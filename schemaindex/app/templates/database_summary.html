@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+
+{% block main_body_right %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Data Source Information
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="box box-default">
+          {% if 'error' in base_navigation_dict.keys()%}
+              <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                {{base_navigation_dict['error']}}
+              </div>
+          {%end%}
+
+            <!-- general form elements disabled -->
+          <form action="{{ request.path }}" method="post"  role="form">
+                  <!-- text input -->
+
+          <div class="box-header with-border">
+          <h3 class="box-title">Data Source Information</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+          </div>
+        </div>
+          <div class="box-body">
+          <div class="row">
+
+
+          <div class="col-md-6">
+            <!-- Horizontal Form -->
+                  <!-- select -->
+                  <div class="form-group">
+                    <label>Choose The Data Source Type (Required): </label>
+                    <select name = "db_type" class="form-control">
+                      {% for p in base_navigation_dict['plugin_name_list']   %}
+                            <option>{{p}}</option>
+                      {% end %}
+                    </select>
+                  </div>
+
+                  <div class="form-group required ">
+                    <label>Data Source Name (Required): </label>
+                    <input name="ds_name" type="text" class="form-control" placeholder="Enter Schema Name ..."
+                           value="{{ base_navigation_dict['db'].ds_name if 'db' in base_navigation_dict.keys()   else '' }}">
+                  </div>
+                  <div class="form-group">
+                    <label>Display Name: </label>
+                    <input name="display_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
+                           value="{{ base_navigation_dict['db'].display_name if 'db' in base_navigation_dict.keys() else '' }}">
+                  </div>
+
+                  <!-- checkbox -->
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label>
+                        <input name="reflect_database_automatic" type="checkbox">
+                        Reflect Data Source Immediately
+                      </label>
+                    </div>
+
+                  </div>
+
+          </div>
+          <div class="col-md-6">
+
+
+                  <div class="form-group">
+                    <label>Connection URL(Required):</label>
+                    <input name="db_url" type="text" class="form-control" placeholder="Enter connection URL, e.g. mysql://username:password@localhost/blog"
+                           value="{{ base_navigation_dict['db'].db_url if 'db' in base_navigation_dict.keys() else '' }}">
+                  </div>
+
+
+                  <!-- textarea -->
+                  <div class="form-group">
+                    <label>Data Source Comment: </label>
+                    <textarea  name="db_comment" class="form-control" rows="3" placeholder="Enter ...">
+                      {{ base_navigation_dict['db'].db_comment if 'db' in base_navigation_dict.keys() else "" }}
+                    </textarea>
+                  </div>
+
+
+                  <div class="form-group">
+                    <label>Short Description for Data Source: </label>
+                    <textarea  name="db_desc" class="form-control" rows="3" placeholder="Enter ...">
+                      {{ base_navigation_dict['db'].db_desc if 'db' in base_navigation_dict.keys() else "" }}
+                    </textarea>
+                  </div>
+
+
+
+
+
+                  <div class="form-group">
+
+                  </div>
+
+                </div>
+          </div>
+
+
+            </div>
+          <div class="box-footer">
+
+              <a href="javascript:history.back()" id="cancel" name="cancel" class="btn btn-default">Cancel</a>
+
+              <input type="submit" value="{{ _("Save Changes") if 'db' in base_navigation_dict.keys() else _("Create Data Source") }}"
+                     class="btn btn-info pull-right"/>
+
+       　　</div>
+                </form>
+              <!-- /.box-body -->
+          <!-- /.box -->
+      </div>
+
+
+
+                 {% if 'db' in base_navigation_dict.keys() %}
+      <div class="box box-default">
+          <form action="/delete_data_source" method="post"  role="form">
+               <!-- checkbox -->
+
+              <div class="box-footer">
+
+              <div class="col-md-8 col-md-offset-2">
+
+                  <!-- checkbox -->
+                  <div class="form-group">
+
+                      <label>
+                        <input name="delete_reflected_database_automatic" type="checkbox">
+                        Delete Contents in Data Source
+                      </label>
+
+                  <input name="ds_name" type="hidden" value="{{ base_navigation_dict['db'].ds_name}}">
+                  <input type="submit" value="Delete Data Source" class="btn btn-danger pull-right"/>
+
+                    </div>
+              </div>
+            </form>
+    　　</div>
+     {% end %}
+
+    </section>
+    <!-- /.content -->
+
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Info boxes -->
+
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <div class="col-md-12">
+          <!-- MAP & BOX PANE -->
+
+          <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">List of Tables</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Database Name</th>
+                    <th>Table Name</th>
+                    <th>Table Comments</th>
+                    <th>Column Names</th>
+                    <th>Operations</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+  {% if 'tabrs' in base_navigation_dict.keys()     %}
+
+  {% for tab in base_navigation_dict['tabrs']   %}
+                  <tr>
+                    <td>{{ '.'.join([tab.ds_name])  }} </td>
+                    <td>{{ tab.table_name }}</td>
+                    <td>{{ tab.table_comment }}</td>
+                    <td>{{ tab.column_names }}</td>
+                    <td><a href="/view_table_in_notebook?table_name={{ tab.table_name }}&ds_name={{ tab.ds_name }}">Create Notebook</a>
+
+                      <!--button type="button" class="btn btn-block btn-primary"
+                              onclick="window.open('/view_table_in_notebook?table_name={{ tab.table_name }}&ds_name={{ tab.ds_name }}');" >
+                        Create Notebook
+                      </button-->
+                    </td>
+                  </tr>
+  {% end %}
+  {% end %}
+
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <form action="/relfect_data_source" method="post"  role="form">
+                    <a href="javascript:void(0)" class="uppercase">View All Tables</a>
+                {% if 'db' in base_navigation_dict.keys()  %}
+                    <input type="hidden" name="ds_name" value="{{base_navigation_dict['db'].ds_name}}">
+                    <input type="submit" value="{{ _("Reflect Now!") }}" class="btn btn-info pull-right"/>
+                {% end %}
+                </form>
+
+
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+{% end %}

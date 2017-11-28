@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block listofdb %}
+  {% for row in dbrs   %}
+     <li><a href="/database_summary?display_name={{ row.display_name  }}&ds_name={{ '.'.join([row.ds_name])  }}"><i class="fa fa-circle-o"></i> {{ '.'.join([row.ds_name])  }} </a></li>
+  {% end %}
+{% end %}
+
+
+
+{% block main_body_right %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Welcome to <b> SchemaIndex </b>
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Info boxes -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-database"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"># of Data Sources</span>
+              <span class="info-box-number">{{base_navigation_dict['ds_count']}}<small></small></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-table"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"># of Entities</span>
+              <span class="info-box-number">{{base_navigation_dict['tab_count']}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-list-alt"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"># of Attributes</span>
+              <span class="info-box-number">{{base_navigation_dict['attr_count']}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-tags"></i></span>
+
+            <div class="info-box-content"   data-toggle="tooltip" title="Not implemented!">
+              <span class="info-box-text"># of Tags</span>
+              <span class="info-box-number">{{base_navigation_dict['tag_count']}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-md-12">
+
+
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <div class="col-md-12">
+          <!-- MAP & BOX PANE -->
+
+          <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <center></center><h3 class="box-title">List of Data Source Plugins</h3> </center>
+              <div class="box-tools pull-right">
+                <!--button type="button" class="btn btn-info"  data-toggle="tooltip" title="To scan available plugins" >Scan Plugins </button-->
+                <button type="button" class="btn btn-block btn-default"  data-toggle="tooltip" title="Not implemented!" >Import Plugin </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Data Source Type Name</th>
+                    <th>Plugin Path</th>
+                    <th>Status</th>
+                    <th>Sample URL</th>
+                    <th>Operations</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td><a href="/view_table_in_notebook?table_name=departments&ds_name=employees" target="_blank">Mysql</a></td>
+                    <td>/c/b/a/</td>
+                    <td><span class="label label-success">this is a mysql</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#00a65a" data-height="20">a@b/ccc</div>
+                    </td>
+                    <td>3</td>
+                  </tr>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td>iPhone 6 Plus</td>
+                    <td>iPhone 6 Plus</td>
+                    <td><span class="label label-danger">Delivered</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+ <!-- Left col -->
+        <div class="col-md-12">
+          <!-- MAP & BOX PANE -->
+
+          <!-- TABLE: LATEST ORDERS -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <center></center><h3 class="box-title">List of Data Sources</h3> </center>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                  <thead>
+                  <tr>
+                    <th>Data Source Name</th>
+                    <th># of Tables</th>
+                    <th>URL</th>
+                    <th>Create Date</th>
+                    <th>Last Reflect Date</th>
+                  </tr>
+
+                  </thead>
+                  <tbody>
+
+              {% for ds in base_navigation_dict['dbrs']   %}
+                  <tr>
+                    <td><a  href="/database_summary?ds_name={{ '.'.join([row.ds_name])  }}">
+                      　　{{ds.ds_name}}</a></td>
+                    <td>{{ds.nbr_of_tables}}</td>
+                    <td>{{ds.db_url}}</td>
+                    <td>{{ds.created_date.strftime("%Y-%m-%d %H:%M:%S")}}</td>
+                    <td>{{ds.last_reflect_date.strftime("%Y-%m-%d %H:%M:%S")}}</td>
+                  </tr>
+              {% end %}
+
+　                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
+              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+
+{% end %}
+
+{% block main_body_right_nouse %}
+
+          <!-- PRODUCT LIST -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Recently Added Tags</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul class="products-list product-list-in-box">
+                <li class="item">
+                  <div class="product-img">
+                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">Samsung TV
+                      <span class="label label-warning pull-right">$1800</span></a>
+                        <span class="product-description">
+                          Samsung 32" 1080p 60Hz LED Smart HDTV.
+                        </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+                <li class="item">
+                  <div class="product-img">
+                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">Bicycle
+                      <span class="label label-info pull-right">$700</span></a>
+                        <span class="product-description">
+                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
+                        </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+                <li class="item">
+                  <div class="product-img">
+                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
+                        <span class="product-description">
+                          Xbox One Console Bundle with Halo Master Chief Collection.
+                        </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+                <li class="item">
+                  <div class="product-img">
+                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">PlayStation 4
+                      <span class="label label-success pull-right">$399</span></a>
+                        <span class="product-description">
+                          PlayStation 4 500GB Console (PS4)
+                        </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+              </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+              <a href="javascript:void(0)" class="uppercase">View All Products</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+
+{% end %}
