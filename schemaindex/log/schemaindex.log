@@ -379,3 +379,55 @@ NameError: global name 'SQLAlchemyReflectEngine' is not defined
 [2017-11-28 23:14:18,904] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.10ms
 [2017-11-28 23:14:18,908] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.86ms
 [2017-11-28 23:14:18,910] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.60ms
+[2017-11-28 23:19:31,670] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:19:31,670] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:19:31,670] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:19:31,670] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:19:31,671] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 304 GET /add_data_source (::1) 22.83ms
+[2017-11-28 23:19:31,684] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.89ms
+[2017-11-28 23:19:31,684] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.63ms
+[2017-11-28 23:19:31,685] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.56ms
+[2017-11-28 23:19:31,686] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.65ms
+[2017-11-28 23:19:31,737] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 0.91ms
+[2017-11-28 23:19:31,752] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.25ms
+[2017-11-28 23:19:31,756] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.17ms
+[2017-11-28 23:19:31,761] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.67ms
+[2017-11-28 23:19:36,299] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:19:36,299] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:19:36,299] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:19:36,300] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:19:36,300] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 GET /database_summary?ds_name=a (::1) 20.04ms
+[2017-11-28 23:19:36,312] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.47ms
+[2017-11-28 23:19:36,316] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.61ms
+[2017-11-28 23:19:36,319] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.70ms
+[2017-11-28 23:19:36,321] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.12ms
+[2017-11-28 23:19:36,349] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.26ms
+[2017-11-28 23:19:36,353] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.15ms
+[2017-11-28 23:19:36,355] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.63ms
+[2017-11-28 23:19:36,358] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.98ms
+[2017-11-28 23:19:46,935] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:19:46,935] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:19:46,935] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:19:46,935] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:19:46,937] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 304 GET /overview (::1) 25.86ms
+[2017-11-28 23:19:46,953] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 3.41ms
+[2017-11-28 23:19:46,954] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.74ms
+[2017-11-28 23:19:46,956] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.96ms
+[2017-11-28 23:19:46,960] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.83ms
+[2017-11-28 23:19:46,983] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.45ms
+[2017-11-28 23:19:46,993] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.98ms
+[2017-11-28 23:19:46,999] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+[2017-11-28 23:19:47,003] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.91ms
+[2017-11-28 23:19:49,710] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:19:49,710] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:19:49,710] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:19:49,710] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:19:49,711] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 304 GET /database_summary?ds_name=a (::1) 17.49ms
+[2017-11-28 23:19:49,728] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 3.08ms
+[2017-11-28 23:19:49,732] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.61ms
+[2017-11-28 23:19:49,734] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.98ms
+[2017-11-28 23:19:49,736] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.14ms
+[2017-11-28 23:19:49,758] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.19ms
+[2017-11-28 23:19:49,767] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.40ms
+[2017-11-28 23:19:49,770] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.72ms
+[2017-11-28 23:19:49,772] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.60ms
