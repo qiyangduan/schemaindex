@@ -196,7 +196,7 @@ class DeleteDataSourceHandler(tornado.web.RequestHandler):
                                 }
         if result_message['message_title']  == 'Error':
             session = create_session(bind=engine)
-            dbrs1 = session.query(MDatabase).filter_by(ds_name = ds_dict['ds_name'] )
+            dbrs1 = session.query(MDatabase).filter_by(ds_name = ds_dict['ds_name'])
             db = dbrs1.first()
             base_navigation_dict['db'] = db
             base_navigation_dict['tabrs'] = sf_app.get_table_list_for_data_source_rs(param_ds_name= ds_dict['ds_name'] )
@@ -267,6 +267,8 @@ class DatabaseJSONHandler(tornado.web.RequestHandler):
         ds_dict['display_name']  = self.get_argument('display_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
         ds_dict['db_url'] = self.get_argument('db_url')
+        ds_dict['db_type'] = self.get_argument('db_type')
+
         sf_app.add_data_soruce(ds_dict)
 
 

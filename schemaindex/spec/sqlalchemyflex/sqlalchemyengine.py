@@ -23,7 +23,7 @@ class SQLAlchemyReflectEngine():
             print('error: db_url must be provided.')
             return
 
-        reflect_engine = create_engine(db_url)
+        reflect_engine = create_engine((self.ds_dict['db_url']))
         metadata = MetaData(bind=reflect_engine)
         metadata.reflect()
 

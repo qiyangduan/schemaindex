@@ -2851,3 +2851,514 @@ Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static
 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.40ms
 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.72ms
 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.60ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/database_summary?ds_name=a', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = SQLAlchemyReflectEngine()
+NameError: global name 'SQLAlchemyReflectEngine' is not defined
+500 POST /relfect_data_source (::1) 4.37ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 POST /delete_data_source (::1) 187.47ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.60ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.84ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.03ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 0.69ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 0.80ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.69ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.70ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.60ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /add_data_source (::1) 15.64ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.07ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.75ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.54ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.55ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.33ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 3.19ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.92ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.92ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 POST /add_data_source (::1) 109.12ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.00ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.59ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.53ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.52ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.62ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.00ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.62ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.62ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 4.68ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 19.53ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 20605.09ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 7.56ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 6.12ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    for row in dbrs:
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+TypeError: 'NoneType' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 249031.23ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /add_data_source (::1) 25.76ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+Future exception was never retrieved: Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 168, in _read_message
+    quiet_exceptions=iostream.StreamClosedError)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+StreamClosedError: Stream is closed
+Future exception was never retrieved: Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 168, in _read_message
+    quiet_exceptions=iostream.StreamClosedError)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+StreamClosedError: Stream is closed
+Future exception was never retrieved: Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 168, in _read_message
+    quiet_exceptions=iostream.StreamClosedError)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+StreamClosedError: Stream is closed
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+304 GET /add_data_source (::1) 37.12ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.40ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.06ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.06ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.81ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.79ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.14ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.08ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 POST /add_data_source (::1) 95.01ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.89ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.12ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.02ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.98ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.28ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.60ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.04ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 29266.08ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 3062.38ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 6.91ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 7.81ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 42686.29ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 9.56ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 4005.05ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+Uncaught exception
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+    delegate.finish()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/httpserver.py", line 289, in finish
+    self.delegate.finish()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 2047, in finish
+    self.execute()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 2080, in execute
+    **self.path_kwargs)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+  File "_pydevd_bundle/pydevd_cython.pyx", line 970, in _pydevd_bundle.pydevd_cython.SafeCallWrapper.__call__ (_pydevd_bundle/pydevd_cython.c:19428)
+    ret = (<object>method_obj)(*args)
+  File "_pydevd_bundle/pydevd_cython.pyx", line 501, in _pydevd_bundle.pydevd_cython.PyDBFrame.trace_dispatch (_pydevd_bundle/pydevd_cython.c:18762)
+    cpdef trace_dispatch(self, frame, str event, arg):
+  File "_pydevd_bundle/pydevd_cython.pyx", line 744, in _pydevd_bundle.pydevd_cython.PyDBFrame.trace_dispatch (_pydevd_bundle/pydevd_cython.c:15791)
+    raise
+  File "_pydevd_bundle/pydevd_cython.pyx", line 735, in _pydevd_bundle.pydevd_cython.PyDBFrame.trace_dispatch (_pydevd_bundle/pydevd_cython.c:15637)
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "_pydevd_bundle/pydevd_cython.pyx", line 252, in _pydevd_bundle.pydevd_cython.PyDBFrame.do_wait_suspend (_pydevd_bundle/pydevd_cython.c:5643)
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/media/wdc_d/linux/local/pycharm-community-2017.2.3/helpers/pydev/pydevd.py", line 767, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /overview (::1) 45.51ms
+200 GET /overview (::1) 45.51ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.06ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.06ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.04ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.04ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.02ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.02ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.01ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.01ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.76ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.76ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.93ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.93ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 3.26ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 3.26ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.98ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.98ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /add_data_source (::1) 26.12ms
+200 GET /add_data_source (::1) 26.12ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 4.00ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 4.00ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 4.30ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 4.30ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.09ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.09ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.69ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.69ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.26ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.26ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.58ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.58ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.39ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.39ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 POST /add_data_source (::1) 206.95ms
+200 POST /add_data_source (::1) 206.95ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.80ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.80ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.23ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.23ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.15ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.15ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.84ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.84ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.18ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.18ms
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p.module_name)
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p.module_name)
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+500 POST /relfect_data_source (::1) 104912.84ms
+500 POST /relfect_data_source (::1) 104912.84ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+Logging initialization finished.
+Logging initialization finished.
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+AttributeError: 'dict' object has no attribute 'ReflectEngine'
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+AttributeError: 'dict' object has no attribute 'ReflectEngine'
+500 POST /relfect_data_source (::1) 73648.91ms
+500 POST /relfect_data_source (::1) 73648.91ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+Logging initialization finished.
+Logging initialization finished.
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 200, in reflect_db
+    db_url=row.db_url
+TypeError: reflect() got an unexpected keyword argument 'display_name'
+Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 200, in reflect_db
+    db_url=row.db_url
+TypeError: reflect() got an unexpected keyword argument 'display_name'
+500 POST /relfect_data_source (::1) 18062.19ms
+500 POST /relfect_data_source (::1) 18062.19ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+Logging initialization finished.
+Logging initialization finished.
+302 POST /relfect_data_source (::1) 3026.12ms
+302 POST /relfect_data_source (::1) 3026.12ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /database_summary?ds_name=a (::1) 40.80ms
+200 GET /database_summary?ds_name=a (::1) 40.80ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.50ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.50ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.67ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.67ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 3.01ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 3.01ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 5.50ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 5.50ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 4.18ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 4.18ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 3.91ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 3.91ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 3.55ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 3.55ms
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server

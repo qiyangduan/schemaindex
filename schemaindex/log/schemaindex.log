@@ -431,3 +431,421 @@ NameError: global name 'SQLAlchemyReflectEngine' is not defined
 [2017-11-28 23:19:49,767] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.40ms
 [2017-11-28 23:19:49,770] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.72ms
 [2017-11-28 23:19:49,772] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.60ms
+[2017-11-28 23:22:10,126] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/database_summary?ds_name=a', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = SQLAlchemyReflectEngine()
+NameError: global name 'SQLAlchemyReflectEngine' is not defined
+[2017-11-28 23:22:10,128] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 4.37ms
+[2017-11-28 23:23:03,847] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:24:24,718] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:24:33,995] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:26:19,431] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:26:19,432] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:26:19,432] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:26:19,432] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:26:19,432] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 POST /delete_data_source (::1) 187.47ms
+[2017-11-28 23:26:19,444] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.60ms
+[2017-11-28 23:26:19,448] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.84ms
+[2017-11-28 23:26:19,451] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.03ms
+[2017-11-28 23:26:19,453] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 0.69ms
+[2017-11-28 23:26:19,477] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 0.80ms
+[2017-11-28 23:26:19,510] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.69ms
+[2017-11-28 23:26:19,512] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.70ms
+[2017-11-28 23:26:19,514] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.60ms
+[2017-11-28 23:26:22,377] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:26:22,377] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:26:22,377] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:26:22,377] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:26:22,378] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 GET /add_data_source (::1) 15.64ms
+[2017-11-28 23:26:22,392] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.07ms
+[2017-11-28 23:26:22,393] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.75ms
+[2017-11-28 23:26:22,394] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.54ms
+[2017-11-28 23:26:22,395] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.55ms
+[2017-11-28 23:26:22,422] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.33ms
+[2017-11-28 23:26:22,437] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 3.19ms
+[2017-11-28 23:26:22,442] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.92ms
+[2017-11-28 23:26:22,445] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.92ms
+[2017-11-28 23:26:32,592] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:26:32,592] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:26:32,592] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:26:32,593] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:26:32,593] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 POST /add_data_source (::1) 109.12ms
+[2017-11-28 23:26:32,609] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.00ms
+[2017-11-28 23:26:32,610] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.59ms
+[2017-11-28 23:26:32,611] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.53ms
+[2017-11-28 23:26:32,612] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.52ms
+[2017-11-28 23:26:32,654] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.62ms
+[2017-11-28 23:26:32,664] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.00ms
+[2017-11-28 23:26:32,669] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.62ms
+[2017-11-28 23:26:32,671] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.62ms
+[2017-11-28 23:26:49,094] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+[2017-11-28 23:26:49,095] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 4.68ms
+[2017-11-28 23:27:21,423] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+[2017-11-28 23:27:21,426] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 19.53ms
+[2017-11-28 23:28:31,911] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+[2017-11-28 23:28:31,913] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 20605.09ms
+[2017-11-28 23:28:51,128] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+[2017-11-28 23:28:51,129] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 7.56ms
+[2017-11-28 23:28:54,520] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'NoneType' object has no attribute '__getitem__'
+[2017-11-28 23:28:54,521] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 6.12ms
+[2017-11-28 23:33:23,926] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 195, in reflect_db
+    for row in dbrs:
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+TypeError: 'NoneType' object has no attribute '__getitem__'
+[2017-11-28 23:33:23,929] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 249031.23ms
+[2017-11-28 23:33:23,954] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:33:23,955] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:33:23,955] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:33:23,955] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:33:23,957] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 GET /add_data_source (::1) 25.76ms
+[2017-11-28 23:33:23,966] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:33:23,967] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py:129}  - Future exception was never retrieved: Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 168, in _read_message
+    quiet_exceptions=iostream.StreamClosedError)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+StreamClosedError: Stream is closed
+[2017-11-28 23:33:23,967] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py:129}  - Future exception was never retrieved: Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 168, in _read_message
+    quiet_exceptions=iostream.StreamClosedError)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+StreamClosedError: Stream is closed
+[2017-11-28 23:33:23,967] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py:129}  - Future exception was never retrieved: Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1021, in run
+    yielded = self.gen.throw(*exc_info)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 168, in _read_message
+    quiet_exceptions=iostream.StreamClosedError)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 1015, in run
+    value = future.result()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/concurrent.py", line 237, in result
+    raise_exc_info(self._exc_info)
+  File "<string>", line 3, in raise_exc_info
+StreamClosedError: Stream is closed
+[2017-11-28 23:33:28,835] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:33:28,836] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:33:28,836] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:33:28,836] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:33:28,837] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 304 GET /add_data_source (::1) 37.12ms
+[2017-11-28 23:33:28,850] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.40ms
+[2017-11-28 23:33:28,851] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.06ms
+[2017-11-28 23:33:28,854] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+[2017-11-28 23:33:28,856] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.06ms
+[2017-11-28 23:33:28,879] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.81ms
+[2017-11-28 23:33:28,888] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.79ms
+[2017-11-28 23:33:28,893] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.14ms
+[2017-11-28 23:33:28,898] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.08ms
+[2017-11-28 23:33:40,731] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:33:40,731] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:33:40,731] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:33:40,732] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:33:40,733] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 POST /add_data_source (::1) 95.01ms
+[2017-11-28 23:33:40,749] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.89ms
+[2017-11-28 23:33:40,751] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.12ms
+[2017-11-28 23:33:40,752] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.02ms
+[2017-11-28 23:33:40,754] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.98ms
+[2017-11-28 23:33:40,802] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 3.28ms
+[2017-11-28 23:33:40,814] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.60ms
+[2017-11-28 23:33:40,817] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+[2017-11-28 23:33:40,820] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.04ms
+[2017-11-28 23:34:15,997] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:34:16,001] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 29266.08ms
+[2017-11-28 23:34:44,131] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:34:44,133] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 3062.38ms
+[2017-11-28 23:34:50,851] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:34:50,852] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 6.91ms
+[2017-11-28 23:34:54,442] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:34:54,443] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 7.81ms
+[2017-11-28 23:36:03,090] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:36:03,093] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 42686.29ms
+[2017-11-28 23:36:09,108] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:36:09,109] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 9.56ms
+[2017-11-28 23:36:28,726] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEnigne() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p["module_name"])
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:36:28,729] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 4005.05ms
+[2017-11-28 23:37:15,842] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:40:58,458] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py:54}  - Uncaught exception
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+    delegate.finish()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/httpserver.py", line 289, in finish
+    self.delegate.finish()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 2047, in finish
+    self.execute()
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 2080, in execute
+    **self.path_kwargs)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/gen.py", line 285, in wrapper
+    yielded = next(result)
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 263, in get_reflect_plugin
+    p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+  File "_pydevd_bundle/pydevd_cython.pyx", line 970, in _pydevd_bundle.pydevd_cython.SafeCallWrapper.__call__ (_pydevd_bundle/pydevd_cython.c:19428)
+    ret = (<object>method_obj)(*args)
+  File "_pydevd_bundle/pydevd_cython.pyx", line 501, in _pydevd_bundle.pydevd_cython.PyDBFrame.trace_dispatch (_pydevd_bundle/pydevd_cython.c:18762)
+    cpdef trace_dispatch(self, frame, str event, arg):
+  File "_pydevd_bundle/pydevd_cython.pyx", line 744, in _pydevd_bundle.pydevd_cython.PyDBFrame.trace_dispatch (_pydevd_bundle/pydevd_cython.c:15791)
+    raise
+  File "_pydevd_bundle/pydevd_cython.pyx", line 735, in _pydevd_bundle.pydevd_cython.PyDBFrame.trace_dispatch (_pydevd_bundle/pydevd_cython.c:15637)
+    self.do_wait_suspend(thread, frame, event, arg)
+  File "_pydevd_bundle/pydevd_cython.pyx", line 252, in _pydevd_bundle.pydevd_cython.PyDBFrame.do_wait_suspend (_pydevd_bundle/pydevd_cython.c:5643)
+    self._args[0].do_wait_suspend(*args, **kwargs)
+  File "/media/wdc_d/linux/local/pycharm-community-2017.2.3/helpers/pydev/pydevd.py", line 767, in do_wait_suspend
+    time.sleep(0.01)
+KeyboardInterrupt
+[2017-11-28 23:42:08,684] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:42:08,685] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:42:08,686] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:42:08,686] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:42:08,689] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 GET /overview (::1) 45.51ms
+[2017-11-28 23:42:08,700] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 3.06ms
+[2017-11-28 23:42:08,702] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.04ms
+[2017-11-28 23:42:08,704] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.02ms
+[2017-11-28 23:42:08,706] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.01ms
+[2017-11-28 23:42:08,744] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 1.76ms
+[2017-11-28 23:42:08,760] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.93ms
+[2017-11-28 23:42:08,767] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 3.26ms
+[2017-11-28 23:42:08,772] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.98ms
+[2017-11-28 23:42:11,471] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:42:11,472] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:42:11,472] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:42:11,472] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:42:11,473] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 GET /add_data_source (::1) 26.12ms
+[2017-11-28 23:42:11,490] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 4.00ms
+[2017-11-28 23:42:11,498] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 4.30ms
+[2017-11-28 23:42:11,501] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
+[2017-11-28 23:42:11,503] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.09ms
+[2017-11-28 23:42:11,539] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 3.69ms
+[2017-11-28 23:42:11,542] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.26ms
+[2017-11-28 23:42:11,547] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.58ms
+[2017-11-28 23:42:11,551] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.39ms
+[2017-11-28 23:42:18,931] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:42:18,932] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:42:18,932] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:42:18,932] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:42:18,933] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 POST /add_data_source (::1) 206.95ms
+[2017-11-28 23:42:18,996] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.80ms
+[2017-11-28 23:42:19,000] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.23ms
+[2017-11-28 23:42:19,004] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.15ms
+[2017-11-28 23:42:19,007] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.84ms
+[2017-11-28 23:42:19,012] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.43ms
+[2017-11-28 23:42:19,014] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.18ms
+[2017-11-28 23:44:56,446] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 264, in get_reflect_plugin
+    return self.load_reflect_engine(p.module_name)
+TypeError: 'MPlugin' object has no attribute '__getitem__'
+[2017-11-28 23:44:56,448] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 104912.84ms
+[2017-11-28 23:44:56,457] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:45:35,053] {/home/duan/github/schemaindex/schemaindex/app/config.py:73}  - Logging initialization finished.
+[2017-11-28 23:46:26,961] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 196, in reflect_db
+    adb = sf_app.get_reflect_plugin(row.db_type).ReflectEngine() #SQLAlchemyReflectEngine()
+AttributeError: 'dict' object has no attribute 'ReflectEngine'
+[2017-11-28 23:46:26,965] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 73648.91ms
+[2017-11-28 23:46:57,229] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:47:21,460] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:47:48,703] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:47:59,617] {/home/duan/github/schemaindex/schemaindex/app/config.py:73}  - Logging initialization finished.
+[2017-11-28 23:48:11,843] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1548}  - Uncaught exception POST /relfect_data_source (::1)
+HTTPServerRequest(protocol='http', host='localhost:8088', method='POST', uri='/relfect_data_source', version='HTTP/1.1', remote_ip='::1', headers={'Origin': 'http://localhost:8088', 'Content-Length': '9', 'Accept-Language': 'en,zh-CN;q=0.8,zh;q=0.6', 'Accept-Encoding': 'gzip, deflate, br', 'Host': 'localhost:8088', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8', 'Upgrade-Insecure-Requests': '1', 'Connection': 'keep-alive', 'Referer': 'http://localhost:8088/add_data_source', 'Cache-Control': 'max-age=0', 'Cookie': 'csrftoken=jJsg0nSV2f1QLkF01MXwrjDV4NPPOQgDgi8ncfPF6mNRgmyWVAWoNAga1bXiyiun; _xsrf=2|7699a66c|032aec4dfe2e78af8007f4ac57db054f|1510079105; username-localhost-8888="2|1:0|10:1511296996|23:username-localhost-8888|44:MzA5YjBiZTM5ODQ1NDVjM2FhMjgyZDExMzJmMDczODA=|73995d11569c35ee59da5d0092597fb0f109a9ba7bf5049dc599d8adeb3493d4"; username-localhost-8889="2|1:0|10:1511297045|23:username-localhost-8889|44:NzY2ZmNjNjU4MzZjNGUzMzgzYTcxOWRkMDAyYjA3MjU=|41e4abcfaa7f5cd681bc13518e48b7d8ce458fdae67ac5b6d3156e49b912d2dd"', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36', 'Content-Type': 'application/x-www-form-urlencoded'})
+Traceback (most recent call last):
+  File "/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py", line 1467, in _execute
+    result = method(*self.path_args, **self.path_kwargs)
+  File "/home/duan/github/schemaindex/schemaindex/app/handler.py", line 215, in post
+    sf_app.reflect_db(ds_name)
+  File "/home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py", line 200, in reflect_db
+    db_url=row.db_url
+TypeError: reflect() got an unexpected keyword argument 'display_name'
+[2017-11-28 23:48:11,846] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 500 POST /relfect_data_source (::1) 18062.19ms
+[2017-11-28 23:50:10,539] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:50:18,286] {/home/duan/github/schemaindex/schemaindex/app/config.py:73}  - Logging initialization finished.
+[2017-11-28 23:50:18,325] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 302 POST /relfect_data_source (::1) 3026.12ms
+[2017-11-28 23:50:18,400] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+[2017-11-28 23:50:18,401] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+[2017-11-28 23:50:18,401] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+[2017-11-28 23:50:18,402] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:2678}  - Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+[2017-11-28 23:50:18,404] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 200 GET /database_summary?ds_name=a (::1) 40.80ms
+[2017-11-28 23:50:18,416] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 2.50ms
+[2017-11-28 23:50:18,419] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.67ms
+[2017-11-28 23:50:18,423] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 3.01ms
+[2017-11-28 23:50:18,432] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 5.50ms
+[2017-11-28 23:50:18,462] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/fastclick/fastclick.js (::1) 4.18ms
+[2017-11-28 23:50:18,475] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 3.91ms
+[2017-11-28 23:50:18,484] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
+[2017-11-28 23:50:18,490] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 3.55ms
+[2017-11-28 23:50:21,261] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server

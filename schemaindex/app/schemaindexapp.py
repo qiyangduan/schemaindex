@@ -83,6 +83,7 @@ class SchemaIndexApp:
         session.add_all([
             dbmodels.MDatabase(display_name=ds_dict['display_name'] ,
                                ds_name=ds_dict['ds_name'] ,
+                               db_type=ds_dict['db_type'] ,
                                nbr_of_tables=0,
                                nbr_of_columns=9,
                                db_desc = 'list of db',
@@ -192,12 +193,9 @@ class SchemaIndexApp:
         session = dbmodels.create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatabase).filter_by(ds_name=data_source_name)
         for row in dbrs:
-            adb = SQLAlchemyReflectEngine()
-            adb.reflect_database(display_name=row.display_name,
-                                 ds_name=row.ds_name,
-                                 db_type=row.db_type,
-                                 db_url=row.db_url
-                                 )
+            adb = sf_app.get_reflect_plugin(row.db_type)['reflect_engine'].ReflectEngine() #SQLAlchemyReflectEngine()
+            adb.reflect(reload_flag=True    )
+
     def list_data_sources(self):
         model_list = []
         models = []
@@ -260,7 +258,7 @@ class SchemaIndexApp:
 
     def get_reflect_plugin(self, p_plugin_name = None):
         p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        return self.load_reflect_engine(p["module_name"])
+        return self.load_reflect_engine(p.module_name)
 
 
 
@@ -275,7 +273,7 @@ class SchemaIndexApp:
 
         try:
             module = __import__(dottedpath, globals(), locals(), [])
-            return {'reflectengine': module,
+            return {'reflect_engine': module,
                     'plugin_name': getattr(module, 'plugin_name'),
                     'module_name': dottedpath,
                     'plugin_spec_path': plugin_spec_path,
