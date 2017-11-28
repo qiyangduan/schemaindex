@@ -849,3 +849,4 @@ TypeError: reflect() got an unexpected keyword argument 'display_name'
 [2017-11-28 23:50:18,484] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.07ms
 [2017-11-28 23:50:18,490] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/web.py:1971}  - 404 GET /static/plugins/chartjs/Chart.min.js (::1) 3.55ms
 [2017-11-28 23:50:21,261] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+[2017-11-28 23:53:16,572] {/media/adata/linux/anaconda27/lib/python2.7/site-packages/tornado/autoreload.py:204}  - /home/duan/github/schemaindex/schemaindex/app/dbmodels.py modified; restarting server

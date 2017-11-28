@@ -109,8 +109,8 @@ from sqlalchemyflex import MetaData,create_engine
 
 # create the pydot graph object by autoloading all tables via a bound metadata object
 # metadata=MetaData('sqlite:////home/duan/github/jupyter/schema_display/c.db')
-engine = create_engine('mysqlflex://root:learning@localhost/blog')
-metadata=MetaData('mysqlflex://root:learning@localhost/blog')
+engine = create_engine('mysqlflex://root:x@localhost/blog')
+metadata=MetaData('mysqlflex://root:x@localhost/blog')
 
 metadata.reflect()
 #tables = metadata.tables.values()

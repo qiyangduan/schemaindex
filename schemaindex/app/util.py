@@ -167,19 +167,3 @@ def reflect_db(ds_name = None):
 
 if __name__ == "__main__":
     reflect_db('blog')
-
-    '''
-    adb = SQLAlchemyReflectEngine()
-    adb.reflect_database(display_name = 'db1',
-                            ds_name = 'blog',
-                            db_type='mysqlflex',
-                            db_url = 'mysqlflex://root:learning@localhost/blog' ) #  None)
-
-    adb.reflect_database(display_name = 'db1',
-                            ds_name = 'schema1',
-                            db_type='sqlite',
-                            db_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex' ) #  None)
- 
-'''
-
-

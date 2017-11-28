@@ -3362,3 +3362,4 @@ Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static
 404 GET /static/plugins/chartjs/Chart.min.js (::1) 3.55ms
 /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
 /home/duan/github/schemaindex/schemaindex/app/schemaindexapp.py modified; restarting server
+/home/duan/github/schemaindex/schemaindex/app/dbmodels.py modified; restarting server
