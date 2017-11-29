@@ -1,41 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="clean up some files">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/schemaindex/spec/sqliteindex/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/schemaindex/spec/sqliteindex/sqliteengine.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/req" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schema.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/do_schemaindex_init" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/indexdir/MAIN_9dly67sx0w0b04fk.seg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/indexdir/_MAIN_1.toc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/log/schemaflex.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/log/schemaflex_others.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/log/schemaindex.log" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/textindex/createindex.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/textindex/indexdir/MAIN_WRITELOCK" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/textindex/indexdir/MAIN_ek1wrvaxqxjymnl7.seg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/textindex/indexdir/_MAIN_1.toc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/textindex/query1.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/textindex/testwhoosh.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/schemaindex/app/util.py" afterPath="$PROJECT_DIR$/misc/util.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/schemaindex/app/whooshtextindexer.py" afterPath="$PROJECT_DIR$/misc/whooshtextindexer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/allmodel.sqlite3" afterPath="$PROJECT_DIR$/schemaindex/app/allmodel.sqlite3" />
+    <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO" afterPath="$PROJECT_DIR$/TODO" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docker-compose.yml" afterPath="$PROJECT_DIR$/docker-compose.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/dbmodels.py" afterPath="$PROJECT_DIR$/schemaindex/app/dbmodels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/handler.py" afterPath="$PROJECT_DIR$/schemaindex/app/handler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/schemaindex.py" afterPath="$PROJECT_DIR$/schemaindex/app/schemaindex.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" afterPath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/overview.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/overview.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/update_data_source.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/update_data_source.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/webserver.py" afterPath="$PROJECT_DIR$/schemaindex/app/webserver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/mysqlflex/mysqlreflectengine.py" afterPath="$PROJECT_DIR$/schemaindex/spec/mysqlflex/mysqlreflectengine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/sqlalchemyengine.py" afterPath="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/sqlalchemyengine.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO.md" afterPath="$PROJECT_DIR$/TODO.md" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,7 +17,7 @@
       <file leaf-file-name="handler.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/schemaindex/app/handler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2130">
+            <state relative-caret-position="0">
               <caret line="148" column="31" lean-forward="false" selection-start-line="148" selection-start-column="31" selection-end-line="148" selection-end-column="31" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -58,44 +26,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schemaindexapp.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="schemaindexapp.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/schemaindex/app/schemaindexapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3465">
+            <state relative-caret-position="15">
               <caret line="231" column="18" lean-forward="false" selection-start-line="231" selection-start-column="18" selection-end-line="231" selection-end-column="18" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="overview.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/overview.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TODO" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TODO">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -228,7 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/schemaflex/spec/SqlalchemyReflectEngine.py" />
         <option value="$PROJECT_DIR$/schemaflex/spec/MysqlReflectEngine.py" />
         <option value="$PROJECT_DIR$/schemaflex/spec/mysql/MysqlReflectEngine.py" />
         <option value="$PROJECT_DIR$/schemaflex/spec/sqlite3/__init__.py" />
@@ -279,6 +216,7 @@
         <option value="$PROJECT_DIR$/schemaindex/app/templates/overview.html" />
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/TODO" />
+        <option value="$PROJECT_DIR$/TODO.md" />
       </list>
     </option>
   </component>
@@ -741,7 +679,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511909719877</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="clean up some files">
+      <created>1511993320043</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1511993320043</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -833,13 +778,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/misc/sqlalchem_test_school.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/log/schemaflex.log" />
     <entry file="file://$PROJECT_DIR$/schemaindex/log/schemaflex_sqlalchemy.log">
       <provider selected="true" editor-type-id="text-editor">
@@ -1026,6 +964,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,6 +997,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,7 +1019,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/app/handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2130">
+        <state relative-caret-position="0">
           <caret line="148" column="31" lean-forward="false" selection-start-line="148" selection-start-column="31" selection-end-line="148" selection-end-column="31" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -1092,16 +1032,6 @@
         <state relative-caret-position="210">
           <caret line="21" column="44" lean-forward="true" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/schemaindexapp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3465">
-          <caret line="231" column="18" lean-forward="false" selection-start-line="231" selection-start-column="18" selection-end-line="231" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1123,14 +1053,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/overview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1144,6 +1066,32 @@
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/overview.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TODO.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="15" lean-forward="false" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/schemaindexapp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="231" column="18" lean-forward="false" selection-start-line="231" selection-start-column="18" selection-end-line="231" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
