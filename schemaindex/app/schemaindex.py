@@ -4,13 +4,13 @@
 """ stanmoctl.py
     
     Usage:
-        stanmo -h
-        stanmo list ( data_source | data_source_type )
-        stanmo add <data_source_name> --spec=<spec_name>
-        stanmo reflect <data_source_name>
-        stanmo search <search_key_word>...
-        stanmo runserver [--port=<port> ] [--instance=<id> ]
-        stanmo show <data_source_name>
+        schemaindex -h
+        schemaindex list ( data_source | data_source_type )
+        schemaindex add <data_source_name> --spec=<spec_name>
+        schemaindex reflect <data_source_name>
+        schemaindex search <search_key_word>...
+        schemaindex runserver [--port=<port> ] [--instance=<id> ]
+        schemaindex show <data_source_name>
 
     Options:
         -h,--help             : show this help message
@@ -22,13 +22,15 @@
         --port=<port>         : The OS port where server will be listening on. It uses 5000 if omitted..
 """
 # This command push will be implemented later.
-#        stanmo push [specs]
-#        stanmo pull [specs]  # To download a model spec from central repository
-#        stanmo search [specs]
+#        schemaindex push [specs]
+#        schemaindex pull [specs]  # To download a model spec from central repository
+#        schemaindex search [specs]
 
 # the above is our usage string that docopt will read and use to determine
 # whether or not the user has passed valid arguments.
 # following: https://github.com/docopt/docopt
+
+
 from docopt import docopt
 from schemaindexapp import sf_app
 from webserver import run_webserver
@@ -40,7 +42,7 @@ import logging
 # in the control file, it should not deal with any specific model but only use spec and model name to call the loader
 
 def main():
-    """ main-entry point for stanmo program, parse the commands and build the sf_app platform """
+    """ main-entry point for schemaindex program, parse the commands and build the sf_app platform """
     docopt_args = docopt(__doc__)
 
     # Parse the User command and the required arguments
@@ -107,7 +109,7 @@ def main():
         the_model = sf_app.load_model(model_name=model_name)
         try:
             the_model.show(port=port)
-        except StanmoError as e:
+        except :
             print('Failed to show the model: {0}'.format(e.strerror))
 
 

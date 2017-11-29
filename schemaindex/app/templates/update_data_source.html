@@ -2,7 +2,7 @@
 
 {% block listofdb %}
   {% for row in dbrs   %}
-     <li><a href="/database_summary?display_name={{ row.display_name  }}&ds_name={{ '.'.join([row.ds_name])  }}"><i class="fa fa-circle-o"></i> {{ '.'.join([row.ds_name])  }} </a></li>
+     <li><a href="/database_summary?table_group_name={{ row.table_group_name  }}&ds_name={{ '.'.join([row.ds_name])  }}"><i class="fa fa-circle-o"></i> {{ '.'.join([row.ds_name])  }} </a></li>
   {% end %}
 {% end %}
 
@@ -54,8 +54,8 @@
 
                   <div class="form-group">
                     <label>Data Source Name: </label>
-                    <input name="display_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
-                           value="{{ db.display_name if db else '' }}">
+                    <input name="table_group_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
+                           value="{{ db.table_group_name if db else '' }}">
                   </div>
                   <div class="form-group">
                     <label>Schema Name: </label>

@@ -30,7 +30,6 @@
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
           </div>
         </div>
           <div class="box-body">
@@ -44,7 +43,8 @@
                     <label>Choose The Data Source Type (Required): </label>
                     <select name = "db_type" class="form-control">
                       {% for p in base_navigation_dict['plugin_name_list']   %}
-                            <option>{{p}}</option>
+                            <option {{'selected' if 'input_db_type' in base_navigation_dict.keys() and base_navigation_dict['input_db_type'] == p else '' }} >
+                             {{p}}</option>
                       {% end %}
                     </select>
                   </div>
@@ -56,8 +56,8 @@
                   </div>
                   <div class="form-group">
                     <label>Display Name: </label>
-                    <input name="display_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
-                           value="{{ base_navigation_dict['db'].display_name if 'db' in base_navigation_dict.keys() else '' }}">
+                    <input name="table_group_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
+                           value="{{ base_navigation_dict['db'].table_group_name if 'db' in base_navigation_dict.keys() else '' }}">
                   </div>
 
                   <!-- checkbox -->
@@ -174,7 +174,6 @@
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
@@ -201,10 +200,7 @@
                     <td>{{ tab.column_names }}</td>
                     <td><a href="/view_table_in_notebook?table_name={{ tab.table_name }}&ds_name={{ tab.ds_name }}">Create Notebook</a>
 
-                      <!--button type="button" class="btn btn-block btn-primary"
-                              onclick="window.open('/view_table_in_notebook?table_name={{ tab.table_name }}&ds_name={{ tab.ds_name }}');" >
-                        Create Notebook
-                      </button-->
+
                     </td>
                   </tr>
   {% end %}

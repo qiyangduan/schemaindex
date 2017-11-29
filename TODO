@@ -1,11 +1,9 @@
-TODO LIST
-====================================
-The following .
+# TODO LIST
 
-1. Split the db enigne and text index engine, for the future to replace by better one. [20171128]
+| Title | #Status  | #Date |
+| :---: | :---: | :---: |
+| Split the db enigne and text index engine, for the future to replace by better one. | Not started | 20171128 |
+| Split reflect engine into plugins | Done, 20171129 | 20171128 |
+| hdfs plugin to index hdfs | not started | 20171128 |
+| kafka plugin? | | 20171128 |
 
-   Not started.
-
-2. Split reflect engine.
-
-   [20171128: Started]

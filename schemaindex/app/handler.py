@@ -4,9 +4,8 @@ import simplejson as json
 from dbmodels import engine, MDatabase,MTable,MColumn
 
 from schemaindexapp import sf_app
-# from schemaindexapp import SchemaIndexApp
 from sqlalchemy.orm import create_session
-from sqlalchemy import func
+
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -24,6 +23,7 @@ class OverviewHandler(tornado.web.RequestHandler):
         attr_count = session.query(MColumn).count()
         base_navigation_dict = {'selected_menu': 'overview',
                                 'dbrs': dbrs,
+                                'plugin_list': sf_app.get_plugin_list(),
                                 'ds_count':str(ds_count),
                                 'tab_count':str(tab_count),
                                 'attr_count':str(attr_count),
@@ -36,7 +36,7 @@ class OverviewHandler(tornado.web.RequestHandler):
 class DatabaseSummaryHandler(tornado.web.RequestHandler):
     def get(self):
         # self.write("Hello, world")
-        # param_db_name = self.get_argument("display_name", None)
+        # param_db_name = self.get_argument("table_group_name", None)
         session = create_session(bind=engine)
         param_ds_name = self.get_argument("ds_name", None)
         if param_ds_name is None:
@@ -76,7 +76,7 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
 
     def post(self):
         ds_dict = {}
-        ds_dict['display_name']  = self.get_argument('display_name')
+        ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
         ds_dict['db_url'] = self.get_argument('db_url')
         ds_dict['db_type'] = self.get_argument('db_type')
@@ -139,21 +139,24 @@ class GlobalSearchHandler(tornado.web.RequestHandler):
 class AddDataSourceHandler(tornado.web.RequestHandler):
     def get(self):
         # json.dumps()
-        dbrs = sf_app.get_data_source_rs()
-
         base_navigation_dict = {'selected_menu': 'datasources',
-                                'dbrs': dbrs,
+                                'dbrs': sf_app.get_data_source_rs(),
                                 'plugin_name_list': sf_app.get_plugin_name_list(),
-                                'selected_add_data_source':True, 'selected_schema_name':'__add_data_source__',
+                                'selected_add_data_source':True,
+                                'selected_schema_name':'__add_data_source__',
                                 }
+        db_type = self.get_argument('db_type',default=None)
+        if db_type is not None:
+            base_navigation_dict['input_db_type'] = db_type
+
         self.render("database_summary.html",
                     base_navigation_dict=base_navigation_dict,
-                    dbrs=dbrs, db=None,tabrs=None)
+                      db=None,tabrs=None)
 
 
     def post(self):
         ds_dict = {}
-        ds_dict['display_name']  = self.get_argument('display_name')
+        ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
         ds_dict['db_url'] = self.get_argument('db_url')
         ds_dict['db_type'] = self.get_argument('db_type')
@@ -161,8 +164,6 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
         ds_dict['db_comment'] = self.get_argument('db_comment')
 
         db = sf_app.add_data_soruce(ds_dict)
-
-
         dbrs = sf_app.get_data_source_rs()
 
         Info = {'result': 'ok', 'message':'A new data source is added.'}
@@ -264,7 +265,7 @@ class ViewTableInNotebookHandler(tornado.web.RequestHandler):
 class DatabaseJSONHandler(tornado.web.RequestHandler):
     def post(self):
         ds_dict = {}
-        ds_dict['display_name']  = self.get_argument('display_name')
+        ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
         ds_dict['db_url'] = self.get_argument('db_url')
         ds_dict['db_type'] = self.get_argument('db_type')

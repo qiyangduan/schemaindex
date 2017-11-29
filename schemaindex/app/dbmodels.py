@@ -17,6 +17,7 @@ class MPlugin(Base):
     __tablename__ =  'mplugin'
     plugin_name = Column(String(100), primary_key=True,)
     module_name = Column(String(1200))
+    # plugin_status = Column(String(200))
     plugin_spec_path = Column(String(200))
     supported_ds_types = Column(String(200))
     sample_ds_url = Column(String(1000))
@@ -33,7 +34,7 @@ class MDatabase(Base):
     __tablename__ =  'mdatabase'
     #db_id = Column(Integer, primary_key=True, autoincrement=True)
     ds_name = Column(String(100), primary_key=True,)
-    display_name = Column(String(200))
+    table_group_name = Column(String(200), default='_NA')
     nbr_of_tables = Column(Integer)
     nbr_of_columns = Column(Integer)
     created_date = Column(DateTime, default=func.now())
@@ -45,13 +46,14 @@ class MDatabase(Base):
     db_tags = Column(String(2550))
     def __repr__(self):
         return "<database (name='%s', db_url='%s', last_reflect_date='%s')>" % (
-            self.display_name, self.db_url, self.last_reflect_date)
+            self.table_group_name, self.db_url, self.last_reflect_date)
 
 class MTable(Base):
     __tablename__ = 'mtable'
     # table_id = Column(Integer, primary_key=True, autoincrement=True)
     # db_id = Column(Integer)
     ds_name = Column(String(100), primary_key=True,)
+    table_group_name = Column(String(200), default='_NA')
     table_name = Column(String(255), primary_key=True)
     table_type = Column(String(255))
     table_comment = Column(String(5000))
@@ -61,6 +63,7 @@ class MColumn(Base):
     __tablename__ =  'mcolumn'
     # table_id = Column(Integer, primary_key=True)
     ds_name = Column(String(100), primary_key=True,)
+    table_group_name = Column(String(200), default='_NA')
     table_name = Column(String(255), primary_key=True)
     column_name = Column(String(255), primary_key=True)
     column_seq = Column(Integer)

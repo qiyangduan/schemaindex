@@ -19,10 +19,10 @@ import handler
 class MApplication(tornado.web.Application):
     def __init__(self):
         handlers = [
-            (r"/", handler.MainHandler),
+            (r"/", handler.OverviewHandler),
+            (r"/overview", handler.OverviewHandler),
             (r"/database_json", handler.DatabaseJSONHandler),
             (r"/search_suggestion_json", handler.SearchSuggestionJSONHandler),
-            (r"/overview", handler.OverviewHandler),
             (r"/database_summary", handler.DatabaseSummaryHandler),
             (r"/add_data_source", handler.AddDataSourceHandler),
             (r"/delete_data_source", handler.DeleteDataSourceHandler),
@@ -50,6 +50,7 @@ def run_webserver(port=8088):
     tornado.options.parse_command_line()
     app = tornado.httpserver.HTTPServer(MApplication())
     app.listen(port)
+    print('Server started, please visit : http://localhost:' + str(port) + '/')
     tornado.ioloop.IOLoop.current().start()
 
 

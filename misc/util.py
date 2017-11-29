@@ -11,8 +11,6 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
 
-from whoosh.index import create_in
-from whoosh.fields import *
 
 
 Base = declarative_base()
@@ -27,7 +25,7 @@ class MysqlReflectEngine():
     def __init__(self):
         db_type = 'mysqlflex'
 
-    def reflect_database(self, display_name, ds_name, reload_flag=True, db_url=None):
+    def reflect_database(self, table_group_name, ds_name, reload_flag=True, db_url=None):
         if not db_url:
             db_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex'
             db_type = 'sqlite3flex'
@@ -51,7 +49,7 @@ class MysqlReflectEngine():
             # t.columns.id
             # t.columns.id.comment
             session.add_all([
-                MTable(  display_name='sqlite' ,
+                MTable(  table_group_name='sqlite' ,
                          ds_name = 'default',
                          table_name=t.name,
                          table_comment = ''
@@ -75,7 +73,7 @@ class MysqlReflectEngine():
 class SQLAlchemyReflectEngine():
     def __init__(self):
         db_type = 'sqlite3flex'
-    def reflect_database(self, db_type, display_name = None, ds_name= None, reload_flag=True, db_url=None):
+    def reflect_database(self, db_type, table_group_name = None, ds_name= None, reload_flag=True, db_url=None):
         if not db_url:
             #db_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex'
             #db_type = 'sqlite3flex'
@@ -96,9 +94,6 @@ class SQLAlchemyReflectEngine():
         # tables = metadata.tables.values()
         # print(tables)
 
-        schema = Schema(table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
-        indexdir = cfg['main']['schemaflex_text_index_path']
-        ix = create_in(indexdir , schema)
         writer = ix.writer()
 #        writer.add_document(table_name_desc=u'{"event": "the event table"}', table_id=u'/b',
 #                            column_name_desc=u'{"event_date":"when the event happen interesting!","event_code":"the code of event, with 11 digits"}')
@@ -139,7 +134,7 @@ class SQLAlchemyReflectEngine():
                 column_list.append([c.name, str(c.type), c.doc])
 
             writer.add_document(table_id='/'.join(['/',ds_name, t.name]),
-                                table_info=unicode(simplejson.dumps({"ds_name":  display_name,
+                                table_info=unicode(simplejson.dumps({"ds_name":  table_group_name,
                                                                      "ds_name":    ds_name ,
                                                                      "table_name":  t.name ,
                                                                      "table_comment":    ' ' ,
@@ -158,7 +153,7 @@ def reflect_db(ds_name = None):
     dbrs = session.query(MDatabase).filter_by(ds_name = ds_name)
     for row in dbrs:
         adb = SQLAlchemyReflectEngine()
-        adb.reflect_database(display_name = row.display_name,
+        adb.reflect_database(table_group_name = row.table_group_name,
                                 ds_name = row.ds_name,
                                 db_type=row.db_type,
                                 db_url = row. db_url

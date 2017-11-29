@@ -1,16 +1,19 @@
 from config import cfg
 import os
+import shutil
 import time
 import logging
 import simplejson as json
 import sys
 import dbmodels
+
 # from util import SQLAlchemyReflectEngine
 from sqlalchemy import Column, DateTime, String, Integer, func
 
 
 from whoosh import index
 from whoosh.qparser import QueryParser
+from whoosh.fields import *
 
 
 
@@ -27,13 +30,42 @@ class SchemaIndexApp:
 
     db_session = dbmodels.create_session(bind=dbmodels.engine)
     logger = logging.getLogger('stanmo_logger')
+    indexdir = cfg['main']['schemaflex_text_index_path']
+    ix = None
+    index_writer = None
     def __init__(self):
         self.stanmo_home = cfg['main']['schemaflex_home']
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/spec
         sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
         self.schemaindex_init()
+        self.logger.debug('SchemaIndex platform is started.') # will not print anything
 
-        self.logger.debug('stanmo platform is started.') # will not print anything
+        #print('openning index')
+        #self.ix = index.open_dir(self.indexdir)
+        #self.index_writer = self.ix.writer()
+
+    def __del__(self):
+        if self.index_writer is not None:
+            # print('closing index')
+            self.index_writer.cancel()
+            self.ix.close() #
+
+    def add_table_content_index(self,table_id = None, table_info = None):
+
+        ix = index.open_dir(self.indexdir)
+        index_writer = ix.writer()
+        index_writer.add_document(table_id=table_id,
+                            table_info=table_info
+                            )
+        index_writer.commit()
+
+    def commit_index(self, table_id=None, table_info=None):
+        return
+        self.index_writer.commit()
+        self.ix = index.open_dir(self.indexdir)
+        self.index_writer = self.ix.writer()
+
+
 
     def schemaindex_init(self):
         # import os.path
@@ -42,6 +74,9 @@ class SchemaIndexApp:
 
         if not os.path.exists(to_init_indicator):
             return;
+
+        self.logger.debug('SchemaIndex platform is being initialized.') # will not print anything
+
         os.remove(to_init_indicator)
         # os.remove(textidx)
 
@@ -51,12 +86,25 @@ class SchemaIndexApp:
             # if(False):
         try:
             engine = dbmodels.create_engine('sqlite:///' + db_file_path)
-            print('creating ... ' + db_file_path)
+            self.logger.debug('creating db at ...:  ' + db_file_path) # will not print anything
             dbmodels.Base.metadata.create_all(engine)
+            self.logger.debug('scanning plugins ... ')  # will not print anything
             self.scan_reflect_plugins()
-            print("schemaindex: Initialized before the first request. db file is: " + db_file_path)
         except Exception as e:
             print(str(e))
+
+        self.logger.debug('re-construct text index at folder: ' + self.indexdir)  # will not print anything
+        if os.path.exists(db_file_path):
+            shutil.rmtree(self.indexdir)
+        os.mkdir(self.indexdir)
+
+        schema = Schema(table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
+        ix = index.create_in(self.indexdir , schema)
+        print("schemaindex: Initialized." )  # will not print anything
+
+
+
+
 
     def delete_data_soruce(self,ds_dict = None):
         session = dbmodels.create_session(bind=dbmodels.engine)
@@ -81,15 +129,15 @@ class SchemaIndexApp:
 
         session.begin()
         session.add_all([
-            dbmodels.MDatabase(display_name=ds_dict['display_name'] ,
+            dbmodels.MDatabase(table_group_name=ds_dict['table_group_name'] ,
                                ds_name=ds_dict['ds_name'] ,
                                db_type=ds_dict['db_type'] ,
+                               db_url= ds_dict['db_url'],
                                nbr_of_tables=0,
                                nbr_of_columns=9,
                                db_desc = 'list of db',
                                db_comment = 'customer rating for each product',
                                created_date = func.now(),
-                               db_url= ds_dict['db_url']
                     )
         ])
         session.commit()
@@ -106,7 +154,7 @@ class SchemaIndexApp:
         session.begin()
         # db1 = dbmodels.MDatabase.query.filter_by(ds_name=ds_dict['ds_name']).first()
         session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name']).\
-            update({'display_name': ds_dict['display_name'],
+            update({'table_group_name': ds_dict['table_group_name'],
                     'db_type': ds_dict['db_type'],
                     'db_url': ds_dict['db_url'],
                     'db_desc':'list of dbupdated'})
@@ -133,28 +181,20 @@ class SchemaIndexApp:
 
     def global_whoosh_search(self, q = ''):
 
-        indexdir = cfg['main']['schemaflex_text_index_path']
-        rs = self.db_session.query(dbmodels.MDatabase) #.filter_by(name='ed')
-        ix = index.open_dir(indexdir)
+        ix = index.open_dir(self.indexdir)
         res = []
         with ix.searcher() as searcher:
             query = QueryParser("table_info", ix.schema).parse(q)
             results = searcher.search(query)
-            '''
-            print(results[0])
-            b = simplejson.loads(results[0]['table_info'])
-            print(b)
-            print(results.__len__())
-            '''
             for r in results:
                 res.append(json.loads(r['table_info']))
 
         return res
     def get_whoosh_search_suggestion(self, q = ''):
 
-        indexdir = cfg['main']['schemaflex_text_index_path']
-        rs = self.db_session.query(dbmodels.MDatabase) #.filter_by(name='ed')
+        indexdir = self.indexdir
         ix = index.open_dir(indexdir)
+
         res = []
         with ix.reader() as r:
             # print (r.most_frequent_terms("table_info", number=5, prefix='dep'))
@@ -167,13 +207,33 @@ class SchemaIndexApp:
     def get_data_source_rs(self):
 
         rs = self.db_session.query(dbmodels.MDatabase).order_by(dbmodels.MDatabase.ds_name.asc()) #.filter_by(name='ed')
-        return  rs
+        return rs
+
+    def get_data_source_dict(self, ds_name = None):
+
+        rs = self.db_session.query(dbmodels.MDatabase).filter_by(ds_name=ds_name)
+        if rs.count() > 0:
+            ds = rs.first()
+            return {
+                'ds_name': ds.ds_name,
+                'db_url': ds.db_url,
+                'db_type': ds.db_type,
+                'table_group_name': ds.table_group_name,
+            }
+        return None
 
     def get_plugin_name_list(self):
         plugins = []
         rs =  self.db_session.query(dbmodels.MPlugin)
         for p in rs:
             plugins.append(p.plugin_name)
+        return  plugins
+
+    def get_plugin_list(self):
+        plugins = []
+        rs = self.db_session.query(dbmodels.MPlugin)
+        for p in rs:
+            plugins.append(p)
         return  plugins
 
 
@@ -193,8 +253,9 @@ class SchemaIndexApp:
         session = dbmodels.create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatabase).filter_by(ds_name=data_source_name)
         for row in dbrs:
-            adb = sf_app.get_reflect_plugin(row.db_type)['reflect_engine'].ReflectEngine() #SQLAlchemyReflectEngine()
-            adb.reflect(reload_flag=True    )
+            the_engine= sf_app.get_reflect_plugin(row.db_type)['reflect_engine']
+            a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
+            a_ds.reflect(reload_flag=True)
 
     def list_data_sources(self):
         model_list = []
@@ -212,9 +273,9 @@ class SchemaIndexApp:
                                                                            'URL'
                                                                            ))
             for a_model in models:
-                print('{0:20}   {db_type_name:20}  {display_name:35}  '.format(a_model.ds_name,
+                print('{0:20}   {db_type_name:20}  {table_group_name:35}  '.format(a_model.ds_name,
                                                                           db_type_name=a_model.db_type,
-                                                                          display_name = a_model.db_url
+                                                                          table_group_name = a_model.db_url
                                                                                            )
                       )
         else:
@@ -226,7 +287,7 @@ class SchemaIndexApp:
 
     def list_reflect_plugins(self):
         logger = logging.getLogger('stanmo_logger')
-        logger.debug('looking for reflect engine' )
+        logger.debug('looking for reflect engine from location: ' + os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH) )
         plugin_spec_path = os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH)
         logger = logging.getLogger('stanmo_logger')
         logger.debug('looking for model spec in path: ' + plugin_spec_path)
