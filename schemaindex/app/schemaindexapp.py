@@ -9,6 +9,7 @@ import dbmodels
 
 # from util import SQLAlchemyReflectEngine
 from sqlalchemy import Column, DateTime, String, Integer, func
+from sqlalchemy.orm import create_session
 
 
 from whoosh import index
@@ -28,7 +29,7 @@ class SchemaIndexApp:
     MODEL_SPEC_FILENAME = 'mining_model.json'
     TIME_FORMATER = "%Y-%m-%d %H:%M:%S"
 
-    db_session = dbmodels.create_session(bind=dbmodels.engine)
+    db_session = create_session(bind=dbmodels.engine)
     logger = logging.getLogger('stanmo_logger')
     indexdir = cfg['main']['schemaflex_text_index_path']
     ix = None
@@ -107,7 +108,7 @@ class SchemaIndexApp:
 
 
     def delete_data_soruce(self,ds_dict = None):
-        session = dbmodels.create_session(bind=dbmodels.engine)
+        session = create_session(bind=dbmodels.engine)
         session._model_changes={}
 
         tab_result = session.query(dbmodels.MTable).filter_by(ds_name=ds_dict['ds_name'])
@@ -124,7 +125,7 @@ class SchemaIndexApp:
                 'message_body': 'the data source "' + ds_dict['ds_name'] + '" is deleted.'}
 
     def add_data_soruce(self,ds_dict = None):
-        session = dbmodels.create_session(bind=dbmodels.engine)
+        session = create_session(bind=dbmodels.engine)
         session._model_changes={}
 
         session.begin()
@@ -148,7 +149,7 @@ class SchemaIndexApp:
         return db
 
     def update_data_soruce(self,ds_dict = None):
-        session = dbmodels.create_session(bind=dbmodels.engine)
+        session = create_session(bind=dbmodels.engine)
         session._model_changes={}
 
         session.begin()
@@ -250,7 +251,7 @@ class SchemaIndexApp:
 
 
     def reflect_db(self,data_source_name=None):
-        session = dbmodels.create_session(bind=dbmodels.engine)
+        session = create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatabase).filter_by(ds_name=data_source_name)
         for row in dbrs:
             the_engine= si_app.get_reflect_plugin(row.db_type)['reflect_engine']
@@ -261,7 +262,7 @@ class SchemaIndexApp:
         model_list = []
         models = []
 
-        session = dbmodels.create_session(bind=dbmodels.engine)
+        session = create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatabase)  # .filter_by(name='ed')
 
 
