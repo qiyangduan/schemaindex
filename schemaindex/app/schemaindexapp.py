@@ -253,7 +253,7 @@ class SchemaIndexApp:
         session = dbmodels.create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatabase).filter_by(ds_name=data_source_name)
         for row in dbrs:
-            the_engine= sf_app.get_reflect_plugin(row.db_type)['reflect_engine']
+            the_engine= si_app.get_reflect_plugin(row.db_type)['reflect_engine']
             a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
             a_ds.reflect(reload_flag=True)
 
@@ -348,4 +348,4 @@ class SchemaIndexApp:
             return None
 
 
-sf_app = SchemaIndexApp()
+si_app = SchemaIndexApp()

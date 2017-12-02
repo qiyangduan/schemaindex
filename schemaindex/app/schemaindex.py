@@ -32,7 +32,7 @@
 
 
 from docopt import docopt
-from schemaindexapp import sf_app
+from schemaindexapp import si_app
 from webserver import run_webserver
 import config
 import os
@@ -42,16 +42,16 @@ import logging
 # in the control file, it should not deal with any specific model but only use spec and model name to call the loader
 
 def main():
-    """ main-entry point for schemaindex program, parse the commands and build the sf_app platform """
+    """ main-entry point for schemaindex program, parse the commands and build the si_app platform """
     docopt_args = docopt(__doc__)
 
     # Parse the User command and the required arguments
     if docopt_args["list"]:
         if docopt_args["data_source"] == True:
-            # print(json.dumps(sf_app.list_models()))
-            sf_app.list_data_sources()
+            # print(json.dumps(si_app.list_models()))
+            si_app.list_data_sources()
         elif docopt_args["data_source_type"] == True:
-            model_specs = sf_app.list_reflect_plugins()
+            model_specs = si_app.list_reflect_plugins()
 
             # {"name":spec_name, "path":os.path.join(model_spec_path,item)} )
             if len(model_specs) > 0:
@@ -73,20 +73,20 @@ def main():
         spec_name = docopt_args["--spec"]
         if spec_name is None:
             print("Please specify the <model_name> and <spec_name>")
-        sf_app.create_model(model_name=model_name, spec_name=spec_name)
+        si_app.create_model(model_name=model_name, spec_name=spec_name)
         print("Model is created successfully.")
 
 
     elif docopt_args["reflect"]:
         # to reflect the specified data source.
         data_source_name = docopt_args["<data_source_name>"]
-        the_model = sf_app.reflect_db(data_source_name=data_source_name)
+        the_model = si_app.reflect_db(data_source_name=data_source_name)
 
     elif docopt_args["search"]:
         # to search by a keyword
         q = docopt_args["<search_key_word>"]
         print(q)
-        the_tables = sf_app.global_whoosh_search(q=' '.join(q))
+        the_tables = si_app.global_whoosh_search(q=' '.join(q))
 
 
     elif docopt_args["runserver"]:
@@ -106,7 +106,7 @@ def main():
             port =  docopt_args["--port"]
 
         model_name = docopt_args["<model_name>"]
-        the_model = sf_app.load_model(model_name=model_name)
+        the_model = si_app.load_model(model_name=model_name)
         try:
             the_model.show(port=port)
         except :

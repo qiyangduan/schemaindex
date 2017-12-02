@@ -5,9 +5,9 @@ from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, fun
 import simplejson as json
 
 from app.dbmodels import engine, MTable, MColumn, MDatabase
-from  app.schemaindexapp import sf_app
+from  app.schemaindexapp import si_app
 
-class SQLAlchemyReflectEngine():
+class HDFSIndexEngine():
     ds_dict = None
     def __init__(self,ds_dict=None, ds_name = None):
         if ds_dict is not None:
@@ -78,8 +78,8 @@ class SQLAlchemyReflectEngine():
                 ])
                 column_list.append([c.name, str(c.type), c.doc])
 
-            sf_app.add_table_content_index(table_id='/'.join(['/',self.ds_dict['ds_name'], t.name]),
-                                table_info=unicode(json.dumps({"ds_name":  self.ds_dict['table_group_name'],
+            si_app.add_table_content_index(table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
+                                           table_info=unicode(json.dumps({"ds_name":  self.ds_dict['table_group_name'],
                                                                      "ds_name":    self.ds_dict['ds_name'] ,
                                                                      "table_name":  t.name ,
                                                                      "table_comment":    ' ' ,
@@ -87,11 +87,11 @@ class SQLAlchemyReflectEngine():
                                                                      }
                                                                     )
                                                    )
-                                )
+                                           )
 
 
         session.commit()
-        sf_app.commit_index()
+        si_app.commit_index()
 
 
     @staticmethod
@@ -108,7 +108,7 @@ class SQLAlchemyReflectEngine():
 
 
 if __name__ == "__main__":
-    adb = SQLAlchemyReflectEngine(ds_dict = { 'table_group_name': 'a',
+    adb = HDFSIndexEngine(ds_dict = { 'table_group_name': 'a',
                                      'ds_name': 'a',
                                      'db_type':'sqlalchemy',
                                      'db_url' : 'mysql://root:learning@localhost/blog',

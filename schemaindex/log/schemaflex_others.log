@@ -2216,3 +2216,97 @@ Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static
 404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.76ms
 404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.28ms
 200 GET /view_table_in_notebook?table_name=departments&ds_name=a (::1) 24.84ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET / (::1) 371.40ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.20ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.70ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.64ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.74ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.03ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 0.86ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.04ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.93ms
+404 GET /favicon.ico (::1) 0.73ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /global_search (::1) 22.00ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.92ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.86ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.02ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.20ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 0.76ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.21ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.77ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.90ms
+304 GET /search_suggestion_json?query=dep (::1) 96.47ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 POST /global_search (::1) 37.15ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.14ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.92ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.98ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.93ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 0.81ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.29ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.02ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.64ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+304 GET /database_summary?ds_name=a (::1) 41.94ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.27ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.96ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 4.11ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 3.17ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 2.01ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.15ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.68ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.83ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /global_search (::1) 11.75ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 4.87ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 1.19ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.81ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.54ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.93ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.59ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.95ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.77ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 GET /global_search (::1) 16.21ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 3.68ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.18ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 3.03ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 1.55ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.63ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 2.03ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.59ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.37ms
+304 GET /search_suggestion_json?query=dep (::1) 1.98ms
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/fastclick/fastclick.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/sparkline/jquery.sparkline.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/slimScroll/jquery.slimscroll.min.js'
+Could not open static file '/home/duan/github/schemaindex/schemaindex/app/static/plugins/chartjs/Chart.min.js'
+200 POST /global_search (::1) 15.00ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 1.98ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 2.03ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.23ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 2.55ms
+404 GET /static/plugins/fastclick/fastclick.js (::1) 0.87ms
+404 GET /static/plugins/sparkline/jquery.sparkline.min.js (::1) 1.60ms
+404 GET /static/plugins/slimScroll/jquery.slimscroll.min.js (::1) 0.86ms
+404 GET /static/plugins/chartjs/Chart.min.js (::1) 0.64ms

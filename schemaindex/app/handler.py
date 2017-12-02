@@ -3,7 +3,7 @@ import simplejson as json
 
 from dbmodels import engine, MDatabase,MTable,MColumn
 
-from schemaindexapp import sf_app
+from schemaindexapp import si_app
 from sqlalchemy.orm import create_session
 
 
@@ -16,14 +16,14 @@ class OverviewHandler(tornado.web.RequestHandler):
         # self.write("Hello, world")
         # print('overview ed')
         session = create_session(bind=engine)
-        dbrs = sf_app.get_data_source_rs()
+        dbrs = si_app.get_data_source_rs()
 
         ds_count = dbrs.count()
         tab_count = session.query(MTable).count()
         attr_count = session.query(MColumn).count()
         base_navigation_dict = {'selected_menu': 'overview',
                                 'dbrs': dbrs,
-                                'plugin_list': sf_app.get_plugin_list(),
+                                'plugin_list': si_app.get_plugin_list(),
                                 'ds_count':str(ds_count),
                                 'tab_count':str(tab_count),
                                 'attr_count':str(attr_count),
@@ -57,8 +57,8 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
         if db is None:
             print('error: did not find database')
 
-        dbrs = sf_app.get_data_source_rs()
-        tabrs = sf_app.get_table_list_for_data_source_rs(param_ds_name= param_ds_name)
+        dbrs = si_app.get_data_source_rs()
+        tabrs = si_app.get_table_list_for_data_source_rs(param_ds_name= param_ds_name)
 
 
 
@@ -67,7 +67,7 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
                                 'selected_schema_name': param_ds_name,
                                 'db':db,
                                 'tabrs':tabrs,
-                                'plugin_name_list': sf_app.get_plugin_name_list(),
+                                'plugin_name_list': si_app.get_plugin_name_list(),
                                 }
 
         self.render("database_summary.html", # current_schema_name = param_schema_name,
@@ -83,16 +83,16 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
         ds_dict['db_desc'] = self.get_argument('db_desc')
         ds_dict['db_comment'] = self.get_argument('db_comment')
 
-        db = sf_app.update_data_soruce(ds_dict)
+        db = si_app.update_data_soruce(ds_dict)
 
 
-        dbrs = sf_app.get_data_source_rs()
+        dbrs = si_app.get_data_source_rs()
 
         Info = {'result': 'ok', 'message':'A new data source is updated.'}
         base_navigation_dict = {'selected_menu': 'database',
                                 'dbrs': dbrs,
                                 'selected_add_data_source':True, 'selected_schema_name':ds_dict['ds_name'],
-                                'plugin_name_list': sf_app.get_plugin_name_list(),
+                                'plugin_name_list': si_app.get_plugin_name_list(),
                                 'db':db
                                 }
         self.render("database_summary.html",
@@ -104,7 +104,7 @@ class GlobalSearchHandler(tornado.web.RequestHandler):
     def get(self):
         q = ''
         res = []
-        dbrs = sf_app.get_data_source_rs()
+        dbrs = si_app.get_data_source_rs()
 
         base_navigation_dict = {'selected_menu': 'search',
                                 'dbrs': dbrs,
@@ -119,8 +119,8 @@ class GlobalSearchHandler(tornado.web.RequestHandler):
     def post(self):
 
         q = self.get_argument('q')
-        res = sf_app.global_whoosh_search(q)
-        dbrs = sf_app.get_data_source_rs()
+        res = si_app.global_whoosh_search(q)
+        dbrs = si_app.get_data_source_rs()
 
         base_navigation_dict = {'selected_menu': 'search',
                                 'dbrs': dbrs,
@@ -140,8 +140,8 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
     def get(self):
         # json.dumps()
         base_navigation_dict = {'selected_menu': 'datasources',
-                                'dbrs': sf_app.get_data_source_rs(),
-                                'plugin_name_list': sf_app.get_plugin_name_list(),
+                                'dbrs': si_app.get_data_source_rs(),
+                                'plugin_name_list': si_app.get_plugin_name_list(),
                                 'selected_add_data_source':True,
                                 'selected_schema_name':'__add_data_source__',
                                 }
@@ -163,13 +163,13 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
         ds_dict['db_desc'] = self.get_argument('db_desc')
         ds_dict['db_comment'] = self.get_argument('db_comment')
 
-        db = sf_app.add_data_soruce(ds_dict)
-        dbrs = sf_app.get_data_source_rs()
+        db = si_app.add_data_soruce(ds_dict)
+        dbrs = si_app.get_data_source_rs()
 
         Info = {'result': 'ok', 'message':'A new data source is added.'}
         base_navigation_dict = {'selected_menu': 'database',
                                 'dbrs': dbrs,
-                                'plugin_name_list': sf_app.get_plugin_name_list(),
+                                'plugin_name_list': si_app.get_plugin_name_list(),
                                 'selected_add_data_source':True,
                                 'selected_schema_name':ds_dict['ds_name'],
                                 'db':db,
@@ -185,13 +185,13 @@ class DeleteDataSourceHandler(tornado.web.RequestHandler):
         ds_dict['delete_reflected_database_automatic'] = self.get_argument('delete_reflected_database_automatic', default=None)
 
         # print ds_dict['delete_reflected_database_automatic']
-        result_message = sf_app.delete_data_soruce(ds_dict)
+        result_message = si_app.delete_data_soruce(ds_dict)
 
-        dbrs = sf_app.get_data_source_rs()
+        dbrs = si_app.get_data_source_rs()
         base_navigation_dict = {'selected_menu': 'database',
                                 'dbrs': dbrs,
                                 'selected_add_data_source':True,
-                                'plugin_name_list': sf_app.get_plugin_name_list(),
+                                'plugin_name_list': si_app.get_plugin_name_list(),
                                 'selected_schema_name':ds_dict['ds_name'],
                                 'message': result_message
                                 }
@@ -200,7 +200,7 @@ class DeleteDataSourceHandler(tornado.web.RequestHandler):
             dbrs1 = session.query(MDatabase).filter_by(ds_name = ds_dict['ds_name'])
             db = dbrs1.first()
             base_navigation_dict['db'] = db
-            base_navigation_dict['tabrs'] = sf_app.get_table_list_for_data_source_rs(param_ds_name= ds_dict['ds_name'] )
+            base_navigation_dict['tabrs'] = si_app.get_table_list_for_data_source_rs(param_ds_name= ds_dict['ds_name'])
 
 
         self.render("database_summary.html",
@@ -213,7 +213,7 @@ class ReflectDataSourceHandler(tornado.web.RequestHandler):
 
     def post(self):
         ds_name = self.get_argument('ds_name')
-        sf_app.reflect_db(ds_name)
+        si_app.reflect_db(ds_name)
         # self.__setattr__('reflected_db', ds_name)
         self.redirect('/database_summary?ds_name='+ds_name)
 
@@ -270,7 +270,7 @@ class DatabaseJSONHandler(tornado.web.RequestHandler):
         ds_dict['db_url'] = self.get_argument('db_url')
         ds_dict['db_type'] = self.get_argument('db_type')
 
-        sf_app.add_data_soruce(ds_dict)
+        si_app.add_data_soruce(ds_dict)
 
 
         Info = {'result': 'ok'}
@@ -278,19 +278,19 @@ class DatabaseJSONHandler(tornado.web.RequestHandler):
 
     def get(self):
         # json.dumps()
-        db_dict = sf_app.get_data_source_name_list()
+        db_dict = si_app.get_data_source_name_list()
         self.write(json.dumps(db_dict)) # data = json.dumps(db_dict)
 
 class SearchSuggestionJSONHandler(tornado.web.RequestHandler):
     def get(self):
         q = self.get_argument('query')
-        res = sf_app.get_whoosh_search_suggestion(q)
+        res = si_app.get_whoosh_search_suggestion(q)
         self.write(json.dumps(res))
 
 class JSON1Handler(tornado.web.RequestHandler):
     def get(self):
         q = self.get_argument('query')
-        res = sf_app.get_whoosh_search_suggestion(q)
+        res = si_app.get_whoosh_search_suggestion(q)
         self.write(json.dumps(res))
 
         # self.write(json.dumps(res1))

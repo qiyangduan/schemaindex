@@ -1,6 +1,6 @@
-bcrypt
-futures
-MySQL-python
-markdown
 tornado
-torndb
+docopt
+simplejson
+sqlalchemy
+shutil
+whoosh
