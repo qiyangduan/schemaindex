@@ -1,6 +1,4 @@
 tornado
 docopt
-simplejson
 sqlalchemy
-shutil
 whoosh

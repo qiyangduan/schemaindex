@@ -17,10 +17,8 @@ cfg = {"web": {
                  'init_indicator_file': os.path.abspath(os.path.join(os.path.dirname(__file__), 'do_schemaindex_init')),
                  },
         "logging": {"log_file": "schemaindex.log",
-                            "sqla_log_file": "schemaflex_sqlalchemy.log",
-                            "root_log_file": "schemaflex_others.log",
                             "log_dir": "log",
-                            "log_level": "ERROR"  # DEBUG,INFO,WARNING,ERROR,CRITICAL
+                            "log_level": "DEBUG"  # DEBUG,INFO,WARNING,ERROR,CRITICAL
                             }
 }
 
@@ -53,24 +51,8 @@ logging.basicConfig(format='[%(asctime)s] {%(pathname)s:%(lineno)d}  - %(message
 log = logging.getLogger('schemaflex_logger')
 handler = MyStreamHandler()
 log.addHandler(handler)
-# logging.basicConfig()
-logging.getLogger('sqlalchemyflex.engine').setLevel(logging.ERROR)
-logging.getLogger('sqlalchemyflex').setLevel(logging.ERROR)
-logging.getLogger('sqlalchemyflex.engine.base.Engine').setLevel(logging.ERROR)
 
-sqla_logger = logging.getLogger('sqlalchemyflex')
-sqla_logger.propagate = False
-sqla_logger.addHandler(logging.FileHandler(os.path.join(LOG_DIR, cfg['logging']['sqla_log_file'])))
-logging.getLogger('sqlalchemyflex.engine').addHandler(
-    logging.FileHandler(os.path.join(LOG_DIR, cfg['logging']['sqla_log_file'])))
-logging.getLogger().addHandler(
-    logging.FileHandler(os.path.join(LOG_DIR, cfg['logging']['root_log_file'])))
-
-# log.error("Now try passing a string to an int: %d", 'abc')
-# log.error("Try interpolating an int correctly: %i", 1)
-# log.error("Now try passing a string to an int: %d", 'abc')
-# log.error("And then a string to a string %s", 'abc')
-logging.getLogger('schemaflex_logger').info('Logging initialization finished.')  # will not print anything
+# logging.getLogger('schemaflex_logger').info('Logging initialization finished.')  # will not print anything
 
 
 class schemaflexError(Exception):

@@ -70,10 +70,7 @@
                   <thead>
                   <tr>
                     <th>Data Source Name</th>
-                    <th>Table Name</th>
-                    <th>Table Comments</th>
-                    <th>Column Names</th>
-                    <th>Operations</th>
+                    <th>Entity</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -83,9 +80,7 @@
 
                   <tr>
                     <td>{{ tab['ds_name']  }} </td>
-                    <td>{{ tab['table_name'] }}</td>
-                    <td>{{ tab['table_comment'] }}</td>
-                    <td>{{ tab['column_info']   }}</td>
+                    <td>{{ tab['table_info']   }}</td>
                     <td><a href="/view_table_in_notebook?ds_name={{ tab['ds_name'] }}&ds_name={{ tab['ds_name'] }}">Create Notebook</a>
 
                     </td>

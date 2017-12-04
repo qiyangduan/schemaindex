@@ -3,7 +3,7 @@ import os
 import shutil
 import time
 import logging
-import simplejson as json
+import json
 import sys
 import dbmodels
 
@@ -39,7 +39,8 @@ class SchemaIndexApp:
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/spec
         sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
         self.schemaindex_init()
-        self.logger.debug('SchemaIndex platform is started.') # will not print anything
+        #
+        self.logger.debug('SchemaIndex platform is started.')
 
         #print('openning index')
         #self.ix = index.open_dir(self.indexdir)
@@ -51,13 +52,11 @@ class SchemaIndexApp:
             self.index_writer.cancel()
             self.ix.close() #
 
-    def add_table_content_index(self,table_id = None, table_info = None):
+    def add_table_content_index(self,ds_name = None, table_id = None, table_info = None):
 
         ix = index.open_dir(self.indexdir)
         index_writer = ix.writer()
-        index_writer.add_document(table_id=table_id,
-                            table_info=table_info
-                            )
+        index_writer.add_document(ds_name = unicode(ds_name), table_id=unicode(table_id), table_info=unicode(table_info))
         index_writer.commit()
 
     def commit_index(self, table_id=None, table_info=None):
@@ -99,7 +98,7 @@ class SchemaIndexApp:
             shutil.rmtree(self.indexdir)
         os.mkdir(self.indexdir)
 
-        schema = Schema(table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
+        schema = Schema(ds_name=ID(stored=True), table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
         ix = index.create_in(self.indexdir , schema)
         print("schemaindex: Initialized." )  # will not print anything
 
@@ -188,7 +187,7 @@ class SchemaIndexApp:
             query = QueryParser("table_info", ix.schema).parse(q)
             results = searcher.search(query)
             for r in results:
-                res.append(json.loads(r['table_info']))
+                res.append({'ds_name': r['ds_name'], 'table_info': r['table_info']})
 
         return res
     def get_whoosh_search_suggestion(self, q = ''):
@@ -306,16 +305,17 @@ class SchemaIndexApp:
         self.db_session.begin()
         self.db_session.query(dbmodels.MPlugin).delete()
         for plugin_dict in plist:
-            self.db_session.add_all([
-                dbmodels.MPlugin( plugin_name=plugin_dict['plugin_name'] ,
-                                  module_name=plugin_dict['module_name'] ,
-                                  plugin_spec_path=plugin_dict['plugin_spec_path'],
-                                  supported_ds_types=plugin_dict['supported_ds_types'],
-                                  sample_ds_url=plugin_dict['sample_ds_url'],
-                                  author=plugin_dict['author'],
-                                  plugin_desc=plugin_dict['plugin_desc'],
-                                )
-                                ])
+            if plugin_dict is not None:
+                self.db_session.add_all([
+                    dbmodels.MPlugin( plugin_name=plugin_dict['plugin_name'] ,
+                                      module_name=plugin_dict['module_name'] ,
+                                      plugin_spec_path=plugin_dict['plugin_spec_path'],
+                                      supported_ds_types=plugin_dict['supported_ds_types'],
+                                      sample_ds_url=plugin_dict['sample_ds_url'],
+                                      author=plugin_dict['author'],
+                                      plugin_desc=plugin_dict['plugin_desc'],
+                                    )
+                                    ])
         self.db_session.commit()
 
     def get_reflect_plugin(self, p_plugin_name = None):
@@ -344,8 +344,9 @@ class SchemaIndexApp:
                     'supported_ds_types': json.dumps(getattr(module, 'supported_ds_types')) ,
                     'author': getattr(module, 'author'),
                     }
-        except AttributeError:
-            logging.exception('load_reflect_engine: Could not import %s because the class was not found', dottedpath)
+        except Exception as e:
+            self.logger.error( "load_reflect_engine (error): Failed to import plugin %s, due to error :{%s}" % (dottedpath, e) )
+
             return None
 
 

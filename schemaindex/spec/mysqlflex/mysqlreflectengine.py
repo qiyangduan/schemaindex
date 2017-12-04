@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import create_session
 from sqlalchemy import MetaData
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
-import simplejson as json
+import json
 
 from app.dbmodels import engine, MTable, MColumn, MDatabase
 from  app.schemaindexapp import si_app

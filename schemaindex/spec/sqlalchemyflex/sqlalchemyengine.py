@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import create_session
 from sqlalchemy import MetaData
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
-import simplejson as json
+import json
 
 from app.dbmodels import engine, MTable, MColumn, MDatabase
 from  app.schemaindexapp import si_app
@@ -73,13 +73,13 @@ class SQLAlchemyReflectEngine():
                             column_name = c.name,
                             column_type = str(c.type),
                             column_comment = None # c.doc
-
                 )
                 ])
                 column_list.append([c.name, str(c.type), c.doc])
 
-            si_app.add_table_content_index(table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
-                                           table_info=unicode(json.dumps({"ds_name":  self.ds_dict['table_group_name'],
+            si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
+                                           table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
+                                           table_info=unicode(json.dumps({"table_group_name":  self.ds_dict['table_group_name'],
                                                                      "ds_name":    self.ds_dict['ds_name'] ,
                                                                      "table_name":  t.name ,
                                                                      "table_comment":    ' ' ,

@@ -1,11 +1,8 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import create_session
-from sqlalchemy import MetaData
-from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
-import simplejson as json
+
+from hdfs import Client
 
 from app.dbmodels import engine, MTable, MColumn, MDatabase
-from  app.schemaindexapp import si_app
+from app.schemaindexapp import si_app
 
 class HDFSIndexEngine():
     ds_dict = None
@@ -21,97 +18,67 @@ class HDFSIndexEngine():
     def echo(self):
         return 'echo'
 
+    # get the all file information from HDFS
+    def QueryHDFSFile(self, pDirectory, pClient, filelist):
+        tDirectoryType = pClient.status(pDirectory).get('type')
+
+        if tDirectoryType == 'FILE':
+            filelist.append(pDirectory)
+
+        elif tDirectoryType == 'DIRECTORY' and (not pClient.list(pDirectory)):  # This is an empty folder
+            pass
+            # I skip empty directories.
+        else:
+            tDirectorys = pClient.list(pDirectory)
+
+            fileNumInFolder = 0  # the number of files in this folder
+            tSubDirectorys = []
+            for tDirectory in tDirectorys:
+                tSubDirectory = pDirectory + '/' + tDirectory
+                tSubDirectorys.append(tSubDirectory)
+                if pClient.status(tSubDirectory).get('type') == 'FILE':
+                    fileNumInFolder += 1
+
+            for tSubDirectory in tSubDirectorys:
+                self.QueryHDFSFile(tSubDirectory, pClient, filelist)
+
+    # get the all file information from HDFS
+    def getHDFSFileInfo(self,tclient, pInitDir):
+
+        filelist = []
+        # if pInitDir is a file, fileNum = 1; if pInitDir is a directory, fileNum here has no influence
+        self.QueryHDFSFile(pInitDir, tclient, filelist)
+
+        return filelist
+
     def reflect(self, reload_flag = False):
         if not self.ds_dict:
             print('error: db_url must be provided.')
             return
 
-        reflect_engine = create_engine((self.ds_dict['db_url']))
-        metadata = MetaData(bind=reflect_engine)
-        metadata.reflect()
+        tclient = Client(self.ds_dict['db_url'])
+        path_hdfs = self.ds_dict['table_group_name']
 
-        session = create_session(bind=engine)
-        session._model_changes={}
-        session.begin()
+        filelist = self.getHDFSFileInfo(tclient, path_hdfs)
+        #for f in (filelist):
+        #    print('*  oriPath: {}'.format(f))
 
-        if reload_flag:
-            session.query(MTable).filter_by(ds_name = self.ds_dict['ds_name']).delete()
-            session.query(MColumn).filter_by(ds_name = self.ds_dict['ds_name']).delete()
-        # tables = metadata.tables.values()
-        # print(tables)
+        for t in filelist:
+            print(t)
 
-
-
-        for t in metadata.sorted_tables:
-            print(t.name)
-            # t.columns.id
-            # t.columns.id.comment
-            session.add_all([
-                MTable(
-                        ds_name = self.ds_dict['ds_name'],
-                        table_group_name = self.ds_dict['table_group_name'],
-                        table_name=t.name,
-                        table_comment = ''
-                        )
-            ])
-
-
-            table1 = Table(t.name, metadata
-                           , autoload=True, autoload_with=engine)
-
-            print([c.name for c in table1.columns])
-            print([c.type for c in table1.columns])
-            print([c for c in table1.columns])
-            column_list = []
-            for c in table1.columns:
-                # print(c)
-                session.add_all([
-                    MColumn(
-                            ds_name = self.ds_dict['ds_name'],
-                            table_name=t.name,
-                            table_group_name=self.ds_dict['table_group_name'],
-                            column_name = c.name,
-                            column_type = str(c.type),
-                            column_comment = None # c.doc
-
-                )
-                ])
-                column_list.append([c.name, str(c.type), c.doc])
-
-            si_app.add_table_content_index(table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
-                                           table_info=unicode(json.dumps({"ds_name":  self.ds_dict['table_group_name'],
-                                                                     "ds_name":    self.ds_dict['ds_name'] ,
-                                                                     "table_name":  t.name ,
-                                                                     "table_comment":    ' ' ,
-                                                                     "column_info": column_list
-                                                                     }
-                                                                    )
-                                                   )
+            si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
+                                           table_id=t,
+                                           table_info=t,
                                            )
 
-
-        session.commit()
         si_app.commit_index()
 
 
-    @staticmethod
-    def reflect_db(ds_name = None):
-        session = create_session(bind=engine)
-        dbrs = session.query(MDatabase).filter_by(ds_name = ds_name)
-        for row in dbrs:
-            adb = SQLAlchemyReflectEngine()
-            adb.reflect(table_group_name = row.table_group_name,
-                                    ds_name = row.ds_name,
-                                    db_type=row.db_type,
-                                    db_url = row. db_url
-                                 )
-
-
 if __name__ == "__main__":
-    adb = HDFSIndexEngine(ds_dict = { 'table_group_name': 'a',
-                                     'ds_name': 'a',
-                                     'db_type':'sqlalchemy',
-                                     'db_url' : 'mysql://root:learning@localhost/blog',
+    adb = HDFSIndexEngine(ds_dict = { 'table_group_name': '/user/data_norm',
+                                     'ds_name': 'hdfs1',
+                                     'db_type':'hdfsindex',
+                                     'db_url' : 'http://localhost:50070',
     })
     adb.reflect() #  None)
 

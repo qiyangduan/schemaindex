@@ -8,4 +8,4 @@ author = 'duan'
 
 class_name = 'a.b'
 
-from .hdfsindexengine import SQLAlchemyReflectEngine as ReflectEngine
+from .hdfsindexengine import HDFSIndexEngine as ReflectEngine

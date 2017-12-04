@@ -1,5 +1,5 @@
 import tornado.web
-import simplejson as json
+import json
 
 from dbmodels import engine, MDatabase,MTable,MColumn
 
@@ -62,7 +62,7 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
 
 
 
-        base_navigation_dict = {'selected_menu': 'database',
+        base_navigation_dict = {'selected_menu': 'datasources',
                                 'dbrs': dbrs,
                                 'selected_schema_name': param_ds_name,
                                 'db':db,

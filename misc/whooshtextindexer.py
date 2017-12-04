@@ -7,7 +7,7 @@ import config
 import os
 
 
-import simplejson as json
+import json
 schema = Schema(title=TEXT(stored=True), path=ID(stored=True), content=TEXT(stored=True))
 
 
