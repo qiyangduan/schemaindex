@@ -43,7 +43,9 @@
                     <label>Choose The Data Source Type (Required): </label>
                     <select name = "db_type" class="form-control">
                       {% for p in base_navigation_dict['plugin_name_list']   %}
-                            <option {{'selected' if 'input_db_type' in base_navigation_dict.keys() and base_navigation_dict['input_db_type'] == p else '' }} >
+                            <option {{'selected' if ('input_db_type' in base_navigation_dict.keys() and base_navigation_dict['input_db_type'] == p) or \
+                                                    ('db' in base_navigation_dict.keys() and base_navigation_dict['db'].db_type == p) \
+                                                  else '' }} >
                              {{p}}</option>
                       {% end %}
                     </select>

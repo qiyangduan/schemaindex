@@ -18,6 +18,7 @@ class MPlugin(Base):
     module_name = Column(String(1200))
     # plugin_status = Column(String(200))
     plugin_spec_path = Column(String(200))
+    notebook_template_path = Column(String(500))
     supported_ds_types = Column(String(200))
     sample_ds_url = Column(String(1000))
     author = Column(String(200))
@@ -33,6 +34,7 @@ class MDatabase(Base):
     __tablename__ =  'mdatabase'
     #db_id = Column(Integer, primary_key=True, autoincrement=True)
     ds_name = Column(String(100), primary_key=True,)
+    db_trx_id = Column(Integer)
     table_group_name = Column(String(200), default='_NA')
     nbr_of_tables = Column(Integer)
     nbr_of_columns = Column(Integer)

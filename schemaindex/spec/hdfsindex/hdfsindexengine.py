@@ -20,16 +20,19 @@ class HDFSIndexEngine():
 
     # get the all file information from HDFS
     def QueryHDFSFile(self, pDirectory, pClient, filelist):
-        tDirectoryType = pClient.status(pDirectory).get('type')
+
+        to_list_dir = pDirectory if len(pDirectory) > 1 else '/'
+        tDirectoryType = pClient.status(to_list_dir).get('type')
 
         if tDirectoryType == 'FILE':
             filelist.append(pDirectory)
 
-        elif tDirectoryType == 'DIRECTORY' and (not pClient.list(pDirectory)):  # This is an empty folder
+        elif tDirectoryType == 'DIRECTORY' and (not pClient.list(to_list_dir)):  # This is an empty folder
             pass
             # I skip empty directories.
         else:
-            tDirectorys = pClient.list(pDirectory)
+
+            tDirectorys = pClient.list(to_list_dir)
 
             fileNumInFolder = 0  # the number of files in this folder
             tSubDirectorys = []
@@ -58,10 +61,19 @@ class HDFSIndexEngine():
 
         tclient = Client(self.ds_dict['db_url'])
         path_hdfs = self.ds_dict['table_group_name']
+        if path_hdfs[-1] == '/':
+            # remove trailing '/' for concatenating more path
+            path_hdfs = path_hdfs[:-1] #+'/'
+
 
         filelist = self.getHDFSFileInfo(tclient, path_hdfs)
         #for f in (filelist):
         #    print('*  oriPath: {}'.format(f))
+
+
+        if reload_flag:
+            si_app.delete_doc_from_index_by_datasource(ds_name=self.ds_dict['ds_name'])
+
 
         for t in filelist:
             print(t)
@@ -71,7 +83,7 @@ class HDFSIndexEngine():
                                            table_info=t,
                                            )
 
-        si_app.commit_index()
+        # si_app.commit_index()
 
 
 if __name__ == "__main__":

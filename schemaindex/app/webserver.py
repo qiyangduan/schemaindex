@@ -30,6 +30,8 @@ class MApplication(tornado.web.Application):
             (r"/view_table_in_notebook", handler.ViewTableInNotebookHandler),
             (r"/global_search", handler.GlobalSearchHandler),
             (r"/json1", handler.JSON1Handler),
+            (r"/hdfs_inotify_change", handler.hdfs_inotify_change),
+            (r"/hdfs_inotify_get_checkpoint_txid", handler.hdfs_inotify_get_checkpoint_txid),
 
         ]
         settings = dict(

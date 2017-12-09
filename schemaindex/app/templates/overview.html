@@ -188,7 +188,6 @@
                   <thead>
                   <tr>
                     <th>Data Source Name</th>
-                    <th># of Tables</th>
                     <th>URL</th>
                     <th>Create Date</th>
                     <th>Last Reflect Date</th>
@@ -201,7 +200,6 @@
                   <tr>
                     <td><a  href="/database_summary?ds_name={{ '.'.join([row.ds_name])  }}">
                       　　{{ds.ds_name}}</a></td>
-                    <td>{{ds.nbr_of_tables}}</td>
                     <td>{{ds.db_url}}</td>
                     <td>{{ds.created_date.strftime("%Y-%m-%d %H:%M:%S")}}</td>
                     <td>{{ds.last_reflect_date.strftime("%Y-%m-%d %H:%M:%S")}}</td>

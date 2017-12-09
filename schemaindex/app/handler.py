@@ -164,19 +164,35 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
         ds_dict['db_comment'] = self.get_argument('db_comment')
 
         db = si_app.add_data_soruce(ds_dict)
+        if db:
+            self.redirect('/database_summary?ds_name=' + ds_dict['ds_name'])
+        else:
+            dbrs = si_app.get_data_source_rs()
+
+            Info = {'result': 'ok', 'message': 'A new data source is added.'}
+            base_navigation_dict = {'selected_menu': 'database',
+                                    'dbrs': dbrs,
+                                    'selected_add_data_source': True,
+                                    'plugin_name_list': si_app.get_plugin_name_list(),
+                                    'selected_schema_name': ds_dict['ds_name'],
+                                    'db': db,
+                                    }
+            self.render("database_summary.html",
+                        base_navigation_dict=base_navigation_dict)
+
+        '''
         dbrs = si_app.get_data_source_rs()
 
         Info = {'result': 'ok', 'message':'A new data source is added.'}
         base_navigation_dict = {'selected_menu': 'database',
                                 'dbrs': dbrs,
                                 'plugin_name_list': si_app.get_plugin_name_list(),
-                                'selected_add_data_source':True,
                                 'selected_schema_name':ds_dict['ds_name'],
                                 'db':db,
                                 }
         self.render("database_summary.html",
                     base_navigation_dict=base_navigation_dict)
-
+        '''
 
 class DeleteDataSourceHandler(tornado.web.RequestHandler):
     def post(self):
@@ -295,3 +311,75 @@ class JSON1Handler(tornado.web.RequestHandler):
 
         # self.write(json.dumps(res1))
 
+class hdfs_inotify_get_checkpoint_txid(tornado.web.RequestHandler):
+    def get(self):
+        self.write('890')
+        return
+        data_source_name = self.get_argument('data_source_name')
+        ds_dict = si_app.get_data_source_dict(ds_name=data_source_name)
+        self.write(str(ds_dict['db_trx_id']))
+        # self.write('-1')
+
+class hdfs_inotify_change(tornado.web.RequestHandler):
+    def post(self):
+        event_type = self.get_argument('event_type')
+        if event_type  == 'CREATE':
+            path = self.get_argument('path')
+            owner = self.get_argument('owner')
+            date_time = self.get_argument('date_time')
+            txid = self.get_argument('txid')
+            data_source_name = self.get_argument('data_source_name')
+
+            doc_old = si_app.global_whoosh_search_by_id(q_id=path)
+            if len(doc_old) > 0:
+                si_app.logger.error('the doc/entity already not exist for creation event.')
+                si_app.delete_doc_from_index_by_docnum(p_docnum=doc_old[0]['docnum'])
+
+            si_app.add_table_content_index(ds_name = data_source_name,
+                                           table_id=path,
+                                           table_info=json.dumps({'path':path, 'date_time':date_time}),
+                                           )
+            # si_app.commit_index()
+            print('event_type', event_type, "time", date_time,'tx:', txid)
+
+        # Do the thing
+        elif event_type == 'UNLINK':
+            path = self.get_argument('path')
+            date_time = self.get_argument('date_time')
+            txid = self.get_argument('txid')
+            data_source_name = self.get_argument('data_source_name')
+
+            doc_old = si_app.global_whoosh_search_by_id(q_id=path)
+            if len(doc_old) < 1:
+                si_app.logger.error('the doc/entity to delete/unlink does not exist.')
+            else:
+                si_app.delete_doc_from_index_by_docnum(p_docnum=doc_old[0]['docnum'])
+
+            # si_app.commit_index()
+
+            print('event_type', event_type, "time", date_time, 'tx:', txid)
+        if event_type in 'RENAME':
+            src_path = self.get_argument('src_path')
+            dst_path = self.get_argument('dst_path')
+            date_time = self.get_argument('date_time')
+            txid = self.get_argument('txid')
+            data_source_name = self.get_argument('data_source_name')
+
+            doc_old = si_app.global_whoosh_search_by_id(q_id=src_path)
+            if len(doc_old) < 1:
+                si_app.logger.error('the doc/entity to rename does not exist.')
+            else:
+                si_app.delete_doc_from_index_by_docnum(p_docnum=doc_old[0]['docnum'])
+
+            si_app.add_table_content_index(ds_name = data_source_name,
+                                           table_id=dst_path,
+                                           table_info=json.dumps({'path':dst_path, 'date_time':date_time}),
+                                           )
+            # si_app.commit_index()
+            path = src_path + '.....' + dst_path
+            print('event_type', event_type,'path',path, "time", date_time,'tx:', txid)
+        else:
+            print('event_type', event_type )
+
+        print(path)
+        self.write('received!' + path)

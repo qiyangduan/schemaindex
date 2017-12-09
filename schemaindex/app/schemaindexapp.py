@@ -52,20 +52,6 @@ class SchemaIndexApp:
             self.index_writer.cancel()
             self.ix.close() #
 
-    def add_table_content_index(self,ds_name = None, table_id = None, table_info = None):
-
-        ix = index.open_dir(self.indexdir)
-        index_writer = ix.writer()
-        index_writer.add_document(ds_name = unicode(ds_name), table_id=unicode(table_id), table_info=unicode(table_info))
-        index_writer.commit()
-
-    def commit_index(self, table_id=None, table_info=None):
-        return
-        self.index_writer.commit()
-        self.ix = index.open_dir(self.indexdir)
-        self.index_writer = self.ix.writer()
-
-
 
     def schemaindex_init(self):
         # import os.path
@@ -126,26 +112,30 @@ class SchemaIndexApp:
     def add_data_soruce(self,ds_dict = None):
         session = create_session(bind=dbmodels.engine)
         session._model_changes={}
-
-        session.begin()
-        session.add_all([
-            dbmodels.MDatabase(table_group_name=ds_dict['table_group_name'] ,
-                               ds_name=ds_dict['ds_name'] ,
-                               db_type=ds_dict['db_type'] ,
-                               db_url= ds_dict['db_url'],
-                               nbr_of_tables=0,
-                               nbr_of_columns=9,
-                               db_desc = 'list of db',
-                               db_comment = 'customer rating for each product',
-                               created_date = func.now(),
-                    )
-        ])
-        session.commit()
-        dbrs1 = session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name'])
-        db = dbrs1.first()
-        if db is None:
-            print('error: did not find database')
-        return db
+        try:
+            session.begin()
+            session.add_all([
+                dbmodels.MDatabase(table_group_name=ds_dict['table_group_name'] ,
+                                   ds_name=ds_dict['ds_name'] ,
+                                   db_type=ds_dict['db_type'] ,
+                                   db_url= ds_dict['db_url'],
+                                   nbr_of_tables=0,
+                                   nbr_of_columns=9,
+                                   db_desc = 'list of db',
+                                   db_comment = 'customer rating for each product',
+                                   created_date = func.now(),
+                        )
+            ])
+            session.commit()
+            dbrs1 = session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name'])
+            db = dbrs1.first()
+            if db is None:
+                si_app.logger.error('error: did not find database')
+            return db
+        except Exception as e:
+            si_app.logger.error('failed to add data source!')
+            si_app.logger.error(e)
+            return None
 
     def update_data_soruce(self,ds_dict = None):
         session = create_session(bind=dbmodels.engine)
@@ -187,9 +177,54 @@ class SchemaIndexApp:
             query = QueryParser("table_info", ix.schema).parse(q)
             results = searcher.search(query)
             for r in results:
-                res.append({'ds_name': r['ds_name'], 'table_info': r['table_info']})
+                res.append({'ds_name': r['ds_name'],
+                            'docnum': r.docnum,
+                            'table_info': r['table_info'],
+                            })
 
         return res
+
+    def global_whoosh_search_by_id(self, q_id = ''):
+
+        ix = index.open_dir(self.indexdir)
+        res = []
+        with ix.searcher() as searcher:
+            query = QueryParser("table_id", ix.schema).parse(q_id)
+            results = searcher.search(query)
+            for r in results:
+                res.append({'ds_name': r['ds_name'],
+                            'docnum': r.docnum,
+                            'table_info': r['table_info'],
+                            })
+
+        return res
+
+    def delete_doc_from_index_by_docnum(self, p_docnum = None):
+
+        ix = index.open_dir(self.indexdir)
+        index_writer = ix.writer()
+
+        index_writer.delete_document(docnum = p_docnum)
+        index_writer.commit()
+        return True
+
+    def delete_doc_from_index_by_datasource(self, ds_name = None):
+
+        ix = index.open_dir(self.indexdir)
+        index_writer = ix.writer()
+
+        ix = index.open_dir(self.indexdir)
+        res = []
+        with ix.searcher() as searcher:
+            query = QueryParser("ds_name", ix.schema).parse(ds_name)
+            num = index_writer.delete_by_query(q=query)
+            si_app.logger.info( '{0:10} documents from data source {1:15}  '.format( str(num), ds_name) )
+
+        index_writer.commit()
+        return True
+
+
+
     def get_whoosh_search_suggestion(self, q = ''):
 
         indexdir = self.indexdir
@@ -204,6 +239,22 @@ class SchemaIndexApp:
 
         return res
 
+
+    def add_table_content_index(self,ds_name = None, table_id = None, table_info = None):
+
+        ix = index.open_dir(self.indexdir)
+        index_writer = ix.writer()
+        index_writer.add_document(ds_name = unicode(ds_name), table_id=unicode(table_id), table_info=unicode(table_info))
+        index_writer.commit()
+
+    def commit_index(self, table_id=None, table_info=None):
+        return
+        self.index_writer.commit()
+        self.ix = index.open_dir(self.indexdir)
+        self.index_writer = self.ix.writer()
+
+
+
     def get_data_source_rs(self):
 
         rs = self.db_session.query(dbmodels.MDatabase).order_by(dbmodels.MDatabase.ds_name.asc()) #.filter_by(name='ed')
@@ -214,12 +265,15 @@ class SchemaIndexApp:
         rs = self.db_session.query(dbmodels.MDatabase).filter_by(ds_name=ds_name)
         if rs.count() > 0:
             ds = rs.first()
-            return {
+            return {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
+
+            ''''{
                 'ds_name': ds.ds_name,
                 'db_url': ds.db_url,
+                'db_trx_id': ds.db_trx_id,
                 'db_type': ds.db_type,
                 'table_group_name': ds.table_group_name,
-            }
+            }'''
         return None
 
     def get_plugin_name_list(self):
@@ -253,9 +307,10 @@ class SchemaIndexApp:
         session = create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatabase).filter_by(ds_name=data_source_name)
         for row in dbrs:
-            the_engine= si_app.get_reflect_plugin(row.db_type)['reflect_engine']
-            a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
-            a_ds.reflect(reload_flag=True)
+                the_engine= si_app.get_reflect_plugin(row.db_type)['reflect_engine']
+                a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
+                a_ds.reflect(reload_flag=True)
+
 
     def list_data_sources(self):
         model_list = []
@@ -311,6 +366,7 @@ class SchemaIndexApp:
                                       module_name=plugin_dict['module_name'] ,
                                       plugin_spec_path=plugin_dict['plugin_spec_path'],
                                       supported_ds_types=plugin_dict['supported_ds_types'],
+                                      notebook_template_path=plugin_dict['notebook_template_path'],
                                       sample_ds_url=plugin_dict['sample_ds_url'],
                                       author=plugin_dict['author'],
                                       plugin_desc=plugin_dict['plugin_desc'],
@@ -339,6 +395,7 @@ class SchemaIndexApp:
                     'plugin_name': getattr(module, 'plugin_name'),
                     'module_name': dottedpath,
                     'plugin_spec_path': plugin_spec_path,
+                    'notebook_template_path': getattr(module, 'notebook_template_path'),
                     'sample_ds_url': getattr(module, 'sample_ds_url'),
                     'plugin_desc': getattr(module, 'plugin_desc'),
                     'supported_ds_types': json.dumps(getattr(module, 'supported_ds_types')) ,
