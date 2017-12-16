@@ -1,5 +1,5 @@
 import os
-import simplejson
+import json
 from config import cfg
 from datetime import datetime as sysdt
 
@@ -23,14 +23,14 @@ this is bad
 
 class MysqlReflectEngine():
     def __init__(self):
-        db_type = 'mysqlflex'
+        ds_type = 'mysqlflex'
 
-    def reflect_database(self, table_group_name, ds_name, reload_flag=True, db_url=None):
-        if not db_url:
-            db_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex'
-            db_type = 'sqlite3flex'
+    def reflect_database(self, table_group_name, ds_name, reload_flag=True, ds_url=None):
+        if not ds_url:
+            ds_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex'
+            ds_type = 'sqlite3flex'
 
-        reflect_engine = create_engine(db_url)
+        reflect_engine = create_engine(ds_url)
         metadata = MetaData(bind=reflect_engine)
         metadata.reflect()
 
@@ -72,14 +72,14 @@ class MysqlReflectEngine():
 
 class SQLAlchemyReflectEngine():
     def __init__(self):
-        db_type = 'sqlite3flex'
-    def reflect_database(self, db_type, table_group_name = None, ds_name= None, reload_flag=True, db_url=None):
-        if not db_url:
-            #db_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex'
-            #db_type = 'sqlite3flex'
-            print('error: db_url must be provided.')
+        ds_type = 'sqlite3flex'
+    def reflect_database(self, ds_type, table_group_name = None, ds_name= None, reload_flag=True, ds_url=None):
+        if not ds_url:
+            #ds_url = 'sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex'
+            #ds_type = 'sqlite3flex'
+            print('error: ds_url must be provided.')
 
-        reflect_engine = create_engine(db_url)
+        reflect_engine = create_engine(ds_url)
         metadata = MetaData(bind=reflect_engine)
         metadata.reflect()
 
@@ -134,7 +134,7 @@ class SQLAlchemyReflectEngine():
                 column_list.append([c.name, str(c.type), c.doc])
 
             writer.add_document(table_id='/'.join(['/',ds_name, t.name]),
-                                table_info=unicode(simplejson.dumps({"ds_name":  table_group_name,
+                                table_info=unicode(json.dumps({"ds_name":  table_group_name,
                                                                      "ds_name":    ds_name ,
                                                                      "table_name":  t.name ,
                                                                      "table_comment":    ' ' ,
@@ -155,8 +155,8 @@ def reflect_db(ds_name = None):
         adb = SQLAlchemyReflectEngine()
         adb.reflect_database(table_group_name = row.table_group_name,
                                 ds_name = row.ds_name,
-                                db_type=row.db_type,
-                                db_url = row. db_url
+                                ds_type=row.ds_type,
+                                ds_url = row. ds_url
                              )
 
 

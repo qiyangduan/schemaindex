@@ -4,7 +4,7 @@ from sqlalchemy import MetaData
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
 import json
 
-from app.dbmodels import engine, MTable, MColumn, MDatabase
+from app.dbmodels import engine, MTable, MColumn, MDatasource
 from  app.schemaindexapp import si_app
 
 class MysqlReflectEngine():
@@ -23,10 +23,10 @@ class MysqlReflectEngine():
 
     def reflect(self, reload_flag = False):
         if not self.ds_dict:
-            print('error: db_url must be provided.')
+            print('error: ds_url must be provided.')
             return
 
-        reflect_engine = create_engine((self.ds_dict['db_url']))
+        reflect_engine = create_engine((self.ds_dict['ds_url']))
         metadata = MetaData(bind=reflect_engine)
         metadata.reflect()
 
@@ -96,21 +96,21 @@ class MysqlReflectEngine():
     @staticmethod
     def reflect_db(ds_name = None):
         session = create_session(bind=engine)
-        dbrs = session.query(MDatabase).filter_by(ds_name = ds_name)
+        dbrs = session.query(MDatasource).filter_by(ds_name = ds_name)
         for row in dbrs:
             adb = MysqlReflectEngine()
             adb.reflect(table_group_name = row.table_group_name,
                                     ds_name = row.ds_name,
-                                    db_type=row.db_type,
-                                    db_url = row. db_url
+                                    ds_type=row.ds_type,
+                                    ds_url = row. ds_url
                                  )
 
 
 if __name__ == "__main__":
     adb = MysqlReflectEngine(ds_dict = { 'table_group_name': 'a',
                                      'ds_name': 'a',
-                                     'db_type':'sqlalchemy',
-                                     'db_url' : 'mysql://root:learning@localhost/blog',
+                                     'ds_type':'sqlalchemy',
+                                     'ds_url' : 'mysql://root:learning@localhost/blog',
     })
     adb.reflect() #  None)
 

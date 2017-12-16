@@ -36,6 +36,7 @@ class SchemaIndexApp:
     index_writer = None
     def __init__(self):
         self.stanmo_home = cfg['main']['schemaflex_home']
+        self.config = cfg
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/spec
         sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
         self.schemaindex_init()
@@ -71,9 +72,12 @@ class SchemaIndexApp:
             os.remove(db_file_path)
             # if(False):
         try:
+            # recreate the sqlite database file
             engine = dbmodels.create_engine('sqlite:///' + db_file_path)
             self.logger.debug('creating db at ...:  ' + db_file_path) # will not print anything
             dbmodels.Base.metadata.create_all(engine)
+
+
             self.logger.debug('scanning plugins ... ')  # will not print anything
             self.scan_reflect_plugins()
         except Exception as e:
@@ -88,10 +92,6 @@ class SchemaIndexApp:
         ix = index.create_in(self.indexdir , schema)
         print("schemaindex: Initialized." )  # will not print anything
 
-
-
-
-
     def delete_data_soruce(self,ds_dict = None):
         session = create_session(bind=dbmodels.engine)
         session._model_changes={}
@@ -103,7 +103,7 @@ class SchemaIndexApp:
                     'message_body':'the data source "' + ds_dict['ds_name'] + '" contains metadata. Please check " Delete Contents in Data Source" and try again'}
 
         session.begin()
-        session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name']).delete(synchronize_session=False)
+        session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name']).delete(synchronize_session=False)
         session.commit()
         return {'message_type': 'info',
                 'message_title': 'Info',
@@ -115,19 +115,18 @@ class SchemaIndexApp:
         try:
             session.begin()
             session.add_all([
-                dbmodels.MDatabase(table_group_name=ds_dict['table_group_name'] ,
+                dbmodels.MDatasource(table_group_name=ds_dict['table_group_name'] ,
                                    ds_name=ds_dict['ds_name'] ,
-                                   db_type=ds_dict['db_type'] ,
-                                   db_url= ds_dict['db_url'],
+                                   ds_type=ds_dict['ds_type'] ,
+                                   ds_url= ds_dict['ds_url'],
                                    nbr_of_tables=0,
                                    nbr_of_columns=9,
-                                   db_desc = 'list of db',
-                                   db_comment = 'customer rating for each product',
+                                   ds_desc = 'list of db',
                                    created_date = func.now(),
                         )
             ])
             session.commit()
-            dbrs1 = session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name'])
+            dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
             db = dbrs1.first()
             if db is None:
                 si_app.logger.error('error: did not find database')
@@ -142,17 +141,17 @@ class SchemaIndexApp:
         session._model_changes={}
 
         session.begin()
-        # db1 = dbmodels.MDatabase.query.filter_by(ds_name=ds_dict['ds_name']).first()
-        session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name']).\
+        # db1 = dbmodels.MDatasource.query.filter_by(ds_name=ds_dict['ds_name']).first()
+        session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name']).\
             update({'table_group_name': ds_dict['table_group_name'],
-                    'db_type': ds_dict['db_type'],
-                    'db_url': ds_dict['db_url'],
-                    'db_desc':'list of dbupdated'})
+                    'ds_type': ds_dict['ds_type'],
+                    'ds_url': ds_dict['ds_url'],
+                    'ds_desc':ds_dict['ds_desc']})
 
-        #db1.db_desc = 'list of db updated'
-        #db1.db_url = ds_dict['db_url']
+        #db1.ds_desc = 'list of db updated'
+        #db1.ds_url = ds_dict['ds_url']
         session.commit()
-        dbrs1 = session.query(dbmodels.MDatabase).filter_by(ds_name=ds_dict['ds_name'])
+        dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
         db = dbrs1.first()
         if db is None:
             print('error: did not find database')
@@ -162,11 +161,11 @@ class SchemaIndexApp:
 
     def get_data_source_name_list(self):
 
-        rs = self.db_session.query(dbmodels.MDatabase) #.filter_by(name='ed')
+        rs = self.db_session.query(dbmodels.MDatasource) #.filter_by(name='ed')
 
         ds_list = []
         for row in rs:
-            ds_list.append({'name': row.ds_name , 'url': row.db_url } )
+            ds_list.append({'name': row.ds_name , 'url': row.ds_url } )
         return  ds_list
 
     def global_whoosh_search(self, q = ''):
@@ -257,21 +256,21 @@ class SchemaIndexApp:
 
     def get_data_source_rs(self):
 
-        rs = self.db_session.query(dbmodels.MDatabase).order_by(dbmodels.MDatabase.ds_name.asc()) #.filter_by(name='ed')
+        rs = self.db_session.query(dbmodels.MDatasource).order_by(dbmodels.MDatasource.ds_name.asc()) #.filter_by(name='ed')
         return rs
 
     def get_data_source_dict(self, ds_name = None):
 
-        rs = self.db_session.query(dbmodels.MDatabase).filter_by(ds_name=ds_name)
+        rs = self.db_session.query(dbmodels.MDatasource).filter_by(ds_name=ds_name)
         if rs.count() > 0:
             ds = rs.first()
             return {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
 
             ''''{
                 'ds_name': ds.ds_name,
-                'db_url': ds.db_url,
+                'ds_url': ds.ds_url,
                 'db_trx_id': ds.db_trx_id,
-                'db_type': ds.db_type,
+                'ds_type': ds.ds_type,
                 'table_group_name': ds.table_group_name,
             }'''
         return None
@@ -290,6 +289,17 @@ class SchemaIndexApp:
             plugins.append(p)
         return  plugins
 
+    def get_plugin_info(self, p_plugin_name = ''):
+
+        p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        p['ds_param'] = json.loads(p['ds_param'])
+        return  p
+
+
+    def get_reflect_plugin(self, p_plugin_name = None):
+        p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        return self.load_reflect_engine(p.module_name)
+
 
     def get_table_list_for_data_source_rs(self, param_ds_name = ''):
         sql = '''
@@ -305,9 +315,9 @@ class SchemaIndexApp:
 
     def reflect_db(self,data_source_name=None):
         session = create_session(bind=dbmodels.engine)
-        dbrs = session.query(dbmodels.MDatabase).filter_by(ds_name=data_source_name)
+        dbrs = session.query(dbmodels.MDatasource).filter_by(ds_name=data_source_name)
         for row in dbrs:
-                the_engine= si_app.get_reflect_plugin(row.db_type)['reflect_engine']
+                the_engine= si_app.get_reflect_plugin(row.ds_type)['reflect_engine']
                 a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
                 a_ds.reflect(reload_flag=True)
 
@@ -317,7 +327,7 @@ class SchemaIndexApp:
         models = []
 
         session = create_session(bind=dbmodels.engine)
-        dbrs = session.query(dbmodels.MDatabase)  # .filter_by(name='ed')
+        dbrs = session.query(dbmodels.MDatasource)  # .filter_by(name='ed')
 
 
         for db in dbrs:
@@ -329,8 +339,8 @@ class SchemaIndexApp:
                                                                            ))
             for a_model in models:
                 print('{0:20}   {db_type_name:20}  {table_group_name:35}  '.format(a_model.ds_name,
-                                                                          db_type_name=a_model.db_type,
-                                                                          table_group_name = a_model.db_url
+                                                                          db_type_name=a_model.ds_type,
+                                                                          table_group_name = a_model.ds_url
                                                                                            )
                       )
         else:
@@ -365,6 +375,7 @@ class SchemaIndexApp:
                     dbmodels.MPlugin( plugin_name=plugin_dict['plugin_name'] ,
                                       module_name=plugin_dict['module_name'] ,
                                       plugin_spec_path=plugin_dict['plugin_spec_path'],
+                                      ds_param=json.dumps(plugin_dict['ds_param']),
                                       supported_ds_types=plugin_dict['supported_ds_types'],
                                       notebook_template_path=plugin_dict['notebook_template_path'],
                                       sample_ds_url=plugin_dict['sample_ds_url'],
@@ -373,10 +384,6 @@ class SchemaIndexApp:
                                     )
                                     ])
         self.db_session.commit()
-
-    def get_reflect_plugin(self, p_plugin_name = None):
-        p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        return self.load_reflect_engine(p.module_name)
 
 
 
@@ -392,8 +399,9 @@ class SchemaIndexApp:
         try:
             module = __import__(dottedpath, globals(), locals(), [])
             return {'reflect_engine': module,
-                    'plugin_name': getattr(module, 'plugin_name'),
                     'module_name': dottedpath,
+                    'plugin_name': getattr(module, 'plugin_name'),
+                    'ds_param': getattr(module, 'ds_param'),
                     'plugin_spec_path': plugin_spec_path,
                     'notebook_template_path': getattr(module, 'notebook_template_path'),
                     'sample_ds_url': getattr(module, 'sample_ds_url'),

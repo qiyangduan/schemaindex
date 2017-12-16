@@ -1,7 +1,7 @@
 import tornado.web
 import json
 
-from dbmodels import engine, MDatabase,MTable,MColumn
+from dbmodels import engine, MDatasource,MTable,MColumn
 
 from schemaindexapp import si_app
 from sqlalchemy.orm import create_session
@@ -42,7 +42,7 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
         if param_ds_name is None:
             print('error: no schema name is given')
             base_navigation_dict = {'selected_menu': 'datasources',
-                                    'dbrs': session.query(MDatabase),
+                                    'dbrs': session.query(MDatasource),
                                     'error': 'error: no schema name is given',
                                     'db': None
                                     }
@@ -52,7 +52,7 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
 
         entry = None
 
-        dbrs1 = session.query(MDatabase).filter_by(ds_name = param_ds_name )
+        dbrs1 = session.query(MDatasource).filter_by(ds_name = param_ds_name )
         db = dbrs1.first()
         if db is None:
             print('error: did not find database')
@@ -78,10 +78,9 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
         ds_dict = {}
         ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
-        ds_dict['db_url'] = self.get_argument('db_url')
-        ds_dict['db_type'] = self.get_argument('db_type')
-        ds_dict['db_desc'] = self.get_argument('db_desc')
-        ds_dict['db_comment'] = self.get_argument('db_comment')
+        ds_dict['ds_url'] = self.get_argument('ds_url')
+        ds_dict['ds_type'] = self.get_argument('ds_type')
+        ds_dict['ds_desc'] = self.get_argument('ds_desc')
 
         db = si_app.update_data_soruce(ds_dict)
 
@@ -143,11 +142,13 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
                                 'dbrs': si_app.get_data_source_rs(),
                                 'plugin_name_list': si_app.get_plugin_name_list(),
                                 'selected_add_data_source':True,
+                                'input_ds_param':True,
                                 'selected_schema_name':'__add_data_source__',
                                 }
-        db_type = self.get_argument('db_type',default=None)
-        if db_type is not None:
-            base_navigation_dict['input_db_type'] = db_type
+        ds_type = self.get_argument('ds_type',default=None)
+        if ds_type is not None:
+            base_navigation_dict['input_db_type'] = ds_type
+            base_navigation_dict['input_ds_param'] = si_app.get_plugin_info(p_plugin_name=ds_type)
 
         self.render("database_summary.html",
                     base_navigation_dict=base_navigation_dict,
@@ -158,9 +159,9 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
         ds_dict = {}
         ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
-        ds_dict['db_url'] = self.get_argument('db_url')
-        ds_dict['db_type'] = self.get_argument('db_type')
-        ds_dict['db_desc'] = self.get_argument('db_desc')
+        ds_dict['ds_url'] = self.get_argument('ds_url')
+        ds_dict['ds_type'] = self.get_argument('ds_type')
+        ds_dict['ds_desc'] = self.get_argument('ds_desc')
         ds_dict['db_comment'] = self.get_argument('db_comment')
 
         db = si_app.add_data_soruce(ds_dict)
@@ -213,7 +214,7 @@ class DeleteDataSourceHandler(tornado.web.RequestHandler):
                                 }
         if result_message['message_title']  == 'Error':
             session = create_session(bind=engine)
-            dbrs1 = session.query(MDatabase).filter_by(ds_name = ds_dict['ds_name'])
+            dbrs1 = session.query(MDatasource).filter_by(ds_name = ds_dict['ds_name'])
             db = dbrs1.first()
             base_navigation_dict['db'] = db
             base_navigation_dict['tabrs'] = si_app.get_table_list_for_data_source_rs(param_ds_name= ds_dict['ds_name'])
@@ -240,11 +241,11 @@ class ViewTableInNotebookHandler(tornado.web.RequestHandler):
         table_name = self.get_argument('table_name')
         ds_name = self.get_argument('ds_name')
         session = create_session(bind=engine)
-        db_url = None
-        dbrs = session.query(MDatabase).filter_by(ds_name=ds_name)
+        ds_url = None
+        dbrs = session.query(MDatasource).filter_by(ds_name=ds_name)
         for row in dbrs:
-            db_url =  row.db_url
-        if db_url is None:
+            ds_url =  row.ds_url
+        if ds_url is None:
             print('error: database not found')
 
         #repls = {'hello': 'goodbye', 'world': 'earth'}
@@ -252,7 +253,7 @@ class ViewTableInNotebookHandler(tornado.web.RequestHandler):
         #reduce(lambda a, kv: a.replace(*kv), repls.iteritems(), s)
 
         replace_dict = {'$$TABLE$$': table_name,
-                        '$$DB_URL$$': db_url}
+                        '$$DB_URL$$': ds_url}
 
         with open("/home/duan/github/show_table_template.ipynb", "rt") as fin:
             with open("/home/duan/github/show_table_t_" + table_name + ".ipynb", "wt") as fout:
@@ -283,8 +284,8 @@ class DatabaseJSONHandler(tornado.web.RequestHandler):
         ds_dict = {}
         ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
-        ds_dict['db_url'] = self.get_argument('db_url')
-        ds_dict['db_type'] = self.get_argument('db_type')
+        ds_dict['ds_url'] = self.get_argument('ds_url')
+        ds_dict['ds_type'] = self.get_argument('ds_type')
 
         si_app.add_data_soruce(ds_dict)
 

@@ -4,10 +4,11 @@ import traceback, logging
 # Those are all options for end user to customize. Other internal configurations may be found in different classes.
 cfg = {"web": {
                 'port': 8088,
+                'address': "localhost",
                 'use_anonymous' : True
                },
         'database': {
-                'db_type': 'sqlite3',
+                'ds_type': 'sqlite3',
                 'sqlite_file': "allmodel.sqlite3",
                 'user': 'root',
                 'passwd': 'my secret password',

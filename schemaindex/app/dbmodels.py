@@ -19,6 +19,7 @@ class MPlugin(Base):
     # plugin_status = Column(String(200))
     plugin_spec_path = Column(String(200))
     notebook_template_path = Column(String(500))
+    ds_param  = Column(String(4000)) #Customized parameter by each plugin, stored as a python dict object in json string.
     supported_ds_types = Column(String(200))
     sample_ds_url = Column(String(1000))
     author = Column(String(200))
@@ -30,24 +31,25 @@ class MPlugin(Base):
 
 
 #Reflect each database table we need to use, using metadata
-class MDatabase(Base):
-    __tablename__ =  'mdatabase'
+class MDatasource(Base):
+    __tablename__ =  'MDatasource'
     #db_id = Column(Integer, primary_key=True, autoincrement=True)
     ds_name = Column(String(100), primary_key=True,)
-    db_trx_id = Column(Integer)
-    table_group_name = Column(String(200), default='_NA')
+    db_trx_id = Column(Integer) # This is to track current datasource id if it is sychonized in real time. For example, hdfs inotify txid
     nbr_of_tables = Column(Integer)
     nbr_of_columns = Column(Integer)
+    ds_type = Column(String(100) )
+    ds_url = Column(String(1000))
+    table_group_name = Column(String(200), default='_NA')
     created_date = Column(DateTime, default=func.now())
     last_reflect_date = Column(DateTime, default=func.now())
-    db_type = Column(String(100) )
-    db_url = Column(String(1000))
-    db_comment = Column(String(1000))
-    db_desc = Column(String(1000))
-    db_tags = Column(String(2550))
+    ds_param  = Column(String(4000)) #Customized parameter by each plugin, stored as a python dict object in json string.
+    # ds_param_desc = Column(String(4000))
+    ds_desc = Column(String(1000))
+    ds_tags = Column(String(2550))
     def __repr__(self):
-        return "<database (name='%s', db_url='%s', last_reflect_date='%s')>" % (
-            self.table_group_name, self.db_url, self.last_reflect_date)
+        return "<database (name='%s', ds_url='%s', last_reflect_date='%s')>" % (
+            self.table_group_name, self.ds_url, self.last_reflect_date)
 
 class MTable(Base):
     __tablename__ = 'mtable'

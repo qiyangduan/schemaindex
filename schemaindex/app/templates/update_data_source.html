@@ -46,7 +46,7 @@
                   <!-- select -->
                   <div class="form-group">
                     <label>Choose The Data Source Type</label>
-                    <select name = "db_type" class="form-control">
+                    <select name = "ds_type" class="form-control">
                       <option>mysql</option>
                       <option>sqlite</option>
                     </select>
@@ -79,8 +79,8 @@
 
                   <div class="form-group">
                     <label>Connection URL:</label>
-                    <input name="db_url" type="text" class="form-control" placeholder="Enter connection URL, e.g. mysql://username:password@localhost/blog"
-                           value="{{ db.db_url if db else '' }}">
+                    <input name="ds_url" type="text" class="form-control" placeholder="Enter connection URL, e.g. mysql://username:password@localhost/blog"
+                           value="{{ db.ds_url if db else '' }}">
                   </div>
 
 
@@ -95,8 +95,8 @@
 
                   <div class="form-group">
                     <label>Short Description for Data Source: </label>
-                    <textarea  name="db_desc" class="form-control" rows="3" placeholder="Enter ...">
-                      {{ db.db_desc if db else "" }}
+                    <textarea  name="ds_desc" class="form-control" rows="3" placeholder="Enter ...">
+                      {{ db.ds_desc if db else "" }}
                     </textarea>
                   </div>
 

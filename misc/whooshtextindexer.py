@@ -18,7 +18,7 @@ class TextIndexer():
     ix = None
 
     def __init__(self):
-        db_type = 'mysqlflex'
+        ds_type = 'mysqlflex'
         indexdir = config['main']['schemaflex_text_index_path']
 
         if not os.path.exists(indexdir):

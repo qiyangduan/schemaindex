@@ -1,22 +1,51 @@
 
 from hdfs import Client
-
-from app.dbmodels import engine, MTable, MColumn, MDatabase
+import os
+import subprocess
+from app.dbmodels import engine, MTable, MColumn, MDatasource
 from app.schemaindexapp import si_app
 
 class HDFSIndexEngine():
     ds_dict = None
-    def __init__(self,ds_dict=None, ds_name = None):
+    si_app = None
+
+    def __init__(self,si_app = None, ds_dict=None, ds_name = None):
+        self.si_app = si_app
         if ds_dict is not None:
             self.ds_dict = ds_dict
         elif ds_name is not None:
                 self.ds_dict = si_app.get_data_source_dict(ds_name = ds_name)
         else:
             si_app.logger.error('no data source is given!')
+            return
+        if(self.ds_dict['ds_param']['start_inotify']):
+            self.start_inotify_process()
 
     @staticmethod
     def echo(self):
         return 'echo'
+
+    def start_inotify_process(self):
+        si_app.logger.info('starting inotify java process ...')
+        my_log_file_loc = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH,'hdfsindex', 'hdfs_log', 'hdfs_inotify.log')
+        f = open(my_log_file_loc, "a")
+
+        si_server_addr = "http://%s:%d" % (si_app.config['web']['address'], si_app.config['web']['port'])
+        hdfs_url = "hdfs://localhost:9000" # self.ds_dict['ds_param']
+        java_class_dir = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
+                                      , 'java', 'src','com','schemaindex')
+
+        java_class_path = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
+                                      , 'java', 'lib','*')
+         #'-Xmx400M',
+        jar_param = ['java',  '-cp', '.:'+java_class_path , 'HdfsINotify2Restful',  si_server_addr, self.ds_dict['ds_name'], hdfs_url ] #  http://localhost:8088 hdfs1 hdfs://localhost:9000 ]
+
+        print subprocess.list2cmdline(jar_param)
+        subprocess.call(jar_param
+                        , stdout=f
+                        , cwd=java_class_dir)
+
+
 
     # get the all file information from HDFS
     def QueryHDFSFile(self, pDirectory, pClient, filelist):
@@ -56,10 +85,10 @@ class HDFSIndexEngine():
 
     def reflect(self, reload_flag = False):
         if not self.ds_dict:
-            print('error: db_url must be provided.')
+            print('error: ds_url must be provided.')
             return
 
-        tclient = Client(self.ds_dict['db_url'])
+        tclient = Client(self.ds_dict['ds_url'])
         path_hdfs = self.ds_dict['table_group_name']
         if path_hdfs[-1] == '/':
             # remove trailing '/' for concatenating more path
@@ -89,9 +118,12 @@ class HDFSIndexEngine():
 if __name__ == "__main__":
     adb = HDFSIndexEngine(ds_dict = { 'table_group_name': '/user/data_norm',
                                      'ds_name': 'hdfs1',
-                                     'db_type':'hdfsindex',
-                                     'db_url' : 'http://localhost:50070',
+                                     'ds_type':'hdfsindex',
+                                     'ds_url' : 'http://localhost:50070',
+                                      'ds_param': {'hdfs_web_url': 'http://localhost:50070',
+                                                    'hdfs_url': 'hdfs://localhost:9000'}
     })
-    adb.reflect() #  None)
+    # adb.reflect() #  None)
+    adb.start_inotify_process()
 
 
