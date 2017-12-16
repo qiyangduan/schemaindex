@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="update requirements.txt">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/log/schemaindex.log" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/allmodel.sqlite3" afterPath="$PROJECT_DIR$/schemaindex/app/allmodel.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/misc/util.py" afterPath="$PROJECT_DIR$/misc/util.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/misc/whooshtextindexer.py" afterPath="$PROJECT_DIR$/misc/whooshtextindexer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/config.py" afterPath="$PROJECT_DIR$/schemaindex/app/config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/dbmodels.py" afterPath="$PROJECT_DIR$/schemaindex/app/dbmodels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/handler.py" afterPath="$PROJECT_DIR$/schemaindex/app/handler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" afterPath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/base.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/overview.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/overview.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/update_data_source.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/update_data_source.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/webserver.py" afterPath="$PROJECT_DIR$/schemaindex/app/webserver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py" afterPath="$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/hdfsindex/hdfsindexengine.py" afterPath="$PROJECT_DIR$/schemaindex/spec/hdfsindex/hdfsindexengine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/mysqlflex/mysqlreflectengine.py" afterPath="$PROJECT_DIR$/schemaindex/spec/mysqlflex/mysqlreflectengine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/__init__.py" afterPath="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/sqlalchemyengine.py" afterPath="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/sqlalchemyengine.py" />
-    </list>
+    <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="update requirements.txt" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +11,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="schemaindexapp.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="schemaindexapp.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/schemaindex/app/schemaindexapp.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="211">
@@ -43,21 +23,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="165">
+              <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/__init__.py">
+        <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="17" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -979,13 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/java/src/com/schemaindex/HdfsINotify2Restful.java.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -1139,6 +1112,14 @@
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
