@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="update requirements.txt">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/allmodel.sqlite3" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/cities/list.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/demo/assets/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/demo/assets/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/demo/assets/js/jquery.mockjax.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/demo/i.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/demo/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/js/bootstrap-typeahead.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/js/bootstrap-typeahead.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/src/banner.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/schemaindex/app/static/temp/typeahead/src/bootstrap-typeahead.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html" afterPath="$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/hdfsindexengine.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+              <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
               <folding>
                 <element signature="e#1#24#0" expanded="true" />
               </folding>
@@ -26,11 +43,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="135">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global_search_result.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="73">
+              <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="database_summary.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/database_summary.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="73">
+              <caret line="64" column="19" lean-forward="true" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -40,7 +87,7 @@
         <entry file="file://$PROJECT_DIR$/schemaindex/app/dbmodels.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="439">
-              <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -52,7 +99,7 @@
         <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="196">
-              <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,7 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>db_desc</find>
       <find>db_tags</find>
       <find>s_dict['db_comment'] = self.get_argument('db_commen</find>
       <find>if</find>
@@ -99,6 +145,7 @@
       <find>a</find>
       <find>java</find>
       <find>allmodel.sql</find>
+      <find>view all</find>
     </findStrings>
     <replaceStrings>
       <replace>Column</replace>
@@ -169,13 +216,11 @@
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/TODO" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/misc/whooshtextindexer.py" />
         <option value="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/sqlalchemyengine.py" />
         <option value="$PROJECT_DIR$/schemaindex/log/schemaindex.log" />
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/java/run.sh" />
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/java/src/com/schemaindex/run.sh" />
-        <option value="$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html" />
         <option value="$PROJECT_DIR$/TODO.md" />
         <option value="$PROJECT_DIR$/schemaindex/app/config.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/webserver.py" />
@@ -188,13 +233,15 @@
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py" />
         <option value="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/__init__.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/handler.py" />
-        <option value="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" />
         <option value="$PROJECT_DIR$/schemaindex/app/templates/base.html" />
         <option value="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/templates/overview.html" />
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/show_hdfs_file_template.ipynb" />
         <option value="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/show_sqlalchemy_table_template.ipynb" />
         <option value="$PROJECT_DIR$/schemaindex/app/dbmodels.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html" />
+        <option value="$PROJECT_DIR$/schemaindex/app/templates/database_summary.html" />
       </list>
     </option>
   </component>
@@ -245,20 +292,23 @@
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="log" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="indexdir" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="spec" type="462c0819:PsiDirectoryNode" />
-              <item name="hdfsindex" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 2.7.13 (/media/adata/linux/anaconda27/bin/python2.7) &gt;" type="70bed36:NamedLibraryElementNode" />
             </path>
           </expand>
           <select />
@@ -672,7 +722,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34063444" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17363344" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4533762" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -797,13 +847,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/misc/whooshtextindexer.py" />
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="6" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/app/do_schemaindex_init" />
     <entry file="file://$PROJECT_DIR$/schemaindex/log/schemaflex_others.log" />
     <entry file="file://$PROJECT_DIR$/schemaindex/log/schemaflex_sqlalchemy.log" />
@@ -832,13 +875,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="71">
           <caret line="1472" column="16" lean-forward="true" selection-start-line="1472" selection-start-column="16" selection-end-line="1472" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="83" column="44" lean-forward="true" selection-start-line="83" selection-start-column="44" selection-end-line="83" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -923,14 +959,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/database_summary.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="131" column="0" lean-forward="false" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -1004,7 +1032,7 @@
     <entry file="file://$PROJECT_DIR$/schemaindex/app/dbmodels.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
-          <caret line="54" column="0" lean-forward="true" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -1014,7 +1042,7 @@
     <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1022,7 +1050,7 @@
     <entry file="file://$PROJECT_DIR$/schemaindex/spec/hdfsindex/hdfsindexengine.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
           <folding>
             <element signature="e#1#24#0" expanded="true" />
           </folding>
@@ -1031,8 +1059,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/global_search_result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/database_summary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="64" column="19" lean-forward="true" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
           <folding />
         </state>
       </provider>

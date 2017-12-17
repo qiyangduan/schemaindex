@@ -244,7 +244,7 @@
             <!-- /.box-body -->
             <div class="box-footer text-center">
                 <form action="/relfect_data_source" method="post"  role="form">
-                    <a href="javascript:void(0)" class="uppercase">View All Tables</a>
+                    <!--a href="javascript:void(0)" class="uppercase">View All Tables</a-->
                 {% if base_navigation_dict['selected_add_data_source'] == False   %}
                     <input type="hidden" name="ds_name" value="{{base_navigation_dict['db'].ds_name}}">
                     <input type="submit" value="{{ _("Reflect Now!") }}" class="btn btn-info pull-right"/>
