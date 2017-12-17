@@ -1,4 +1,6 @@
 import os
+import json
+from copy import deepcopy
 
 from sqlalchemy import MetaData
 from sqlalchemy import create_engine
@@ -32,7 +34,7 @@ class MPlugin(Base):
 
 #Reflect each database table we need to use, using metadata
 class MDatasource(Base):
-    __tablename__ =  'MDatasource'
+    __tablename__ =  'mdatasource'
     #db_id = Column(Integer, primary_key=True, autoincrement=True)
     ds_name = Column(String(100), primary_key=True,)
     db_trx_id = Column(Integer) # This is to track current datasource id if it is sychonized in real time. For example, hdfs inotify txid
@@ -44,12 +46,34 @@ class MDatasource(Base):
     created_date = Column(DateTime, default=func.now())
     last_reflect_date = Column(DateTime, default=func.now())
     ds_param  = Column(String(4000)) #Customized parameter by each plugin, stored as a python dict object in json string.
-    # ds_param_desc = Column(String(4000))
+
     ds_desc = Column(String(1000))
     ds_tags = Column(String(2550))
     def __repr__(self):
-        return "<database (name='%s', ds_url='%s', last_reflect_date='%s')>" % (
-            self.table_group_name, self.ds_url, self.last_reflect_date)
+        return "<database (name='%s', ds_type = %s, ds_url='%s', last_reflect_date='%s')>" % (
+            self.ds_name, self.ds_type, self.ds_url, self.last_reflect_date)
+
+
+    @staticmethod
+    def from_dict(ds_dict=None):
+        ds =     MDatasource(table_group_name=ds_dict['table_group_name'],
+                             ds_name=ds_dict['ds_name'],
+                             ds_type=ds_dict['ds_type'],
+                             ds_url=ds_dict['ds_url'],
+                             ds_param=json.dumps(ds_dict['ds_param']),
+                             nbr_of_tables=0,
+                             nbr_of_columns=9,
+                             ds_desc=ds_dict['ds_desc'] if 'ds_desc' in ds_dict.keys() else '',
+                             created_date=func.now(),
+                             )
+        return ds
+
+
+    def to_dict(self):
+        ds_dict = deepcopy(self.__dict__)
+        ds_dict['ds_param'] = json.loads(ds_dict['ds_param'])
+        return ds_dict
+
 
 class MTable(Base):
     __tablename__ = 'mtable'
@@ -79,6 +103,20 @@ engine = create_engine('sqlite:///' + db_file_path)
 
 if __name__ == "__main__":
     # insert_initial_stanmo_data()
+
+    ds_dict = {'table_group_name': '/user/data_norm',
+               'ds_name': 'hdfs1',
+               'ds_type': 'hdfsindex',
+               'ds_url': 'http://localhost:50070',
+               'ds_param': {'hdfs_web_url': 'http://localhost:50070',
+                            'hdfs_url': 'hdfs://localhost:9000'}
+               }
+    ds=MDatasource.from_dict(ds_dict = ds_dict)
+    a = list(ds.__dict__.keys())
+    print (a)
+    print(ds)
+    print(ds.to_dict())
+    exit(0)
 
     engine = create_engine('sqlite:////home/duan/github/schemamap/app/allmodel.sqlite3flex')
     metadata = MetaData(bind=engine)

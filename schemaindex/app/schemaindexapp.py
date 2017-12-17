@@ -112,29 +112,28 @@ class SchemaIndexApp:
     def add_data_soruce(self,ds_dict = None):
         session = create_session(bind=dbmodels.engine)
         session._model_changes={}
-        try:
-            session.begin()
-            session.add_all([
-                dbmodels.MDatasource(table_group_name=ds_dict['table_group_name'] ,
-                                   ds_name=ds_dict['ds_name'] ,
-                                   ds_type=ds_dict['ds_type'] ,
-                                   ds_url= ds_dict['ds_url'],
-                                   nbr_of_tables=0,
-                                   nbr_of_columns=9,
-                                   ds_desc = 'list of db',
-                                   created_date = func.now(),
-                        )
-            ])
-            session.commit()
-            dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
-            db = dbrs1.first()
-            if db is None:
-                si_app.logger.error('error: did not find database')
-            return db
-        except Exception as e:
-            si_app.logger.error('failed to add data source!')
-            si_app.logger.error(e)
-            return None
+
+        session.begin()
+        session.add_all([
+            dbmodels.MDatasource(table_group_name=ds_dict['table_group_name'] ,
+                               ds_name=ds_dict['ds_name'] ,
+                               ds_type=ds_dict['ds_type'] ,
+                               ds_url= ds_dict['ds_url'],
+                               ds_param=json.dumps(ds_dict['ds_param']) ,
+                               nbr_of_tables=0,
+                               nbr_of_columns=9,
+                               ds_desc=ds_dict['ds_desc'],
+                               created_date = func.now(),
+                    )
+        ])
+        session.commit()
+        dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
+        db = dbrs1.first()
+        if db is None: # This should not happend!
+            si_app.logger.error('error: did not find database')
+            return False
+        return True
+
 
     def update_data_soruce(self,ds_dict = None):
         session = create_session(bind=dbmodels.engine)
@@ -264,7 +263,7 @@ class SchemaIndexApp:
         rs = self.db_session.query(dbmodels.MDatasource).filter_by(ds_name=ds_name)
         if rs.count() > 0:
             ds = rs.first()
-            return {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
+            return   ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
 
             ''''{
                 'ds_name': ds.ds_name,
@@ -277,7 +276,7 @@ class SchemaIndexApp:
 
     def get_plugin_name_list(self):
         plugins = []
-        rs =  self.db_session.query(dbmodels.MPlugin)
+        rs = self.db_session.query(dbmodels.MPlugin)
         for p in rs:
             plugins.append(p.plugin_name)
         return  plugins
@@ -292,7 +291,7 @@ class SchemaIndexApp:
     def get_plugin_info(self, p_plugin_name = ''):
 
         p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        p['ds_param'] = json.loads(p['ds_param'])
+        # p['ds_param'] = json.loads(p.ds_param )
         return  p
 
 

@@ -4,10 +4,12 @@ supported_ds_types = ['mysql','sqlite3']
 
 
 ds_param = {'schema_name': {'type':'String',
+                             'full_name':'Schema Name to Reflect:',
                              'desc':'''''',
                              },
             'ds_url': {'type':'String',
-                             'desc':'''The HDFS native access URL, usually staring with hdfs, for example: hdfs://localhost:9000 . This URL is used by a Java inotify library to connect to HDFS and monitor all file level changes to HDFS.''',
+                             'full_name':'Database Connection String:',
+                             'desc':'''The sqlalchemy access URL,  for example: mysql://root:xyz@localhost/employees.''',
                              },
             }
 

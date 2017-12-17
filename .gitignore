@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 *.class
 *.log
+*.sqlite3
 
 # C extensions
 *.so
@@ -12,5 +13,4 @@ __pycache__/
 .Python
 .idea
 indexdir/
-log/
 misc/

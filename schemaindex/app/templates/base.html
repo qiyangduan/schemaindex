@@ -70,7 +70,7 @@
 
           <a href="/overview">
             <i class="fa fa-home"></i> <span>Home</span>
-            <span class="pull-right-container"   onclick="window.location.href='/add_data_source'"  new>
+            <span class="pull-right-container"   onclick="window.location.href='/add_data_source?ds_type=hdfsindex'"  new>
               <small class="label pull-right bg-green"></small>
             </span>
           </a>
@@ -88,7 +88,7 @@
         {% if base_navigation_dict['selected_menu'] == 'datasources'  %}
         <li class="active treeview menu-open">
           {% else %}
-        <li class="treeview">
+        <li class="treeview  menu-open">
           {% end %}
           <a href="#">
             <i class="fa fa-database"></i>

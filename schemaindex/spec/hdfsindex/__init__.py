@@ -4,15 +4,19 @@ The index schema is Schema(ds_name=ID(stored=True), table_id=ID(stored=True), ta
 The real time index engine requires the hdfs connection information.'''
 
 ds_param = {'hdfs_web_url': {'type':'String',
+                             'full_name':'HDFS Web URL:',
                              'desc':'''The HDFS web URL, usually staring with HTTP, for example: http://localhost:50070 .  This URL is used by hdfscli library to connect to HDFS web and scan HDFS structure.''',
                              },
             'root_path': {'type':'String',
+                             'full_name':'Root path:',
                              'desc':'The starting point to index for the index, for example, you can use / or /user', #
                              },
             'hdfs_url': {'type':'String',
+                             'full_name':'HDFS Native URI for inotify:',
                              'desc':'''The HDFS native access URL, usually staring with hdfs, for example: hdfs://localhost:9000 . This URL is used by a Java inotify library to connect to HDFS and monitor all file level changes to HDFS.''',
                              },
             'start_inotify':{'type':'Boolean',
+                             'full_name':'Real time synchronization:',
                              'desc':'Whether to continously monitor the HDFS changes, or Not.'  # False
                              },
             }

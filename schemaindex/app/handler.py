@@ -33,71 +33,6 @@ class OverviewHandler(tornado.web.RequestHandler):
 
         self.render("overview.html", base_navigation_dict=base_navigation_dict)
 
-class DatabaseSummaryHandler(tornado.web.RequestHandler):
-    def get(self):
-        # self.write("Hello, world")
-        # param_db_name = self.get_argument("table_group_name", None)
-        session = create_session(bind=engine)
-        param_ds_name = self.get_argument("ds_name", None)
-        if param_ds_name is None:
-            print('error: no schema name is given')
-            base_navigation_dict = {'selected_menu': 'datasources',
-                                    'dbrs': session.query(MDatasource),
-                                    'error': 'error: no schema name is given',
-                                    'db': None
-                                    }
-            # self.render("404.html")
-            self.render("database_summary.html",  # current_schema_name = param_schema_name,
-                        base_navigation_dict=base_navigation_dict )
-
-        entry = None
-
-        dbrs1 = session.query(MDatasource).filter_by(ds_name = param_ds_name )
-        db = dbrs1.first()
-        if db is None:
-            print('error: did not find database')
-
-        dbrs = si_app.get_data_source_rs()
-        tabrs = si_app.get_table_list_for_data_source_rs(param_ds_name= param_ds_name)
-
-
-
-        base_navigation_dict = {'selected_menu': 'datasources',
-                                'dbrs': dbrs,
-                                'selected_schema_name': param_ds_name,
-                                'db':db,
-                                'tabrs':tabrs,
-                                'plugin_name_list': si_app.get_plugin_name_list(),
-                                }
-
-        self.render("database_summary.html", # current_schema_name = param_schema_name,
-                    base_navigation_dict=base_navigation_dict # ,dbrs=dbrs, tabrs=tabrs,db=db
-                    )
-
-    def post(self):
-        ds_dict = {}
-        ds_dict['table_group_name']  = self.get_argument('table_group_name')
-        ds_dict['ds_name'] = self.get_argument('ds_name')
-        ds_dict['ds_url'] = self.get_argument('ds_url')
-        ds_dict['ds_type'] = self.get_argument('ds_type')
-        ds_dict['ds_desc'] = self.get_argument('ds_desc')
-
-        db = si_app.update_data_soruce(ds_dict)
-
-
-        dbrs = si_app.get_data_source_rs()
-
-        Info = {'result': 'ok', 'message':'A new data source is updated.'}
-        base_navigation_dict = {'selected_menu': 'database',
-                                'dbrs': dbrs,
-                                'selected_add_data_source':True, 'selected_schema_name':ds_dict['ds_name'],
-                                'plugin_name_list': si_app.get_plugin_name_list(),
-                                'db':db
-                                }
-        self.render("database_summary.html",
-                    base_navigation_dict=base_navigation_dict,
-                    info=Info, dbrs=dbrs, db = None,tabrs=None)
-
 
 class GlobalSearchHandler(tornado.web.RequestHandler):
     def get(self):
@@ -132,12 +67,98 @@ class GlobalSearchHandler(tornado.web.RequestHandler):
                     search_result = res)
 
 
+class DatabaseSummaryHandler(tornado.web.RequestHandler):
+    def get(self):
+        # self.write("Hello, world")
+        # param_db_name = self.get_argument("table_group_name", None)
+        session = create_session(bind=engine)
+        param_ds_name = self.get_argument("ds_name", None)
+        if param_ds_name is None:
+            si_app.logger.warn('error: no data source name is given (ds_name)')
+            result_message =   {'message_type': 'danger',
+                                'message_title': 'Error',
+                                'message_body':'No data source name is given (ds_name)'}
 
+
+            base_navigation_dict = {'selected_menu': 'datasources',
+                                    'dbrs': session.query(MDatasource),
+                                    'error': 'error: no schema name is given',
+                                    'selected_add_data_source': False,
+                                    'message': result_message,
+                                    'db': None
+                                    }
+            # self.render("404.html")
+            self.render("database_summary.html",  # current_schema_name = param_schema_name,
+                        base_navigation_dict=base_navigation_dict )
+
+        entry = None
+
+        dbrs1 = session.query(MDatasource).filter_by(ds_name = param_ds_name )
+        db = dbrs1.first()
+        if db is None:
+            print('error: did not find database')
+
+        dbrs = si_app.get_data_source_rs()
+        tabrs = si_app.get_table_list_for_data_source_rs(param_ds_name= param_ds_name)
+
+        base_navigation_dict = {'selected_menu': 'datasources',
+                                'selected_add_data_source': False,
+                                'dbrs': dbrs,
+                                'selected_schema_name': param_ds_name,
+                                'db':db,
+                                'tabrs':tabrs,
+                                'plugin_name_list': si_app.get_plugin_name_list(),
+                                }
+
+
+        base_navigation_dict['input_db_type'] = db.ds_type
+        plugin_info = si_app.get_plugin_info(p_plugin_name=db.ds_type )
+        base_navigation_dict['input_ds_param'] = json.loads(plugin_info.ds_param)
+
+        self.render("database_summary.html", # current_schema_name = param_schema_name,
+                    base_navigation_dict=base_navigation_dict # ,dbrs=dbrs, tabrs=tabrs,db=db
+                    )
+
+    def post(self):
+        ds_dict = {}
+        ds_dict['table_group_name']  = self.get_argument('table_group_name')
+        ds_dict['ds_name'] = self.get_argument('ds_name')
+        ds_dict['ds_url'] = self.get_argument('ds_url')
+        ds_dict['ds_type'] = self.get_argument('ds_type')
+        ds_dict['ds_desc'] = self.get_argument('ds_desc')
+
+        db = si_app.update_data_soruce(ds_dict)
+
+
+        dbrs = si_app.get_data_source_rs()
+
+        result_message = {'message_type': 'info',
+                          'message_title': 'Success',
+                          'message_body': 'The data source %s is updated.' % (
+                          str(ds_dict['ds_name']) )}
+
+        base_navigation_dict = {'selected_menu': 'database',
+                                'dbrs': dbrs,
+                                'selected_add_data_source':False,
+                                'selected_schema_name':ds_dict['ds_name'],
+                                'plugin_name_list': si_app.get_plugin_name_list(),
+                                'message': result_message,
+                                'db':db  # When 'db' is available, it is treated as show_data_source
+                                }
+
+
+        base_navigation_dict['input_db_type'] = db.ds_type
+        plugin_info = si_app.get_plugin_info(p_plugin_name=db.ds_type )
+        base_navigation_dict['input_ds_param'] = json.loads(plugin_info.ds_param)
+
+        self.render("database_summary.html",
+                    base_navigation_dict=base_navigation_dict, dbrs=dbrs, db = None,tabrs=None)
 
 
 class AddDataSourceHandler(tornado.web.RequestHandler):
     def get(self):
-        # json.dumps()
+        #
+        # it is import not to put 'db' into this dict to indicate this is add_data_source
         base_navigation_dict = {'selected_menu': 'datasources',
                                 'dbrs': si_app.get_data_source_rs(),
                                 'plugin_name_list': si_app.get_plugin_name_list(),
@@ -146,9 +167,15 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
                                 'selected_schema_name':'__add_data_source__',
                                 }
         ds_type = self.get_argument('ds_type',default=None)
-        if ds_type is not None:
-            base_navigation_dict['input_db_type'] = ds_type
-            base_navigation_dict['input_ds_param'] = si_app.get_plugin_info(p_plugin_name=ds_type)
+
+
+        if ds_type is None:
+            ds_type =si_app.get_plugin_name_list()[0]  # simply choose first available plugin
+
+
+        base_navigation_dict['input_db_type'] = ds_type
+        plugin_info = si_app.get_plugin_info(p_plugin_name=ds_type)
+        base_navigation_dict['input_ds_param'] = json.loads(plugin_info.ds_param)
 
         self.render("database_summary.html",
                     base_navigation_dict=base_navigation_dict,
@@ -160,24 +187,45 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
         ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
         ds_dict['ds_url'] = self.get_argument('ds_url')
-        ds_dict['ds_type'] = self.get_argument('ds_type')
         ds_dict['ds_desc'] = self.get_argument('ds_desc')
-        ds_dict['db_comment'] = self.get_argument('db_comment')
 
-        db = si_app.add_data_soruce(ds_dict)
-        if db:
+        ds_dict['ds_type'] = self.get_argument('ds_type')
+        ds_dict['ds_param'] = {}
+        ds_plugin_info = si_app.get_plugin_info(p_plugin_name=ds_dict['ds_type'])
+
+        param_name_dict = json.loads(ds_plugin_info.ds_param)
+        for param_name in param_name_dict.keys():
+            if param_name_dict[param_name]['type'] == 'Boolean':
+                ds_dict['ds_param'][param_name] = self.get_argument('ds_param.' + param_name, default=False )
+            else:
+                ds_dict['ds_param'][param_name] = self.get_argument('ds_param.' + param_name)
+
+        try:
+            si_app.add_data_soruce(ds_dict)
+            #Info = {'result': 'ok', 'message': 'A new data source is added.'}
             self.redirect('/database_summary?ds_name=' + ds_dict['ds_name'])
-        else:
+        except Exception as e:
+            si_app.logger.error('failed to add data source!')
+            si_app.logger.error(e)
+            #Info = {'result': 'ok', 'message': 'A new data source is added.'}
             dbrs = si_app.get_data_source_rs()
+            result_message =   {'message_type': 'danger',
+                                'message_title': 'Error',
+                                'message_body':'Failed to add data source: %s! The error was: %s' % (str(ds_dict['ds_name']), str(e))}
 
-            Info = {'result': 'ok', 'message': 'A new data source is added.'}
             base_navigation_dict = {'selected_menu': 'database',
                                     'dbrs': dbrs,
                                     'selected_add_data_source': True,
                                     'plugin_name_list': si_app.get_plugin_name_list(),
                                     'selected_schema_name': ds_dict['ds_name'],
-                                    'db': db,
+                                    'message': result_message,
+                                    'db': MDatasource.from_dict(ds_dict = ds_dict),
                                     }
+            base_navigation_dict['input_db_type'] = ds_dict['ds_type']
+            plugin_info = si_app.get_plugin_info(p_plugin_name=ds_dict['ds_type'])
+            base_navigation_dict['input_ds_param'] = json.loads(plugin_info.ds_param)
+
+
             self.render("database_summary.html",
                         base_navigation_dict=base_navigation_dict)
 
