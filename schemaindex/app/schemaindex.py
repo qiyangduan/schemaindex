@@ -6,7 +6,7 @@
     Usage:
         schemaindex -h
         schemaindex list ( data_source | data_source_type )
-        schemaindex add <data_source_name> --spec=<spec_name>
+        schemaindex add <data_source_name> --plugin=<spec_name>
         schemaindex reflect <data_source_name>
         schemaindex search <search_key_word>...
         schemaindex runserver [--port=<port> ] [--instance=<id> ]
@@ -23,7 +23,7 @@
 """
 # This command push will be implemented later.
 #        schemaindex push [specs]
-#        schemaindex pull [specs]  # To download a model spec from central repository
+#        schemaindex pull [specs]  # To download a model plugin from central repository
 #        schemaindex search [specs]
 
 # the above is our usage string that docopt will read and use to determine
@@ -39,7 +39,7 @@ import os
 
 import logging
 # from basemodelspec import BaseMiningModel
-# in the control file, it should not deal with any specific model but only use spec and model name to call the loader
+# in the control file, it should not deal with any specific model but only use plugin and model name to call the loader
 
 def main():
     """ main-entry point for schemaindex program, parse the commands and build the si_app platform """
@@ -67,10 +67,10 @@ def main():
 
 
     # Parse the User command and the required arguments
-    # create <model_name> --spec=<spec_name>
+    # create <model_name> --plugin=<spec_name>
     if docopt_args["add"]:
         model_name = docopt_args["<model_name>"]
-        spec_name = docopt_args["--spec"]
+        spec_name = docopt_args["--plugin"]
         if spec_name is None:
             print("Please specify the <model_name> and <spec_name>")
         si_app.create_model(model_name=model_name, spec_name=spec_name)

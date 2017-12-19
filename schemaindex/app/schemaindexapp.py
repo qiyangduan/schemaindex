@@ -1,9 +1,9 @@
-import atexit
+#import atexit
 import os
 import shutil
 import logging
 import json
-
+import time
 
 from sqlalchemy import Column, DateTime, String, Integer, func
 from sqlalchemy.orm import create_session
@@ -25,8 +25,8 @@ class SchemaIndexApp:
 
     MODEL_DATAFRAME_DIR = 'data'
     MODEL_INSTANCE_DIR = 'instance'
-    MODEL_SPEC_DIR = 'spec' # Save the specs of a specific model, including file mining_model.json
-    MODEL_SPEC_PATH = 'spec' # Save all model_spec programs. One spec may serve multiple models
+    MODEL_SPEC_DIR = 'plugin' # Save the specs of a specific model, including file mining_model.json
+    MODEL_SPEC_PATH = 'plugin' # Save all model_spec programs. One plugin may serve multiple models
     MODEL_SPEC_FILENAME = 'mining_model.json'
     TIME_FORMATER = "%Y-%m-%d %H:%M:%S"
 
@@ -43,9 +43,11 @@ class SchemaIndexApp:
 
     db_session = create_session(bind=dbmodels.engine)
     data_source_process = {} #  {'__sample__': []}
+    time_to_commit = time.time()
+
 
     def __init__(self):
-        # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/spec
+        # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/plugin
         # sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
 
         self.schemaindex_init()
@@ -167,6 +169,15 @@ class SchemaIndexApp:
             si_app.logger.error('error: did not find database')
             return False
         return True
+
+    def update_data_soruce_trx_id(self,ds_name = None, trx_id = None):
+
+        current_time = time.time()
+        self.data_source_dict[ds_name]['ds_param']['inotify_trx_id'] = trx_id
+        if current_time - self.time_to_commit > self.config['main']['interval_commit_trx_id']:
+            self.logger.info('time out, this time write to database')
+            self.update_data_soruce(ds_dict=self.data_source_dict[ds_name])
+            self.time_to_commit = current_time
 
 
     def update_data_soruce(self,ds_dict = None):
@@ -393,7 +404,7 @@ class SchemaIndexApp:
         logger.debug('looking for reflect engine from location: ' + os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH) )
         plugin_spec_path = os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH)
         logger = logging.getLogger('stanmo_logger')
-        logger.debug('looking for model spec in path: ' + plugin_spec_path)
+        logger.debug('looking for model plugin in path: ' + plugin_spec_path)
         spec_list = []
 
         for item in os.listdir(plugin_spec_path):

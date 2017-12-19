@@ -1,34 +1,30 @@
 from setuptools import setup
 
-setup(name='stanmo',
-      version='0.2',
-      description='Execution engine for standard business learning models.',
-      url='https://github.com/qiyangduan/stanmo',
+setup(name='schemaindex',
+      version='0.1',
+      description='An indexing engine for different types of data sources, including HDFS, Mysql, etc.',
+      url='https://github.com/qiyangduan/schemaindex',
       author='Duan Qiyang',
-      author_email='qiyang.duan@qq.com',
+      author_email='qiyang.duan@gmail.com',
       license='Apache Software License',
       include_package_data=True,
-      packages=['stanmo'
-               ,'stanmo.app'
-               ,'stanmo.data'
-               ,'stanmo.log'
-               ,'stanmo.spec'
-               ,'stanmo.spec'
-               ,'stanmo.test'
+      packages=['schemaindex'
+               ,'schemaindex.plugin'
+               ,'schemaindex.test'
                 ],
       install_requires=[
-          'simplejson', 'flask', 'docopt','sqlalchemy',
-          'pandas','scikit-learn','scipy'
+           'tornado',
+           'docopt',
+           'sqlalchemy',
+           'whoosh',
+           'hdfs',
+
+
       ],
       test_suite='nose.collector',
-      tests_require=['nose', 'nose-cover3', 'simplejson','sqlalchemy',
-                    'flask',
-                    'docopt',
-                    'pandas',
-                    'scikit-learn',
-                    'scipy'],
+      tests_require=['nose', 'nose-cover3', ],
       entry_points={
-          'console_scripts': ['stanmo=stanmo.stanmoctl:main'],
+          'console_scripts': ['stanmo=schemaindex.app.schemaindex:main'],
       },
       classifiers = [ ],
       zip_safe=False)

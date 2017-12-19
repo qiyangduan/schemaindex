@@ -22,15 +22,15 @@ class OverviewHandler(tornado.web.RequestHandler):
         dbrs = si_app.get_data_source_rs()
 
         ds_count = dbrs.count()
-        tab_count = session.query(MTable).count()
-        attr_count = session.query(MColumn).count()
+        #tab_count = session.query(MTable).count()
+        #attr_count = session.query(MColumn).count()
         base_navigation_dict = {'selected_menu': 'overview',
                                 'dbrs': dbrs,
                                 'plugin_list': si_app.get_plugin_list(),
                                 'ds_count':str(ds_count),
-                                'tab_count':str(tab_count),
-                                'attr_count':str(attr_count),
-                                'tag_count':'NA',
+                                #'tab_count':str(tab_count),
+                                #'attr_count':str(attr_count),
+                                #'tag_count':'NA',
 
         }
 
@@ -90,7 +90,8 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
                                     'message': result_message,
                                     'db': None
                                     }
-            # self.render("404.html")
+            # self.rend
+            # er("404.html")
             self.render("database_summary.html",  # current_schema_name = param_schema_name,
                         base_navigation_dict=base_navigation_dict )
 
@@ -99,7 +100,23 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
         dbrs1 = session.query(MDatasource).filter_by(ds_name = param_ds_name )
         db = dbrs1.first()
         if db is None:
-            print('error: did not find database')
+            print('')
+            si_app.logger.warn('error: did not find database' + param_ds_name)
+            result_message =   {'message_type': 'danger',
+                                'message_title': 'Error',
+                                'message_body':'error: did not find database' + param_ds_name}
+
+
+            base_navigation_dict = {'selected_menu': 'overview',
+                                    'dbrs': session.query(MDatasource),
+                                    'error': 'error: no schema name is given',
+                                    'selected_add_data_source': False,
+                                    'message': result_message,
+                                    'plugin_list': si_app.get_plugin_list(),
+                                    }
+            # self.render("404.html")
+            self.render("overview.html",  # current_schema_name = param_schema_name,
+                        base_navigation_dict=base_navigation_dict )
 
         dbrs = si_app.get_data_source_rs()
         tabrs = si_app.get_table_list_for_data_source_rs(param_ds_name= param_ds_name)
@@ -252,13 +269,12 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
 
 class DeleteDataSourceHandler(tornado.web.RequestHandler):
     def post(self):
-        ds_dict = {}
-        ds_dict['ds_name'] = self.get_argument('ds_name')
+        ds_name = self.get_argument('ds_name')
+        ds_dict  = si_app.get_data_source_dict(ds_name=ds_name)
         ds_dict['delete_reflected_database_automatic'] = self.get_argument('delete_reflected_database_automatic', default=None)
 
         # print ds_dict['delete_reflected_database_automatic']
         result_message = si_app.delete_data_soruce(ds_dict)
-
         dbrs = si_app.get_data_source_rs()
         base_navigation_dict = {'selected_menu': 'database',
                                 'dbrs': dbrs,
@@ -273,10 +289,14 @@ class DeleteDataSourceHandler(tornado.web.RequestHandler):
             db = dbrs1.first()
             base_navigation_dict['db'] = db
             base_navigation_dict['tabrs'] = si_app.get_table_list_for_data_source_rs(param_ds_name= ds_dict['ds_name'])
+            base_navigation_dict['input_db_type'] = ds_dict['ds_type']
+            plugin_info = si_app.get_plugin_info(p_plugin_name=ds_dict['ds_type'])
+            base_navigation_dict['input_ds_param'] = json.loads(plugin_info.ds_param)
 
+            self.render("database_summary.html",
+                        base_navigation_dict=base_navigation_dict)
 
-        self.render("database_summary.html",
-                    base_navigation_dict=base_navigation_dict)
+        self.redirect('/')
 
 
 
@@ -461,8 +481,15 @@ class hdfs_inotify_change(tornado.web.RequestHandler):
 
         print(path)
 
-        si_app.data_source_dict[data_source_name]['ds_param']['inotify_trx_id'] = txid
-        si_app.update_data_soruce(ds_dict=si_app.data_source_dict[data_source_name])
+        # si_app.data_source_dict[data_source_name]['ds_param']['inotify_trx_id'] = txid
+
+
+        #there may be performance issues if we update trxid everytime to database. Therefore, i updated to cache
+        # most of times.
+
+        # si_app.update_data_soruce(ds_dict=si_app.data_source_dict[data_source_name])
+        si_app.update_data_soruce_trx_id(ds_name=data_source_name, trx_id=txid)
+
         self.write('received!' + path)
 
 
