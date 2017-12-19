@@ -1,4 +1,4 @@
-import os
+import os, sys
 import traceback, logging
 
 # Those are all options for end user to customize. Other internal configurations may be found in different classes.
@@ -14,6 +14,7 @@ cfg = {"web": {
                 'passwd': 'my secret password',
                 },
         "main": {"schemaflex_home": os.path.abspath(os.path.join(os.path.dirname(__file__), '..')),
+                 "schemaflex_spec": os.path.abspath(os.path.join(os.path.dirname(__file__), '..','spec')),
                  "schemaflex_text_index_path": os.path.abspath(os.path.join(os.path.dirname(__file__), '..','indexdir')),
                  'init_indicator_file': os.path.abspath(os.path.join(os.path.dirname(__file__), 'do_schemaindex_init')),
                  },
@@ -23,6 +24,7 @@ cfg = {"web": {
                             }
 }
 
+sys.path.append( cfg['main']['schemaflex_spec'])
 
 LOG_DIR = os.path.join(cfg['main']['schemaflex_home'],
                        cfg['logging']['log_dir'])

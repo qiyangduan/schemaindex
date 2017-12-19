@@ -52,12 +52,13 @@ def run_webserver(addr = "localhost", port=8088):
     tornado.options.parse_command_line()
     app = tornado.httpserver.HTTPServer(MApplication())
     app.listen(port=port, address=addr)
-    print('Server started, please visit : http://%s:%s/' % ( addr, str(port)))
     tornado.ioloop.IOLoop.current().start()
+    print('Server started, please visit : http://%s:%s/' % ( addr, str(port)))
 
 
 if __name__ == "__main__":
     run_webserver(port = config.cfg['web']['port'], addr = config.cfg['web']['address'])
+
 
 '''    tornado.options.parse_command_line()
     app = tornado.httpserver.HTTPServer(MApplication())

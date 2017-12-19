@@ -59,22 +59,9 @@
 
                   <div class="form-group required ">
                     <label>Data Source Name (Required): </label>
-                    <input name="ds_name" type="text" class="form-control" placeholder="Enter Schema Name ..."
+                    <input name="ds_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
                            value="{{ base_navigation_dict['db'].ds_name if 'db' in base_navigation_dict.keys()   else '' }}">
                   </div>
-                  <div class="form-group">
-                    <label>Group / Schema / Path Name: </label>
-                    <input name="table_group_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
-                           value="{{ base_navigation_dict['db'].table_group_name if 'db' in base_navigation_dict.keys() else '' }}">
-                  </div>
-
-                  <div class="form-group">
-                    <label>Short Description for Data Source: </label>
-                    <textarea  name="ds_desc" class="form-control" rows="3" placeholder="Enter ...">
-                      {{ base_navigation_dict['db'].ds_desc if 'db' in base_navigation_dict.keys() else "" }}
-                    </textarea>
-                  </div>
-
 
                   <!-- checkbox -->
                   <div class="form-group">
@@ -87,15 +74,17 @@
 
                   </div>
 
+                  <div class="form-group">
+                    <label>Description: </label>
+                    <textarea  name="ds_desc" class="form-control" rows="3" placeholder="Enter ...">
+                      {{ base_navigation_dict['db'].ds_desc if 'db' in base_navigation_dict.keys() else "" }}
+                    </textarea>
+                  </div>
+
+
+
           </div>
           <div class="col-md-6">
-
-
-                  <div class="form-group">
-                    <label>Connection URL(Required):</label>
-                    <input name="ds_url" type="text" class="form-control" placeholder="Enter connection URL, e.g. mysql://username:password@localhost/blog"
-                           value="{{ base_navigation_dict['db'].ds_url if 'db' in base_navigation_dict.keys() else '' }}">
-                  </div>
 
 
               {#  to show existing datasource and to show new data source should be same now! #}
@@ -108,7 +97,7 @@
                     <div class="checkbox">
                       <label>
                         <input name="ds_param.{{param_id}}" type="checkbox"
-                               {{'checked="checked"'  if 'db' in base_navigation_dict.keys() and  base_navigation_dict['db'].to_dict()['ds_param'][param_id]  == True else '' }}
+                               {{'checked="checked"'  if 'db' in base_navigation_dict.keys() and  base_navigation_dict['db'].to_dict()['ds_param'][param_id]  == 'on' else '' }}
                         　　　　data-toggle="tooltip" title="{{ base_navigation_dict['input_ds_param'][param_id]['desc']}}">
                         {{ base_navigation_dict['input_ds_param'][param_id]['full_name']}}
                       </label>

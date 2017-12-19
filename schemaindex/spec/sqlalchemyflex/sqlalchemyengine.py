@@ -21,12 +21,15 @@ class SQLAlchemyReflectEngine():
     def echo(self):
         return 'echo'
 
+    def datasource_init(self):
+        pass
+
     def reflect(self, reload_flag = False):
         if not self.ds_dict:
             print('error: ds_url must be provided.')
             return
 
-        reflect_engine = create_engine((self.ds_dict['ds_url']))
+        reflect_engine = create_engine(self.ds_dict['ds_param']['connect_string']   )
         metadata = MetaData(bind=reflect_engine)
         metadata.reflect()
 
@@ -37,6 +40,7 @@ class SQLAlchemyReflectEngine():
         if reload_flag:
             session.query(MTable).filter_by(ds_name = self.ds_dict['ds_name']).delete()
             session.query(MColumn).filter_by(ds_name = self.ds_dict['ds_name']).delete()
+            si_app.delete_doc_from_index_by_datasource(ds_name=self.ds_dict['ds_name'])
         # tables = metadata.tables.values()
         # print(tables)
 
@@ -49,7 +53,7 @@ class SQLAlchemyReflectEngine():
             session.add_all([
                 MTable(
                         ds_name = self.ds_dict['ds_name'],
-                        table_group_name = self.ds_dict['table_group_name'],
+                        table_group_name = self.ds_dict['ds_param']['schema_name'],
                         table_name=t.name,
                         table_comment = ''
                         )
@@ -69,7 +73,7 @@ class SQLAlchemyReflectEngine():
                     MColumn(
                             ds_name = self.ds_dict['ds_name'],
                             table_name=t.name,
-                            table_group_name=self.ds_dict['table_group_name'],
+                            table_group_name=self.ds_dict['ds_param']['schema_name'],
                             column_name = c.name,
                             column_type = str(c.type),
                             column_comment = None # c.doc
@@ -79,7 +83,7 @@ class SQLAlchemyReflectEngine():
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
                                            table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
-                                           table_info=unicode(json.dumps({"table_group_name":  self.ds_dict['table_group_name'],
+                                           table_info=unicode(json.dumps({"table_group_name":  self.ds_dict['ds_param']['schema_name'],
                                                                      "ds_name":    self.ds_dict['ds_name'] ,
                                                                      "table_name":  t.name ,
                                                                      "table_comment":    ' ' ,
@@ -94,25 +98,13 @@ class SQLAlchemyReflectEngine():
         si_app.commit_index()
 
 
-    @staticmethod
-    def reflect_db(ds_name = None):
-        session = create_session(bind=engine)
-        dbrs = session.query(MDatasource).filter_by(ds_name = ds_name)
-        for row in dbrs:
-            adb = SQLAlchemyReflectEngine()
-            adb.reflect(table_group_name = row.table_group_name,
-                                    ds_name = row.ds_name,
-                                    ds_type=row.ds_type,
-                                    ds_url = row. ds_url
-                                 )
-
 
 if __name__ == "__main__":
-    adb = SQLAlchemyReflectEngine(ds_dict = { 'table_group_name': 'a',
+    adb = SQLAlchemyReflectEngine(ds_dict = { # 'table_group_name': 'a',
                                      'ds_name': 'a',
                                      'ds_type':'sqlalchemy',
                                      'ds_url' : 'mysql://root:learning@localhost/blog',
     })
-    adb.reflect() #  None)
+    adb.reflect()
 
 

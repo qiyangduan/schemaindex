@@ -1,4 +1,4 @@
-// package com.onefoursix;
+// package com.schemaindex;
 // https://www.mkyong.com/java/apache-httpclient-examples/
 
 
@@ -43,53 +43,76 @@ public class HdfsINotify2Restful {
 
 	public static long getCheckpointTxID(String indexServerURL) throws IOException, InterruptedException, MissingEventsException  {
         String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10; rv:33.0) Gecko/20100101 Firefox/33.0";
+        Long returnCode = new Long (-1);
 
         HttpClient client = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet(indexServerURL);
-
-        // add request header
-        request.addHeader("User-Agent", USER_AGENT);
-        HttpResponse response = client.execute(request);
-
-        System.out.println("Response Code : "
-                        + response.getStatusLine().getStatusCode());
-
-        BufferedReader rd = new BufferedReader(
-            new InputStreamReader(response.getEntity().getContent()));
-
-        StringBuffer result = new StringBuffer();
+        HttpGet request;
+        HttpResponse response;
+        BufferedReader  rd;
         String line = "";
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        String line1;
+
+        while (true) {
+            request = new HttpGet(indexServerURL);
+
+            // add request header
+            request.addHeader("User-Agent", USER_AGENT);
+            response = client.execute(request);
+
+            System.out.println("Response Code (for trx id) : "
+                            + response.getStatusLine().getStatusCode());
+
+            rd = new BufferedReader(
+                new InputStreamReader(response.getEntity().getContent()));
+
+            line = rd.readLine();
             System.out.println(line);
-            return Long.parseLong(line);
+
+            while ((line1 = rd.readLine()) != null) {
+                    System.out.println(line1);
+                }
+            returnCode = Long.parseLong(line);
+            if (returnCode < -1 || returnCode ==0) {
+              Thread.sleep(30 *   // minutes to sleep
+                     60 *   // seconds to a minute
+                     1000); // milliseconds to a second
+              continue;
+            } else if (returnCode == -1 || returnCode > 0 ){
+              return returnCode;
+            }
+
         }
-        return Long.parseLong(line);
+
 
     }
             
         
     public static void main(String[] args) throws IOException, InterruptedException, MissingEventsException {
-        System.out.println("parater 2 is: " +  "a");
-        /*
-        if (args.length == 4 ) {
-			System.out.println("id is: " + getCheckpointTxID("http://localhost:8088/hdfs_inotify_get_checkpoint_txid"));
-            System.exit(1);
-		}
-        */
-        
+
         if (args.length < 3  ) {
 			System.out.println("please input arguments in format of: INDEX_SERVER_URL DATA_SOURCE_NAME HDFS_URL [starting_trx_id] ");
             System.exit(1);
 		}
+
         String indexServer =  args[0] ;
-        String indexServerURL =  indexServer    + "/hdfs_inotify_change";  // "http://localhost:8088/hdfs_inotify_change";
-        String indexServerGetCheckpointURL =  indexServer    + "/hdfs_inotify_get_checkpoint_txid";
-        System.out.println("parater 2 is: " +  "a");
         String dataSourceName =  args[1] ; // "hdfs1";
-        System.out.println("parater 2 is: " +  dataSourceName);
+
+        String indexServerURL =  indexServer    + "/hdfs_inotify_change";  // "http://localhost:8088/hdfs_inotify_change";
+        String indexServerGetCheckpointURL =  indexServer
+                + "/hdfs_inotify_get_checkpoint_txid?data_source_name=" + dataSourceName;
+
         String hdfsServerURL =  args[2] ; // "hdfs://localhost:9000";
         long lastReadTxid  = 0;
+        System.out.println("HdfsINotify2Restful is started with parameters: " );
+        System.out.println("schemaindexServerURL is: " + indexServerURL);
+        System.out.println("hdfsServerURL is: " + hdfsServerURL);
+        /*
+        System.out.println("Now I wait for 10 seconds before staring pulling trx id ...  "  );
+        Thread.sleep(1  *   // minutes to sleep
+                     10 *   // seconds to a minute
+                     1000); // milliseconds to a second
+        */
+        System.out.println("Started pulling trx id ...  "  );
         if (args.length == 4  ) {
 			lastReadTxid = Long.parseLong(args[1]);
 
@@ -97,8 +120,6 @@ public class HdfsINotify2Restful {
             lastReadTxid = getCheckpointTxID(indexServerGetCheckpointURL);
         }
 
-        System.out.println("server is: " + indexServerURL);
-        
 		System.out.println("lastReadTxid = " + lastReadTxid);
 
 		HdfsAdmin admin = new HdfsAdmin(URI.create(hdfsServerURL), new Configuration());

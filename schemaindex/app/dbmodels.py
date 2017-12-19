@@ -37,16 +37,15 @@ class MDatasource(Base):
     __tablename__ =  'mdatasource'
     #db_id = Column(Integer, primary_key=True, autoincrement=True)
     ds_name = Column(String(100), primary_key=True,)
-    db_trx_id = Column(Integer) # This is to track current datasource id if it is sychonized in real time. For example, hdfs inotify txid
+    # db_trx_id = Column(Integer, default=-2) # This is to track current datasource id if it is sychonized in real time. For example, hdfs inotify txid
     nbr_of_tables = Column(Integer)
     nbr_of_columns = Column(Integer)
     ds_type = Column(String(100) )
-    ds_url = Column(String(1000))
-    table_group_name = Column(String(200), default='_NA')
+    # ds_url = Column(String(1000))
+    # table_group_name = Column(String(200), default='_NA')
     created_date = Column(DateTime, default=func.now())
-    last_reflect_date = Column(DateTime, default=func.now())
+    last_reflect_date = Column(DateTime)
     ds_param  = Column(String(4000)) #Customized parameter by each plugin, stored as a python dict object in json string.
-
     ds_desc = Column(String(1000))
     ds_tags = Column(String(2550))
     def __repr__(self):
@@ -56,10 +55,10 @@ class MDatasource(Base):
 
     @staticmethod
     def from_dict(ds_dict=None):
-        ds =     MDatasource(table_group_name=ds_dict['table_group_name'],
+        ds =     MDatasource(# table_group_name=ds_dict['table_group_name'],
                              ds_name=ds_dict['ds_name'],
                              ds_type=ds_dict['ds_type'],
-                             ds_url=ds_dict['ds_url'],
+                             # ds_url=ds_dict['ds_url'],
                              ds_param=json.dumps(ds_dict['ds_param']),
                              nbr_of_tables=0,
                              nbr_of_columns=9,
@@ -101,15 +100,18 @@ class MColumn(Base):
 db_file_path = os.path.join(os.getcwd(), config.cfg['database']['sqlite_file'])
 engine = create_engine('sqlite:///' + db_file_path)
 
+
+'''
 if __name__ == "__main__":
     # insert_initial_stanmo_data()
 
-    ds_dict = {'table_group_name': '/user/data_norm',
+    ds_dict = {#'table_group_name': '/user/data_norm',
                'ds_name': 'hdfs1',
                'ds_type': 'hdfsindex',
-               'ds_url': 'http://localhost:50070',
+               #'ds_url': 'http://localhost:50070',
                'ds_param': {'hdfs_web_url': 'http://localhost:50070',
-                            'hdfs_url': 'hdfs://localhost:9000'}
+                            'hdfs_url': 'hdfs://localhost:9000',
+                            'root_path':'/'}
                }
     ds=MDatasource.from_dict(ds_dict = ds_dict)
     a = list(ds.__dict__.keys())
@@ -127,7 +129,7 @@ if __name__ == "__main__":
         print(t.name)
         # t.columns.id
         # t.columns.id.comment
-'''
+
     connection = engine.connect()
     result = connection.execute("SELECT table_name, column_name, COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS " +
                                 "WHERE TABLE_SCHEMA = 'blog'  ")

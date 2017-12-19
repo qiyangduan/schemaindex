@@ -1,13 +1,10 @@
-from config import cfg
+import atexit
 import os
 import shutil
-import time
 import logging
 import json
-import sys
-import dbmodels
 
-# from util import SQLAlchemyReflectEngine
+
 from sqlalchemy import Column, DateTime, String, Integer, func
 from sqlalchemy.orm import create_session
 
@@ -15,6 +12,10 @@ from sqlalchemy.orm import create_session
 from whoosh import index
 from whoosh.qparser import QueryParser
 from whoosh.fields import *
+
+
+from config import cfg
+import dbmodels
 
 
 
@@ -29,23 +30,57 @@ class SchemaIndexApp:
     MODEL_SPEC_FILENAME = 'mining_model.json'
     TIME_FORMATER = "%Y-%m-%d %H:%M:%S"
 
-    db_session = create_session(bind=dbmodels.engine)
+    config = cfg
+    stanmo_home = cfg['main']['schemaflex_home']
+
     logger = logging.getLogger('stanmo_logger')
+
     indexdir = cfg['main']['schemaflex_text_index_path']
     ix = None
     index_writer = None
+
+    data_source_dict = {} # {'__sample__': {}}
+
+    db_session = create_session(bind=dbmodels.engine)
+    data_source_process = {} #  {'__sample__': []}
+
     def __init__(self):
-        self.stanmo_home = cfg['main']['schemaflex_home']
-        self.config = cfg
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/spec
-        sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
+        # sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
+
         self.schemaindex_init()
         #
+        self.logger.debug('SchemaIndex is trying to boot up all init service by each data source ...')
+        #self.datasource_init()
+
+        #ds_list = self.get_data_source_rs()
+        #for row in ds_list:
+
+
+
         self.logger.debug('SchemaIndex platform is started.')
 
-        #print('openning index')
-        #self.ix = index.open_dir(self.indexdir)
-        #self.index_writer = self.ix.writer()
+    def datasource_init(self):
+
+        ds_list = self.get_data_source_rs()
+
+        # Here we loop through all data sources. For each of them, if it is not cached, then it is the first time to run schemaindexapp.
+        # We do 2 things for each data source
+        # 1. cache the ds_dict
+        # 2. run datasource_init of each datasource as defined by plugin.
+        for row in ds_list:
+            if row.ds_name not in self.data_source_dict.keys() :
+                self.data_source_dict[row.ds_name] = self.get_data_source_dict(ds_name=row.ds_name)
+
+                the_engine = self.get_reflect_plugin(p_plugin_name=row.ds_type)['reflect_engine']
+                one_ds = the_engine.ReflectEngine(ds_dict = row.to_dict())
+                one_ds.datasource_init()
+
+            '''
+            the_engine= si_app.get_reflect_plugin(row.ds_type)
+            a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
+            a_ds.reflect(reload_flag=True)
+            '''
 
     def __del__(self):
         if self.index_writer is not None:
@@ -115,13 +150,12 @@ class SchemaIndexApp:
 
         session.begin()
         session.add_all([
-            dbmodels.MDatasource(table_group_name=ds_dict['table_group_name'] ,
+            dbmodels.MDatasource(
                                ds_name=ds_dict['ds_name'] ,
                                ds_type=ds_dict['ds_type'] ,
-                               ds_url= ds_dict['ds_url'],
                                ds_param=json.dumps(ds_dict['ds_param']) ,
                                nbr_of_tables=0,
-                               nbr_of_columns=9,
+                               nbr_of_columns=0,
                                ds_desc=ds_dict['ds_desc'],
                                created_date = func.now(),
                     )
@@ -136,19 +170,19 @@ class SchemaIndexApp:
 
 
     def update_data_soruce(self,ds_dict = None):
+
+        self.data_source_dict[ds_dict['ds_name']] = ds_dict
+
         session = create_session(bind=dbmodels.engine)
         session._model_changes={}
-
         session.begin()
-        # db1 = dbmodels.MDatasource.query.filter_by(ds_name=ds_dict['ds_name']).first()
         session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name']).\
-            update({'table_group_name': ds_dict['table_group_name'],
+            update({
                     'ds_type': ds_dict['ds_type'],
-                    'ds_url': ds_dict['ds_url'],
+                    'ds_param': json.dumps(ds_dict['ds_param']),
                     'ds_desc':ds_dict['ds_desc']})
 
-        #db1.ds_desc = 'list of db updated'
-        #db1.ds_url = ds_dict['ds_url']
+
         session.commit()
         dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
         db = dbrs1.first()
@@ -157,16 +191,16 @@ class SchemaIndexApp:
         return db
 
 
-
-    def get_data_source_name_list(self):
-
-        rs = self.db_session.query(dbmodels.MDatasource) #.filter_by(name='ed')
-
-        ds_list = []
-        for row in rs:
-            ds_list.append({'name': row.ds_name , 'url': row.ds_url } )
-        return  ds_list
-
+    '''
+        def get_data_source_name_list(self):
+    
+            rs = self.db_session.query(dbmodels.MDatasource) #.filter_by(name='ed')
+    
+            ds_list = []
+            for row in rs:
+                ds_list.append({'name': row.ds_name , 'ds_type': row.ds_type } )
+            return  ds_list
+    '''
     def global_whoosh_search(self, q = ''):
 
         ix = index.open_dir(self.indexdir)
@@ -260,18 +294,14 @@ class SchemaIndexApp:
 
     def get_data_source_dict(self, ds_name = None):
 
+        if ds_name in self.data_source_dict.keys() is not None:
+            return self.data_source_dict[ds_name]
+
         rs = self.db_session.query(dbmodels.MDatasource).filter_by(ds_name=ds_name)
         if rs.count() > 0:
             ds = rs.first()
-            return   ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
-
-            ''''{
-                'ds_name': ds.ds_name,
-                'ds_url': ds.ds_url,
-                'db_trx_id': ds.db_trx_id,
-                'ds_type': ds.ds_type,
-                'table_group_name': ds.table_group_name,
-            }'''
+            self.data_source_dict[ds_name] = ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
+            return self.data_source_dict[ds_name]
         return None
 
     def get_plugin_name_list(self):
@@ -316,9 +346,18 @@ class SchemaIndexApp:
         session = create_session(bind=dbmodels.engine)
         dbrs = session.query(dbmodels.MDatasource).filter_by(ds_name=data_source_name)
         for row in dbrs:
-                the_engine= si_app.get_reflect_plugin(row.ds_type)['reflect_engine']
-                a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
-                a_ds.reflect(reload_flag=True)
+            the_engine= si_app.get_reflect_plugin(row.ds_type)['reflect_engine']
+            a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
+            a_ds.reflect(reload_flag=True)
+
+            session_update = create_session(bind=dbmodels.engine)
+            session_update.begin()
+            session_update.query(dbmodels.MDatasource).filter_by(ds_name=row.ds_name).\
+                update({'last_reflect_date': func.now()}, synchronize_session='fetch')
+            session_update.commit()
+            session_update.close()
+        session.close()
+
 
 
     def list_data_sources(self):
@@ -337,9 +376,9 @@ class SchemaIndexApp:
                                                                            'URL'
                                                                            ))
             for a_model in models:
-                print('{0:20}   {db_type_name:20}  {table_group_name:35}  '.format(a_model.ds_name,
+                print('{0:20}   {db_type_name:20}  {table_group1_name:35}  '.format(a_model.ds_name,
                                                                           db_type_name=a_model.ds_type,
-                                                                          table_group_name = a_model.ds_url
+                                                                          table_group1_name = a_model.ds_param
                                                                                            )
                       )
         else:
@@ -410,7 +449,6 @@ class SchemaIndexApp:
                     }
         except Exception as e:
             self.logger.error( "load_reflect_engine (error): Failed to import plugin %s, due to error :{%s}" % (dottedpath, e) )
-
             return None
 
 

@@ -4,7 +4,10 @@ import json
 from dbmodels import engine, MDatasource,MTable,MColumn
 
 from schemaindexapp import si_app
+si_app.datasource_init() # This call was in si_app.__init__, but it failed with "not able to load module". So i moved it here.
+
 from sqlalchemy.orm import create_session
+
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -121,11 +124,18 @@ class DatabaseSummaryHandler(tornado.web.RequestHandler):
 
     def post(self):
         ds_dict = {}
-        ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
-        ds_dict['ds_url'] = self.get_argument('ds_url')
         ds_dict['ds_type'] = self.get_argument('ds_type')
         ds_dict['ds_desc'] = self.get_argument('ds_desc')
+
+        ds_dict['ds_param'] = {}
+        ds_plugin_info = si_app.get_plugin_info(p_plugin_name=ds_dict['ds_type'])
+        param_name_dict = json.loads(ds_plugin_info.ds_param)
+        for param_name in param_name_dict.keys():
+            if param_name_dict[param_name]['type'] == 'Boolean':
+                ds_dict['ds_param'][param_name] = self.get_argument('ds_param.' + param_name, default='off' )
+            else:
+                ds_dict['ds_param'][param_name] = self.get_argument('ds_param.' + param_name)
 
         db = si_app.update_data_soruce(ds_dict)
 
@@ -184,15 +194,12 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
 
     def post(self):
         ds_dict = {}
-        ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
-        ds_dict['ds_url'] = self.get_argument('ds_url')
         ds_dict['ds_desc'] = self.get_argument('ds_desc')
-
         ds_dict['ds_type'] = self.get_argument('ds_type')
+
         ds_dict['ds_param'] = {}
         ds_plugin_info = si_app.get_plugin_info(p_plugin_name=ds_dict['ds_type'])
-
         param_name_dict = json.loads(ds_plugin_info.ds_param)
         for param_name in param_name_dict.keys():
             if param_name_dict[param_name]['type'] == 'Boolean':
@@ -326,11 +333,10 @@ class ViewTableInNotebookHandler(tornado.web.RequestHandler):
 
 
 
-
 class DatabaseJSONHandler(tornado.web.RequestHandler):
     def post(self):
         ds_dict = {}
-        ds_dict['table_group_name']  = self.get_argument('table_group_name')
+        # ds_dict['table_group_name']  = self.get_argument('table_group_name')
         ds_dict['ds_name'] = self.get_argument('ds_name')
         ds_dict['ds_url'] = self.get_argument('ds_url')
         ds_dict['ds_type'] = self.get_argument('ds_type')
@@ -343,7 +349,9 @@ class DatabaseJSONHandler(tornado.web.RequestHandler):
 
     def get(self):
         # json.dumps()
-        db_dict = si_app.get_data_source_name_list()
+        print('si_app.datasource_init()')
+        si_app.datasource_init()
+        db_dict = {'ds_name':'emp1'}
         self.write(json.dumps(db_dict)) # data = json.dumps(db_dict)
 
 class SearchSuggestionJSONHandler(tornado.web.RequestHandler):
@@ -362,41 +370,57 @@ class JSON1Handler(tornado.web.RequestHandler):
 
 class hdfs_inotify_get_checkpoint_txid(tornado.web.RequestHandler):
     def get(self):
-        self.write('890')
-        return
+        # Return Code:
+        # -2 : Stop the process and wait for next notice
+        # -1 : Start from last trx, as in hadoop inotification definition
+        # Integer > 0 : the real trx id and proceed.
+
+        #self.write('890')
+        #return
         data_source_name = self.get_argument('data_source_name')
         ds_dict = si_app.get_data_source_dict(ds_name=data_source_name)
-        self.write(str(ds_dict['db_trx_id']))
-        # self.write('-1')
+        if ds_dict['ds_param']['start_inotify'] == 'on' and ds_dict['last_reflect_date'] is not None:
+            print('returning:' + str(ds_dict['ds_param']['inotify_trx_id']))
+            self.write(str(ds_dict['ds_param']['inotify_trx_id']))
+        else: # self.write('-1')
+            self.write('-2')
 
 class hdfs_inotify_change(tornado.web.RequestHandler):
     def post(self):
         event_type = self.get_argument('event_type')
+        txid = self.get_argument('txid')
+        data_source_name = self.get_argument('data_source_name')
+
+
         if event_type  == 'CREATE':
             path = self.get_argument('path')
             owner = self.get_argument('owner')
             date_time = self.get_argument('date_time')
-            txid = self.get_argument('txid')
-            data_source_name = self.get_argument('data_source_name')
+
+            # /data/songs.csv._COPYING_
+            if path[-9:] == '_COPYING_':
+                # this is a intermidiate file, ignord.
+                si_app.logger.info('this file is ignored because ._COPYING_ : ' + path)
+                return
+
+            print('event_type', event_type, "time", date_time,'tx:', txid, 'path:', path)
 
             doc_old = si_app.global_whoosh_search_by_id(q_id=path)
             if len(doc_old) > 0:
                 si_app.logger.error('the doc/entity already not exist for creation event.')
-                si_app.delete_doc_from_index_by_docnum(p_docnum=doc_old[0]['docnum'])
+                for doc1 in doc_old:
+                    si_app.delete_doc_from_index_by_docnum(p_docnum=doc1['docnum'])
 
             si_app.add_table_content_index(ds_name = data_source_name,
                                            table_id=path,
                                            table_info=json.dumps({'path':path, 'date_time':date_time}),
                                            )
-            # si_app.commit_index()
-            print('event_type', event_type, "time", date_time,'tx:', txid)
+
 
         # Do the thing
         elif event_type == 'UNLINK':
             path = self.get_argument('path')
             date_time = self.get_argument('date_time')
-            txid = self.get_argument('txid')
-            data_source_name = self.get_argument('data_source_name')
 
             doc_old = si_app.global_whoosh_search_by_id(q_id=path)
             if len(doc_old) < 1:
@@ -411,14 +435,19 @@ class hdfs_inotify_change(tornado.web.RequestHandler):
             src_path = self.get_argument('src_path')
             dst_path = self.get_argument('dst_path')
             date_time = self.get_argument('date_time')
-            txid = self.get_argument('txid')
-            data_source_name = self.get_argument('data_source_name')
 
             doc_old = si_app.global_whoosh_search_by_id(q_id=src_path)
             if len(doc_old) < 1:
-                si_app.logger.error('the doc/entity to rename does not exist.')
+                si_app.logger.error('the doc/entity to rename does not exist.' + src_path)
             else:
                 si_app.delete_doc_from_index_by_docnum(p_docnum=doc_old[0]['docnum'])
+
+            doc_new = si_app.global_whoosh_search_by_id(q_id=dst_path)
+            if len(doc_new) > 0:
+                si_app.logger.error('the doc/entity already not exist for creation event.')
+                for doc1 in doc_new:
+                    si_app.delete_doc_from_index_by_docnum(p_docnum=doc1['docnum'])
+
 
             si_app.add_table_content_index(ds_name = data_source_name,
                                            table_id=dst_path,
@@ -431,4 +460,14 @@ class hdfs_inotify_change(tornado.web.RequestHandler):
             print('event_type', event_type )
 
         print(path)
+
+        si_app.data_source_dict[data_source_name]['ds_param']['inotify_trx_id'] = txid
+        si_app.update_data_soruce(ds_dict=si_app.data_source_dict[data_source_name])
         self.write('received!' + path)
+
+
+
+
+
+
+

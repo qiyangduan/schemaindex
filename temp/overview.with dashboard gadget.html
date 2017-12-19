@@ -39,7 +39,66 @@
 
     <!-- Main content -->
     <section class="content">
+      <!-- Info boxes -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-database"></i></span>
 
+            <div class="info-box-content">
+              <span class="info-box-text"># of Data Sources</span>
+              <span class="info-box-number">{{base_navigation_dict['ds_count']}}<small></small></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-table"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"># of Entities</span>
+              <span class="info-box-number">{{base_navigation_dict['tab_count']}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-list-alt"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"># of Attributes</span>
+              <span class="info-box-number">{{base_navigation_dict['attr_count']}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-tags"></i></span>
+
+            <div class="info-box-content"   data-toggle="tooltip" title="Not implemented!">
+              <span class="info-box-text"># of Tags</span>
+              <span class="info-box-number">{{base_navigation_dict['tag_count']}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 
       <div class="row">
         <div class="col-md-12">
