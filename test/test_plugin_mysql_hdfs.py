@@ -23,7 +23,7 @@ ds_dict = {
     'ds_name': 'emp1',
     'ds_type': 'sqlalchemy',
     'ds_desc': 'created by unittest of hdfsindex',
-    'ds_param': {'connect_string': 'mysql://root:learning@localhost/employees',
+    'ds_param': {'connect_string': 'mysql://root:ttt@localhost/employees',
                  'schema_name': 'na',
                  }
 }
