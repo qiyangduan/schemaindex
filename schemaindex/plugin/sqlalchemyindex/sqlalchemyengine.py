@@ -4,8 +4,11 @@ from sqlalchemy import MetaData
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
 import json
 
-from app.dbmodels import engine, MTable, MColumn, MDatasource
-from  app.schemaindexapp import si_app
+from app.dbmodels import MTable, MColumn, MDatasource
+from app.schemaindexapp import si_app
+
+
+engine = create_engine('sqlite:///' + si_app.config['database']['sqlite_file']  )
 
 class SQLAlchemyReflectEngine():
     ds_dict = None
@@ -33,6 +36,8 @@ class SQLAlchemyReflectEngine():
         metadata = MetaData(bind=reflect_engine)
         metadata.reflect()
 
+
+
         session = create_session(bind=engine)
         session._model_changes={}
         session.begin()
@@ -47,7 +52,7 @@ class SQLAlchemyReflectEngine():
 
 
         for t in metadata.sorted_tables:
-            print(t.name)
+            #print(t.name)
             # t.columns.id
             # t.columns.id.comment
             session.add_all([
@@ -63,9 +68,9 @@ class SQLAlchemyReflectEngine():
             table1 = Table(t.name, metadata
                            , autoload=True, autoload_with=engine)
 
-            print([c.name for c in table1.columns])
-            print([c.type for c in table1.columns])
-            print([c for c in table1.columns])
+            # print([c.name for c in table1.columns])
+            #print([c.type for c in table1.columns])
+            #print([c for c in table1.columns])
             column_list = []
             for c in table1.columns:
                 # print(c)
@@ -83,7 +88,8 @@ class SQLAlchemyReflectEngine():
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
                                            table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
-                                           table_info=unicode(json.dumps({"table_group_name":  self.ds_dict['ds_param']['schema_name'],
+                                           #info=unicode(json.dumps({"table
+                                           table_info=(json.dumps({"table_group_name":  self.ds_dict['ds_param']['schema_name'],
                                                                      "ds_name":    self.ds_dict['ds_name'] ,
                                                                      "table_name":  t.name ,
                                                                      "table_comment":    ' ' ,
@@ -100,11 +106,17 @@ class SQLAlchemyReflectEngine():
 
 
 if __name__ == "__main__":
-    adb = SQLAlchemyReflectEngine(ds_dict = { # 'table_group_name': 'a',
-                                     'ds_name': 'a',
-                                     'ds_type':'sqlalchemy',
-                                     'ds_url' : 'mysql://root:learning@localhost/blog',
-    })
+    ds_dict = {
+        'ds_name': 'emp1',
+        'ds_type': 'hdfsindex',
+        'ds_desc': 'created by unittest of hdfsindex',
+        'ds_param': {'connect_string': 'mysql://root:learning@localhost/employees',
+                     'schema_name': 'na',
+                     }
+    }
+
+
+    adb = SQLAlchemyReflectEngine(ds_dict)
     adb.reflect()
 
 

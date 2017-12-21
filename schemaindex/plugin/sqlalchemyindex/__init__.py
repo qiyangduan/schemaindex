@@ -17,7 +17,7 @@ ds_param = {'schema_name': {'type':'String',
 sample_ds_url = 'mysql://root:xyz@localhost/employees'
 
 author = 'duan'
-class_name = 'sqlalchemyflex.SQLAlchemyReflectEngine'
+class_name = 'sqlalchemyindex.SQLAlchemyReflectEngine'
 notebook_template_path = 'show_sqlalchemy_table_template.ipynb'
 
 from .sqlalchemyengine import SQLAlchemyReflectEngine as ReflectEngine

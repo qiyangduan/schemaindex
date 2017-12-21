@@ -1,13 +1,17 @@
 import tornado.web
 import json
+from sqlalchemy.orm import create_session
+from sqlalchemy import create_engine
 
-from dbmodels import engine, MDatasource,MTable,MColumn
 
-from schemaindexapp import si_app
+
+from .dbmodels import MDatasource,MTable,MColumn
+
+from .schemaindexapp import si_app
 si_app.datasource_init() # This call was in si_app.__init__, but it failed with "not able to load module". So i moved it here.
 
-from sqlalchemy.orm import create_session
 
+engine = create_engine('sqlite:///' + si_app.config['database']['sqlite_file'])
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -273,7 +277,6 @@ class DeleteDataSourceHandler(tornado.web.RequestHandler):
         ds_dict  = si_app.get_data_source_dict(ds_name=ds_name)
         ds_dict['delete_reflected_database_automatic'] = self.get_argument('delete_reflected_database_automatic', default=None)
 
-        # print ds_dict['delete_reflected_database_automatic']
         result_message = si_app.delete_data_soruce(ds_dict)
         dbrs = si_app.get_data_source_rs()
         base_navigation_dict = {'selected_menu': 'database',
@@ -379,7 +382,7 @@ class SearchSuggestionJSONHandler(tornado.web.RequestHandler):
         q = self.get_argument('query')
         res = si_app.get_whoosh_search_suggestion(q)
         self.write(json.dumps(res))
-
+'''
 class JSON1Handler(tornado.web.RequestHandler):
     def get(self):
         q = self.get_argument('query')
@@ -387,6 +390,7 @@ class JSON1Handler(tornado.web.RequestHandler):
         self.write(json.dumps(res))
 
         # self.write(json.dumps(res1))
+'''
 
 class hdfs_inotify_get_checkpoint_txid(tornado.web.RequestHandler):
     def get(self):

@@ -1,11 +1,19 @@
-#import atexit
+from __future__ import unicode_literals
+# according to http://python-future.org/compatible_idioms.html#unicode-text-string-literals
+#
+#
+# #import atexit
 import os
 import shutil
 import logging
 import json
 import time
+import importlib
+from builtins import str
+
 
 from sqlalchemy import Column, DateTime, String, Integer, func
+from sqlalchemy import create_engine
 from sqlalchemy.orm import create_session
 
 
@@ -14,9 +22,14 @@ from whoosh.qparser import QueryParser
 from whoosh.fields import *
 
 
-from config import cfg
-import dbmodels
+from .config import cfg
+from .dbmodels import MColumn, MTable, MDatasource, MPlugin, Base
 
+#sys.path.append( cfg['main']['schemaflex_spec'])
+
+import sqlite3
+
+si_db_engine =  create_engine('sqlite:///' + cfg['database']['sqlite_file'])
 
 
 class SchemaIndexApp:
@@ -41,7 +54,7 @@ class SchemaIndexApp:
 
     data_source_dict = {} # {'__sample__': {}}
 
-    db_session = create_session(bind=dbmodels.engine)
+    db_session = create_session(bind=si_db_engine)
     data_source_process = {} #  {'__sample__': []}
     time_to_commit = time.time()
 
@@ -104,24 +117,25 @@ class SchemaIndexApp:
         os.remove(to_init_indicator)
         # os.remove(textidx)
 
-        db_file_path = os.path.join(os.getcwd(), cfg['database']['sqlite_file'])
+        db_file_path = cfg['database']['sqlite_file']
         if os.path.exists(db_file_path):
             os.remove(db_file_path)
             # if(False):
         try:
             # recreate the sqlite database file
-            engine = dbmodels.create_engine('sqlite:///' + db_file_path)
+            engine = create_engine('sqlite:///' + db_file_path)
             self.logger.debug('creating db at ...:  ' + db_file_path) # will not print anything
-            dbmodels.Base.metadata.create_all(engine)
+            Base.metadata.create_all(engine)
 
 
             self.logger.debug('scanning plugins ... ')  # will not print anything
             self.scan_reflect_plugins()
         except Exception as e:
             print(str(e))
+            self.logger.debug('init error: ' + str(e))  # will not print anything
 
         self.logger.debug('re-construct text index at folder: ' + self.indexdir)  # will not print anything
-        if os.path.exists(db_file_path):
+        if os.path.exists(self.indexdir):
             shutil.rmtree(self.indexdir)
         os.mkdir(self.indexdir)
 
@@ -130,29 +144,33 @@ class SchemaIndexApp:
         print("schemaindex: Initialized." )  # will not print anything
 
     def delete_data_soruce(self,ds_dict = None):
-        session = create_session(bind=dbmodels.engine)
+        session = create_session(bind=si_db_engine)
         session._model_changes={}
 
-        tab_result = session.query(dbmodels.MTable).filter_by(ds_name=ds_dict['ds_name'])
+        tab_result = session.query(MTable).filter_by(ds_name=ds_dict['ds_name'])
         if tab_result.count() > 0 and (not ds_dict['delete_reflected_database_automatic'] == 'on'):
             return {'message_type': 'danger',
                     'message_title': 'Error',
                     'message_body':'the data source "' + ds_dict['ds_name'] + '" contains metadata. Please check " Delete Contents in Data Source" and try again'}
 
         session.begin()
-        session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name']).delete(synchronize_session=False)
+        session.query(MDatasource).filter_by(ds_name=ds_dict['ds_name']).delete(synchronize_session=False)
+        session.query(MTable).filter_by(ds_name=ds_dict['ds_name']).delete(synchronize_session=False)
+        session.query(MColumn).filter_by(ds_name=ds_dict['ds_name']).delete(synchronize_session=False)
         session.commit()
+        self.delete_doc_from_index_by_datasource(ds_name=ds_dict['ds_name'])
+
         return {'message_type': 'info',
                 'message_title': 'Info',
                 'message_body': 'the data source "' + ds_dict['ds_name'] + '" is deleted.'}
 
     def add_data_soruce(self,ds_dict = None):
-        session = create_session(bind=dbmodels.engine)
+        session = create_session(bind=si_db_engine)
         session._model_changes={}
 
         session.begin()
         session.add_all([
-            dbmodels.MDatasource(
+            MDatasource(
                                ds_name=ds_dict['ds_name'] ,
                                ds_type=ds_dict['ds_type'] ,
                                ds_param=json.dumps(ds_dict['ds_param']) ,
@@ -163,7 +181,7 @@ class SchemaIndexApp:
                     )
         ])
         session.commit()
-        dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
+        dbrs1 = session.query(MDatasource).filter_by(ds_name=ds_dict['ds_name'])
         db = dbrs1.first()
         if db is None: # This should not happend!
             si_app.logger.error('error: did not find database')
@@ -184,10 +202,10 @@ class SchemaIndexApp:
 
         self.data_source_dict[ds_dict['ds_name']] = ds_dict
 
-        session = create_session(bind=dbmodels.engine)
+        session = create_session(bind=si_db_engine)
         session._model_changes={}
         session.begin()
-        session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name']).\
+        session.query(MDatasource).filter_by(ds_name=ds_dict['ds_name']).\
             update({
                     'ds_type': ds_dict['ds_type'],
                     'ds_param': json.dumps(ds_dict['ds_param']),
@@ -195,7 +213,7 @@ class SchemaIndexApp:
 
 
         session.commit()
-        dbrs1 = session.query(dbmodels.MDatasource).filter_by(ds_name=ds_dict['ds_name'])
+        dbrs1 = session.query(MDatasource).filter_by(ds_name=ds_dict['ds_name'])
         db = dbrs1.first()
         if db is None:
             print('error: did not find database')
@@ -205,7 +223,7 @@ class SchemaIndexApp:
     '''
         def get_data_source_name_list(self):
     
-            rs = self.db_session.query(dbmodels.MDatasource) #.filter_by(name='ed')
+            rs = self.db_session.query(MDatasource) #.filter_by(name='ed')
     
             ds_list = []
             for row in rs:
@@ -273,21 +291,23 @@ class SchemaIndexApp:
         indexdir = self.indexdir
         ix = index.open_dir(indexdir)
 
-        res = []
+        result = []
         with ix.reader() as r:
-            # print (r.most_frequent_terms("table_info", number=5, prefix='dep'))
             for aterm in r.most_frequent_terms("table_info", number=5, prefix=q):
-                res.append(aterm[1]) # The result was like (1.0, 'dept_manager'), but here i need only a keyword
-                print (aterm)
+                one_result = aterm[1].decode('utf-8')
+                result.append(one_result) # The result was like (1.0, 'dept_manager'), but here i need only a keyword
+                #print(aterm)
 
-        return res
+        return result
 
 
     def add_table_content_index(self,ds_name = None, table_id = None, table_info = None):
 
         ix = index.open_dir(self.indexdir)
         index_writer = ix.writer()
-        index_writer.add_document(ds_name = unicode(ds_name), table_id=unicode(table_id), table_info=unicode(table_info))
+        # index_writer.add_document(ds_name = unicode(ds_name), table_id=unicode(table_id), table_info=unicode(table_info))
+
+        index_writer.add_document(ds_name = str(ds_name), table_id=str(table_id), table_info=str(table_info))
         index_writer.commit()
 
     def commit_index(self, table_id=None, table_info=None):
@@ -300,7 +320,7 @@ class SchemaIndexApp:
 
     def get_data_source_rs(self):
 
-        rs = self.db_session.query(dbmodels.MDatasource).order_by(dbmodels.MDatasource.ds_name.asc()) #.filter_by(name='ed')
+        rs = self.db_session.query(MDatasource).order_by(MDatasource.ds_name.asc()) #.filter_by(name='ed')
         return rs
 
     def get_data_source_dict(self, ds_name = None):
@@ -308,7 +328,7 @@ class SchemaIndexApp:
         if ds_name in self.data_source_dict.keys() is not None:
             return self.data_source_dict[ds_name]
 
-        rs = self.db_session.query(dbmodels.MDatasource).filter_by(ds_name=ds_name)
+        rs = self.db_session.query(MDatasource).filter_by(ds_name=ds_name)
         if rs.count() > 0:
             ds = rs.first()
             self.data_source_dict[ds_name] = ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
@@ -317,27 +337,27 @@ class SchemaIndexApp:
 
     def get_plugin_name_list(self):
         plugins = []
-        rs = self.db_session.query(dbmodels.MPlugin)
+        rs = self.db_session.query(MPlugin)
         for p in rs:
             plugins.append(p.plugin_name)
         return  plugins
 
     def get_plugin_list(self):
         plugins = []
-        rs = self.db_session.query(dbmodels.MPlugin)
+        rs = self.db_session.query(MPlugin)
         for p in rs:
             plugins.append(p)
         return  plugins
 
     def get_plugin_info(self, p_plugin_name = ''):
 
-        p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
         # p['ds_param'] = json.loads(p.ds_param )
         return  p
 
 
     def get_reflect_plugin(self, p_plugin_name = None):
-        p = self.db_session.query(dbmodels.MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
         return self.load_reflect_engine(p.module_name)
 
 
@@ -349,21 +369,21 @@ class SchemaIndexApp:
                 GROUP BY c.ds_name, c.table_name;
                 '''
 
-        tabrs = dbmodels.engine.execute(sql)
+        tabrs = si_db_engine.execute(sql)
         return  tabrs
 
 
     def reflect_db(self,data_source_name=None):
-        session = create_session(bind=dbmodels.engine)
-        dbrs = session.query(dbmodels.MDatasource).filter_by(ds_name=data_source_name)
+        session = create_session(bind=si_db_engine)
+        dbrs = session.query(MDatasource).filter_by(ds_name=data_source_name)
         for row in dbrs:
             the_engine= si_app.get_reflect_plugin(row.ds_type)['reflect_engine']
             a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
             a_ds.reflect(reload_flag=True)
 
-            session_update = create_session(bind=dbmodels.engine)
+            session_update = create_session(bind=si_db_engine)
             session_update.begin()
-            session_update.query(dbmodels.MDatasource).filter_by(ds_name=row.ds_name).\
+            session_update.query(MDatasource).filter_by(ds_name=row.ds_name).\
                 update({'last_reflect_date': func.now()}, synchronize_session='fetch')
             session_update.commit()
             session_update.close()
@@ -375,8 +395,8 @@ class SchemaIndexApp:
         model_list = []
         models = []
 
-        session = create_session(bind=dbmodels.engine)
-        dbrs = session.query(dbmodels.MDatasource)  # .filter_by(name='ed')
+        session = create_session(bind=si_db_engine)
+        dbrs = session.query(MDatasource)  # .filter_by(name='ed')
 
 
         for db in dbrs:
@@ -417,11 +437,11 @@ class SchemaIndexApp:
         plist = self.list_reflect_plugins()
 
         self.db_session.begin()
-        self.db_session.query(dbmodels.MPlugin).delete()
+        self.db_session.query(MPlugin).delete()
         for plugin_dict in plist:
             if plugin_dict is not None:
                 self.db_session.add_all([
-                    dbmodels.MPlugin( plugin_name=plugin_dict['plugin_name'] ,
+                    MPlugin( plugin_name=plugin_dict['plugin_name'] ,
                                       module_name=plugin_dict['module_name'] ,
                                       plugin_spec_path=plugin_dict['plugin_spec_path'],
                                       ds_param=json.dumps(plugin_dict['ds_param']),

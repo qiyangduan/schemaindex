@@ -3,3 +3,5 @@ docopt
 sqlalchemy
 whoosh
 hdfs
+future
+pysqlite

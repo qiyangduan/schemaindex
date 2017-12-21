@@ -10,9 +10,8 @@ import tornado.options
 import tornado.web
 import tornado.web
 
-import config
-from dbmodels import engine
-import handler
+from schemaindex.app import config
+from schemaindex.app import handler
 
 # from app import dbmodels
 
@@ -29,7 +28,7 @@ class MApplication(tornado.web.Application):
             (r"/relfect_data_source", handler.ReflectDataSourceHandler),
             (r"/view_table_in_notebook", handler.ViewTableInNotebookHandler),
             (r"/global_search", handler.GlobalSearchHandler),
-            (r"/json1", handler.JSON1Handler),
+            #(r"/json1", handler.JSON1Handler),
             (r"/hdfs_inotify_change", handler.hdfs_inotify_change),
             (r"/hdfs_inotify_get_checkpoint_txid", handler.hdfs_inotify_get_checkpoint_txid),
 
@@ -46,14 +45,14 @@ class MApplication(tornado.web.Application):
         )
         super(MApplication, self).__init__(handlers, **settings)
         # Have one global connection to the blog DB across all handlers
-        self.engine = engine 
+        # self.engine = engine
 
 def run_webserver(addr = "localhost", port=8088):
     tornado.options.parse_command_line()
     app = tornado.httpserver.HTTPServer(MApplication())
     app.listen(port=port, address=addr)
-    tornado.ioloop.IOLoop.current().start()
     print('Server started, please visit : http://%s:%s/' % ( addr, str(port)))
+    tornado.ioloop.IOLoop.current().start()
 
 
 if __name__ == "__main__":

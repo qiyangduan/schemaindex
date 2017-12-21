@@ -2,7 +2,7 @@ from hdfs import Client
 import os
 import signal
 import subprocess
-from app.dbmodels import engine, MTable, MColumn, MDatasource
+# from app.dbmodels import MTable, MColumn, MDatasource
 from app.schemaindexapp import si_app
 
 
@@ -28,7 +28,7 @@ class HDFSIndexEngine():
 
     def start_inotify_process(self):
         si_app.logger.info('starting inotify java process ...')
-        my_log_file_loc = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH,'hdfsindex', 'hdfs_log', 'hdfs_inotify.log')
+        my_log_file_loc = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH,'hdfsindex', 'hdfs_inotify.log')
         f = open(my_log_file_loc, "a")
 
         si_server_addr = "http://%s:%d" % (si_app.config['web']['address'], si_app.config['web']['port'])
@@ -41,7 +41,7 @@ class HDFSIndexEngine():
          #'-Xmx400M',
         jar_param = ['java',  '-cp', '.:'+java_class_path , 'HdfsINotify2Restful',  si_server_addr, self.ds_dict['ds_name'], hdfs_url ] #  http://localhost:8088 hdfs1 hdfs://localhost:9000 ]
 
-        print subprocess.list2cmdline(jar_param)
+        print(subprocess.list2cmdline(jar_param))
         pro = subprocess.Popen(jar_param
                         , stdout=f
                         , cwd=java_class_dir)
@@ -105,7 +105,7 @@ class HDFSIndexEngine():
 
 
         for t in filelist:
-            print(t)
+            #print(t)
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
                                            table_id=t,
@@ -141,12 +141,12 @@ if __name__ == "__main__":
         'ds_param': {'hdfs_web_url': 'http://localhost:50070',
                      'hdfs_url': 'hdfs://localhost:9000',
                      'start_inotify': 'off',
-                     'root_path':'/',
+                     'root_path': '/',
+                     'inotify_trx_id': '-1',
                      }
     }
 
-
-    # si_app.add_data_soruce(ds_dict)
+    si_app.add_data_soruce(ds_dict)
     si_app.reflect_db(data_source_name=ds_dict['ds_name'])
     #adb = HDFSIndexEngine()
     # adb.reflect() #  None)

@@ -2,11 +2,7 @@ import os
 import json
 from copy import deepcopy
 
-from sqlalchemy import MetaData
-from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-
-import config
 
 Base = declarative_base()
 from sqlalchemy import Column, DateTime, String, Integer, func
@@ -49,8 +45,8 @@ class MDatasource(Base):
     ds_desc = Column(String(1000))
     ds_tags = Column(String(2550))
     def __repr__(self):
-        return "<database (name='%s', ds_type = %s, ds_url='%s', last_reflect_date='%s')>" % (
-            self.ds_name, self.ds_type, self.ds_url, self.last_reflect_date)
+        return "<database (name='%s', ds_type = %s,   last_reflect_date='%s')>" % (
+            self.ds_name, self.ds_type,   self.last_reflect_date)
 
 
     @staticmethod
@@ -97,8 +93,6 @@ class MColumn(Base):
     column_comment = Column(String(1000))
     column_tags = Column(String(2550))
 
-db_file_path = os.path.join(os.getcwd(), config.cfg['database']['sqlite_file'])
-engine = create_engine('sqlite:///' + db_file_path)
 
 
 '''
@@ -115,7 +109,7 @@ if __name__ == "__main__":
                }
     ds=MDatasource.from_dict(ds_dict = ds_dict)
     a = list(ds.__dict__.keys())
-    print (a)
+    print(a)
     print(ds)
     print(ds.to_dict())
     exit(0)
@@ -137,7 +131,7 @@ if __name__ == "__main__":
         print("username:", row['table_name'], " - ", row['column_name'], " - ", row['COLUMN_COMMENT'])
     connection.close()
 
-from sqlalchemyflex import MetaData,create_engine
+from sqlalchemyindex import MetaData,create_engine
 
 # default
 #engine = create_engine('mysqlflex://scott:tiger@localhost/foo')
