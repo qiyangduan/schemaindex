@@ -5,16 +5,17 @@
     
     Usage:
         schemaindex -h
-        schemaindex list ( data_source | data_source_type )
-        schemaindex add <data_source_name> --plugin=<spec_name>
+        schemaindex runserver [--port=<port> ] [--instance=<id> ]
+        schemaindex list ( data_source | plugin )
+        schemaindex add <data_source_name> --plugin=<spec_name> --ds_param=<ds_param_string>
+        schemaindex reload plugin
         schemaindex reflect <data_source_name>
         schemaindex search <search_key_word>...
-        schemaindex runserver [--port=<port> ] [--instance=<id> ]
         schemaindex show <data_source_name>
 
     Options:
         -h,--help             : show this help message
-        model_name            : model name given when it was created
+        data_source_name      : name of data source given when it was created
         spec_name             : The name of model specification
         --input_file=<path>   : Path of input files to the model
         --output_file=<path>  : Path to write the model output file.
@@ -23,20 +24,29 @@
 """
 # This command push will be implemented later.
 #        schemaindex push [specs]
-#        schemaindex pull [specs]  # To download a model plugin from central repository
+#        schemaindex pull [specs]  # To download a plugin from central repository
 #        schemaindex search [specs]
-
-# the above is our usage string that docopt will read and use to determine
-# whether or not the user has passed valid arguments.
 # following: https://github.com/docopt/docopt
-
 
 import os
 from docopt import docopt
-from schemaindex.app.schemaindexapp import si_app
-from schemaindex.app.webserver import run_webserver
+from app.schemaindexapp import si_app #
+from app.webserver import run_webserver
 
-import logging
+
+def list_plugs():
+    plist = si_app.get_plugin_list()
+
+    # {"name":spec_name, "path":os.path.join(model_spec_path,item)} )
+    if len(plist) > 0:
+        print('{0:40} {1:35} '.format('Reflect Plugin Name:', 'Path:  '))
+        for spec in plist:
+            print('{0:40} {1:55}'.format(spec.plugin_name, os.path.join(spec.plugin_spec_path, spec.module_name)))
+    else:
+        print('No plugins are found!')
+
+
+
 def main():
     """ main-entry point for schemaindex program, parse the commands and build the si_app platform """
     docopt_args = docopt(__doc__)
@@ -46,20 +56,8 @@ def main():
         if docopt_args["data_source"] == True:
             # print(json.dumps(si_app.list_models()))
             si_app.list_data_sources()
-        elif docopt_args["data_source_type"] == True:
-            model_specs = si_app.list_reflect_plugins()
-
-            # {"name":spec_name, "path":os.path.join(model_spec_path,item)} )
-            if len(model_specs) > 0:
-                print('{0:40} {1:35} '.format('Reflect Plugin Name:','Path:  '))
-                for spec in model_specs:
-                    if spec["plugin_name"] is None:
-                        spec_name = 'No Name'
-                    else:
-                        spec_name = spec["plugin_name"]
-                    print('{0:40} {1:55}'.format(spec_name,   os.path.join(spec["plugin_spec_path"],spec["module_name"]) ) )
-            else:
-                print('No model specs found!')
+        elif docopt_args["plugin"] == True:
+            list_plugs()
 
 
     # Parse the User command and the required arguments
@@ -85,14 +83,20 @@ def main():
         the_tables = si_app.global_whoosh_search(q=' '.join(q))
 
 
+
     elif docopt_args["runserver"]:
         # to run a HTTP server to provide restful api services..
 
         if docopt_args["--port"] is not None:
             si_app.config['web']['port'] =  docopt_args["--port"]
-
         run_webserver(port = si_app.config['web']['port'])
 
+    elif docopt_args["reload"]:
+        # to reload from plugin folder
+        if docopt_args["plugin"] == True:
+            si_app.scan_reflect_plugins()
+            print("Plugins are reloaded.")
+            list_plugs()
 
 
     elif docopt_args["show"]:

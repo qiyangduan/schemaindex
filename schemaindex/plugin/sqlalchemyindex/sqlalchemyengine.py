@@ -4,8 +4,8 @@ from sqlalchemy import MetaData
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
 import json
 
-from app.dbmodels import MTable, MColumn, MDatasource
-from app.schemaindexapp import si_app
+from schemaindex.app.dbmodels import MTable, MColumn, MDatasource
+from schemaindex.app.schemaindexapp import si_app
 
 
 engine = create_engine('sqlite:///' + si_app.config['database']['sqlite_file']  )

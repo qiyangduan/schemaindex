@@ -1,0 +1,2 @@
+recursive-include schemaindex/app *
+recursive-include schemaindex/plugin *

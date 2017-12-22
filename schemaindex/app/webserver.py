@@ -10,8 +10,8 @@ import tornado.options
 import tornado.web
 import tornado.web
 
-from schemaindex.app import config
-from schemaindex.app import handler
+from . import config
+from . import handler
 
 # from app import dbmodels
 

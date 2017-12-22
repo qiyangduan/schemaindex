@@ -1,7 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+
+
+# following https://python-packaging-user-guide.readthedocs.io/tutorials/distributing-packages/
 
 setup(name='schemaindex',
-      version='0.01',
+      version='0.02',
       description='An indexing engine for different types of data sources, including HDFS, Mysql, etc.',
       url='https://github.com/qiyangduan/schemaindex',
       author='Duan Qiyang',
@@ -23,7 +26,8 @@ setup(name='schemaindex',
 
       ],
       entry_points={
-          'console_scripts': ['schemaindex=schemaindex:main'],
+          # 'console_scripts': ['sic=schemaindexctl:main'],
+          'console_scripts': ['schemaindex=schemaindex.schemaindexctl:main'],
       },
       classifiers = [
           'Development Status :: 3 - Alpha',

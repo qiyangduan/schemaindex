@@ -65,18 +65,56 @@ class SchemaIndexApp:
 
         self.schemaindex_init()
         #
-        self.logger.debug('SchemaIndex is trying to boot up all init service by each data source ...')
-        #self.datasource_init()
-
-        #ds_list = self.get_data_source_rs()
-        #for row in ds_list:
-
-
+        #self.datasource_init() # Calling here cause troubles to __import__, weird. 20171222
 
         self.logger.debug('SchemaIndex platform is started.')
 
+
+    def schemaindex_init(self):
+
+        db_file_path = cfg['database']['sqlite_file']
+        to_init_indicator = db_file_path #   cfg['main']['init_indicator_file']
+        self.logger.debug('Checking where to re-init by file:' + to_init_indicator)
+
+        if os.path.exists(to_init_indicator):
+            self.logger.debug('DB file is ready, no re-init, going to normal startup.')
+            return;
+
+        self.logger.debug('SchemaIndex platform is being initialized because there no data file yet.')
+        # os.remove(to_init_indicator)
+
+        try:
+
+            if os.path.exists(db_file_path):
+                self.logger.debug('Trying to remove existing db file.')
+                os.remove(db_file_path)
+
+
+
+            # recreate the sqlite database file
+            self.logger.debug('creating db at ...:  ' + db_file_path)
+            engine = create_engine('sqlite:///' + db_file_path)
+            Base.metadata.create_all(engine)
+
+            self.logger.debug('scanning plugins for re-initialization... ')
+            self.scan_reflect_plugins()
+        except Exception as e:
+            print(str(e))
+            self.logger.debug('init error: ' + str(e))  # will not print anything
+
+        self.logger.debug('re-construct text index at folder: ' + self.indexdir)  # will not print anything
+        if os.path.exists(self.indexdir):
+            shutil.rmtree(self.indexdir)
+        os.mkdir(self.indexdir)
+
+        schema = Schema(ds_name=ID(stored=True), table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
+        ix = index.create_in(self.indexdir , schema)
+        print("schemaindex platform is re-initialized, with new sqlite data file and whoosh index." )  # will not print anything
+
+
     def datasource_init(self):
 
+        self.logger.debug('SchemaIndex is trying to boot up all init service by each data source ...')
         ds_list = self.get_data_source_rs()
 
         # Here we loop through all data sources. For each of them, if it is not cached, then it is the first time to run schemaindexapp.
@@ -103,45 +141,6 @@ class SchemaIndexApp:
             self.index_writer.cancel()
             self.ix.close() #
 
-
-    def schemaindex_init(self):
-        # import os.path
-        to_init_indicator =   cfg['main']['init_indicator_file']
-
-
-        if not os.path.exists(to_init_indicator):
-            return;
-
-        self.logger.debug('SchemaIndex platform is being initialized.') # will not print anything
-
-        os.remove(to_init_indicator)
-        # os.remove(textidx)
-
-        db_file_path = cfg['database']['sqlite_file']
-        if os.path.exists(db_file_path):
-            os.remove(db_file_path)
-            # if(False):
-        try:
-            # recreate the sqlite database file
-            engine = create_engine('sqlite:///' + db_file_path)
-            self.logger.debug('creating db at ...:  ' + db_file_path) # will not print anything
-            Base.metadata.create_all(engine)
-
-
-            self.logger.debug('scanning plugins ... ')  # will not print anything
-            self.scan_reflect_plugins()
-        except Exception as e:
-            print(str(e))
-            self.logger.debug('init error: ' + str(e))  # will not print anything
-
-        self.logger.debug('re-construct text index at folder: ' + self.indexdir)  # will not print anything
-        if os.path.exists(self.indexdir):
-            shutil.rmtree(self.indexdir)
-        os.mkdir(self.indexdir)
-
-        schema = Schema(ds_name=ID(stored=True), table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
-        ix = index.create_in(self.indexdir , schema)
-        print("schemaindex: Initialized." )  # will not print anything
 
     def delete_data_soruce(self,ds_dict = None):
         session = create_session(bind=si_db_engine)

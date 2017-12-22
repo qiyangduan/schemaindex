@@ -3,27 +3,35 @@ from __future__ import print_function
 #
 import pytest
 
+from schemaindex.app.config import cfg
+
 from schemaindex.app.schemaindexapp import si_app
-
-from schemaindex.app.config import  cfg as config
-
-
+import os
 
 @pytest.fixture(scope='module')
 def resource_a_setup(request):
     print('\nDoing setup by putting init file')
-    open(config['main']['init_indicator_file'], 'a').close()
+    db_file_path = cfg['database']['sqlite_file']
+
+    # open(config['main']['init_indicator_file'], 'a').close()
+    if os.path.exists(db_file_path):
+        print('DB file is ready, no re-init, going to delete it .')
+        os.remove(db_file_path)
+
+
     si_app.schemaindex_init()
 
     def fin():
         print ("\nDoing teardown")
     request.addfinalizer(fin)
 
+
+
 ds_dict = {
     'ds_name': 'emp1',
     'ds_type': 'sqlalchemy',
     'ds_desc': 'created by unittest of hdfsindex',
-    'ds_param': {'connect_string': 'mysql://root:ttt@localhost/employees',
+    'ds_param': {'connect_string': 'mysql://root:learning@localhost/employees',
                  'schema_name': 'na',
                  }
 }

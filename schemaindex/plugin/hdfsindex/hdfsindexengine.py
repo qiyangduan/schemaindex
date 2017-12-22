@@ -3,7 +3,7 @@ import os
 import signal
 import subprocess
 # from app.dbmodels import MTable, MColumn, MDatasource
-from app.schemaindexapp import si_app
+from schemaindex.app.schemaindexapp import si_app
 
 
 class HDFSIndexEngine():
