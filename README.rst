@@ -1,12 +1,16 @@
 
-====================================
+Overview
+============
+SchemaIndex is designed for data scientists to find data more efficiently. It can index the tables
+and files known to the user.
 
-# SchemaIndex
-SchemaIndex is designed to index the schemas known to you. You can:
-1. register the data sources (e.g. Mysql, Oracle, etc) with its connection information.
-2. Search for all tables/entities in those data sources by their names.
+With schemaindex, you can:
+1. Create a data source (e.g. Mysql, Oracle, etc) by registering its connection information.
+2. Reflect the data source and index the metadata.
+3. Search for all tables/entities in those data sources by their names.
 
-# Supported Database Types
+Supported Data Sources
+-------------
 * Oracle
 * Mysql
 * Sqlite
@@ -34,7 +38,8 @@ How to use
 
 How to start a SchemaIndex Server
 -------------
-After the installation, at the first time, please run this command to load currently available plugins:
+To initialize the schemaindex server, please run this command to load currently available plugins.
+This need to be done right after installation only once:
 
 .. code-block:: bash
     $ schemaindex reload plugin
@@ -59,4 +64,9 @@ The following is a sample output:
     Server started, please visit : http://localhost:8088/
 
 
-Once you installed schemaindex, you can start
+*runserver* command should boot up a webserver and open the browser for you.
+In the brower, click "datasources" and then click "create ..." to register your own data source.
+For example, to register a new HDFS data source, you can input information like the following screenshot:
+
+.. image:: doc/pic/create_data_source.jpg
+
