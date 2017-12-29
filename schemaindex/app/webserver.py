@@ -51,7 +51,14 @@ def run_webserver(addr = "localhost", port=8088):
     tornado.options.parse_command_line()
     app = tornado.httpserver.HTTPServer(MApplication())
     app.listen(port=port, address=addr)
+    url = 'http://%s:%s/' % ( addr, str(port))   # 'http://localhost:' + str(port) + '/'
+
     print('Server started, please visit : http://%s:%s/' % ( addr, str(port)))
+
+    import webbrowser
+    # Open URL in new window, raising the window if possible.
+    webbrowser.open_new(url)
+
     tornado.ioloop.IOLoop.current().start()
 
 

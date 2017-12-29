@@ -14,7 +14,7 @@
         schemaindex show <data_source_name>
 
     Options:
-        -h,--help             : show this help message
+        -h                    : show this help message
         data_source_name      : name of data source given when it was created
         spec_name             : The name of model specification
         --input_file=<path>   : Path of input files to the model

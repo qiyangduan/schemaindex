@@ -31,7 +31,7 @@ ds_dict = {
     'ds_name': 'emp1',
     'ds_type': 'sqlalchemy',
     'ds_desc': 'created by unittest of hdfsindex',
-    'ds_param': {'connect_string': 'mysql://root:learning@localhost/employees',
+    'ds_param': {'connect_string': 'mysql://root:xxx@localhost/employees',
                  'schema_name': 'na',
                  }
 }
@@ -44,7 +44,7 @@ def test_plugin_mysql_add(resource_a_setup):
 
     si_app.add_data_soruce(ds_dict)
     dict1 = si_app.get_data_source_dict(ds_name=ds_dict['ds_name'])
-    assert dict1['ds_param']['connect_string'] == 'mysql://root:learning@localhost/employees'
+    assert dict1['ds_param']['connect_string'] == 'mysql://root:xxx@localhost/employees'
 
 
 def test_plugin_mysql_reflect(after='test_plugin_mysql_add'):
