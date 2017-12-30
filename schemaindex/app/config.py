@@ -65,13 +65,7 @@ log.addHandler(handler)
 # logging.getLogger('schemaflex_logger').info('Logging initialization finished.')  # will not print anything
 
 
-class schemaflexError(Exception):
+class SchemaIndexPluginError(Exception):
     pass
 
 
-class schemaflexParameterError(Exception):
-    pass
-
-
-class schemaflexErrorNoInstanceID(Exception):
-    pass

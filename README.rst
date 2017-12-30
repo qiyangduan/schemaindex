@@ -64,9 +64,15 @@ The following is a sample output:
     Server started, please visit : http://localhost:8088/
 
 
-*runserver* command should boot up a webserver and open the browser for you.
+*runserver* command should boot up a webserver and open a browser for you.
 In the brower, click "datasources" and then click "create ..." to register your own data source.
 For example, to register a new HDFS data source, you can input information like the following screenshot:
 
 .. image:: doc/pic/create_data_source.jpg
 
+The next step is to reflect the data source and extract all metadata.
+You can do so by clicking button "Relfect Now!" to extract the metadata of the data source,
+ or check the box "Reflect Data Source Immediately" during data source creation.
+
+If all previous two steps are successful, you should be able to search the files in "search" box
+ appearing in "overview" and "search" page, like the following screenshot:

@@ -22,7 +22,7 @@ from whoosh.qparser import QueryParser
 from whoosh.fields import *
 
 
-from .config import cfg
+from .config import cfg, SchemaIndexPluginError
 from .dbmodels import MColumn, MTable, MDatasource, MPlugin, Base
 
 #sys.path.append( cfg['main']['schemaflex_spec'])
@@ -129,11 +129,6 @@ class SchemaIndexApp:
                 one_ds = the_engine.ReflectEngine(ds_dict = row.to_dict())
                 one_ds.datasource_init()
 
-            '''
-            the_engine= si_app.get_reflect_plugin(row.ds_type)
-            a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
-            a_ds.reflect(reload_flag=True)
-            '''
 
     def __del__(self):
         if self.index_writer is not None:
@@ -479,7 +474,9 @@ class SchemaIndexApp:
                     }
         except Exception as e:
             self.logger.error( "load_reflect_engine (error): Failed to import plugin %s, due to error :{%s}" % (dottedpath, e) )
-            return None
+            # return None
+            raise SchemaIndexPluginError(e)
+
 
 
 si_app = SchemaIndexApp()
