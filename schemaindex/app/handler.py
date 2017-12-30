@@ -317,35 +317,14 @@ class ReflectDataSourceHandler(tornado.web.RequestHandler):
 class ViewTableInNotebookHandler(tornado.web.RequestHandler):
     def get(self):
         # json.dumps()
-        table_name = self.get_argument('table_name')
+        table_id = self.get_argument('table_id')
         ds_name = self.get_argument('ds_name')
-        session = create_session(bind=engine)
-        ds_url = None
-        dbrs = session.query(MDatasource).filter_by(ds_name=ds_name)
-        for row in dbrs:
-            ds_url =  row.ds_url
-        if ds_url is None:
-            print('error: database not found')
 
-        #repls = {'hello': 'goodbye', 'world': 'earth'}
-        #s = 'hello, world'
-        #reduce(lambda a, kv: a.replace(*kv), repls.iteritems(), s)
 
-        replace_dict = {'$$TABLE$$': table_name,
-                        '$$DB_URL$$': ds_url}
-
-        with open("/home/duan/github/show_table_template.ipynb", "rt") as fin:
-            with open("/home/duan/github/show_table_t_" + table_name + ".ipynb", "wt") as fout:
-                for line in fin:
-                    # fout.write(line.replace('$$TABLE$$', table_name))
-                    fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
-
-        '''
-                import subprocess # /media/adata/linux/anaconda27/bin/
-                subprocess.call(["jupyter", "notebook",  "/home/duan/github/show_table_t_" + table_name + ".ipynb"])
-        '''
+        gen_loc = si_pm.generate_notebook_for_table(table_id=table_id, ds_name=ds_name)
+        print(gen_loc)
         from subprocess import Popen
-        p = Popen(["jupyter", "notebook",  "/home/duan/github/show_table_t_" + table_name + ".ipynb"]) # something long running
+        p = Popen(["jupyter", "notebook",  "--notebook-dir=" + si_app.config['main']['schemaflex_spec'], gen_loc]) # something long running
 
         Info = {'result': 'started in another browser'}
         self.write(json.dumps(Info))

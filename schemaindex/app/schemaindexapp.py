@@ -20,7 +20,7 @@ from sqlalchemy.orm import create_session
 from whoosh import index
 from whoosh.qparser import QueryParser
 from whoosh.fields import *
-
+from whoosh.analysis import FancyAnalyzer
 
 from .config import cfg, SchemaIndexPluginError
 from .dbmodels import MColumn, MTable, MDatasource, MPlugin, Base
@@ -74,6 +74,12 @@ class SchemaIndexApp:
 
         try:
 
+            generate_notebook_dir = self.config['main']['schemaindex_notebooks']
+            if not os.path.exists(generate_notebook_dir):
+                self.logger.debug('creating folder for generated notebook.')
+                os.mkdir(generate_notebook_dir)
+
+
             if os.path.exists(db_file_path):
                 self.logger.debug('Trying to remove existing db file.')
                 os.remove(db_file_path)
@@ -91,7 +97,8 @@ class SchemaIndexApp:
             shutil.rmtree(self.indexdir)
         os.mkdir(self.indexdir)
 
-        schema = Schema(ds_name=ID(stored=True), table_id=ID(stored=True), table_info=TEXT(stored=True)) # , column_info=TEXT(stored=True)
+        schema = Schema(ds_name=ID(stored=True), table_id=ID(stored=True),
+                        table_info=TEXT(stored=True, analyzer=FancyAnalyzer())) # , column_info=TEXT(stored=True)
         ix = index.create_in(self.indexdir , schema)
         print("schemaindex platform is re-initialized, with new sqlite data file and whoosh index." )  # will not print anything
 
@@ -214,6 +221,7 @@ class SchemaIndexApp:
             for r in results:
                 res.append({'ds_name': r['ds_name'],
                             'docnum': r.docnum,
+                            'table_id':r['table_id'],
                             'table_info': r['table_info'],
                             })
 
@@ -299,7 +307,7 @@ class SchemaIndexApp:
 
     def get_data_source_dict(self, ds_name = None):
 
-        if ds_name in self.data_source_dict.keys() is not None:
+        if ds_name in self.data_source_dict.keys():
             return self.data_source_dict[ds_name]
 
         rs = self.db_session.query(MDatasource).filter_by(ds_name=ds_name)

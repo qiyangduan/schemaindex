@@ -15,6 +15,7 @@ cfg = {"web": {
                 },
         "main": {"schemaflex_home": os.path.abspath(os.path.join(os.path.dirname(__file__), '..')),
                  "schemaflex_spec": os.path.abspath(os.path.join(os.path.dirname(__file__), '..','plugin')),
+                 "schemaindex_notebooks": os.path.abspath(os.path.join(os.path.dirname(__file__), '..','notebooks')),
                  "schemaflex_text_index_path": os.path.abspath(os.path.join(os.path.dirname(__file__), '..','indexdir')),
                  'init_indicator_file': os.path.abspath(os.path.join(os.path.dirname(__file__), 'do_schemaindex_init')),
                  'interval_commit_trx_id': 60,

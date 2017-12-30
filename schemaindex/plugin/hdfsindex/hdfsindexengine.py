@@ -129,6 +129,19 @@ class HDFSIndexEngine():
             si_app.logger.info('staring backend HdfsINotify2Restful process to connect to inotify ...')
             self.start_inotify_process()
 
+    def generate_notebook(self, schemaindex_notebooks_dir = '/tmp', table_id = None):
+
+        spec_dir = si_app.config['main']['schemaflex_spec']
+        replace_dict = {'$$file_path$$': table_id,
+                        '$$hdfs_web_url$$': self.ds_dict['ds_param']['hdfs_web_url']}
+        generated_loc = os.path.join(spec_dir,'hdfsindex', 'show_hdfs_file_%s_%s.ipynb' %
+                                     (self.ds_dict['ds_name'], table_id.replace('/','_') )          )
+        with open(os.path.join(spec_dir,'hdfsindex', 'show_hdfs_file_template.ipynb'), "rt") as fin:
+            with open( generated_loc, "wt") as fout:
+                for line in fin:
+                    # fout.write(line.replace('$$TABLE$$', table_name))
+                    fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
+        return generated_loc
 
 
 

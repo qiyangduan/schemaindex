@@ -173,4 +173,16 @@ class PluginManager:
             session_update.close()
         session.close()
 
+    def generate_notebook_for_table(self, table_id = None, ds_name = None):
+
+        ds_dict = si_app.get_data_source_dict(ds_name= ds_name)
+        the_engine = self.get_reflect_plugin(ds_dict['ds_type'])['reflect_engine']
+
+        a_ds = the_engine.ReflectEngine(ds_dict = ds_dict )
+        generate_notebook_loc = a_ds.generate_notebook(schemaindex_notebooks_dir=self.config['main']['schemaindex_notebooks']
+                               , table_id= table_id)
+        return  generate_notebook_loc
+
+
+
 si_pm = PluginManager()

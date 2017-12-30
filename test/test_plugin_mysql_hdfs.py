@@ -61,11 +61,10 @@ def test_plugin_mysql_add(resource_a_setup):
 def test_plugin_mysql_reflect(after='test_plugin_mysql_add'):
 
     si_pm.reflect_db(data_source_name=ds_dict['ds_name'])
-    suggest1=si_app.get_whoosh_search_suggestion(q='dept')
+    suggest1=si_app.get_whoosh_search_suggestion(q='dep')
     print(suggest1)
 
-    assert 'dept_no' in suggest1
-    assert 'dept_name' in suggest1
+    assert 'dept' in suggest1
 
 
 
@@ -94,7 +93,7 @@ def test_plugin_hdfs_add():
 
 def test_plugin_hdfs_reflect(after='test_plugin_hdfs_add_reflect'):
     si_pm.reflect_db(data_source_name=hdfs_ds_dict['ds_name'])
-    suggest1 = si_app.get_whoosh_search_suggestion(q='cities')
+    suggest1 = si_app.get_whoosh_search_suggestion(q='citi')
     print(suggest1)
-    assert 'cities.csv' in suggest1
+    assert 'cities' in suggest1
     #assert 'dept_name' in suggest1

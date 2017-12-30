@@ -3,6 +3,7 @@ from sqlalchemy.orm import create_session
 from sqlalchemy import MetaData
 from sqlalchemy import Table, Column, DateTime, String, Integer, ForeignKey, func
 import json
+import os
 
 from schemaindex.app.dbmodels import MTable, MColumn, MDatasource
 from schemaindex.app.schemaindexapp import si_app
@@ -87,12 +88,11 @@ class SQLAlchemyReflectEngine():
                 column_list.append([c.name, str(c.type), c.doc])
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
-                                           table_id='/'.join(['/', self.ds_dict['ds_name'], t.name]),
-                                           #info=unicode(json.dumps({"table
+                                           table_id=t.name, #'/'.join(['/', self.ds_dict['ds_name'], t.name]),
                                            table_info=(json.dumps({"table_group_name":  self.ds_dict['ds_param']['schema_name'],
                                                                      "ds_name":    self.ds_dict['ds_name'] ,
                                                                      "table_name":  t.name ,
-                                                                     "table_comment":    ' ' ,
+                                                                     # "table_comment":    ' ' ,
                                                                      "column_info": column_list
                                                                      }
                                                                     )
@@ -103,6 +103,19 @@ class SQLAlchemyReflectEngine():
         session.commit()
         si_app.commit_index()
 
+    def generate_notebook(self, schemaindex_notebooks_dir = '/tmp', table_id = None):
+
+        spec_dir = si_app.config['main']['schemaflex_spec']
+        replace_dict = {'$$TABLE$$': table_id,
+                        '$$connect_string$$': self.ds_dict['ds_param']['connect_string']}
+        generated_loc = os.path.join(spec_dir,'hdfsindex', 'show_table_%s_%s.ipynb' %
+                                     (self.ds_dict['ds_name'], table_id.replace('/','_') )          )
+        with open(os.path.join(spec_dir,'sqlalchemyindex', 'show_sqlalchemy_table_template.ipynb'), "rt") as fin:
+            with open( generated_loc, "wt") as fout:
+                for line in fin:
+                    # fout.write(line.replace('$$TABLE$$', table_name))
+                    fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
+        return generated_loc
 
 
 if __name__ == "__main__":
