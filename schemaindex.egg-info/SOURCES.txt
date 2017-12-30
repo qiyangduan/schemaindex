@@ -1,4 +1,5 @@
 MANIFEST.in
+README.rst
 setup.py
 schemaindex/__init__.py
 schemaindex/schemaindexctl.py
@@ -11,13 +12,14 @@ schemaindex.egg-info/requires.txt
 schemaindex.egg-info/top_level.txt
 schemaindex/app/__init__.py
 schemaindex/app/__init__.pyc
-schemaindex/app/allmodel.sqlite3
 schemaindex/app/config.py
 schemaindex/app/config.pyc
 schemaindex/app/dbmodels.py
 schemaindex/app/dbmodels.pyc
 schemaindex/app/handler.py
 schemaindex/app/handler.pyc
+schemaindex/app/pluginmanager.py
+schemaindex/app/pluginmanager.pyc
 schemaindex/app/schemaindexapp.py
 schemaindex/app/schemaindexapp.pyc
 schemaindex/app/webserver.py
@@ -149,7 +151,10 @@ schemaindex/plugin/hdfsindex/__init__.py
 schemaindex/plugin/hdfsindex/__init__.pyc
 schemaindex/plugin/hdfsindex/hdfsindexengine.py
 schemaindex/plugin/hdfsindex/hdfsindexengine.pyc
+schemaindex/plugin/hdfsindex/show_hdfs_file_hdfs1__data_cities.csv.ipynb
 schemaindex/plugin/hdfsindex/show_hdfs_file_template.ipynb
+schemaindex/plugin/hdfsindex/show_table_emp1_departments.ipynb
+schemaindex/plugin/hdfsindex/.ipynb_checkpoints/show_hdfs_file_hdfs1__data_cities.csv-checkpoint.ipynb
 schemaindex/plugin/hdfsindex/__pycache__/__init__.cpython-36.pyc
 schemaindex/plugin/hdfsindex/__pycache__/hdfsindexengine.cpython-36.pyc
 schemaindex/plugin/hdfsindex/java/lib/commons-cli-1.2.jar

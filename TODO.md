@@ -10,6 +10,7 @@
 | To add auto-testing test cases | | 20171208 | not started |
 | To add docker package | | 20171208 | not started |
 | To make pip package | | 20171208 | not started |
+| To create customized analyzer, instead of fancyanalyzer. This should render "abc_de" and "abc", "de" together. | | 20171228 | not started |
 
 
 
