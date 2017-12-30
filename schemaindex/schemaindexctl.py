@@ -32,6 +32,30 @@ import os
 from docopt import docopt
 from app.schemaindexapp import si_app #
 from app.webserver import run_webserver
+from app.pluginmanager import si_pm
+
+def initialize_schemaindex():
+    db_file_path = si_app.config['database']['sqlite_file']
+    to_init_indicator = db_file_path  # cfg['main']['init_indicator_file']
+    si_app.logger.debug('Checking where to re-init by file:' + to_init_indicator)
+
+    if os.path.exists(to_init_indicator):
+        si_app.logger.debug('DB file is ready, no re-init, going to normal startup.')
+        return;
+
+    si_app.logger.debug('SchemaIndex platform is being initialized because there no data file yet.')
+
+    si_app.schemaindex_init(db_file_path = db_file_path)
+    si_pm.scan_reflect_plugins()
+
+
+    si_app.logger.debug('SchemaIndex platform is initialized.')
+
+
+# os.remove(to_init_indicator)
+
+
+
 
 
 def list_plugs():
@@ -89,6 +113,8 @@ def main():
 
         if docopt_args["--port"] is not None:
             si_app.config['web']['port'] =  docopt_args["--port"]
+
+        si_pm.datasource_init()
         run_webserver(port = si_app.config['web']['port'])
 
     elif docopt_args["reload"]:
@@ -115,6 +141,9 @@ def main():
 
 # START OF SCRIPT
 if __name__ == "__main__":
+    # First we initialize the schemaindex database and load the plugins
+    initialize_schemaindex()
+
     main()
 
 

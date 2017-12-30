@@ -147,7 +147,9 @@ if __name__ == "__main__":
     }
 
     si_app.add_data_soruce(ds_dict)
-    si_app.reflect_db(data_source_name=ds_dict['ds_name'])
+    a = HDFSIndexEngine(ds_dict = ds_dict)
+    a.reflect()
+    #si_app.reflect_db(data_source_name=ds_dict['ds_name'])
     #adb = HDFSIndexEngine()
     # adb.reflect() #  None)
     # adb.start_inotify_process()

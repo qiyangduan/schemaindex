@@ -63,44 +63,28 @@ class SchemaIndexApp:
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/plugin
         # sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
 
-        self.schemaindex_init()
+        # self.schemaindex_init()
         #
         #self.datasource_init() # Calling here cause troubles to __import__, weird. 20171222
+        pass
 
-        self.logger.debug('SchemaIndex platform is started.')
 
+    def schemaindex_init(self, db_file_path = None):
 
-    def schemaindex_init(self):
-
-        db_file_path = cfg['database']['sqlite_file']
-        to_init_indicator = db_file_path #   cfg['main']['init_indicator_file']
-        self.logger.debug('Checking where to re-init by file:' + to_init_indicator)
-
-        if os.path.exists(to_init_indicator):
-            self.logger.debug('DB file is ready, no re-init, going to normal startup.')
-            return;
-
-        self.logger.debug('SchemaIndex platform is being initialized because there no data file yet.')
-        # os.remove(to_init_indicator)
 
         try:
 
             if os.path.exists(db_file_path):
                 self.logger.debug('Trying to remove existing db file.')
                 os.remove(db_file_path)
-
-
-
             # recreate the sqlite database file
             self.logger.debug('creating db at ...:  ' + db_file_path)
             engine = create_engine('sqlite:///' + db_file_path)
             Base.metadata.create_all(engine)
 
-            self.logger.debug('scanning plugins for re-initialization... ')
-            self.scan_reflect_plugins()
         except Exception as e:
             print(str(e))
-            self.logger.debug('init error: ' + str(e))  # will not print anything
+            self.logger.debug('init error: ' + str(e))
 
         self.logger.debug('re-construct text index at folder: ' + self.indexdir)  # will not print anything
         if os.path.exists(self.indexdir):
@@ -124,10 +108,6 @@ class SchemaIndexApp:
         for row in ds_list:
             if row.ds_name not in self.data_source_dict.keys() :
                 self.data_source_dict[row.ds_name] = self.get_data_source_dict(ds_name=row.ds_name)
-
-                the_engine = self.get_reflect_plugin(p_plugin_name=row.ds_type)['reflect_engine']
-                one_ds = the_engine.ReflectEngine(ds_dict = row.to_dict())
-                one_ds.datasource_init()
 
 
     def __del__(self):
@@ -329,31 +309,6 @@ class SchemaIndexApp:
             return self.data_source_dict[ds_name]
         return None
 
-    def get_plugin_name_list(self):
-        plugins = []
-        rs = self.db_session.query(MPlugin)
-        for p in rs:
-            plugins.append(p.plugin_name)
-        return  plugins
-
-    def get_plugin_list(self):
-        plugins = []
-        rs = self.db_session.query(MPlugin)
-        for p in rs:
-            plugins.append(p)
-        return  plugins
-
-    def get_plugin_info(self, p_plugin_name = ''):
-
-        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        # p['ds_param'] = json.loads(p.ds_param )
-        return  p
-
-
-    def get_reflect_plugin(self, p_plugin_name = None):
-        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        return self.load_reflect_engine(p.module_name)
-
 
     def get_table_list_for_data_source_rs(self, param_ds_name = ''):
         sql = '''
@@ -366,22 +321,6 @@ class SchemaIndexApp:
         tabrs = si_db_engine.execute(sql)
         return  tabrs
 
-
-    def reflect_db(self,data_source_name=None):
-        session = create_session(bind=si_db_engine)
-        dbrs = session.query(MDatasource).filter_by(ds_name=data_source_name)
-        for row in dbrs:
-            the_engine= si_app.get_reflect_plugin(row.ds_type)['reflect_engine']
-            a_ds = the_engine.ReflectEngine(ds_dict = self.get_data_source_dict(ds_name= row.ds_name) ) #SQLAlchemyReflectEngine()
-            a_ds.reflect(reload_flag=True)
-
-            session_update = create_session(bind=si_db_engine)
-            session_update.begin()
-            session_update.query(MDatasource).filter_by(ds_name=row.ds_name).\
-                update({'last_reflect_date': func.now()}, synchronize_session='fetch')
-            session_update.commit()
-            session_update.close()
-        session.close()
 
 
 
@@ -412,6 +351,62 @@ class SchemaIndexApp:
         logging.getLogger('stanmo_logger').debug('discovered models: ' + model_list.__str__())
         return model_list
 
+
+
+
+
+
+
+
+
+    def get_plugin_name_list(self):
+        plugins = []
+        rs = self.db_session.query(MPlugin)
+        for p in rs:
+            plugins.append(p.plugin_name)
+        return  plugins
+
+    def get_plugin_list(self):
+        plugins = []
+        rs = self.db_session.query(MPlugin)
+        for p in rs:
+            plugins.append(p)
+        return  plugins
+
+    def get_plugin_info(self, p_plugin_name = ''):
+
+        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        # p['ds_param'] = json.loads(p.ds_param )
+        return  p
+
+
+
+    '''
+
+    def get_plugin_name_list(self):
+        plugins = []
+        rs = self.db_session.query(MPlugin)
+        for p in rs:
+            plugins.append(p.plugin_name)
+        return  plugins
+
+    def get_plugin_list(self):
+        plugins = []
+        rs = self.db_session.query(MPlugin)
+        for p in rs:
+            plugins.append(p)
+        return  plugins
+
+    def get_plugin_info(self, p_plugin_name = ''):
+
+        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        # p['ds_param'] = json.loads(p.ds_param )
+        return  p
+
+
+    def get_reflect_plugin(self, p_plugin_name = None):
+        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
+        return self.load_reflect_engine(p.module_name)
 
     def list_reflect_plugins(self):
         logger = logging.getLogger('stanmo_logger')
@@ -478,5 +473,5 @@ class SchemaIndexApp:
             raise SchemaIndexPluginError(e)
 
 
-
+    '''
 si_app = SchemaIndexApp()

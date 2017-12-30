@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="update requirements.txt">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/schemaindex/app/pluginmanager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/v/cache/lastfailed" afterPath="$PROJECT_DIR$/.cache/v/cache/lastfailed" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.rst" afterPath="$PROJECT_DIR$/README.rst" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/config.py" afterPath="$PROJECT_DIR$/schemaindex/app/config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/handler.py" afterPath="$PROJECT_DIR$/schemaindex/app/handler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" afterPath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" afterPath="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/schemaindexctl.py" afterPath="$PROJECT_DIR$/schemaindex/schemaindexctl.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py" afterPath="$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,104 +23,7 @@
     <favorites_list name="schemaindex" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="schemaindexapp.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/schemaindex/app/schemaindexapp.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="370" column="0" lean-forward="false" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/app/config.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="67" column="28" lean-forward="false" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/plugin/hdfsindex/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hdfsindexengine.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="schemaindexctl.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/schemaindexctl.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1320">
-              <caret line="91" column="12" lean-forward="false" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
-              <folding>
-                <element signature="e#1240#1249#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webserver.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/app/webserver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-              <folding>
-                <element signature="e#23#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Dockerfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.rst" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.rst">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1170">
-              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/schemaindex/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -126,16 +34,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cument(ds_name = unicode(</find>
-      <find>List of Tables</find>
-      <find>ctoryType = pClient.status(to_list_dir).g</find>
-      <find>MDatasource</find>
-      <find>sqlite_file</find>
-      <find>session</find>
-      <find>dbmodels.engine</find>
-      <find>reflec</find>
-      <find>plugin</find>
-      <find>dbmodels.</find>
       <find>config</find>
       <find>engine</find>
       <find>resource_setup</find>
@@ -153,9 +51,19 @@
       <find>self.indexdir</find>
       <find>scan</find>
       <find>get_refl</find>
-      <find>get_plugin_list</find>
-      <find>runserver</find>
       <find>learning</find>
+      <find>get_table_list_for_data_source_rs</find>
+      <find>get_plugin_name_list</find>
+      <find>runser</find>
+      <find>plugin_list</find>
+      <find>get_plugin_list</find>
+      <find>schemaindex platform is re-initialized</find>
+      <find>runserver</find>
+      <find>si_app.get_reflect_plugin(row.ds_</find>
+      <find>re-i</find>
+      <find>reflect_db</find>
+      <find>_engine= si_app.get_reflect_pl</find>
+      <find>xxx</find>
     </findStrings>
     <replaceStrings>
       <replace>Integer</replace>
@@ -201,8 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/misc/whooshtextindexer.py" />
-        <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/java/run.sh" />
         <option value="$PROJECT_DIR$/TODO.md" />
         <option value="$PROJECT_DIR$/schemaindex/spec/mysqlflex/__init__.py" />
         <option value="$PROJECT_DIR$/misc/util.py" />
@@ -234,24 +140,26 @@
         <option value="$PROJECT_DIR$/test/test_plugin_hdfs.py" />
         <option value="$PROJECT_DIR$/test/test_plugin_mysql.py" />
         <option value="$PROJECT_DIR$/schemaindex.py" />
-        <option value="$PROJECT_DIR$/schemaindex/app/handler.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/schemaindex/app/__init__.py" />
         <option value="$PROJECT_DIR$/schemaindex/schemaindex.py" />
-        <option value="$PROJECT_DIR$/schemaindex/log/schemaindex.log" />
         <option value="$PROJECT_DIR$/schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.py" />
-        <option value="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/MANIFEST.in" />
         <option value="$PROJECT_DIR$/schemaindex/__init__.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/schemaindex/schemaindexctl.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/webserver.py" />
-        <option value="$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py" />
         <option value="$PROJECT_DIR$/README.rst" />
+        <option value="$PROJECT_DIR$/schemaindex/app/schemaindexpluginmanager.py" />
+        <option value="$PROJECT_DIR$/schemaindex/schemaindexctl.py" />
+        <option value="$PROJECT_DIR$/schemaindex/log/schemaindex.log" />
         <option value="$PROJECT_DIR$/schemaindex/app/config.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
+        <option value="$PROJECT_DIR$/schemaindex/app/handler.py" />
+        <option value="$PROJECT_DIR$/schemaindex/app/pluginmanager.py" />
+        <option value="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" />
+        <option value="$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py" />
       </list>
     </option>
   </component>
@@ -321,27 +229,12 @@
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="temp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="log" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="plugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="hdfsindex" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
@@ -364,19 +257,19 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.project" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/schemaindex/nosetest" />
-      <recent name="$PROJECT_DIR$/test" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/temp" />
-      <recent name="$PROJECT_DIR$/schemaindex/spec/hdfsindex" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/schemaindex" />
       <recent name="$PROJECT_DIR$/temp" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/temp/mysqlflex" />
       <recent name="$PROJECT_DIR$/schemaindex/app/templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/schemaindex/app" />
+      <recent name="$PROJECT_DIR$/schemaindex/nosetest" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/temp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -391,7 +284,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.schemaflex runserver">
+  <component name="RunManager" selected="Python tests.py.test in test">
     <configuration default="true" type="tests" factoryName="Doctests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -498,7 +391,24 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <configuration name="py.test in test_plugin_mysql_hdfs.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="hdfsindexengine" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/schemaindex/plugin/hdfsindex" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="schemamap" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="py.test in test (python 3)" type="tests" factoryName="py.test">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -510,7 +420,22 @@
       <module name="schemamap" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+    </configuration>
+    <configuration name="py.test in test" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="schemamap" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration name="schemaflex list data source  " type="PythonConfigurationType" factoryName="Python">
@@ -632,7 +557,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="8">
+    <list size="10">
       <item index="0" class="java.lang.String" itemvalue="Python.schemaflex list data source  " />
       <item index="1" class="java.lang.String" itemvalue="Python.schemaflex runserver" />
       <item index="2" class="java.lang.String" itemvalue="Python.schemaflex list plugin" />
@@ -640,11 +565,14 @@
       <item index="4" class="java.lang.String" itemvalue="Python.schemaflex runserver (module)" />
       <item index="5" class="java.lang.String" itemvalue="Python.schemaflex reflect bb" />
       <item index="6" class="java.lang.String" itemvalue="Python.schemaflex search customer" />
-      <item index="7" class="java.lang.String" itemvalue="Python tests.py.test in test_plugin_mysql_hdfs.py" />
+      <item index="7" class="java.lang.String" itemvalue="Python tests.py.test in test (python 3)" />
+      <item index="8" class="java.lang.String" itemvalue="Python.hdfsindexengine" />
+      <item index="9" class="java.lang.String" itemvalue="Python tests.py.test in test" />
     </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test_plugin_mysql_hdfs.py" />
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test in test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.hdfsindexengine" />
       </list>
     </recent_temporary>
   </component>
@@ -701,35 +629,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_in_test_plugin_mysql_hdfs_py - 2017.12.21 at 22h 27m 38s.xml">
-      <configuration name="py.test in test_plugin_mysql_hdfs.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 09h 41m 32s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_hdfs_py - 2017.12.21 at 22h 33m 28s.xml">
-      <configuration name="py.test in test_plugin_mysql_hdfs.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 09h 42m 42s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_hdfs_py - 2017.12.22 at 11h 48m 53s.xml">
-      <configuration name="py.test in test_plugin_mysql_hdfs.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 09h 43m 03s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_hdfs_py - 2017.12.22 at 11h 49m 40s.xml">
-      <configuration name="py.test in test_plugin_mysql_hdfs.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 09h 43m 57s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_hdfs_py - 2017.12.22 at 12h 00m 07s.xml">
-      <configuration name="py.test in test_plugin_mysql_hdfs.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 09h 56m 52s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_py - 2017.12.21 at 22h 18m 34s.xml">
-      <configuration name="py.test in test_plugin_mysql.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 09h 58m 03s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_py - 2017.12.21 at 22h 19m 50s.xml">
-      <configuration name="py.test in test_plugin_mysql.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 10h 00m 15s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_py - 2017.12.21 at 22h 21m 29s.xml">
-      <configuration name="py.test in test_plugin_mysql.py" configurationId="tests" />
+    <history-entry file="py_test_in_test - 2017.12.30 at 10h 33m 37s.xml">
+      <configuration name="py.test in test" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_py - 2017.12.21 at 22h 23m 41s.xml">
-      <configuration name="py.test in test_plugin_mysql.py" configurationId="tests" />
+    <history-entry file="py_test_in_test_(python_3) - 2017.12.30 at 10h 31m 05s.xml">
+      <configuration name="py.test in test (python 3)" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_in_test_plugin_mysql_py - 2017.12.21 at 22h 24m 23s.xml">
-      <configuration name="py.test in test_plugin_mysql.py" configurationId="tests" />
+    <history-entry file="py_test_in_test_(python_3) - 2017.12.30 at 10h 33m 24s.xml">
+      <configuration name="py.test in test (python 3)" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -743,18 +671,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1378" height="749" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24697885" sideWeight="0.4916067" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25075528" sideWeight="0.4916067" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284553" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5060423" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46463022" sideWeight="0.5090634" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284553" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12700965" sideWeight="0.4939577" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34063444" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34405145" sideWeight="0.75" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34063444" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31193355" sideWeight="0.5083933" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49678457" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50643086" sideWeight="0.49093655" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32930514" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -801,13 +728,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/schemaindex/app/handler.py</url>
-          <line>251</line>
+          <line>252</line>
           <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/schemaindex/app/handler.py</url>
-          <line>141</line>
-          <option name="timeStamp" value="184" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -817,20 +739,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="190" />
+      <option name="time" value="195" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/TODO.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/misc/util.py" />
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/allmodel.sql" />
     <entry file="file://$PROJECT_DIR$/schemaindex/plugin/sqlalchemyindex/show_sqlalchemy_table_template.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -932,13 +845,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test_1.py" />
-    <entry file="file://$PROJECT_DIR$/test/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="3" lean-forward="true" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/temp/conftest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1005,16 +911,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="69" lean-forward="false" selection-start-line="32" selection-start-column="54" selection-end-line="32" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/app/dbmodels.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1026,7 +922,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,6 +936,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,23 +944,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/schemaindexctl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1320">
-          <caret line="91" column="12" lean-forward="false" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
-          <folding>
-            <element signature="e#1240#1249#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1080,7 +959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1088,7 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1170">
           <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,17 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="13" column="21" lean-forward="false" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-          <folding>
-            <element signature="e#23#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="67" column="28" lean-forward="false" selection-start-line="67" selection-start-column="6" selection-end-line="67" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1114,30 +980,92 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py">
+    <entry file="file://$PROJECT_DIR$/schemaindex/schemaindexctl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="150">
+          <caret line="51" column="60" lean-forward="false" selection-start-line="51" selection-start-column="60" selection-end-line="51" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/log/schemaindex.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="327" column="0" lean-forward="true" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="107" lean-forward="false" selection-start-line="11" selection-start-column="107" selection-end-line="11" selection-end-column="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/handler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="314" column="0" lean-forward="true" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/pluginmanager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="164" column="60" lean-forward="false" selection-start-line="164" selection-start-column="60" selection-end-line="164" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///media/adata/linux/anaconda27/lib/python2.7/site-packages/_pytest/python.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="150" column="21" lean-forward="true" selection-start-line="150" selection-start-column="21" selection-end-line="150" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2017.2/system/python_stubs/-1305210767/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="3413" column="22" lean-forward="false" selection-start-line="3413" selection-start-column="22" selection-end-line="3413" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_plugin_mysql_hdfs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="23" column="56" lean-forward="true" selection-start-line="23" selection-start-column="56" selection-end-line="23" selection-end-column="56" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="146" column="5" lean-forward="false" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/app/schemaindexapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="370" column="0" lean-forward="false" selection-start-line="370" selection-start-column="0" selection-end-line="370" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="85" column="11" lean-forward="false" selection-start-line="85" selection-start-column="11" selection-end-line="85" selection-end-column="11" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

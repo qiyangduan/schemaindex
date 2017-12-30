@@ -9,7 +9,7 @@ cfg = {"web": {
                },
         'database': {
                 'ds_type': 'sqlite3',
-                'sqlite_file':  os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__))) , "allmodel.sqlite3") ,
+                'sqlite_file':  os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__))), '..' , "allmodel.sqlite3") ,
                 'user': 'root',
                 'passwd': 'my secret password',
                 },

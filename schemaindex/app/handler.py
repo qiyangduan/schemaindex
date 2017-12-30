@@ -8,7 +8,8 @@ from sqlalchemy import create_engine
 from .dbmodels import MDatasource,MTable,MColumn
 
 from .schemaindexapp import si_app
-si_app.datasource_init() # This call was in si_app.__init__, but it failed with "not able to load module". So i moved it here.
+from .pluginmanager import si_pm
+# si_app.datasource_init() # This call was in si_app.__init__, but it failed with "not able to load module". So i moved it here.
 
 
 engine = create_engine('sqlite:///' + si_app.config['database']['sqlite_file'])
@@ -308,7 +309,7 @@ class ReflectDataSourceHandler(tornado.web.RequestHandler):
 
     def post(self):
         ds_name = self.get_argument('ds_name')
-        si_app.reflect_db(ds_name)
+        si_pm.reflect_db(ds_name)
         # self.__setattr__('reflected_db', ds_name)
         self.redirect('/database_summary?ds_name='+ds_name)
 

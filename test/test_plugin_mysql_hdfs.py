@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from __future__ import print_function
 
 #
@@ -6,6 +7,7 @@ import pytest
 from schemaindex.app.config import cfg
 
 from schemaindex.app.schemaindexapp import si_app
+from schemaindex.app.pluginmanager import si_pm
 import os
 
 @pytest.fixture(scope='module')
@@ -15,11 +17,11 @@ def resource_a_setup(request):
 
     # open(config['main']['init_indicator_file'], 'a').close()
     if os.path.exists(db_file_path):
-        print('DB file is ready, no re-init, going to delete it .')
+        print('DB file is ready,  going to delete it .')
         os.remove(db_file_path)
 
 
-    si_app.schemaindex_init()
+    si_app.schemaindex_init(db_file_path = db_file_path)
 
     def fin():
         print ("\nDoing teardown")
@@ -30,11 +32,21 @@ def resource_a_setup(request):
 ds_dict = {
     'ds_name': 'emp1',
     'ds_type': 'sqlalchemy',
-    'ds_desc': 'created by unittest of hdfsindex',
+    'ds_desc': 'created by unittest',
     'ds_param': {'connect_string': 'mysql://root:xxx@localhost/employees',
                  'schema_name': 'na',
                  }
 }
+
+def test_plugin_loading(resource_a_setup):
+    list1 = si_app.get_plugin_name_list()
+    print(list1)
+    assert len(list1) == 0
+
+    si_pm.scan_reflect_plugins()
+
+    list1 = si_app.get_plugin_name_list()
+    assert  'hdfsindex'  in list1
 
 
 
@@ -44,12 +56,11 @@ def test_plugin_mysql_add(resource_a_setup):
 
     si_app.add_data_soruce(ds_dict)
     dict1 = si_app.get_data_source_dict(ds_name=ds_dict['ds_name'])
-    assert dict1['ds_param']['connect_string'] == 'mysql://root:xxx@localhost/employees'
-
+    assert dict1['ds_param']['connect_string'] == ds_dict['ds_param']['connect_string']
 
 def test_plugin_mysql_reflect(after='test_plugin_mysql_add'):
 
-    si_app.reflect_db(data_source_name=ds_dict['ds_name'])
+    si_pm.reflect_db(data_source_name=ds_dict['ds_name'])
     suggest1=si_app.get_whoosh_search_suggestion(q='dept')
     print(suggest1)
 
@@ -82,7 +93,7 @@ def test_plugin_hdfs_add():
 
 
 def test_plugin_hdfs_reflect(after='test_plugin_hdfs_add_reflect'):
-    si_app.reflect_db(data_source_name=hdfs_ds_dict['ds_name'])
+    si_pm.reflect_db(data_source_name=hdfs_ds_dict['ds_name'])
     suggest1 = si_app.get_whoosh_search_suggestion(q='cities')
     print(suggest1)
     assert 'cities.csv' in suggest1
