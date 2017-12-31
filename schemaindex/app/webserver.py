@@ -47,17 +47,13 @@ class MApplication(tornado.web.Application):
         # Have one global connection to the blog DB across all handlers
         # self.engine = engine
 
-def run_webserver(addr = "localhost", port=8088):
+def run_webserver(addr = None, port=8088):
     tornado.options.parse_command_line()
     app = tornado.httpserver.HTTPServer(MApplication())
-    app.listen(port=port, address=addr)
-    url = 'http://%s:%s/' % ( addr, str(port))   # 'http://localhost:' + str(port) + '/'
-
-    print('Server started, please visit : http://%s:%s/' % ( addr, str(port)))
-
-    import webbrowser
-    # Open URL in new window, raising the window if possible.
-    webbrowser.open_new(url)
+    if addr is None:
+        app.listen(port=port)
+    else:
+        app.listen(port=port, address=addr)
 
     tornado.ioloop.IOLoop.current().start()
 

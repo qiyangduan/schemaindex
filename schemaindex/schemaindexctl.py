@@ -5,7 +5,7 @@
     
     Usage:
         schemaindex -h
-        schemaindex runserver [--port=<port> ] [--instance=<id> ]
+        schemaindex runserver [--port=<port> ] [--instance=<id> ] [--browser]
         schemaindex list ( data_source | plugin )
         schemaindex add <data_source_name> --plugin=<spec_name> --ds_param=<ds_param_string>
         schemaindex reload plugin
@@ -21,6 +21,7 @@
         --output_file=<path>  : Path to write the model output file.
         --instance=<id>       : The model instance ID.
         --port=<port>         : The OS port where server will be listening on. It uses 5000 if omitted..
+        --browser             : Open the browser automatically
 """
 # This command push will be implemented later.
 #        schemaindex push [specs]
@@ -115,10 +116,23 @@ def main():
         # to run a HTTP server to provide restful api services..
 
         if docopt_args["--port"] is not None:
-            si_app.config['web']['port'] =  docopt_args["--port"]
+            port =  docopt_args["--port"]
+        else:
+            port = si_app.config['web']['port']
 
         si_pm.datasource_init()
-        run_webserver(port = si_app.config['web']['port'])
+        addr = 'localhost'
+
+        url = 'http://%s:%s/' % (addr, str(port))  # 'http://localhost:' + str(port) + '/'
+        print('Server started, please visit : http://%s:%s/' % (addr, str(port)))
+
+        if docopt_args["--browser"] == True:
+            import webbrowser
+            # Open URL in new window, raising the window if possible.
+            webbrowser.open_new(url)
+
+
+        run_webserver(port = port)
 
     elif docopt_args["reload"]:
         # to reload from plugin folder

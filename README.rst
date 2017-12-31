@@ -75,6 +75,22 @@ If all previous two steps are successful, you should be able to search the files
 .. image:: doc/pic/global_search.png
 
 
+Work with HDFS Index
+-------------
+While creating data source, you can select 'hdfsindex' plugin. This plugin is based on hdfscli library (pip install hdfs).
+You need to input those parameters:
+
+1. HDFS Web URL: sometimes is also known as Namenode-UI. Note: Kerberos authentication is not supported. If you need it, please raise a ticket in github.
+
+2. HDFS Native URL: Usually you can find this link after you openned the namenode-ui/web url. THis should start with hdfs://localhost:9000 (or 8020)
+
+If you check "Real time synchronization:" and you have reflected the hdfs data source,
+it will start a background java process to capture all hdfs changes and update the index in real time.
+In background, you should be able to see a process similar to "java ... HdfsINotify2Restful".
+If you do not see this process, try to restart schemaindex server, or look at the logs at $SCHEMAINDEX/log
+
+
+
 Work with Databases
 -------------
 By default, schemaindex comes with a predefined plugin to extract metadata from mainstream databases. It is sqlalchemyindex.
@@ -89,11 +105,13 @@ All the plugins are located in $SCHEMAINDEX/plugin. Currently only HDFS and SQLA
 If you want to add more plugins, you can put the plugin into this folder and run this command:
 
 .. code-block:: bash
+
     $ schemaindex reload plugin
 
 The following is a sample output:
 
 .. code-block:: bash
+
     (py3env1) duan:py3env1$ schemaindex reload plugin
     Plugins are reloaded.
     Reflect Plugin Name:                     Path:
