@@ -5,15 +5,24 @@ SchemaIndex is designed for data scientists to find data more efficiently. It ca
 and files known to the user.
 
 With schemaindex, you can:
+
 1. Create a data source (e.g. Mysql, Oracle, etc) by registering its connection information.
+
 2. Reflect the data source and index the metadata.
+
 3. Search for all tables/entities in those data sources by their names.
 
 Supported Data Sources
 -------------
-* Oracle
+* HDFS
 * Mysql
 * Sqlite
+
+Data Sources to Support on Roadmap
+-------------
+* Oracle
+*
+
 
 
 
