@@ -35,7 +35,6 @@ On Linux
 
 .. code-block:: bash
 
-    # Make sure we have an up-to-date version of pip and setuptools:
     $ pip install schemaindex
 
 
@@ -48,7 +47,9 @@ How to use
 Basic Usage
 -------------
 To start the schemaindex server, please run this command:
+
 .. code-block:: bash
+
     $ schemaindex runserver
 
 The following is a sample output:
