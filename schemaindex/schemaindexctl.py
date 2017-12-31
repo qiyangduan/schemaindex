@@ -75,6 +75,9 @@ def main():
     """ main-entry point for schemaindex program, parse the commands and build the si_app platform """
     docopt_args = docopt(__doc__)
 
+    # First we initialize the schemaindex database and load the plugins
+    initialize_schemaindex()
+
     # Parse the User command and the required arguments
     if docopt_args["list"]:
         if docopt_args["data_source"] == True:
@@ -141,9 +144,7 @@ def main():
 
 # START OF SCRIPT
 if __name__ == "__main__":
-    # First we initialize the schemaindex database and load the plugins
-    initialize_schemaindex()
-
     main()
+
 
 

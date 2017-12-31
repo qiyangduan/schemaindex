@@ -36,10 +36,46 @@ On Linux
 How to use
 ============
 
+Basic Usage
+-------------
+To start the schemaindex server, please run this command:
+.. code-block:: bash
+    $ schemaindex runserver
+
+The following is a sample output:
+
+.. code-block:: bash
+    (py3env1) duan:py3env1$ schemaindex runserver
+    Server started, please visit : http://localhost:8088/
+
+
+*runserver* command should boot up a webserver and also open a browser for you.
+In the browser, click "datasources" and then click "create ..." to register your own data source.
+For example, to register a new HDFS data source, you can input information like the following screenshot:
+
+.. image:: doc/pic/create_data_source.png
+
+The next step is to reflect the data source and extract all metadata.
+You can do so by clicking button "Relfect Now!" to extract the metadata of the data source,
+ or check the box "Reflect Data Source Immediately" during data source creation.
+
+If all previous two steps are successful, you should be able to search the files in "search" box
+ appearing in "overview" and "search" page, like the following screenshot:
+.. image:: doc/pic/global_search.png
+
+
+Work with Databases
+-------------
+By default, schemaindex comes with a predefined plugin to extract metadata from mainstream databases. It is sqlalchemyindex.
+This  reflect engine is based on python library Sqlalchemy, which works for many databases, including Mysql, Sqlite, etc.
+For mysql to work, you need to install pymysql (python3) or mysql-python (python2) in advance.
+
+
+
 How to start a SchemaIndex Server
 -------------
-To initialize the schemaindex server, please run this command to load currently available plugins.
-This need to be done right after installation only once:
+All the plugins are located in $SCHEMAINDEX/plugin. Currently only HDFS and SQLALCHEMY are implemented.
+If you want to add more plugins, you can put the plugin into this folder and run this command:
 
 .. code-block:: bash
     $ schemaindex reload plugin
@@ -52,27 +88,3 @@ The following is a sample output:
     Reflect Plugin Name:                     Path:
     hdfsindex                                /home/duan/virenv/py3env1/local/lib/python2.7/site-packages/schemaindex/plugin/hdfsindex
     sqlalchemy                               /home/duan/virenv/py3env1/local/lib/python2.7/site-packages/schemaindex/plugin/sqlalchemyindex
-
-To start the schemaindex server, please run this command:
-.. code-block:: bash
-    $ schemaindex runserver
-
-The following is a sample output:
-
-.. code-block:: bash
-    (py3env1) duan:py3env1$ schemaindex runserver
-    Server started, please visit : http://localhost:8088/
-
-
-*runserver* command should boot up a webserver and open a browser for you.
-In the brower, click "datasources" and then click "create ..." to register your own data source.
-For example, to register a new HDFS data source, you can input information like the following screenshot:
-
-.. image:: doc/pic/create_data_source.jpg
-
-The next step is to reflect the data source and extract all metadata.
-You can do so by clicking button "Relfect Now!" to extract the metadata of the data source,
- or check the box "Reflect Data Source Immediately" during data source creation.
-
-If all previous two steps are successful, you should be able to search the files in "search" box
- appearing in "overview" and "search" page, like the following screenshot:
