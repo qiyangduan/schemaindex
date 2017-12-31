@@ -31,15 +31,11 @@ Installation
 
 On Linux
 -------------
-(tested 20171222) Stardard  `pip`_ should be able to install schemaindex:
+Stardard pip should be able to install schemaindex:
 
 .. code-block:: bash
 
     $ pip install schemaindex
-
-
-(If ``pip`` installation fails for some reason, you can try
-``easy_install httpie`` as a fallback.)
 
 How to use
 ============

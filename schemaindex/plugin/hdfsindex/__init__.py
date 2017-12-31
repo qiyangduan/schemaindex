@@ -16,7 +16,7 @@ ds_param = {'hdfs_web_url': {'type':'String',
                              'desc':'The starting point to index for the index, for example, you can use / or /user', #
                              },
             'start_inotify':{'type':'Boolean',
-                             'full_name':'Real time synchronization:',
+                             'full_name':'Start real time inotify synchronization',
                              'desc':'Whether to continously monitor the HDFS changes, or Not.'  # False
                              },
             'inotify_trx_id':{'type':'String',
