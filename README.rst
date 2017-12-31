@@ -113,3 +113,16 @@ The following is a sample output:
     Reflect Plugin Name:                     Path:
     hdfsindex                                /home/duan/virenv/py3env1/local/lib/python2.7/site-packages/schemaindex/plugin/hdfsindex
     sqlalchemy                               /home/duan/virenv/py3env1/local/lib/python2.7/site-packages/schemaindex/plugin/sqlalchemyindex
+
+
+Reference
+============
+
+Those questions explain why I created this software:
+
+1. `What is the best way to index and search files in HDFS? <https://www.quora.com/What-is-the-best-way-to-index-and-search-files-in-HDFS>`_
+
+2. `Search/Find a file and file content in Hadoop <https://stackoverflow.com/questions/6297533/search-find-a-file-and-file-content-in-hadoop>`_
+
+3. `find file in hadoop filesystem <https://stackoverflow.com/questions/42903113/find-file-in-hadoop-filesystem>`_
+

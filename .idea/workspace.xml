@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="update requirements.txt">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.rst" afterPath="$PROJECT_DIR$/README.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/__init__.py" afterPath="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/__init__.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -98,8 +97,8 @@
       <file leaf-file-name="README.rst" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.rst">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="64" column="12" lean-forward="true" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
+            <state relative-caret-position="231">
+              <caret line="126" column="35" lean-forward="false" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -296,29 +295,6 @@
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="plugin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="plugin" type="462c0819:PsiDirectoryNode" />
-              <item name="hdfsindex" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
-              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
@@ -1163,8 +1139,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.rst">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="64" column="12" lean-forward="true" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
+        <state relative-caret-position="231">
+          <caret line="126" column="35" lean-forward="false" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
           <folding />
         </state>
       </provider>
