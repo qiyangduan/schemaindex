@@ -55,6 +55,7 @@ To start the schemaindex server, please run this command:
 The following is a sample output:
 
 .. code-block:: bash
+
     (py3env1) duan:py3env1$ schemaindex runserver
     Server started, please visit : http://localhost:8088/
 
@@ -63,7 +64,7 @@ The following is a sample output:
 In the browser, click "datasources" and then click "create ..." to register your own data source.
 For example, to register a new HDFS data source, you can input information like the following screenshot:
 
-.. image:: doc/pic/create_data_source.png
+.. image:: blob/master/doc/pic/create_data_source.png
 
 The next step is to reflect the data source and extract all metadata.
 You can do so by clicking button "Relfect Now!" to extract the metadata of the data source,
