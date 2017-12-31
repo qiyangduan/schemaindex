@@ -64,7 +64,7 @@ The following is a sample output:
 In the browser, click "datasources" and then click "create ..." to register your own data source.
 For example, to register a new HDFS data source, you can input information like the following screenshot:
 
-.. image:: blob/master/doc/pic/create_data_source.png
+.. image:: doc/pic/create_data_source.png
 
 The next step is to reflect the data source and extract all metadata.
 You can do so by clicking button "Relfect Now!" to extract the metadata of the data source,
