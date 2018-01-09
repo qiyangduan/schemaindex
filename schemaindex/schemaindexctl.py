@@ -31,9 +31,9 @@
 
 import os
 from docopt import docopt
-from app.schemaindexapp import si_app #
-from app.webserver import run_webserver
-from app.pluginmanager import si_pm
+from schemaindex.app.schemaindexapp import si_app #
+from schemaindex.app.webserver import run_webserver
+from schemaindex.app.pluginmanager import si_pm
 
 def initialize_schemaindex():
     db_file_path = si_app.config['database']['sqlite_file']

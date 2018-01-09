@@ -99,6 +99,9 @@ class PluginManager:
 
         for item in os.listdir(plugin_spec_path):
             if os.path.isdir(os.path.join(plugin_spec_path, item)):
+                # to avoid : schemaindex.app.config.SchemaIndexPluginError: module '__pycache__' has no attribute 'plugin_name'
+                if(item == '__pycache__'):
+                    continue
                 a_plugin = self.load_reflect_engine(item,plugin_spec_path = plugin_spec_path)
                 spec_list.append(a_plugin)
         return spec_list
