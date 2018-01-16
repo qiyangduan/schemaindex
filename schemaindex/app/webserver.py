@@ -21,14 +21,14 @@ class MApplication(tornado.web.Application):
             (r"/", handler.OverviewHandler),
             (r"/overview", handler.OverviewHandler),
             (r"/database_json", handler.DatabaseJSONHandler),
-            (r"/search_suggestion_json", handler.SearchSuggestionJSONHandler),
             (r"/database_summary", handler.DatabaseSummaryHandler),
             (r"/add_data_source", handler.AddDataSourceHandler),
             (r"/delete_data_source", handler.DeleteDataSourceHandler),
             (r"/relfect_data_source", handler.ReflectDataSourceHandler),
             (r"/view_table_in_notebook", handler.ViewTableInNotebookHandler),
+            #
             (r"/global_search", handler.GlobalSearchHandler),
-            #(r"/json1", handler.JSON1Handler),
+            (r"/search_suggestion_json", handler.SearchSuggestionJSONHandler),
             (r"/hdfs_inotify_change", handler.hdfs_inotify_change),
             (r"/hdfs_inotify_get_checkpoint_txid", handler.hdfs_inotify_get_checkpoint_txid),
 

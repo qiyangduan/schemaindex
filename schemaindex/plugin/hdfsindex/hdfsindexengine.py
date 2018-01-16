@@ -1,8 +1,10 @@
-from hdfs import Client
 import os
-import signal
+import json
 import subprocess
-# from app.dbmodels import MTable, MColumn, MDatasource
+import datetime
+
+from hdfs import Client
+
 from schemaindex.app.schemaindexapp import si_app
 
 
@@ -53,10 +55,18 @@ class HDFSIndexEngine():
     def QueryHDFSFile(self, pDirectory, pClient, filelist):
 
         to_list_dir = pDirectory if len(pDirectory) > 1 else '/'
-        tDirectoryType = pClient.status(to_list_dir).get('type')
+        tDirectoryStatus = pClient.status(to_list_dir)
+        tDirectoryType = tDirectoryStatus.get('type')
 
         if tDirectoryType == 'FILE':
-            filelist.append(pDirectory)
+            formatted_time = datetime.datetime.fromtimestamp(int(tDirectoryStatus.get('modificationTime')) / 1000
+                                                             ).strftime(si_app.TIME_FORMATER)
+            fileDict = {
+                'table_name':pDirectory,
+                'modificationTime':   formatted_time   ,
+                'length': tDirectoryStatus.get('length'),
+            }
+            filelist.append(fileDict)
 
         elif tDirectoryType == 'DIRECTORY' and (not pClient.list(to_list_dir)):  # This is an empty folder
             pass
@@ -65,13 +75,13 @@ class HDFSIndexEngine():
 
             tDirectorys = pClient.list(to_list_dir)
 
-            fileNumInFolder = 0  # the number of files in this folder
+            #fileNumInFolder = 0  # the number of files in this folder
             tSubDirectorys = []
             for tDirectory in tDirectorys:
                 tSubDirectory = pDirectory + '/' + tDirectory
                 tSubDirectorys.append(tSubDirectory)
-                if pClient.status(tSubDirectory).get('type') == 'FILE':
-                    fileNumInFolder += 1
+                #if pClient.status(tSubDirectory).get('type') == 'FILE':
+                #    fileNumInFolder += 1
 
             for tSubDirectory in tSubDirectorys:
                 self.QueryHDFSFile(tSubDirectory, pClient, filelist)
@@ -104,12 +114,12 @@ class HDFSIndexEngine():
         filelist = self.getHDFSFileInfo(tclient, path_hdfs)
 
 
-        for t in filelist:
+        for fd in filelist:
             #print(t)
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
-                                           table_id=t,
-                                           table_info=t,
+                                           table_id=fd['table_name'],
+                                           table_info=(json.dumps(fd) ),
                                            )
         # ds_dict = si_app.get_data_source_dict(ds_name=self.ds_dict['ds_name'])
 
@@ -162,9 +172,6 @@ if __name__ == "__main__":
     si_app.add_data_soruce(ds_dict)
     a = HDFSIndexEngine(ds_dict = ds_dict)
     a.reflect()
-    #si_app.reflect_db(data_source_name=ds_dict['ds_name'])
-    #adb = HDFSIndexEngine()
-    # adb.reflect() #  None)
-    # adb.start_inotify_process()
+
 
 

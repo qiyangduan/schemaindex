@@ -1,4 +1,1 @@
-{
-  "test/test_plugin_mysql_hdfs.py::test_plugin_hdfs_reflect": true, 
-  "test/test_plugin_mysql_hdfs.py::test_plugin_mysql_reflect": true
-}
+{}

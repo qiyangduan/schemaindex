@@ -89,11 +89,11 @@ class SQLAlchemyReflectEngine():
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
                                            table_id=t.name, #'/'.join(['/', self.ds_dict['ds_name'], t.name]),
-                                           table_info=(json.dumps({"table_group_name":  self.ds_dict['ds_param']['schema_name'],
-                                                                     "ds_name":    self.ds_dict['ds_name'] ,
+                                           table_info=(json.dumps({ #"table_group_name":  self.ds_dict['ds_param']['schema_name'],
+                                                                     # "ds_name":    self.ds_dict['ds_name'] ,
                                                                      "table_name":  t.name ,
                                                                      # "table_comment":    ' ' ,
-                                                                     "column_info": column_list
+                                                                     "column_info": column_list,
                                                                      }
                                                                     )
                                                    )
