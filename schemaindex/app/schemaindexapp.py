@@ -282,6 +282,21 @@ class SchemaIndexApp:
 
         return result
 
+    def get_whoosh_search_suggestion_term_freq(self, q = ''):
+
+        indexdir = self.indexdir
+        ix = index.open_dir(indexdir)
+
+        result = []
+        with ix.reader() as r:
+            for aterm in r.most_frequent_terms("table_info", number=5, prefix=q):
+                term_name = aterm[1].decode('utf-8')
+                term_freq = aterm[0]
+                result.append({'table_id':term_name, 'table_freq':term_freq}) # The result was like (1.0, 'dept_manager'), but here i need only a keyword
+                #print(aterm)
+
+        return result
+
 
     def add_table_content_index(self,ds_name = None, table_id = None, table_info = None):
 
@@ -315,6 +330,7 @@ class SchemaIndexApp:
             ds = rs.first()
             self.data_source_dict[ds_name] = ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
             return self.data_source_dict[ds_name]
+
         return None
 
 

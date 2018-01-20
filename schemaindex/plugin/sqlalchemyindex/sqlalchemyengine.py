@@ -117,6 +117,23 @@ class SQLAlchemyReflectEngine():
                     fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
         return generated_loc
 
+    def generate_notebook_snippet(self, table_id = None):
+
+        snippet_template = '''
+from sqlalchemy import create_engine
+import pandas as pd
+
+ds_url = '$$connect_string$$'
+engine = create_engine(ds_url)
+conn = engine.connect()
+df = pd.read_sql('select * from $$TABLE$$ limit 10', con=conn)
+df.head()
+'''
+        replace_dict = {'$$TABLE$$': table_id,
+                        '$$connect_string$$': self.ds_dict['ds_param']['connect_string']}
+        snippet_result = (reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), snippet_template))
+        # print(snippet_result)
+        return snippet_result
 
 if __name__ == "__main__":
     ds_dict = {

@@ -24,16 +24,6 @@ schemaindex/app/schemaindexapp.py
 schemaindex/app/schemaindexapp.pyc
 schemaindex/app/webserver.py
 schemaindex/app/webserver.pyc
-schemaindex/app/__pycache__/__init__.cpython-35.pyc
-schemaindex/app/__pycache__/__init__.cpython-36.pyc
-schemaindex/app/__pycache__/config.cpython-35.pyc
-schemaindex/app/__pycache__/config.cpython-36.pyc
-schemaindex/app/__pycache__/dbmodels.cpython-35.pyc
-schemaindex/app/__pycache__/dbmodels.cpython-36.pyc
-schemaindex/app/__pycache__/handler.cpython-36.pyc
-schemaindex/app/__pycache__/schemaindexapp.cpython-35.pyc
-schemaindex/app/__pycache__/schemaindexapp.cpython-36.pyc
-schemaindex/app/__pycache__/webserver.cpython-36.pyc
 schemaindex/app/static/adminlte/css/AdminLTE.css
 schemaindex/app/static/adminlte/css/AdminLTE.min.css
 schemaindex/app/static/adminlte/css/alt/AdminLTE-bootstrap-social.css
@@ -151,12 +141,7 @@ schemaindex/plugin/hdfsindex/__init__.py
 schemaindex/plugin/hdfsindex/__init__.pyc
 schemaindex/plugin/hdfsindex/hdfsindexengine.py
 schemaindex/plugin/hdfsindex/hdfsindexengine.pyc
-schemaindex/plugin/hdfsindex/show_hdfs_file_hdfs1__data_cities.csv.ipynb
 schemaindex/plugin/hdfsindex/show_hdfs_file_template.ipynb
-schemaindex/plugin/hdfsindex/show_table_emp1_departments.ipynb
-schemaindex/plugin/hdfsindex/.ipynb_checkpoints/show_hdfs_file_hdfs1__data_cities.csv-checkpoint.ipynb
-schemaindex/plugin/hdfsindex/__pycache__/__init__.cpython-36.pyc
-schemaindex/plugin/hdfsindex/__pycache__/hdfsindexengine.cpython-36.pyc
 schemaindex/plugin/hdfsindex/java/lib/commons-cli-1.2.jar
 schemaindex/plugin/hdfsindex/java/lib/commons-collections-3.2.2.jar
 schemaindex/plugin/hdfsindex/java/lib/commons-configuration-1.6.jar
@@ -182,6 +167,4 @@ schemaindex/plugin/sqlalchemyindex/__init__.pyc
 schemaindex/plugin/sqlalchemyindex/show_sqlalchemy_table_template.ipynb
 schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.py
 schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.pyc
-schemaindex/plugin/sqlalchemyindex/__pycache__/__init__.cpython-36.pyc
-schemaindex/plugin/sqlalchemyindex/__pycache__/sqlalchemyengine.cpython-36.pyc
 test/test_plugin_mysql_hdfs.py

@@ -29,6 +29,8 @@ class MApplication(tornado.web.Application):
             #
             (r"/global_search", handler.GlobalSearchHandler),
             (r"/search_suggestion_json", handler.SearchSuggestionJSONHandler),
+            (r"/search_suggestion_freq", handler.SearchSuggestionWithFreqJSONHandler),
+
             (r"/hdfs_inotify_change", handler.hdfs_inotify_change),
             (r"/hdfs_inotify_get_checkpoint_txid", handler.hdfs_inotify_get_checkpoint_txid),
 

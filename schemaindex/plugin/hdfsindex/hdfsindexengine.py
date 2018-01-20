@@ -88,11 +88,9 @@ class HDFSIndexEngine():
 
     # get the all file information from HDFS
     def getHDFSFileInfo(self,tclient, pInitDir):
-
         filelist = []
         # if pInitDir is a file, fileNum = 1; if pInitDir is a directory, fileNum here has no influence
         self.QueryHDFSFile(pInitDir, tclient, filelist)
-
         return filelist
 
     def reflect(self, reload_flag = False):
@@ -152,6 +150,22 @@ class HDFSIndexEngine():
                     # fout.write(line.replace('$$TABLE$$', table_name))
                     fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
         return generated_loc
+
+    def generate_notebook_snippet(self, table_id = None):
+
+        snippet_template = '''
+import pandas as pd
+from hdfs import Client
+tclient = Client( '$$hdfs_web_url$$')
+with tclient.read('$$file_path$$', encoding='utf-8') as reader:
+  df=pd.read_csv(reader)
+df.head()
+'''
+        replace_dict = {'$$file_path$$': table_id,
+                        '$$hdfs_web_url$$': self.ds_dict['ds_param']['hdfs_web_url']}
+        snippet_result = (reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), snippet_template))
+        # print(snippet_result)
+        return snippet_result
 
 
 

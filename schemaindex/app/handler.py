@@ -362,6 +362,11 @@ class SearchSuggestionJSONHandler(tornado.web.RequestHandler):
         q = self.get_argument('query')
         res = si_app.get_whoosh_search_suggestion(q)
         self.write(json.dumps(res))
+class SearchSuggestionWithFreqJSONHandler(tornado.web.RequestHandler):
+    def get(self):
+        q = self.get_argument('query')
+        res = si_app.get_whoosh_search_suggestion_term_freq(q)
+        self.write(json.dumps(res))
 '''
 class JSON1Handler(tornado.web.RequestHandler):
     def get(self):

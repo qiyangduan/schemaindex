@@ -55,7 +55,7 @@ class PluginManager:
         # self.pluginmanager_init()
         #
         #self.datasource_init() # Calling here cause troubles to __import__, weird. 20171222
-
+        self.si_app = si_app
         self.logger.debug('SchemaIndex plugin manager is started.')
 
 
@@ -186,6 +186,15 @@ class PluginManager:
                                , table_id= table_id)
         return  generate_notebook_loc
 
+    def generate_notebook_snippet_for_table(self, table_id = None, ds_name = None):
+
+        ds_dict = si_app.get_data_source_dict(ds_name= ds_name)
+        if ds_dict is None:
+            return None
+        the_engine = self.get_reflect_plugin(ds_dict['ds_type'])['reflect_engine']
+        the_ds = the_engine.ReflectEngine(ds_dict = ds_dict )
+        generate_notebook_snippet = the_ds.generate_notebook_snippet(table_id= table_id)
+        return  generate_notebook_snippet
 
 
 si_pm = PluginManager()

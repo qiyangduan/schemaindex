@@ -10,6 +10,7 @@
         schemaindex add <data_source_name> --plugin=<spec_name> --ds_param=<ds_param_string>
         schemaindex reload plugin
         schemaindex reflect <data_source_name>
+        schemaindex snippet <data_source_name> <table_id>
         schemaindex search <search_key_word>...
         schemaindex show <data_source_name>
 
@@ -97,6 +98,14 @@ def main():
             print("Please specify the <model_name> and <spec_name>")
         si_app.create_model(model_name=model_name, spec_name=spec_name)
         print("Model is created successfully.")
+
+    elif docopt_args["snippet"]:
+        # to reflect the specified data source.
+        data_source_name = docopt_args["<data_source_name>"]
+        table_id = docopt_args["<table_id>"]
+        the_snippet = si_pm.generate_notebook_snippet_for_table(table_id=table_id,
+                                                                ds_name=data_source_name)
+        print(the_snippet)
 
 
     elif docopt_args["reflect"]:
