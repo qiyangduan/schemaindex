@@ -44,6 +44,66 @@ class SchemaindexSearchSuggestionJSONHandler(tornado.web.RequestHandler):
         res = si_app.get_whoosh_search_suggestion_term_freq(q)
         self.write(json.dumps(res))
 
+class SchemaindexBaseURLHandler(tornado.web.RequestHandler):
+    def get(self):
+        u = str(si_app.nb_web_app.settings)
+        self.write( u)
+
+
+
+def load_jupyter_server_extension(nb_server_app):
+    """
+    Called when the extension is loaded.
+
+    Args:
+        nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
+    """
+    nb_server_app.log.info("schemaindex server extension is loaded!")
+    web_app = nb_server_app.web_app
+
+    si_app.nb_web_app =  web_app # .settings['base_url']
+    host_pattern = '.*$'
+    route_pattern = url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search')
+    route_handler = [(route_pattern, SchemaindexSearchHandler),
+                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/search_suggestion_json'),
+                      SchemaindexSearchSuggestionJSONHandler),
+                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/generate_snippet'),
+                      SchemaindexGenerateSnippetHandler),
+                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/get_schemaindex_base_rul'),
+                      SchemaindexBaseURLHandler),
+                     ]
+    web_app.add_handlers(host_pattern, route_handler)
+
+
+class GlobalSearchHandler(IPythonHandler):
+    def get(self):
+        q = self.get_argument('q')
+        res = ''
+        if q == '1':
+            res = '[{"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}]'
+        elif q == '2':
+            res = ''' [ {"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}
+                  , 	{"column_info": [["ds_name", "VARCHAR(100)", null], ["nbr_of_tables", "INTEGER", null], ["nbr_of_columns", "INTEGER", null], ["ds_type", "VARCHAR(100)", null], ["created_date", "DATETIME", null], ["last_reflect_date", "DATETIME", null], ["ds_param", "VARCHAR(4000)", null], ["ds_desc", "VARCHAR(1000)", null], ["ds_tags", "VARCHAR(2550)", null]], "table_group_name": "na", "table_name": "mdatasource", "ds_name": "q"}
+                  ]
+                  '''
+        else:
+            res = '[]'
+        self.write(res)  # json.dumps(res))
+
+    def post(self):
+        q = self.get_argument('q')
+        print('i got parameter' + q)
+        res = ''
+        if q == '1':
+            res = '[{"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}]'
+        elif q == '2':
+            res = ''' [ {"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}
+                  , 	{"column_info": [["ds_name", "VARCHAR(100)", null], ["nbr_of_tables", "INTEGER", null], ["nbr_of_columns", "INTEGER", null], ["ds_type", "VARCHAR(100)", null], ["created_date", "DATETIME", null], ["last_reflect_date", "DATETIME", null], ["ds_param", "VARCHAR(4000)", null], ["ds_desc", "VARCHAR(1000)", null], ["ds_tags", "VARCHAR(2550)", null]], "table_group_name": "na", "table_name": "mdatasource", "ds_name": "q"}
+                  ]
+                  '''
+        else:
+            res = '[]'
+        self.write(res)  # json.dumps(res))
 
 class SearchSuggestionJSONHandler(tornado.web.RequestHandler):
     def get(self):
@@ -84,54 +144,3 @@ class SearchSuggestionJSONHandler(tornado.web.RequestHandler):
                    }
 
         self.write(json.dumps(res))
-
-
-def load_jupyter_server_extension(nb_server_app):
-    """
-    Called when the extension is loaded.
-
-    Args:
-        nb_server_app (NotebookWebApplication): handle to the Notebook webserver instance.
-    """
-    nb_server_app.log.info("schemaindex server extension is loaded!")
-    web_app = nb_server_app.web_app
-    host_pattern = '.*$'
-    route_pattern = url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search')
-    route_handler = [(route_pattern, SchemaindexSearchHandler),
-                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/search_suggestion_json'),
-                      SchemaindexSearchSuggestionJSONHandler),
-                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/generate_snippet'),
-                      SchemaindexGenerateSnippetHandler),
-                     ]
-    web_app.add_handlers(host_pattern, route_handler)
-
-
-class GlobalSearchHandler(IPythonHandler):
-    def get(self):
-        q = self.get_argument('q')
-        res = ''
-        if q == '1':
-            res = '[{"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}]'
-        elif q == '2':
-            res = ''' [ {"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}
-                  , 	{"column_info": [["ds_name", "VARCHAR(100)", null], ["nbr_of_tables", "INTEGER", null], ["nbr_of_columns", "INTEGER", null], ["ds_type", "VARCHAR(100)", null], ["created_date", "DATETIME", null], ["last_reflect_date", "DATETIME", null], ["ds_param", "VARCHAR(4000)", null], ["ds_desc", "VARCHAR(1000)", null], ["ds_tags", "VARCHAR(2550)", null]], "table_group_name": "na", "table_name": "mdatasource", "ds_name": "q"}
-                  ]
-                  '''
-        else:
-            res = '[]'
-        self.write(res)  # json.dumps(res))
-
-    def post(self):
-        q = self.get_argument('q')
-        print('i got parameter' + q)
-        res = ''
-        if q == '1':
-            res = '[{"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}]'
-        elif q == '2':
-            res = ''' [ {"column_info": [["ds_name", "VARCHAR(100)", null], ["table_group_name", "VARCHAR(200)", null], ["table_name", "VARCHAR(255)", null], ["table_type", "VARCHAR(255)", null], ["table_comment", "VARCHAR(5000)", null]], "table_group_name": "na", "table_name": "mtable", "ds_name": "q"}
-                  , 	{"column_info": [["ds_name", "VARCHAR(100)", null], ["nbr_of_tables", "INTEGER", null], ["nbr_of_columns", "INTEGER", null], ["ds_type", "VARCHAR(100)", null], ["created_date", "DATETIME", null], ["last_reflect_date", "DATETIME", null], ["ds_param", "VARCHAR(4000)", null], ["ds_desc", "VARCHAR(1000)", null], ["ds_tags", "VARCHAR(2550)", null]], "table_group_name": "na", "table_name": "mdatasource", "ds_name": "q"}
-                  ]
-                  '''
-        else:
-            res = '[]'
-        self.write(res)  # json.dumps(res))

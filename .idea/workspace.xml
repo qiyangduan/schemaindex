@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b63348a-f918-4588-b1bf-31e47e6f1d9c" name="Default" comment="update requirements.txt">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.cache/v/cache/lastfailed" afterPath="$PROJECT_DIR$/.cache/v/cache/lastfailed" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex.egg-info/SOURCES.txt" afterPath="$PROJECT_DIR$/schemaindex.egg-info/SOURCES.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/config.py" afterPath="$PROJECT_DIR$/schemaindex/app/config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/dbmodels.py" afterPath="$PROJECT_DIR$/schemaindex/app/dbmodels.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/handler.py" afterPath="$PROJECT_DIR$/schemaindex/app/handler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/pluginmanager.py" afterPath="$PROJECT_DIR$/schemaindex/app/pluginmanager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" afterPath="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/app/webserver.py" afterPath="$PROJECT_DIR$/schemaindex/app/webserver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" afterPath="$PROJECT_DIR$/schemaindex/plugin/hdfsindex/hdfsindexengine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.py" afterPath="$PROJECT_DIR$/schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/schemaindexctl.py" afterPath="$PROJECT_DIR$/schemaindex/schemaindexctl.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sdist.sh" afterPath="$PROJECT_DIR$/sdist.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/README.md" afterPath="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/main.js" afterPath="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml" afterPath="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py" afterPath="$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,11 +20,63 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            <state relative-caret-position="132">
+              <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="webserver.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schemaindex/app/webserver.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schemaindexctl.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schemaindex/schemaindexctl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="318">
+              <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1011">
+              <caret line="146" column="0" lean-forward="true" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="schemaindex_nbext.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -49,10 +93,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_engine= si_app.get_reflect_pl</find>
-      <find>table_info</find>
-      <find>lear</find>
-      <find>globalse</find>
       <find>analyz</find>
       <find>ne = self.get_reflect_plugin(ds_di</find>
       <find>_init</find>
@@ -79,6 +119,10 @@
       <find>si_app</find>
       <find>table_freq</find>
       <find>'schema</find>
+      <find>search</find>
+      <find>runserver</find>
+      <find>web_app</find>
+      <find>search for</find>
     </findStrings>
     <replaceStrings>
       <replace>Integer</replace>
@@ -124,8 +168,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/__init__.py" />
-        <option value="$PROJECT_DIR$/schemaindex/spec/sqlalchemyflex/sqlalchemyengine.py" />
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/hdfsindexengine.py" />
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/java/src/com/schemaindex/HdfsINotify2Restful.java" />
         <option value="$PROJECT_DIR$/schemaindex/spec/hdfsindex/hdfs_log/hdfs_inotify.log" />
@@ -172,9 +214,11 @@
         <option value="$PROJECT_DIR$/schemaindex/app/schemaindexapp.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/handler.py" />
         <option value="$PROJECT_DIR$/schemaindex/app/webserver.py" />
-        <option value="$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py" />
         <option value="$PROJECT_DIR$/schemaindex/log/schemaindex.log" />
+        <option value="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/README.md" />
+        <option value="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml" />
         <option value="$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/main.js" />
+        <option value="$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py" />
       </list>
     </option>
   </component>
@@ -224,7 +268,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,6 +279,12 @@
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
@@ -261,6 +310,21 @@
             <path>
               <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
               <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+              <item name="jupyterext" type="462c0819:PsiDirectoryNode" />
+              <item name="serverext" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
+              <item name="jupyterext" type="462c0819:PsiDirectoryNode" />
+              <item name="serverext" type="462c0819:PsiDirectoryNode" />
+              <item name="schemaindex_serverext" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="schemaindex" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schemaindex" type="462c0819:PsiDirectoryNode" />
               <item name="temp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -282,6 +346,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -741,7 +806,7 @@
     <frame x="-6" y="0" width="1378" height="749" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3383686" sideWeight="0.4916067" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18126889" sideWeight="0.4916067" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284553" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28778136" sideWeight="0.28172207" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284553" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -813,20 +878,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/temp/update_data_source.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/temp/overview.with dashboard gadget.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/app/templates/overview.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -1041,7 +1092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1830">
           <caret line="130" column="3" lean-forward="false" selection-start-line="130" selection-start-column="3" selection-end-line="130" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1059,15 +1109,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="10" column="37" lean-forward="false" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="137" column="0" lean-forward="true" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1075,15 +1116,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="166" column="10" lean-forward="false" selection-start-line="166" selection-start-column="10" selection-end-line="166" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/schemaindex/app/webserver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,7 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1119,7 +1150,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,25 +1157,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="6" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/app/webserver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/schemaindexctl.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="107" column="26" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-          <folding>
-            <element signature="e#1373#1382#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="318">
+          <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/nbext/schemaindex_nbext/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        <state relative-caret-position="132">
+          <caret line="33" column="19" lean-forward="false" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1011">
+          <caret line="146" column="0" lean-forward="true" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

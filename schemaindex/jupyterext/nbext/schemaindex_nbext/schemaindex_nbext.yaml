@@ -1,15 +1,13 @@
 Type: Jupyter Notebook Extension
 Compatibility: 3.x, 4.x, 5.x
-Name: Schema Index
+Name: SchemaIndex
 Main: main.js
-Icon: icon.png
 Link: README.md
 Description: |
-  main toolbar, or configurably, run automatically on notebook load.
+  Search for data sources and generate snippets.
 Parameters:
-- name: init_cell.run_on_kernel_ready
+- name: schemaindex_param1
   description: |
-    Run input cells whenever a kernel_ready.Kernel event is fired. See readme
-    for further details.
+    na.
   input_type: checkbox
   default: true

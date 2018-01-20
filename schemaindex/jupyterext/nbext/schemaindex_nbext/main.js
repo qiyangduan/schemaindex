@@ -30,9 +30,19 @@ define([
         dialog.modal({
                     title : 'Search for data and generate snippets ...',
                     body : build_schemaindex_search_modal(),
-                    buttons: {'OK': {'class' : 'btn-primary'}},
                     notebook: Jupyter.notebook,
                     keyboard_manager: Jupyter.keyboard_manager,
+                    buttons: {
+                        'Manage Data Sources': {
+                            class : 'btn-primary',
+                            click: function(event) {
+                                event.preventDefault();
+                                window.open(window.location.protocol+ '//' + window.location.hostname + ':8088/overview');
+                                }
+                        },
+                        Done: {class : 'btn-primary'},
+
+                    },
                 });
 
     }
