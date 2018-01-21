@@ -10,7 +10,8 @@ import json
 import time
 import importlib
 from builtins import str
-from subprocess import Popen
+# from subprocess import Popen
+import subprocess
 
 from sqlalchemy import Column, DateTime, String, Integer, func
 from sqlalchemy import create_engine
@@ -104,12 +105,12 @@ class SchemaIndexApp:
         nbext_dir = os.path.join( self.schemaindex_home, 'jupyterext','nbext')
         serverext_dir = os.path.join( self.schemaindex_home, 'jupyterext','serverext')
 
-        p = Popen(["jupyter", "nbextension", "install", 'schemaindex_nbext', '--user'],
+        p = subprocess.call(["jupyter", "nbextension", "install", 'schemaindex_nbext', '--user'],
                    cwd=nbext_dir)
-        p = Popen(["jupyter", "nbextension", "enable", 'schemaindex_nbext/main', '--user'],
+        p = subprocess.call(["jupyter", "nbextension", "enable", 'schemaindex_nbext/main', '--user'],
                    cwd=nbext_dir)
 
-        p = Popen(["jupyter", "serverextension", "enable", '--py', 'schemaindex.jupyterext.serverext.schemaindex_serverext'],
+        p = subprocess.call(["jupyter", "serverextension", "enable", '--py', 'schemaindex.jupyterext.serverext.schemaindex_serverext'],
                    cwd=serverext_dir)
         print('SchemaIndex finished installing nb and server extensions to jupyter notebook ...')
 

@@ -150,7 +150,7 @@ if __name__ == "__main__":
         'ds_name': 'emp1',
         'ds_type': 'hdfsindex',
         'ds_desc': 'created by unittest of hdfsindex',
-        'ds_param': {'connect_string': 'mysql://root:learning@localhost/employees',
+        'ds_param': {'connect_string': 'mysql://root:xxx@localhost/employees',
                      'schema_name': 'na',
                      }
     }

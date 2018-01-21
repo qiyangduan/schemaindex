@@ -110,7 +110,7 @@ if __name__ == "__main__":
     adb = MysqlReflectEngine(ds_dict = { 'table_group_name': 'a',
                                      'ds_name': 'a',
                                      'ds_type':'sqlalchemy',
-                                     'ds_url' : 'mysql://root:learning@localhost/blog',
+                                     'ds_url' : 'mysql://root:xxx@localhost/blog',
     })
     adb.reflect() #  None)
 
