@@ -10,7 +10,7 @@ from schemaindex.app.pluginmanager import si_pm  #
 
 def _jupyter_server_extension_paths():
     return [{
-        "module": "schemaindex_serverext"
+        "module": "schemaindex.jupyterext.serverext.schemaindex_serverext"
     }]
 
 
@@ -18,11 +18,11 @@ class SchemaindexGenerateSnippetHandler(IPythonHandler):
     def get(self):
         table_id = self.get_argument('table_id')
         ds_name = self.get_argument('ds_name')
-        print('i got parameter' + table_id + 'i got parameter' + ds_name)
+        # print('i got parameter' + table_id + 'i got parameter' + ds_name)
 
         res = si_pm.generate_notebook_snippet_for_table(table_id=table_id,
                                                         ds_name=ds_name)
-        print('i got result:' + str(res))
+        # print('i got result:' + str(res))
 
         self.write(str(res))  #
 
@@ -48,8 +48,6 @@ class SchemaindexBaseURLHandler(tornado.web.RequestHandler):
     def get(self):
         u = str(si_app.nb_web_app.settings)
         self.write( u)
-
-
 
 def load_jupyter_server_extension(nb_server_app):
     """

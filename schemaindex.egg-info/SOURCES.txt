@@ -136,6 +136,15 @@ schemaindex/app/templates/login.html
 schemaindex/app/templates/overview.html
 schemaindex/app/templates/adminlte/LICENSE
 schemaindex/app/templates/adminlte/index2.html
+schemaindex/jupyterext/__init__.py
+schemaindex/jupyterext/nbext/schemaindex_nbext/README.md
+schemaindex/jupyterext/nbext/schemaindex_nbext/main.js
+schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml
+schemaindex/jupyterext/serverext/__init__.py
+schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py
+schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.pyc
+schemaindex/jupyterext/serverext/schemaindex_serverext/__pycache__/__init__.cpython-35.pyc
+schemaindex/jupyterext/serverext/schemaindex_serverext/__pycache__/__init__.cpython-36.pyc
 schemaindex/plugin/__init__.py
 schemaindex/plugin/hdfsindex/__init__.py
 schemaindex/plugin/hdfsindex/__init__.pyc
@@ -167,4 +176,5 @@ schemaindex/plugin/sqlalchemyindex/__init__.pyc
 schemaindex/plugin/sqlalchemyindex/show_sqlalchemy_table_template.ipynb
 schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.py
 schemaindex/plugin/sqlalchemyindex/sqlalchemyengine.pyc
+test/test1.py
 test/test_plugin_mysql_hdfs.py

@@ -16,7 +16,7 @@ define([
 ) {
     "use strict";
 
-    var mod_name = 'schemaindex_nbext';
+    var mod_name = 'schemaindex_nbext_run';
     var log_prefix = '[' + mod_name + ']';
     var options = { // updated from server's config & nb metadata
         run_on_kernel_ready: true,

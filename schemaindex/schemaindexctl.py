@@ -8,6 +8,7 @@
         schemaindex runserver [--port=<port> ] [--instance=<id> ] [--browser]
         schemaindex list ( data_source | plugin )
         schemaindex add <data_source_name> --plugin=<spec_name> --ds_param=<ds_param_string>
+        schemaindex init
         schemaindex reload plugin
         schemaindex reflect <data_source_name>
         schemaindex snippet <data_source_name> <table_id>
@@ -39,7 +40,7 @@ from schemaindex.app.pluginmanager import si_pm
 def initialize_schemaindex():
     db_file_path = si_app.config['database']['sqlite_file']
     to_init_indicator = db_file_path  # cfg['main']['init_indicator_file']
-    si_app.logger.debug('Checking where to re-init by file:' + to_init_indicator)
+    si_app.logger.debug('Checking whether to re-initialize by file:' + to_init_indicator)
 
     if os.path.exists(to_init_indicator):
         si_app.logger.debug('DB file is ready, no re-init, going to normal startup.')
@@ -49,6 +50,12 @@ def initialize_schemaindex():
 
     si_app.schemaindex_init(db_file_path = db_file_path)
     si_pm.scan_reflect_plugins()
+
+    try:
+        si_app.init_notebook_extensions()
+    except Exception as e:
+        print('Exceptions during notebook extension installation: {0}'.format(e.strerror))
+
 
 
     si_app.logger.debug('SchemaIndex platform is initialized.')
@@ -147,6 +154,14 @@ def main():
         # to reload from plugin folder
         if docopt_args["plugin"] == True:
             si_app.scan_reflect_plugins()
+            print("Plugins are reloaded.")
+            list_plugs()
+
+    elif docopt_args["init"]:
+        # to reload from plugin folder
+        si_app.scan_reflect_plugins()
+        if docopt_args["plugin"] == True:
+
             print("Plugins are reloaded.")
             list_plugs()
 

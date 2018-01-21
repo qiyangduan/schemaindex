@@ -10,7 +10,7 @@ import json
 import time
 import importlib
 from builtins import str
-
+from subprocess import Popen
 
 from sqlalchemy import Column, DateTime, String, Integer, func
 from sqlalchemy import create_engine
@@ -44,7 +44,7 @@ class SchemaIndexApp:
     TIME_FORMATER = "%Y-%m-%d %H:%M:%S"
 
     config = cfg
-    stanmo_home = cfg['main']['schemaflex_home']
+    schemaindex_home = cfg['main']['schemaflex_home']
 
     logger = logging.getLogger('stanmo_logger')
 
@@ -61,7 +61,7 @@ class SchemaIndexApp:
 
     def __init__(self):
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/plugin
-        # sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
+        # sys.path.append(os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH))
 
         # self.schemaindex_init()
         #
@@ -70,15 +70,11 @@ class SchemaIndexApp:
 
 
     def schemaindex_init(self, db_file_path = None):
-
-
         try:
-
             generate_notebook_dir = self.config['main']['schemaindex_notebooks']
             if not os.path.exists(generate_notebook_dir):
                 self.logger.debug('creating folder for generated notebook.')
                 os.mkdir(generate_notebook_dir)
-
 
             if os.path.exists(db_file_path):
                 self.logger.debug('Trying to remove existing db file.')
@@ -92,7 +88,7 @@ class SchemaIndexApp:
             print(str(e))
             self.logger.debug('init error: ' + str(e))
 
-        self.logger.debug('re-construct text index at folder: ' + self.indexdir)  # will not print anything
+        self.logger.debug('trying to re-construct text index at folder: ' + self.indexdir)  # will not print anything
         if os.path.exists(self.indexdir):
             shutil.rmtree(self.indexdir)
         os.mkdir(self.indexdir)
@@ -102,6 +98,20 @@ class SchemaIndexApp:
         ix = index.create_in(self.indexdir , schema)
         print("schemaindex platform is re-initialized, with new sqlite data file and whoosh index." )  # will not print anything
 
+    def init_notebook_extensions(self):
+
+        self.logger.debug('SchemaIndex is trying to set up nb and server extensions to jupyter notebook ...')
+        nbext_dir = os.path.join( self.schemaindex_home, 'jupyterext','nbext')
+        serverext_dir = os.path.join( self.schemaindex_home, 'jupyterext','serverext')
+
+        p = Popen(["jupyter", "nbextension", "install", 'schemaindex_nbext', '--user'],
+                   cwd=nbext_dir)
+        p = Popen(["jupyter", "nbextension", "enable", 'schemaindex_nbext/main', '--user'],
+                   cwd=nbext_dir)
+
+        p = Popen(["jupyter", "serverextension", "enable", '--py', 'schemaindex.jupyterext.serverext.schemaindex_serverext'],
+                   cwd=serverext_dir)
+        print('SchemaIndex finished installing nb and server extensions to jupyter notebook ...')
 
     def datasource_init(self):
 
@@ -434,8 +444,8 @@ class SchemaIndexApp:
 
     def list_reflect_plugins(self):
         logger = logging.getLogger('stanmo_logger')
-        logger.debug('looking for reflect engine from location: ' + os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH) )
-        plugin_spec_path = os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH)
+        logger.debug('looking for reflect engine from location: ' + os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH) )
+        plugin_spec_path = os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH)
         logger = logging.getLogger('stanmo_logger')
         logger.debug('looking for model plugin in path: ' + plugin_spec_path)
         spec_list = []

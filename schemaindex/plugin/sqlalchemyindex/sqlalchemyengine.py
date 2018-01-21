@@ -114,7 +114,13 @@ class SQLAlchemyReflectEngine():
             with open( generated_loc, "wt") as fout:
                 for line in fin:
                     # fout.write(line.replace('$$TABLE$$', table_name))
-                    fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
+                    snippet_result = line
+                    for key in replace_dict.keys():
+                        snippet_result = snippet_result.replace(key, replace_dict[key])
+
+                    # fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
+                    fout.write(snippet_result)
+
         return generated_loc
 
     def generate_notebook_snippet(self, table_id = None):
@@ -131,7 +137,11 @@ df.head()
 '''
         replace_dict = {'$$TABLE$$': table_id,
                         '$$connect_string$$': self.ds_dict['ds_param']['connect_string']}
-        snippet_result = (reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), snippet_template))
+        # snippet_result = (reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), snippet_template))
+        snippet_result = snippet_template
+        for key in replace_dict.keys():
+            snippet_result = snippet_result.replace(key, replace_dict[key])
+
         # print(snippet_result)
         return snippet_result
 

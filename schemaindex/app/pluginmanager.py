@@ -41,7 +41,7 @@ class PluginManager:
     TIME_FORMATER = "%Y-%m-%d %H:%M:%S"
 
     config = cfg
-    stanmo_home = cfg['main']['schemaflex_home']
+    schemaindex_home = cfg['main']['schemaflex_home']
 
     logger = logging.getLogger('stanmo_logger')
 
@@ -50,7 +50,7 @@ class PluginManager:
 
     def __init__(self):
         # Add the plugin (model specs) home to sys path for dynamic loading all model specs defined under $STANMO_HOME/plugin
-        # sys.path.append(os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH))
+        # sys.path.append(os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH))
 
         # self.pluginmanager_init()
         #
@@ -91,8 +91,8 @@ class PluginManager:
 
     def list_reflect_plugins(self):
         logger = si_app.logger # logging.getLogger('stanmo_logger')
-        logger.debug('looking for reflect engine from location: ' + os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH) )
-        plugin_spec_path = os.path.join(self.stanmo_home, self.MODEL_SPEC_PATH)
+        logger.debug('looking for reflect engine from location: ' + os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH) )
+        plugin_spec_path = os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH)
 
         logger.debug('looking for model plugin in path: ' + plugin_spec_path)
         spec_list = []

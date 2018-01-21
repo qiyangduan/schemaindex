@@ -30,15 +30,15 @@ class HDFSIndexEngine():
 
     def start_inotify_process(self):
         si_app.logger.info('starting inotify java process ...')
-        my_log_file_loc = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH,'hdfsindex', 'hdfs_inotify.log')
+        my_log_file_loc = os.path.join(si_app.schemaindex_home, si_app.MODEL_SPEC_PATH,'hdfsindex', 'hdfs_inotify.log')
         f = open(my_log_file_loc, "a")
 
         si_server_addr = "http://%s:%d" % (si_app.config['web']['address'], si_app.config['web']['port'])
         hdfs_url = "hdfs://localhost:9000" # self.ds_dict['ds_param']
-        java_class_dir = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
+        java_class_dir = os.path.join(si_app.schemaindex_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
                                       , 'java', 'src','com','schemaindex')
 
-        java_class_path = os.path.join(si_app.stanmo_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
+        java_class_path = os.path.join(si_app.schemaindex_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
                                       , 'java', 'lib','*')
          #'-Xmx400M',
         jar_param = ['java',  '-cp', '.:'+java_class_path , 'HdfsINotify2Restful',  si_server_addr, self.ds_dict['ds_name'], hdfs_url ] #  http://localhost:8088 hdfs1 hdfs://localhost:9000 ]
@@ -147,8 +147,12 @@ class HDFSIndexEngine():
         with open(os.path.join(spec_dir,'hdfsindex', 'show_hdfs_file_template.ipynb'), "rt") as fin:
             with open( generated_loc, "wt") as fout:
                 for line in fin:
-                    # fout.write(line.replace('$$TABLE$$', table_name))
-                    fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
+                    snippet_result = line
+                    for key in replace_dict.keys():
+                        snippet_result = snippet_result.replace(key, replace_dict[key])
+
+                    # fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
+                    fout.write(snippet_result)
         return generated_loc
 
     def generate_notebook_snippet(self, table_id = None):
@@ -163,11 +167,13 @@ df.head()
 '''
         replace_dict = {'$$file_path$$': table_id,
                         '$$hdfs_web_url$$': self.ds_dict['ds_param']['hdfs_web_url']}
-        snippet_result = (reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), snippet_template))
+        # snippet_result = (reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), snippet_template))
+        snippet_result = snippet_template
+        for key in replace_dict.keys():
+            snippet_result = snippet_result.replace(key, replace_dict[key])
+
         # print(snippet_result)
         return snippet_result
-
-
 
 if __name__ == "__main__":
     ds_dict = {
