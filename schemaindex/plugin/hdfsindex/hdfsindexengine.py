@@ -158,6 +158,7 @@ class HDFSIndexEngine():
     def generate_notebook_snippet(self, table_id = None):
 
         snippet_template = '''
+#!pip install pandas        
 import pandas as pd
 from hdfs import Client
 tclient = Client( '$$hdfs_web_url$$')

@@ -5,7 +5,7 @@
     
     Usage:
         schemaindex -h
-        schemaindex runserver [--port=<port> ] [--instance=<id> ] [--browser]
+        schemaindex runserver [--port=<port> ] [--ip=<ip> ] [--browser]
         schemaindex list ( data_source | plugin )
         schemaindex add <data_source_name> --plugin=<spec_name> --ds_param=<ds_param_string>
         schemaindex init
@@ -21,7 +21,7 @@
         spec_name             : The name of model specification
         --input_file=<path>   : Path of input files to the model
         --output_file=<path>  : Path to write the model output file.
-        --instance=<id>       : The model instance ID.
+        --ip=<ip>             : The ip address to listen on, and --ip=* indicates all interfaces.
         --port=<port>         : The OS port where server will be listening on. It uses 5000 if omitted..
         --browser             : Open the browser automatically
 """
@@ -45,8 +45,9 @@ def initialize_schemaindex():
     if os.path.exists(to_init_indicator):
         si_app.logger.debug('DB file is ready, no re-init, going to normal startup.')
         return;
-
-    si_app.logger.debug('SchemaIndex platform is being initialized because there no data file yet.')
+    print("\n\r\n\r")
+    si_app.logger.debug('SchemaIndex platform will be re-initialized because there no data file yet.')
+    print('SchemaIndex platform will be re-initialized because there no data file yet.')
 
     si_app.schemaindex_init(db_file_path = db_file_path)
     si_pm.scan_reflect_plugins()
@@ -136,19 +137,24 @@ def main():
         else:
             port = si_app.config['web']['port']
 
-        si_pm.datasource_init()
-        addr = 'localhost'
+        addr_ip = 'localhost'
+        url = 'http://%s:%s/' % (str(addr_ip), str(port))
+        if docopt_args["--ip"] is not None:
+            addr_ip =  docopt_args["--ip"]
+            url = 'http://%s:%s/' % (str(addr_ip), str(port))
+            if docopt_args["--ip"] == '*':
+                url = 'http://%s:%s/' % ('localhost', str(port))  # 'http://localhost:' + str(port) + '/'
 
-        url = 'http://%s:%s/' % (addr, str(port))  # 'http://localhost:' + str(port) + '/'
-        print('Server started, please visit : http://%s:%s/' % (addr, str(port)))
+        si_pm.datasource_init()
+
+        print("\n\rServer started, please visit : " + url)
 
         if docopt_args["--browser"] == True:
             import webbrowser
             # Open URL in new window, raising the window if possible.
             webbrowser.open_new(url)
 
-
-        run_webserver(port = port)
+        run_webserver(addr=addr_ip, port = port)
 
     elif docopt_args["reload"]:
         # to reload from plugin folder

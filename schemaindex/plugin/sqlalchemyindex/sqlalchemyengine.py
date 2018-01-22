@@ -126,13 +126,15 @@ class SQLAlchemyReflectEngine():
     def generate_notebook_snippet(self, table_id = None):
 
         snippet_template = '''
+#!pip install pandas        
 from sqlalchemy import create_engine
 import pandas as pd
 
 ds_url = '$$connect_string$$'
 engine = create_engine(ds_url)
 conn = engine.connect()
-df = pd.read_sql('select * from $$TABLE$$ limit 10', con=conn)
+# for quick glance, append Oracle:  ' where rownum < 3' , Mysql/sqlite: ' limit 10'
+df = pd.read_sql('select * from $$TABLE$$', con=conn)
 df.head()
 '''
         replace_dict = {'$$TABLE$$': table_id,

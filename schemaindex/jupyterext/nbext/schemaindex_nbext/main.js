@@ -44,6 +44,7 @@ define([
 
                     },
                 });
+        // $('#schemaindex_search_term').focus();
 
     }
 
@@ -251,7 +252,10 @@ define([
             
 
         });
-        
+        schemaindex_modal.on('shown.bs.modal', function () {
+                $('#schemaindex_search_term').focus();
+            })
+
         
         return schemaindex_modal;
     }
