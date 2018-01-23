@@ -37,6 +37,16 @@ class SchemaindexSearchHandler(IPythonHandler):
 
         self.write(json.dumps(res))  # res) #
 
+class SchemaindexSearchFormattedHandler(IPythonHandler):
+    def get(self):
+        q = self.get_argument('q')
+        # print('i got parameter' + q)
+
+        res = si_app.global_whoosh_search_formatted(q)
+        # print('i got result:' + str(res))
+
+        self.write(json.dumps(res))  # res) #
+
 
 class SchemaindexSearchSuggestionJSONHandler(tornado.web.RequestHandler):
     def get(self):
@@ -63,6 +73,8 @@ def load_jupyter_server_extension(nb_server_app):
     host_pattern = '.*$'
     route_pattern = url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search')
     route_handler = [(route_pattern, SchemaindexSearchHandler),
+                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search_formatted'),
+                      SchemaindexSearchFormattedHandler),
                      (url_path_join(web_app.settings['base_url'], '/schemaindex', '/search_suggestion_json'),
                       SchemaindexSearchSuggestionJSONHandler),
                      (url_path_join(web_app.settings['base_url'], '/schemaindex', '/generate_snippet'),
@@ -71,6 +83,8 @@ def load_jupyter_server_extension(nb_server_app):
                       SchemaindexBaseURLHandler),
                      ]
     web_app.add_handlers(host_pattern, route_handler)
+
+
 
 
 class GlobalSearchHandler(IPythonHandler):

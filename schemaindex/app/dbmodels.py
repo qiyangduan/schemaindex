@@ -14,6 +14,7 @@ class MPlugin(Base):
     __tablename__ =  'mplugin'
     plugin_name = Column(String(100), primary_key=True,)
     module_name = Column(String(1200))
+    metadata_type = Column(String(120), default='table')
     # plugin_status = Column(String(200))
     plugin_spec_path = Column(String(200))
     notebook_template_path = Column(String(500))
@@ -25,7 +26,7 @@ class MPlugin(Base):
     plugin_desc = Column(String(1000))
     def __repr__(self):
         return "<pluggin (name='%s', path='%s' )>" % (
-            self.ds_type_name, self.full_path )
+            self.plugin_name, self.plugin_spec_path )
 
 
 #Reflect each database table we need to use, using metadata

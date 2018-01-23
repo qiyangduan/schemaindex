@@ -15,6 +15,7 @@ ds_param = {'schema_name': {'type':'String',
 
 
 sample_ds_url = 'mysql://root:xyz@localhost/employees'
+metadata_type='table'
 
 author = 'duan'
 class_name = 'sqlalchemyindex.SQLAlchemyReflectEngine'

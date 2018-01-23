@@ -42,7 +42,6 @@ class PluginManager:
 
     config = cfg
     schemaindex_home = cfg['main']['schemaflex_home']
-
     logger = logging.getLogger('stanmo_logger')
 
     si_db_engine = create_engine('sqlite:///' + cfg['database']['sqlite_file'])
@@ -119,6 +118,7 @@ class PluginManager:
                     MPlugin( plugin_name=plugin_dict['plugin_name'] ,
                                       module_name=plugin_dict['module_name'] ,
                                       plugin_spec_path=plugin_dict['plugin_spec_path'],
+                                      metadata_type = plugin_dict['metadata_type'],
                                       ds_param=json.dumps(plugin_dict['ds_param']),
                                       supported_ds_types=plugin_dict['supported_ds_types'],
                                       notebook_template_path=plugin_dict['notebook_template_path'],
@@ -145,6 +145,7 @@ class PluginManager:
             return {'reflect_engine': module,
                     'module_name': dottedpath,
                     'plugin_name': getattr(module, 'plugin_name'),
+                    'metadata_type': getattr(module, 'metadata_type'),
                     'ds_param': getattr(module, 'ds_param'),
                     'plugin_spec_path': plugin_spec_path,
                     'notebook_template_path': getattr(module, 'notebook_template_path'),

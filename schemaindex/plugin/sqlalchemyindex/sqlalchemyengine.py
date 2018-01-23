@@ -73,6 +73,7 @@ class SQLAlchemyReflectEngine():
             #print([c.type for c in table1.columns])
             #print([c for c in table1.columns])
             column_list = []
+            column_name_str = ''
             for c in table1.columns:
                 # print(c)
                 session.add_all([
@@ -86,6 +87,7 @@ class SQLAlchemyReflectEngine():
                 )
                 ])
                 column_list.append([c.name, str(c.type), c.doc])
+                column_name_str = column_name_str + ', ' + c.name
 
             si_app.add_table_content_index(ds_name = self.ds_dict['ds_name'],
                                            table_id=t.name, #'/'.join(['/', self.ds_dict['ds_name'], t.name]),
@@ -96,7 +98,8 @@ class SQLAlchemyReflectEngine():
                                                                      "column_info": column_list,
                                                                      }
                                                                     )
-                                                   )
+                                                   ),
+                                           table_content_index= t.name + '  ' + column_name_str
                                            )
 
 

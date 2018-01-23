@@ -125,7 +125,9 @@ def main():
         # to search by a keyword
         q = docopt_args["<search_key_word>"]
         print(q)
-        the_tables = si_app.global_whoosh_search(q=' '.join(q))
+        tt = si_app.global_whoosh_search_formatted(q=' '.join(q))
+        import json
+        print(json.dumps(tt))
 
 
 

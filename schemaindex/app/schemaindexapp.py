@@ -66,7 +66,7 @@ class SchemaIndexApp:
 
         # self.schemaindex_init()
         #
-        #self.datasource_init() # Calling here cause troubles to __import__, weird. 20171222
+        # self.datasource_init() # Calling here cause troubles to __import__, weird. 20171222
         pass
 
 
@@ -94,8 +94,11 @@ class SchemaIndexApp:
             shutil.rmtree(self.indexdir)
         os.mkdir(self.indexdir)
 
-        schema = Schema(ds_name=ID(stored=True), table_id=ID(stored=True),
-                        table_info=TEXT(stored=True, analyzer=FancyAnalyzer())) # , column_info=TEXT(stored=True)
+        schema = Schema(ds_name=ID(stored=True),
+                        table_id=ID(stored=True),
+                        table_info=ID(stored=True),
+                        table_content_index=TEXT(stored=False, analyzer=FancyAnalyzer()),
+                        ) # , column_info=TEXT(stored=True)
         ix = index.create_in(self.indexdir , schema)
         print("schemaindex platform is re-initialized, with new sqlite data file and whoosh index." )  # will not print anything
 
@@ -116,7 +119,7 @@ class SchemaIndexApp:
 
     def datasource_init(self):
 
-        self.logger.debug('SchemaIndex is trying to boot up all init service by each data source ...')
+        #self.logger.debug('SchemaIndex is collecting all data source ...')
         ds_list = self.get_data_source_rs()
 
         # Here we loop through all data sources. For each of them, if it is not cached, then it is the first time to run schemaindexapp.
@@ -227,7 +230,7 @@ class SchemaIndexApp:
         ix = index.open_dir(self.indexdir)
         res = []
         with ix.searcher() as searcher:
-            query = QueryParser("table_info", ix.schema).parse(q)
+            query = QueryParser("table_content_index", ix.schema).parse(q)
             results = searcher.search(query)
             for r in results:
                 res.append({'ds_name': r['ds_name'],
@@ -235,7 +238,23 @@ class SchemaIndexApp:
                             'table_id':r['table_id'],
                             'table_info': r['table_info'],
                             })
+        return res
 
+    def global_whoosh_search_formatted(self, q = ''):
+        ix = index.open_dir(self.indexdir)
+        res = {}
+        with ix.searcher() as searcher:
+            query = QueryParser("table_content_index", ix.schema).parse(q)
+            results = searcher.search(query)
+            for rrr in results:
+                ds_dict = si_app.get_data_source_dict(ds_name=rrr['ds_name'])
+                if ds_dict['metadata_type'] not in res.keys():
+                    res[ds_dict['metadata_type']] = []
+                res[ds_dict['metadata_type']].append({'ds_name': rrr['ds_name'],
+                            'docnum': rrr.docnum,
+                            'table_id':rrr['table_id'],
+                            'table_info': rrr['table_info'],
+                            })
         return res
 
     def global_whoosh_search_by_id(self, q_id = ''):
@@ -286,7 +305,7 @@ class SchemaIndexApp:
 
         result = []
         with ix.reader() as r:
-            for aterm in r.most_frequent_terms("table_info", number=5, prefix=q):
+            for aterm in r.most_frequent_terms("table_content_index", number=5, prefix=q):
                 one_result = aterm[1].decode('utf-8')
                 result.append(one_result) # The result was like (1.0, 'dept_manager'), but here i need only a keyword
                 #print(aterm)
@@ -300,7 +319,7 @@ class SchemaIndexApp:
 
         result = []
         with ix.reader() as r:
-            for aterm in r.most_frequent_terms("table_info", number=5, prefix=q):
+            for aterm in r.most_frequent_terms("table_content_index", number=5, prefix=q):
                 term_name = aterm[1].decode('utf-8')
                 term_freq = aterm[0]
                 result.append({'table_id':term_name, 'table_freq':term_freq}) # The result was like (1.0, 'dept_manager'), but here i need only a keyword
@@ -309,13 +328,17 @@ class SchemaIndexApp:
         return result
 
 
-    def add_table_content_index(self,ds_name = None, table_id = None, table_info = None):
+    def add_table_content_index(self, table_content_index,ds_name = None, table_id = None, table_info = None):
 
         ix = index.open_dir(self.indexdir)
         index_writer = ix.writer()
         # index_writer.add_document(ds_name = unicode(ds_name), table_id=unicode(table_id), table_info=unicode(table_info))
 
-        index_writer.add_document(ds_name = str(ds_name), table_id=str(table_id), table_info=str(table_info))
+        index_writer.add_document(ds_name = str(ds_name)
+                                  , table_id=str(table_id)
+                                  , table_info=str(table_info)
+                                  , table_content_index=str(table_content_index)
+                                  )
         index_writer.commit()
 
     def commit_index(self, table_id=None, table_info=None):
@@ -339,7 +362,12 @@ class SchemaIndexApp:
         rs = self.db_session.query(MDatasource).filter_by(ds_name=ds_name)
         if rs.count() > 0:
             ds = rs.first()
-            self.data_source_dict[ds_name] = ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
+            ds_loaded = ds.to_dict() # {x.name: getattr(ds, x.name) for x in ds.__table__.columns}
+            mt = self.db_session.query(MDatasource, MPlugin).filter(MDatasource.ds_type == MPlugin.plugin_name).\
+                    filter(MDatasource.ds_name==ds_name)
+            for da, mp in mt:
+                ds_loaded['metadata_type'] = mp.metadata_type
+            self.data_source_dict[ds_name] = ds_loaded
             return self.data_source_dict[ds_name]
 
         return None
@@ -387,13 +415,6 @@ class SchemaIndexApp:
         return model_list
 
 
-
-
-
-
-
-
-
     def get_plugin_name_list(self):
         plugins = []
         rs = self.db_session.query(MPlugin)
@@ -415,98 +436,4 @@ class SchemaIndexApp:
         return  p
 
 
-
-    '''
-
-    def get_plugin_name_list(self):
-        plugins = []
-        rs = self.db_session.query(MPlugin)
-        for p in rs:
-            plugins.append(p.plugin_name)
-        return  plugins
-
-    def get_plugin_list(self):
-        plugins = []
-        rs = self.db_session.query(MPlugin)
-        for p in rs:
-            plugins.append(p)
-        return  plugins
-
-    def get_plugin_info(self, p_plugin_name = ''):
-
-        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        # p['ds_param'] = json.loads(p.ds_param )
-        return  p
-
-
-    def get_reflect_plugin(self, p_plugin_name = None):
-        p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
-        return self.load_reflect_engine(p.module_name)
-
-    def list_reflect_plugins(self):
-        logger = logging.getLogger('stanmo_logger')
-        logger.debug('looking for reflect engine from location: ' + os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH) )
-        plugin_spec_path = os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH)
-        logger = logging.getLogger('stanmo_logger')
-        logger.debug('looking for model plugin in path: ' + plugin_spec_path)
-        spec_list = []
-
-        for item in os.listdir(plugin_spec_path):
-            if os.path.isdir(os.path.join(plugin_spec_path, item)):
-                a_plugin = self.load_reflect_engine(item,plugin_spec_path = plugin_spec_path)
-                spec_list.append(a_plugin)
-        return spec_list
-
-    def scan_reflect_plugins(self):
-        plist = self.list_reflect_plugins()
-
-        self.db_session.begin()
-        self.db_session.query(MPlugin).delete()
-        for plugin_dict in plist:
-            if plugin_dict is not None:
-                self.db_session.add_all([
-                    MPlugin( plugin_name=plugin_dict['plugin_name'] ,
-                                      module_name=plugin_dict['module_name'] ,
-                                      plugin_spec_path=plugin_dict['plugin_spec_path'],
-                                      ds_param=json.dumps(plugin_dict['ds_param']),
-                                      supported_ds_types=plugin_dict['supported_ds_types'],
-                                      notebook_template_path=plugin_dict['notebook_template_path'],
-                                      sample_ds_url=plugin_dict['sample_ds_url'],
-                                      author=plugin_dict['author'],
-                                      plugin_desc=plugin_dict['plugin_desc'],
-                                    )
-                                    ])
-        self.db_session.commit()
-
-
-
-    def load_reflect_engine(self, dottedpath, plugin_spec_path = None):
-
-        assert dottedpath is not None, "dottedpath must not be None"
-        #splitted_path = dottedpath.split('.')
-        #modulename = '.'.join(splitted_path[:-1])
-        #classname = splitted_path[-1]
-        # print(sys.path)
-
-
-        try:
-            module = __import__(dottedpath, globals(), locals(), [])
-            return {'reflect_engine': module,
-                    'module_name': dottedpath,
-                    'plugin_name': getattr(module, 'plugin_name'),
-                    'ds_param': getattr(module, 'ds_param'),
-                    'plugin_spec_path': plugin_spec_path,
-                    'notebook_template_path': getattr(module, 'notebook_template_path'),
-                    'sample_ds_url': getattr(module, 'sample_ds_url'),
-                    'plugin_desc': getattr(module, 'plugin_desc'),
-                    'supported_ds_types': json.dumps(getattr(module, 'supported_ds_types')) ,
-                    'author': getattr(module, 'author'),
-                    }
-        except Exception as e:
-            self.logger.error( "load_reflect_engine (error): Failed to import plugin %s, due to error :{%s}" % (dottedpath, e) )
-            # return None
-            raise SchemaIndexPluginError(e)
-
-
-    '''
 si_app = SchemaIndexApp()

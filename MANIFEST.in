@@ -1,3 +1,8 @@
 recursive-include schemaindex/app *
 recursive-include schemaindex/plugin *
+# recursive-include schemaindex/plugin/sqlalchemyindex *
 recursive-include schemaindex/jupyterext *
+recursive-exclude * __pycache__
+recursive-exclude * *.pyc
+recursive-exclude * *.pyo
+recursive-exclude schemaindex/plugin/hdfsindex *

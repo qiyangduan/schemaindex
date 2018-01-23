@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 # following https://python-packaging-user-guide.readthedocs.io/tutorials/distributing-packages/
 
 setup(name='schemaindex',
-      version='0.24',
+      version='0.241',
       description='An indexing engine for different types of data sources, including HDFS, Mysql, etc.',
       url='https://github.com/qiyangduan/schemaindex',
       author='Duan Qiyang',
@@ -12,7 +12,7 @@ setup(name='schemaindex',
       license='Apache Software License',
       include_package_data=True,
       packages=['schemaindex'
-               ,'schemaindex.plugin'
+               # ,'schemaindex.plugin'
                ,'schemaindex.jupyterext'
                ,'schemaindex.app'
                 ],
@@ -27,7 +27,6 @@ setup(name='schemaindex',
 
       ],
       entry_points={
-          # 'console_scripts': ['sic=schemaindexctl:main'],
           'console_scripts': ['schemaindex=schemaindex.schemaindexctl:main'],
       },
       classifiers = [

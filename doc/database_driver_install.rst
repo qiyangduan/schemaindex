@@ -6,6 +6,10 @@ Oracle
 First you need to install the oracle
 https://oracle.github.io/python-cx_Oracle/
 
+In my testing, Python 2.7.13 does not work and schemainde with cx_Oracle will report this error:
+'twophase' is an invalid keyword errors connecting to Oracle
+
+But in python 2.7.14, it works fine for reflecting schema.
 
 MySQL
 ============

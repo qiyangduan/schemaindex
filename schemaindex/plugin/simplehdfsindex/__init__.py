@@ -7,8 +7,39 @@ from hdfs import Client
 
 from schemaindex.app.schemaindexapp import si_app
 
+# -----------------------------------
+plugin_name = 'simplehdfsindex'
+plugin_desc = '''Given the connection information and initial path, this plugin recursively scan through all files in a HDFS system and index them. 
+The real time index engine requires the hdfs connection information.'''
 
-class HDFSIndexEngine():
+ds_param = {'hdfs_web_url': {'type':'String',
+                             'full_name':'HDFS Web URL (Required):',
+                             'desc':'''The HDFS web URL, usually staring with HTTP, for example: http://localhost:50070 .  This URL is used by hdfscli library to connect to HDFS web and scan HDFS structure.''',
+                             },
+            'root_path': {'type':'String',
+                             'full_name':'Root path (Required):',
+                             'desc':'The starting point to index for the index, for example, you can use / or /user', #
+                             },
+
+            }
+
+
+ds_param_desc = {'hdfs_web_url': '''The HDFS web URL, usually staring with HTTP, for example: http://localhost:50070 .  This URL is used by hdfscli library to connect to HDFS web and scan HDFS structure.''',
+            'root_path': 'The starting point to index for the index', # Sample: /
+            }
+
+
+supported_ds_types = ['HDFS']
+metadata_type='file'
+
+sample_ds_url = 'http://localhost:50070'
+author = 'duan'
+notebook_template_path = 'show_hdfs_file_template.ipynb'
+
+
+
+# -----------------------------------
+class ReflectEngine():
     ds_dict = None
     si_app = None
 
@@ -21,35 +52,6 @@ class HDFSIndexEngine():
         else:
             si_app.logger.error('no data source is given!')
             return
-        #if(self.ds_dict['ds_param']['start_inotify']):
-        #    self.start_inotify_process()
-
-    @staticmethod
-    def echo(self):
-        return 'echo'
-
-    def start_inotify_process(self):
-        si_app.logger.info('starting inotify java process ...')
-        my_log_file_loc = os.path.join(si_app.schemaindex_home, si_app.MODEL_SPEC_PATH,'hdfsindex', 'hdfs_inotify.log')
-        f = open(my_log_file_loc, "a")
-
-        si_server_addr = "http://%s:%d" % (si_app.config['web']['address'], si_app.config['web']['port'])
-        hdfs_url = "hdfs://localhost:9000" # self.ds_dict['ds_param']
-        java_class_dir = os.path.join(si_app.schemaindex_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
-                                      , 'java', 'src','com','schemaindex')
-
-        java_class_path = os.path.join(si_app.schemaindex_home, si_app.MODEL_SPEC_PATH, 'hdfsindex'
-                                      , 'java', 'lib','*')
-         #'-Xmx400M',
-        jar_param = ['java',  '-cp', '.:'+java_class_path , 'HdfsINotify2Restful',  si_server_addr, self.ds_dict['ds_name'], hdfs_url ] #  http://localhost:8088 hdfs1 hdfs://localhost:9000 ]
-
-        print(subprocess.list2cmdline(jar_param))
-        pro = subprocess.Popen(jar_param
-                        , stdout=f
-                        , cwd=java_class_dir)
-                        # , shell=False)
-        si_app.data_source_process[self.ds_dict['ds_name']] = pro
-
 
     # get the all file information from HDFS
     def QueryHDFSFile(self, pDirectory, pClient, filelist):
@@ -64,7 +66,7 @@ class HDFSIndexEngine():
             fileDict = {
                 'table_name':pDirectory,
                 'modificationTime':   formatted_time   ,
-                'length': str(tDirectoryStatus.get('length')),
+                'length': tDirectoryStatus.get('length'),
             }
             filelist.append(fileDict)
 
@@ -118,12 +120,11 @@ class HDFSIndexEngine():
                                            table_info=(json.dumps(fd) ),
                                            table_content_index = ' '.join([fd[k] for k in fd.keys() ])
                                            )
-
+        # ds_dict = si_app.get_data_source_dict(ds_name=self.ds_dict['ds_name'])
 
     def datasource_init(self):
-        if self.ds_dict['last_reflect_date'] is not None and self.ds_dict['ds_param']['start_inotify'] == 'on':
-            si_app.logger.info('staring backend HdfsINotify2Restful process to connect to inotify ...')
-            self.start_inotify_process()
+        pass
+
 
     def generate_notebook(self, schemaindex_notebooks_dir = '/tmp', table_id = None):
 
@@ -139,7 +140,6 @@ class HDFSIndexEngine():
                     for key in replace_dict.keys():
                         snippet_result = snippet_result.replace(key, replace_dict[key])
 
-                    # fout.write(reduce(lambda a, kv: a.replace(*kv), replace_dict.iteritems(), line))
                     fout.write(snippet_result)
         return generated_loc
 
@@ -166,20 +166,17 @@ df.head()
 
 if __name__ == "__main__":
     ds_dict = {
-        'ds_name': 'hdfs1',
-        'ds_type': 'hdfsindex',
+        'ds_name': 'hdfs2',
+        'ds_type': 'simplehdfsindex',
         'ds_desc': 'created by unittest of hdfsindex',
         'ds_url': 'http://localhost:50070',
-        'ds_param': {'hdfs_web_url': 'http://localhost:50070',
-                     'hdfs_url': 'hdfs://localhost:9000',
-                     'start_inotify': 'off',
+        'ds_param': {'hdfs_web_url': 'http://localhost:50070' ,
                      'root_path': '/',
-                     'inotify_trx_id': '-1',
                      }
     }
 
     si_app.add_data_soruce(ds_dict)
-    a = HDFSIndexEngine(ds_dict = ds_dict)
+    a = ReflectEngine(ds_dict = ds_dict)
     a.reflect()
 
 

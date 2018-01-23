@@ -33,7 +33,7 @@ ds_dict = {
     'ds_name': 'emp1',
     'ds_type': 'sqlalchemy',
     'ds_desc': 'created by unittest',
-    'ds_param': {'connect_string': 'mysql://root:xxx@localhost/employees',
+    'ds_param': {'connect_string': 'sqlite:////home/duan/schemaindex.sqlite3.goodbackup',
                  'schema_name': 'na',
                  }
 }
@@ -46,7 +46,7 @@ def test_plugin_loading(resource_a_setup):
     si_pm.scan_reflect_plugins()
 
     list1 = si_app.get_plugin_name_list()
-    assert  'hdfsindex'  in list1
+    assert  'simplehdfsindex'  in list1
 
 
 
@@ -61,10 +61,10 @@ def test_plugin_mysql_add(resource_a_setup):
 def test_plugin_mysql_reflect(after='test_plugin_mysql_add'):
 
     si_pm.reflect_db(data_source_name=ds_dict['ds_name'])
-    suggest1=si_app.get_whoosh_search_suggestion(q='dep')
+    suggest1=si_app.get_whoosh_search_suggestion(q='mta')
     print(suggest1)
 
-    assert 'dept' in suggest1
+    assert 'mtable' in suggest1
 
 
 

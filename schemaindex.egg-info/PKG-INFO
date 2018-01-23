@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: schemaindex
-Version: 0.24
+Version: 0.241
 Summary: An indexing engine for different types of data sources, including HDFS, Mysql, etc.
 Home-page: https://github.com/qiyangduan/schemaindex
 Author: Duan Qiyang

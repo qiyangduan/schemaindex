@@ -111,11 +111,11 @@ define([
         // https://github.com/running-coder/jquery-typeahead/issues/42
         // also refer to : /static/notebook/js/commandpalette.js
 
-
         var typeahead_form   = $('<form/>');
         var container = $('<div/>').addClass('typeahead-container');
         var field = $('<div/>').addClass('typeahead-field');
-        var input = $('<input/>').attr('type', 'search').attr('placeholder', 'search').attr('id', 'schemaindex_search_term');
+        var input = $('<input />').attr('type', 'search').attr('placeholder', 'search').attr('id', 'schemaindex_search_term');
+
 
         field
           .append(
@@ -213,29 +213,66 @@ define([
 
                 // get the search result
                 $.ajax({
-                    url: '/schemaindex/global_search', // ?q=' +  $('#schemaindex_search_term').val() , //id_input.val() ,
+                    url: '/schemaindex/global_search_formatted', // ?q=' +  $('#schemaindex_search_term').val() , //id_input.val() ,
                     type: 'GET',
                     data: { q: $('#schemaindex_search_term').val() , time: "2pm" },
                     success: function (response, textStatus, jqXHR) {
                         //console.log('success, duanqiyang',response);
-                        var search_result_table_html = '<br> <div ><table class=\"table table-bordered table-hover\"> \
-                                        <thead><tr><th>Data ID</th> <th>Data Source</th> <th>Details</th> <th>Snippets</th></tr></thead> \
-                                        <tbody  id="schemaindex_search_result_table_to_append"></tbody></table></div>';
-                        schemaindex_modal.find('#schemaindex_search_result_tbody').html(search_result_table_html);
+                        var resDict = JSON.parse(String(response));
+                        schemaindex_modal.find('#schemaindex_search_result_tbody').html('');
 
-                        var the_search_result_tbody = schemaindex_modal.find('#schemaindex_search_result_table_to_append');
-                        var varList = JSON.parse(String(response));
+                        if (resDict.hasOwnProperty('table')) {
+                            var varList = resDict['table'];
 
-                        for (var i = 0; i < varList.length; i++) {
-                                var tr = '<tr>';
-                                tr += '<td>' + varList[i].table_id + '</td>';
-                                tr += '<td>' + varList[i].ds_name + '</td>';
-                                tr += '<td>' + varList[i].table_info + '</td>';
-                                tr += '<td><button class="addsnippets" data-key="'+ varList[i].table_id +'"><i class="fa fa-file-code-o">Insert</i></button></td>';
-                                tr += '</tr>';
-                                the_search_result_tbody.append(tr);
+                            var search_result_table_html = '<br> <div ><table class=\"table table-bordered table-hover\"> \
+                                            <thead><tr><th>Table Name</th> <th>Data Source</th> <th>Column List</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="schemaindex_search_result_table_to_append_table"></tbody></table></div>';
+
+                            schemaindex_modal.find('#schemaindex_search_result_tbody').append(search_result_table_html);
+
+                            var the_search_result_tbody = schemaindex_modal.find('#schemaindex_search_result_table_to_append_table');
+
+                            for (var i = 0; i < varList.length; i++) {
+                                    var columnInfoJSON = JSON.parse(varList[i].table_info)['column_info'];
+                                    var columnString = '';
+                                    for ( var ij = 0; ij< columnInfoJSON.length; ij++){
+                                        columnString = columnString + columnInfoJSON[ij][0] + ', '
+                                    }
+
+                                    var tr = '<tr>';
+                                    tr += '<td>' + varList[i].table_id + '</td>';
+                                    tr += '<td>' + varList[i].ds_name + '</td>';
+                                    tr += '<td>' + columnString + '</td>';
+                                    tr += '<td><button class="addsnippets" data-key="'+ varList[i].table_id +'"><i class="fa fa-file-code-o">Insert</i></button></td>';
+                                    tr += '</tr>';
+                                    the_search_result_tbody.append(tr);
+                            }
                         }
 
+                        if (resDict.hasOwnProperty('file')) {
+                            var varList = resDict['file'];
+
+                            var search_result_table_html = '<br> <div ><table class=\"table table-bordered table-hover\"> \
+                                            <thead><tr><th>File Path</th> <th>Data Source</th> <th>Changed At</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="schemaindex_search_result_table_to_append_file"></tbody></table></div>';
+
+                            schemaindex_modal.find('#schemaindex_search_result_tbody').append(search_result_table_html);
+
+                            var the_search_result_tbody = schemaindex_modal.find('#schemaindex_search_result_table_to_append_file');
+
+                            for (var i = 0; i < varList.length; i++) {
+                                    var modificationTime = JSON.parse(varList[i].table_info)['modificationTime'];
+
+
+                                    var tr = '<tr>';
+                                    tr += '<td>' + varList[i].table_id + '</td>';
+                                    tr += '<td>' + varList[i].ds_name + '</td>';
+                                    tr += '<td>' + modificationTime + '</td>';
+                                    tr += '<td><button class="addsnippets" data-key="'+ varList[i].table_id +'"><i class="fa fa-file-code-o">Insert</i></button></td>';
+                                    tr += '</tr>';
+                                    the_search_result_tbody.append(tr);
+                            }
+                        }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {console.log('eerrrrrr, duanqiyang', errorThrown)},
                     complete: function (jqXHR, textStatus) {
@@ -252,8 +289,14 @@ define([
             
 
         });
-        schemaindex_modal.on('shown.bs.modal', function () {
-                $('#schemaindex_search_term').focus();
+
+        //TODO: This does not work yet.
+        schemaindex_modal.on('shown', function () {
+                schemaindex_modal.find('#schemaindex_search_term').focus();
+                setTimeout(function (){
+                    $('#schemaindex_search_term').focus();
+                }, 1000);
+
             })
 
         

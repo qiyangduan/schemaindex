@@ -42,6 +42,7 @@ ds_param_desc = {'hdfs_web_url': '''The HDFS web URL, usually staring with HTTP,
 
 
 supported_ds_types = ['HDFS']
+metadata_type='file'
 
 sample_ds_url = 'http://localhost:50070'
 author = 'duan'
