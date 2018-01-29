@@ -161,7 +161,7 @@ def main():
     elif docopt_args["reload"]:
         # to reload from plugin folder
         if docopt_args["plugin"] == True:
-            si_app.scan_reflect_plugins()
+            si_pm.scan_reflect_plugins()
             print("Plugins are reloaded.")
             list_plugs()
 
