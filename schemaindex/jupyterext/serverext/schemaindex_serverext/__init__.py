@@ -47,6 +47,13 @@ class SchemaindexSearchFormattedHandler(IPythonHandler):
 
         self.write(json.dumps(res))  # res) #
 
+class SchemaindexStatisticsHandler(IPythonHandler):
+    def get(self):
+        res = si_app.get_schemaindex_statistics()
+        # print('i got result:' + str(res))
+        self.write(json.dumps(res))  # res) #
+
+
 
 class SchemaindexSearchSuggestionJSONHandler(tornado.web.RequestHandler):
     def get(self):
@@ -81,6 +88,8 @@ def load_jupyter_server_extension(nb_server_app):
                       SchemaindexGenerateSnippetHandler),
                      (url_path_join(web_app.settings['base_url'], '/schemaindex', '/get_schemaindex_base_rul'),
                       SchemaindexBaseURLHandler),
+                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/get_schemaindex_statistics'),
+                      SchemaindexStatisticsHandler),
                      ]
     web_app.add_handlers(host_pattern, route_handler)
 

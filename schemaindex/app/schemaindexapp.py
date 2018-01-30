@@ -240,16 +240,31 @@ class SchemaIndexApp:
                             })
         return res
 
+
+    def get_schemaindex_statistics(self):
+
+        ix = index.open_dir(self.indexdir)
+        res = []
+        result_dict = {}
+        with ix.searcher() as searcher:
+
+            table_count = searcher.doc_count()
+            result_dict['table_count'] = table_count
+
+        ds_resultset = self.get_data_source_rs()
+        result_dict['ds_count'] = ds_resultset.count()
+        return  result_dict
+
     def global_whoosh_search_formatted(self, q = ''):
         ix = index.open_dir(self.indexdir)
         res = {}
         with ix.searcher() as searcher:
             query = QueryParser("table_content_index", ix.schema).parse(q)
-            results = searcher.search(query)
+            results = searcher.search(query, limit=self.config['main']['search_result_limit'])
             for rrr in results:
                 ds_dict = si_app.get_data_source_dict(ds_name=rrr['ds_name'])
                 if ds_dict['metadata_type'] not in res.keys():
-                    res[ds_dict['metadata_type']] = []
+                    res[ds_dict['metadata_type']] = [] # 'table' or 'file'
                 res[ds_dict['metadata_type']].append({'ds_name': rrr['ds_name'],
                             'docnum': rrr.docnum,
                             'table_id':rrr['table_id'],

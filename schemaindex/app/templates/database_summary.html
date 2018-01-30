@@ -60,6 +60,7 @@
                   <div class="form-group required ">
                     <label>Data Source Name (Required): </label>
                     <input name="ds_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
+                            {{readonly="readonly" if 'db' in base_navigation_dict.keys()  else ''  }}
                            value="{{ base_navigation_dict['db'].ds_name if 'db' in base_navigation_dict.keys()   else '' }}">
                   </div>
 

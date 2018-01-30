@@ -40,7 +40,7 @@ define([
                                 window.open(window.location.protocol+ '//' + window.location.hostname + ':8088/overview');
                                 }
                         },
-                        Done: {class : 'btn-primary'},
+                        Cancel: {class : 'btn-primary'},
 
                     },
                 });
@@ -169,17 +169,43 @@ define([
             .appendTo(schemaindex_modal)
             .append( typeahead_form  );
 
-        $('<div/>')
-            .addClass('row')
-            .appendTo(schemaindex_modal)
-            .append(
-                $('<div/>')
-                    .attr('id', 'schemaindex_search_result_tbody')
-                    .append(
-                        $('<br><label>')
-                            .text('Please type in search terms and click Search Button...')
-                    )
-            );
+
+                $.ajax({
+                    url: '/schemaindex/get_schemaindex_statistics'  ,
+                    type: 'GET',
+                    async:false,
+                    success: function (response, textStatus, jqXHR) {
+                        console.log('success, got code: ',response);
+                        var resDict = JSON.parse(String(response));
+                        var actionMessage = 'Please type in search terms and click Search Button...';
+                        if (resDict['ds_count'] < 1 ){
+                            actionMessage = 'Please click "Manage Data Source" to add data sources.'
+                        }
+
+
+                        $('<div/>')
+                            .addClass('row')
+                            .appendTo(schemaindex_modal)
+                            .append(
+                                $('<div/>')
+                                    .attr('id', 'schemaindex_search_result_tbody')
+                                    .append(
+                                        $('<br><label>')
+                                            .text(resDict['ds_count']+' Data Sources, '
+                                                + resDict['table_count']+' Entities available. '
+                                                + actionMessage)
+                                    )
+                            );
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {console.log('eerrrrrr, duanqiyang', errorThrown)},
+                    complete: function (jqXHR, textStatus) {
+                        console.log('completeee ajax get_schemaindex_statistics: ', textStatus)
+                    }
+                });
+
+
 
 
 
