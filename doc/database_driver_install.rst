@@ -1,15 +1,17 @@
 Generally please refer to sqlalchemy document for how to set up different databases:
 http://docs.sqlalchemy.org/en/latest/dialects/
 
+
 Oracle
 ============
-First you need to install the oracle
+First you need to install the oracle library first:
 https://oracle.github.io/python-cx_Oracle/
 
 In my testing, Python 2.7.13 does not work and schemainde with cx_Oracle will report this error:
 'twophase' is an invalid keyword errors connecting to Oracle
 
-But in python 2.7.14, it works fine for reflecting schema.
+But in python 2.7.14, it works fine for reflecting schema. sqlalchemy should be upgraded onto 1.2.2.
+
 
 MySQL
 ============
@@ -34,7 +36,7 @@ pip install hdfsclient
 
 Sqlite
 ============
-No extra Package.
+No extra Package and you can simply choose sqlalchemy to do it.
 
 
 IBM DB2

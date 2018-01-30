@@ -220,6 +220,8 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
         ds_dict['ds_desc'] = self.get_argument('ds_desc')
         ds_dict['ds_type'] = self.get_argument('ds_type')
 
+        ds_dict['reflect_database_automatic'] = self.get_argument('reflect_database_automatic', default='off')
+
         ds_dict['ds_param'] = {}
         ds_plugin_info = si_app.get_plugin_info(p_plugin_name=ds_dict['ds_type'])
         param_name_dict = json.loads(ds_plugin_info.ds_param)
@@ -231,6 +233,9 @@ class AddDataSourceHandler(tornado.web.RequestHandler):
 
         try:
             si_app.add_data_soruce(ds_dict)
+            if(ds_dict['reflect_database_automatic'] =='on'):
+                si_pm.reflect_db(ds_dict['ds_name'])
+
             #Info = {'result': 'ok', 'message': 'A new data source is added.'}
             self.redirect('/database_summary?ds_name=' + ds_dict['ds_name'])
         except Exception as e:

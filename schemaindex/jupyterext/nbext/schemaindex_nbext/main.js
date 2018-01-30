@@ -175,11 +175,11 @@ define([
                     type: 'GET',
                     async:false,
                     success: function (response, textStatus, jqXHR) {
-                        console.log('success, got code: ',response);
+                        //console.log('success, got code: ',response);
                         var resDict = JSON.parse(String(response));
                         var actionMessage = 'Please type in search terms and click Search Button...';
                         if (resDict['ds_count'] < 1 ){
-                            actionMessage = 'Please click "Manage Data Source" to add data sources.'
+                            actionMessage = 'Please click "Manage Data Source" to add data sources...'
                         }
 
 
@@ -201,7 +201,7 @@ define([
                     },
                     error: function (jqXHR, textStatus, errorThrown) {console.log('eerrrrrr, duanqiyang', errorThrown)},
                     complete: function (jqXHR, textStatus) {
-                        console.log('completeee ajax get_schemaindex_statistics: ', textStatus)
+                        //console.log('completeee ajax get_schemaindex_statistics: ', textStatus)
                     }
                 });
 

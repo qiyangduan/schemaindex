@@ -73,7 +73,7 @@
                   <tr>
                     <th>Data Source Type Name</th>
                     <th>Plugin Path</th>
-                    <th>Sample URL</th>
+                    <th>Description</th>
                     <th>Operations</th>
                   </tr>
                   </thead>
@@ -84,7 +84,7 @@
                   <tr>
                     <td>{{p.plugin_name}} </td>
                     <td    data-toggle="tooltip" title="{{p.plugin_spec_path}}">{{p.module_name}} </td>
-                    <td>{{p.sample_ds_url}}</td>
+                    <td>{{p.plugin_desc}}</td>
                     <td><a href="/add_data_source?ds_type={{p.plugin_name}}" class="btn btn-info  btn-sm" role="button">Create Data Source</a></td>
                   </tr>
               {% end %}

@@ -9,22 +9,23 @@ from schemaindex.app.schemaindexapp import si_app
 
 # -----------------------------------
 plugin_name = 'simplehdfsindex'
-plugin_desc = '''Given the connection information and initial path, this plugin recursively scan through all files in a HDFS system and index them. 
-The real time index engine requires the hdfs connection information.'''
+plugin_desc = '''Given the connection information and initial path, this plugin recursively scan through all files in a HDFS system and index them. '''
 
 ds_param = {'hdfs_web_url': {'type':'String',
                              'full_name':'HDFS Web URL (Required):',
+                             'default_value': 'http://localhost:50070',
                              'desc':'''The HDFS web URL, usually staring with HTTP, for example: http://localhost:50070 .  This URL is used by hdfscli library to connect to HDFS web and scan HDFS structure.''',
                              },
             'root_path': {'type':'String',
                              'full_name':'Root path (Required):',
+                             'default_value': '/',
                              'desc':'The starting point to index for the index, for example, you can use / or /user', #
                              },
 
             }
 
 
-ds_param_desc = {'hdfs_web_url': '''The HDFS web URL, usually staring with HTTP, for example: http://localhost:50070 .  This URL is used by hdfscli library to connect to HDFS web and scan HDFS structure.''',
+_________ds_param_desc = {'hdfs_web_url': '''The HDFS web URL, usually staring with HTTP, for example: http://localhost:50070 .  This URL is used by hdfscli library to connect to HDFS web and scan HDFS structure.''',
             'root_path': 'The starting point to index for the index', # Sample: /
             }
 

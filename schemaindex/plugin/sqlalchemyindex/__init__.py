@@ -1,15 +1,17 @@
 plugin_name = 'sqlalchemy'
-plugin_desc = 'Sqlalchemy reflect engine, which works for many mainstream databases, including Mysql, Sqlite, etc. For mysql to work, you need to install pymysql/mysqlclient (python3) or mysql-python (python2) in advance.'
+plugin_desc = 'Sqlalchemy reflect engine, which works for many mainstream databases, including Mysql, Sqlite, etc. For each db to work, you need to install pymysql/mysqlclient (python3) or mysql-python (python2) in advance.'
 supported_ds_types = ['mysql','sqlite3']
 
 
 ds_param = {'schema_name': {'type':'String',
                              'full_name':'Schema Name to Reflect:',
+                             'default_value': '_NA',
                              'desc':'''''',
                              },
             'connect_string': {'type':'String',
                              'full_name':'Database Connection String:',
-                             'desc':'''The sqlalchemy access URL,  for example: mysql://root:xyz@localhost/employees.''',
+                             'default_value': 'sqlite:////tmp/db1',
+                             'desc':'''The sqlalchemy access URL.''',
                              },
             }
 

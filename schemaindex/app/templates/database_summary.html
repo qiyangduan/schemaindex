@@ -60,7 +60,7 @@
                   <div class="form-group required ">
                     <label>Data Source Name (Required): </label>
                     <input name="ds_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
-                            {{readonly="readonly" if 'db' in base_navigation_dict.keys()  else ''  }}
+                            {{readonly="readonly" if   base_navigation_dict['selected_add_data_source'] == False else ''  }}
                            value="{{ base_navigation_dict['db'].ds_name if 'db' in base_navigation_dict.keys()   else '' }}">
                   </div>
 
@@ -68,7 +68,7 @@
                   <div class="form-group">
                     <div class="checkbox">
                       <label>
-                        <input name="reflect_database_automatic" type="checkbox">
+                        <input name="reflect_database_automatic" type="checkbox" checked='checked'>
                         Reflect Data Source Immediately
                       </label>
                     </div>
@@ -110,6 +110,7 @@
                     <label>{{ base_navigation_dict['input_ds_param'][param_id]['full_name']}}</label>
                     <input name="ds_param.{{param_id}}" type="text" class="form-control"
                            placeholder="{{ base_navigation_dict['input_ds_param'][param_id]['desc']}}"
+                           value="{{ base_navigation_dict['input_ds_param'][param_id]['default_value']}}"
                            data-toggle="tooltip" title="{{ base_navigation_dict['input_ds_param'][param_id]['desc']}}"
                            value="{{ base_navigation_dict['db'].to_dict()['ds_param'][param_id]  if 'db' in base_navigation_dict.keys() else ''}}">
                   </div>
