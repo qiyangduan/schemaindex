@@ -19,6 +19,30 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write("Hello, world")
 
+
+
+
+class ReloadPluginHandler(tornado.web.RequestHandler):
+    def get(self):
+        si_pm.scan_reflect_plugins()
+        session = create_session(bind=engine)
+        dbrs = si_app.get_data_source_rs()
+        ds_count = dbrs.count()
+
+        base_navigation_dict = {'selected_menu': 'overview',
+                                'dbrs': dbrs,
+                                'plugin_list': si_app.get_plugin_list(),
+                                'ds_count':str(ds_count),
+                                #'tab_count':str(tab_count),
+                                #'attr_count':str(attr_count),
+                                #'tag_count':'NA',
+
+        }
+
+        self.render("overview.html", base_navigation_dict=base_navigation_dict)
+
+
+
 class OverviewHandler(tornado.web.RequestHandler):
     def get(self):
         # self.write("Hello, world")

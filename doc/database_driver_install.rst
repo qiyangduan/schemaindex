@@ -7,6 +7,10 @@ Oracle
 First you need to install the oracle library first:
 https://oracle.github.io/python-cx_Oracle/
 
+Before you can use the oracle library, you also have to install instance client from Oracle:
+http://www.oracle.com/technetwork/database/features/instant-client/index.html
+
+
 In my testing, Python 2.7.13 does not work and schemainde with cx_Oracle will report this error:
 'twophase' is an invalid keyword errors connecting to Oracle
 
@@ -26,6 +30,13 @@ for example:
 mysql+pymysql://root:mypass@localhost/employees
 
 Refer To: http://docs.sqlalchemy.org/en/latest/dialects/mysql.html
+
+
+
+Microsoft SQL Server
+============
+
+
 
 HDFS
 ============

@@ -1,6 +1,7 @@
 plugin_name = 'sqlalchemy'
 plugin_desc = 'Sqlalchemy reflect engine, which works for many mainstream databases, including Mysql, Sqlite, etc. For each db to work, you need to install pymysql/mysqlclient (python3) or mysql-python (python2) in advance.'
 supported_ds_types = ['mysql','sqlite3']
+required_packages = []
 
 
 ds_param = {'schema_name': {'type':'String',

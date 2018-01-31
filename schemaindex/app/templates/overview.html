@@ -61,8 +61,12 @@
             <div class="box-header with-border">
               <center></center><h3 class="box-title">List of Data Source Plugins</h3> </center>
               <div class="box-tools pull-right">
-                <!--button type="button" class="btn btn-info"  data-toggle="tooltip" title="To scan available plugins" >Scan Plugins </button-->
-                <button type="button" class="btn btn-block btn-default"  data-toggle="tooltip" title="Not implemented!" >Import Plugin </button>
+
+    <form action="/reload_plugins" role="form" method="get" >
+                <button type="submit" class="btn  btn-danger"  data-toggle="tooltip" title="Reload Plugins from disk!" >Re-Scan Plugins </button>
+    </form>
+
+
               </div>
             </div>
             <!-- /.box-header -->

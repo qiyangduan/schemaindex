@@ -136,6 +136,8 @@ schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml
 schemaindex/jupyterext/serverext/__init__.py
 schemaindex/jupyterext/serverext/schemaindex_serverext/__init__.py
 schemaindex/plugin/__init__.py
+schemaindex/plugin/mysql/__init__.py
+schemaindex/plugin/oracle/__init__.py
 schemaindex/plugin/simplehdfsindex/__init__.py
 schemaindex/plugin/sqlalchemyindex/__init__.py
 schemaindex/plugin/sqlalchemyindex/show_sqlalchemy_table_template.ipynb

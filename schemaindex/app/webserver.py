@@ -27,6 +27,8 @@ class MApplication(tornado.web.Application):
             (r"/relfect_data_source", handler.ReflectDataSourceHandler),
             (r"/view_table_in_notebook", handler.ViewTableInNotebookHandler),
             #
+
+            (r"/reload_plugins", handler.ReloadPluginHandler),
             (r"/global_search", handler.GlobalSearchHandler),
             (r"/search_suggestion_json", handler.SearchSuggestionJSONHandler),
             (r"/search_suggestion_freq", handler.SearchSuggestionWithFreqJSONHandler),

@@ -1,7 +1,7 @@
-plugin_name = 'mysql'
-plugin_desc = 'mysql reflect engine based on sqlalchemyindex, you need to install pymysql/mysqlclient (python3) or mysql-python (python2) in advance.'
+plugin_name = 'MS_SQL_Server'
+plugin_desc = 'mssql can reflect Microsoft SQL Server engine based on sqlalchemyindex.'
 supported_ds_types = ['oracle']
-required_packages = ['pymysql']
+required_packages = ['pymssql']
 
 
 ds_param = {'schema_name': {'type':'String',
@@ -11,12 +11,11 @@ ds_param = {'schema_name': {'type':'String',
                              },
             'connect_string': {'type':'String',
                              'full_name':'Database Connection String:',
-                               'default_value': 'mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]',
+                               'default_value': 'mssql+pymssql://sa:yourPassword@127.0.0.1/samd?charset=utf8',
                                'desc':'''The sqlalchemy access URL.''',
                              },
             }
 
-sample_ds_url = 'mysql://root:xyz@localhost/employees'
 metadata_type='table'
 
 author = 'duan'

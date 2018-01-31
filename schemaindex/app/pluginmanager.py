@@ -87,32 +87,34 @@ class PluginManager:
         p = self.db_session.query(MPlugin).filter_by(plugin_name=p_plugin_name).first()
         return self.load_reflect_engine(p.module_name)
 
+    '''
+        def list_reflect_plugins(self):
+            logger = si_app.logger # logging.getLogger('stanmo_logger')
+    
+            return spec_list
+    '''
 
-    def list_reflect_plugins(self):
-        logger = si_app.logger # logging.getLogger('stanmo_logger')
-        logger.debug('looking for reflect engine from location: ' + os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH) )
+    def scan_reflect_plugins(self):
+
+        self.logger.debug('scanning plugins for re-initialization... ')
+
         plugin_spec_path = os.path.join(self.schemaindex_home, self.MODEL_SPEC_PATH)
 
-        logger.debug('looking for model plugin in path: ' + plugin_spec_path)
+        self.logger.debug('looking for model plugin in path: ' + plugin_spec_path)
         spec_list = []
 
         for item in os.listdir(plugin_spec_path):
             if os.path.isdir(os.path.join(plugin_spec_path, item)):
                 # to avoid : schemaindex.app.config.SchemaIndexPluginError: module '__pycache__' has no attribute 'plugin_name'
-                if(item == '__pycache__'):
+                if (item == '__pycache__'):
                     continue
-                a_plugin = self.load_reflect_engine(item,plugin_spec_path = plugin_spec_path)
+                a_plugin = self.load_reflect_engine(item, plugin_spec_path=plugin_spec_path)
                 spec_list.append(a_plugin)
-        return spec_list
 
-    def scan_reflect_plugins(self):
-
-        self.logger.debug('scanning plugins for re-initialization... ')
-        plist = self.list_reflect_plugins()
 
         self.db_session.begin()
         self.db_session.query(MPlugin).delete()
-        for plugin_dict in plist:
+        for plugin_dict in spec_list:
             if plugin_dict is not None:
                 self.db_session.add_all([
                     MPlugin( plugin_name=plugin_dict['plugin_name'] ,
@@ -122,7 +124,7 @@ class PluginManager:
                                       ds_param=json.dumps(plugin_dict['ds_param']),
                                       supported_ds_types=plugin_dict['supported_ds_types'],
                                       notebook_template_path=plugin_dict['notebook_template_path'],
-                                      sample_ds_url=plugin_dict['sample_ds_url'],
+                                      # sample_ds_url=plugin_dict['sample_ds_url'],
                                       author=plugin_dict['author'],
                                       plugin_desc=plugin_dict['plugin_desc'],
                                     )
@@ -134,11 +136,6 @@ class PluginManager:
     def load_reflect_engine(self, dottedpath, plugin_spec_path = None):
 
         assert dottedpath is not None, "dottedpath must not be None"
-        #splitted_path = dottedpath.split('.')
-        #modulename = '.'.join(splitted_path[:-1])
-        #classname = splitted_path[-1]
-        # print(sys.path)
-
 
         try:
             module = __import__(dottedpath, globals(), locals(), [])
@@ -149,7 +146,7 @@ class PluginManager:
                     'ds_param': getattr(module, 'ds_param'),
                     'plugin_spec_path': plugin_spec_path,
                     'notebook_template_path': getattr(module, 'notebook_template_path'),
-                    'sample_ds_url': getattr(module, 'sample_ds_url'),
+                    # 'sample_ds_url': getattr(module, 'sample_ds_url'),
                     'plugin_desc': getattr(module, 'plugin_desc'),
                     'supported_ds_types': json.dumps(getattr(module, 'supported_ds_types')) ,
                     'author': getattr(module, 'author'),

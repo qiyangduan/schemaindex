@@ -1,6 +1,8 @@
 plugin_name = 'oracle'
 plugin_desc = 'oracle reflect engine based on sqlalchemyindex, which works for many mainstream databases, including Mysql, Sqlite, etc. For mysql to work, you need to install pymysql/mysqlclient (python3) or mysql-python (python2) in advance.'
 supported_ds_types = ['oracle']
+required_packages = ['cx_Oracle']
+
 
 
 ds_param = {'schema_name': {'type':'String',

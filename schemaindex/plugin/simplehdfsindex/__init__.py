@@ -10,6 +10,7 @@ from schemaindex.app.schemaindexapp import si_app
 # -----------------------------------
 plugin_name = 'simplehdfsindex'
 plugin_desc = '''Given the connection information and initial path, this plugin recursively scan through all files in a HDFS system and index them. '''
+required_packages = ['hdfs']
 
 ds_param = {'hdfs_web_url': {'type':'String',
                              'full_name':'HDFS Web URL (Required):',
