@@ -1,5 +1,6 @@
 from notebook.utils import url_path_join
 from notebook.base.handlers import IPythonHandler
+from tornado import web
 
 import json
 import tornado.web
@@ -44,27 +45,42 @@ class SchemaindexSearchFormattedHandler(IPythonHandler):
 
         res = si_app.global_whoosh_search_formatted(q)
         # print('i got result:' + str(res))
-
         self.write(json.dumps(res))  # res) #
 
 class SchemaindexStatisticsHandler(IPythonHandler):
+
+    @web.authenticated
     def get(self):
         res = si_app.get_schemaindex_statistics()
         # print('i got result:' + str(res))
+        print(self.settings['jinja2_env'].loader.searchpath)
         self.write(json.dumps(res))  # res) #
 
 
 
-class SchemaindexSearchSuggestionJSONHandler(tornado.web.RequestHandler):
+class SchemaindexSearchSuggestionJSONHandler(web.RequestHandler):
     def get(self):
         q = self.get_argument('query')
         res = si_app.get_whoosh_search_suggestion_term_freq(q)
         self.write(json.dumps(res))
 
-class SchemaindexBaseURLHandler(tornado.web.RequestHandler):
+class SchemaindexBaseURLHandler(web.RequestHandler):
     def get(self):
         u = str(si_app.nb_web_app.settings)
         self.write( u)
+
+class SchemaindexTest1Handler(IPythonHandler):
+    def get(self):
+        print(self.settings['jinja2_env'].loader.searchpath)
+        self.settings['jinja2_env'].loader.searchpath.append('/home/duan/github/schemaindex/schemaindex/app/templates')
+        print(self.settings['jinja2_env'].loader.searchpath)
+
+        self.write( self.render_template('duan.html',
+                        mes='hello world again!!!!',
+                        )
+                   )
+
+
 
 def load_jupyter_server_extension(nb_server_app):
     """
@@ -76,10 +92,18 @@ def load_jupyter_server_extension(nb_server_app):
     nb_server_app.log.info("schemaindex server extension is loaded!")
     web_app = nb_server_app.web_app
 
+    #print("static path:" + nb_server_app.extra_static_paths)
+
+    nb_server_app.extra_template_paths.append('/home/duan/github/schemaindex/schemaindex/app/templates')
+    #print("template path:" + nb_server_app.extra_template_paths)
+
+    nb_server_app.extra_static_paths = ['/home/duan/github/schemaindex/schemaindex/app/static']
+
     si_app.nb_web_app =  web_app # .settings['base_url']
     host_pattern = '.*$'
-    route_pattern = url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search')
-    route_handler = [(route_pattern, SchemaindexSearchHandler),
+
+    route_handler = [(url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search'),
+                      SchemaindexSearchHandler),
                      (url_path_join(web_app.settings['base_url'], '/schemaindex', '/global_search_formatted'),
                       SchemaindexSearchFormattedHandler),
                      (url_path_join(web_app.settings['base_url'], '/schemaindex', '/search_suggestion_json'),
@@ -90,8 +114,12 @@ def load_jupyter_server_extension(nb_server_app):
                       SchemaindexBaseURLHandler),
                      (url_path_join(web_app.settings['base_url'], '/schemaindex', '/get_schemaindex_statistics'),
                       SchemaindexStatisticsHandler),
+                     (url_path_join(web_app.settings['base_url'], '/schemaindex', '/test1'),
+                      SchemaindexTest1Handler),
                      ]
     web_app.add_handlers(host_pattern, route_handler)
+    web_app.add_handlers('.*$',  [(r'/schemaindex_static/(.*)', tornado.web.StaticFileHandler, {'path': r'/home/duan/github/schemaindex/schemaindex/app/static/'})]),
+    # print(nb_server_app.template_path)
 
 
 

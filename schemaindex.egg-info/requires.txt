@@ -4,3 +4,5 @@ sqlalchemy
 whoosh
 hdfs
 future
+pymssql
+pymysql
