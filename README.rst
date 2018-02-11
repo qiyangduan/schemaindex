@@ -14,13 +14,28 @@ With schemaindex, you can:
 
 Supported Data Sources
 -------------
+
+I plan to support at least top 10 of most popular databases in db-ranking. This table tracks the progress.:
 * HDFS
 * Mysql
 * Sqlite
 
+| #Data Source | #pip install  | #Cloud | #Notes |
+| :---  | :---  | :---: | :--- |
+| Oracle | requires: 1. pip install cx_oracle, 2. instal oracle instantClient.   | OOTB |
+| Mysql | requires: 1. pip install pymysql | OOTB |
+| MS SQL Server |  requires: 1. conda install pymssql | OOTB |
+| Sqlite | OOTB | OOTB |
+| HDFS | OOTB | OOTB |
+| HDFS_inotify | OOTB | OOTB |
+
+
+
+
+
 Data Sources to Support on Roadmap
 -------------
-* Oracle
+* HDP (Hive)
 *
 
 

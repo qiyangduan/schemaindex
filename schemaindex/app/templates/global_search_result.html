@@ -2,16 +2,18 @@
 
 
 {% block main_body_right %}
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
 
 <div class="row search">
   <div class="col-sm-8 col-sm-offset-2">
-    <form action="/global_search" role="form" method="post" >
+    <form id="the_search_form" action="./global_search" role="form" method="post" >
+        {{ xsrf_form_html() | safe }}
             <div class="input-group">
-              <input id="q_search"  type="text" name="q" class="form-control" placeholder="Search..." value="{{q}}">
+              <input id="q_search"  type="text" name="q" class="form-control" placeholder="Search..." value="{{base_navigation_dict['q']}}">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+                <button class="btn btn-default" type="submit" id="the_search_button"><span class="fa fa-search"></span></button>
               </span>
             </div>
     </form>
@@ -25,7 +27,7 @@
                 }
                 $('#q_search').typeahead({
                     ajax: {
-                        url: '/search_suggestion_json',
+                        url: './search_suggestion_json_orig',
                         method: 'get',
                         triggerLength: 1
                     },
@@ -33,6 +35,113 @@
                 });
 
             });
+
+//          $('#the_search_button').bind("click", function(event) {
+            $('#the_search_form').on('submit', function(e){
+                event.preventDefault()
+                //console.log('i will searcj fpr, duanqiyang:', id_input.data('oldVal'), ', new value:' , id_input.val());
+
+                // get the search result
+                $.ajax({
+                    url: '/schemaindex/global_search_formatted', // ?q=' +  $('#schemaindex_search_term').val() , //id_input.val() ,
+                    type: 'GET',
+                    data: { q: $('#q_search').val() , time: "2pm" },
+                    success: function (response, textStatus, jqXHR) {
+                        //console.log('success, duanqiyang',response);
+                        var resDict = JSON.parse(String(response));
+                        $('#schemaindex_search_result_tbody').html('');
+
+                        if (resDict.hasOwnProperty('table')) {
+                            var varList = resDict['table'];
+/*
+                            var search_result_table_html = '<br> <div ><table class=\"table table-bordered table-hover\"> \
+                                            <thead><tr><th>Table Name</th> <th>Data Source</th> <th>Column List</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="t_schemaindex_search_result_table_to_append_table"></tbody></table></div>';
+*/
+          var search_result_table_html = '<div class="box box-info">\
+            <div class="box-header with-border"> <h3 class="box-title">List of Tables</h3></div> \
+            <div class="box-body"> \
+              <div class="table-responsive" > \
+                <table class="table no-margin"> \
+                 <thead><tr><th>Table Name</th> <th>Data Source</th> <th>Column List</th> <th>Snippets</th></tr></thead> \
+                 <tbody  id="t_schemaindex_search_result_table_to_append_table"></tbody></table></div></div></div>';
+
+
+
+                            $('#schemaindex_search_result_tbody').append(search_result_table_html);
+
+                            var the_search_result_tbody = $('#t_schemaindex_search_result_table_to_append_table');
+
+                            for (var i = 0; i < varList.length; i++) {
+                                    console.log(varList[i].table_info);
+                                    var columnInfoJSON = JSON.parse(varList[i].table_info)['column_info'];
+                                    var columnString = '';
+                                    for ( var ij = 0; ij< columnInfoJSON.length; ij++){
+                                        columnString = columnString + columnInfoJSON[ij][0] + ', '
+                                    }
+
+                                    var tr = '<tr>';
+                                    tr += '<td>' + varList[i].table_id + '</td>';
+                                    tr += '<td>' + varList[i].ds_name + '</td>';
+                                    tr += '<td  style="word-wrap: break-word;min-width: 100px;max-width: 240px;">' + columnString + '</td>';
+                                    tr += '<td  class="col-*-1"><a href="./generate_notebook?table_id=' + varList[i].table_id + '&ds_name=' + varList[i].ds_name + '"  target="_blank">Create Notebook</a></td>';
+                                    tr += '</tr>';
+                                    console.log(tr);
+                                    the_search_result_tbody.append(tr);
+                            }
+                        }
+
+                        if (resDict.hasOwnProperty('file')) {
+                            var varList = resDict['file'];
+/*
+                            var search_result_table_html = '<div ><table class=\"table table-bordered table-hover\"> \
+                                            <thead><tr><th>File Path</th> <th>Data Source</th> <th>Changed At</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="schemaindex_search_result_table_to_append_file"></tbody></table></div>';
+*/
+          var search_result_table_html = '<div class="box box-info">\
+            <div class="box-header with-border"> <h3 class="box-title">List of Files</h3></div> \
+            <div class="box-body"> \
+              <div class="table-responsive" > \
+                <table class="table no-margin"> \
+                  <thead><tr><th>File Path</th> <th>Data Source</th> <th>Changed At</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="schemaindex_search_result_table_to_append_file"></tbody></table></div></div></div>';
+
+
+
+                            $('#schemaindex_search_result_tbody').append(search_result_table_html);
+
+                            var the_search_result_tbody = $('#schemaindex_search_result_table_to_append_file');
+
+                            for (var i = 0; i < varList.length; i++) {
+                                    var modificationTime = JSON.parse(varList[i].table_info)['modificationTime'];
+
+
+                                    var tr = '<tr>';
+                                    tr += '<td  class="col-*-6" style="word-wrap: break-word;min-width: 100px;max-width: 240px;">' + varList[i].table_id + '</td>';
+                                    tr += '<td  class="col-*-1">' + varList[i].ds_name + '</td>';
+                                    tr += '<td  class="col-*-2">' + modificationTime + '</td>';
+                                    tr += '<td  class="col-*-1"><a href="./generate_notebook?table_id=' + varList[i].table_id + '&ds_name=' + varList[i].ds_name + '"  target="_blank">Create Notebook</a></td>';
+                                    tr += '</tr>';
+                                    the_search_result_tbody.append(tr);
+                            }
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {console.log('eerrrrrr, duanqiyang', errorThrown)},
+                    complete: function (jqXHR, textStatus) {
+                        //console.log('completeee ajax: ', textStatus)
+                        $('button.addsnippets').unbind().bind('click', function() {
+                            var ds_name =  $('td:nth-child(2)', $(this).parents('tr')).text();
+                            // console.log('adding snippet ajax: ', $(this).data('key'),     ds_name);
+                            insert_snippets_func($(this).data('key'),   ds_name  );
+                          });
+
+
+                    }
+                });
+                return false;
+
+
+        });
 </script>
 
     </section>
@@ -49,23 +158,20 @@
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
-        <div class="col-md-12">
+        <div class="col-md-12"   id = "schemaindex_search_result_tbody">
           <!-- MAP & BOX PANE -->
 
 
-  {% if len(search_result) > 0   %}
+  {% if base_navigation_dict['search_result'] | length > 0   %}
 
           <!-- TABLE: LATEST ORDERS -->
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">List of Tables</h3>
-
-
             </div>
-
             <!-- /.box-header -->
             <div class="box-body">
-              <div class="table-responsive">
+              <div class="table-responsive" >
                 <table class="table no-margin">
                   <thead>
                   <tr>
@@ -75,18 +181,18 @@
                   </thead>
                   <tbody>
 
-  {% for tab in search_result   %}
+  {% for tab in base_navigation_dict['search_result']  %}
 
 
                   <tr>
                     <td>{{ tab['ds_name']  }} </td>
                     <td>{{ tab['table_info'] }}</td>
-                    <td><a href="/view_table_in_notebook?ds_name={{ tab['ds_name'] }}&table_id={{ tab['table_id'] }}">
+                    <td><a href="./view_table_in_notebook?ds_name={{ tab['ds_name'] }}&table_id={{ tab['table_id'] }}">
                         Create Notebook</a>
 
                     </td>
                   </tr>
-  {% end %}
+  {% endfor %}
 
 
                   </tbody>
@@ -102,7 +208,7 @@
 
             </div>
 
-  {% end %}
+  {% endif %}
 
             <!-- /.box-body -->
             <div class="box-footer text-center">
@@ -120,4 +226,4 @@
     </section>
     <!-- /.content -->
 
-{% end %}
+{% endblock %}

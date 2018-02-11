@@ -3,28 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ escape(handler.settings["website_title"]) }}</title>
+  <title>{{ 'SchemaIndex' }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{ static_url("bootstrap/css/bootstrap.min.css") }}"  >
+  <link rel="stylesheet" href="{{ static_url("schemaindex_static/bootstrap/css/bootstrap.min.css") }}"  >
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ static_url("res/font-awesome-4.7.0/css/font-awesome.css") }}">
+  <link rel="stylesheet" href="{{ static_url("schemaindex_static/res/font-awesome-4.7.0/css/font-awesome.css") }}">
   <!-- Ionicons -->
   <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" -->
 
-  <link rel="stylesheet" href="{{ static_url("adminlte/css/AdminLTE.min.css") }}">
+  <link rel="stylesheet" href="{{ static_url("schemaindex_static/adminlte/css/AdminLTE.min.css") }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{ static_url("adminlte/css/skins/_all-skins.min.css") }}">
+  <link rel="stylesheet" href="{{ static_url("schemaindex_static/adminlte/css/skins/_all-skins.min.css") }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
-  <script src="{{ static_url("res/html5shiv.min.js")}}"></script>
-  <script src="{{ static_url("res/respond.min.js")}}"></script>
+  <script src="{{ static_url("schemaindex_static/res/html5shiv.min.js")}}"></script>
+  <script src="{{ static_url("schemaindex_static/res/respond.min.js")}}"></script>
   <![endif]-->
-    {% block head %}{% end %}
+    {% block head %}{% endblock %}
 </head>
 
 
@@ -34,7 +34,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/" class="logo">
+    <a href="./overview" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><i class="fa fa-database" aria-hidden="true"></i></span>
       <!-- logo for regular state and mobile devices -->
@@ -66,9 +66,9 @@
             <li class="active">
         {% else %}
             <li class="treeview">
-        {% end %}
+        {% endif %}
 
-          <a href="/overview">
+          <a href="./overview">
             <i class="fa fa-home"></i> <span>Home</span>
             <span class="pull-right-container"   onclick="window.location.href='/add_data_source?ds_type=hdfsindex'"  new>
               <small class="label pull-right bg-green"></small>
@@ -79,8 +79,8 @@
             <li class="active">
         {% else %}
             <li class="treeview">
-        {% end %}
-          <a href="/global_search">
+        {% endif %}
+          <a href="./global_search">
             <i class="fa fa-search"></i> <span>Search</span>
           </a>
         </li>
@@ -89,7 +89,7 @@
         <li class="active treeview menu-open">
           {% else %}
         <li class="treeview  menu-open">
-          {% end %}
+          {% endif %}
           <a href="#">
             <i class="fa fa-database"></i>
             <span>Data Sources</span>
@@ -106,10 +106,10 @@
                             <li class="active">
                           {% else %}
                             <li>
-                          {% end %}
+                          {% endif %}
                         {% else %}
                           <li>
-                        {% end %} <a href="/add_data_source">
+                        {% endif %} <a href="./add_data_source">
 
                                 <i class="fa fa-plus-square"></i> Create ... </a>
                           </li>
@@ -120,14 +120,14 @@
                             <li class="active">
                           {% else %}
                             <li>
-                          {% end %}
+                          {% endif %}
                         {% else %}
                           <li>
-                        {% end %}
-                              <a href="/database_summary?ds_name={{ '.'.join([row.ds_name])  }}">
+                        {% endif %}
+                              <a href="./database_summary?ds_name={{ '.'.join([row.ds_name])  }}">
                               <i class="fa fa-circle-o"></i> {{ '.'.join([row.ds_name])  }} </a>
                     </li>
-              {% end %}
+              {% endfor %}
 
             </ul>
 
@@ -150,28 +150,28 @@
                 <h4><i class="icon fa fa-ban"></i> {{base_navigation_dict['message']['message_title']}}</h4>
                 {{base_navigation_dict['message']['message_body']}}
               </div>
-    {% end %}
+    {% endif %}
 
 
 
 
 <!-- ./wrapper -->
 
-{# static_url("plugins/jQuery/jquery-2.2.3.min.js")  http://code.jquery.com/jquery-1.9.1.js  <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+{# static_url("schemaindex_static/plugins/jQuery/jquery-2.2.3.min.js")  http://code.jquery.com/jquery-1.9.1.js  <script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 　　#}
 <!-- jQuery 2.2.3 -->
-  <script src="{{ static_url("res/jquery-2.2.3.min.js")  }} "></script>
+  <script src="{{ static_url("schemaindex_static/res/jquery-2.2.3.min.js")  }} "></script>
 
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ static_url("bootstrap/js/bootstrap.min.js") }}"></script>
+<script src="{{ static_url("schemaindex_static/bootstrap/js/bootstrap.min.js") }}"></script>
 
 <!-- AdminLTE App -->
-<script src="{{ static_url("adminlte/js/app.min.js") }}"></script>
+<script src="{{ static_url("schemaindex_static/adminlte/js/app.min.js") }}"></script>
 
-<script src="{{ static_url("res/bootstrap-typeahead.js")}}"></script>
+<script src="{{ static_url("schemaindex_static/res/bootstrap-typeahead.js")}}"></script>
 
 
-    {% block main_body_right %}{% end %}
+    {% block main_body_right %}{% endblock %}
 
 
 
@@ -183,8 +183,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 0.1
     </div>
-    <strong>Copyright &copy; 2014-2018 <a href="http://almsaeedstudio.com"></a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2014-2018.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
@@ -381,6 +380,6 @@
 
 </div>
 
-    {% block bottom %}{% end %}
+    {% block bottom %}{% endblock %}
   </body>
 </html>

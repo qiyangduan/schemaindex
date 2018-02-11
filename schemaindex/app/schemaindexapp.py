@@ -72,11 +72,12 @@ class SchemaIndexApp:
 
     def schemaindex_init(self, db_file_path = None):
         try:
+            '''
             generate_notebook_dir = self.config['main']['schemaindex_notebooks']
             if not os.path.exists(generate_notebook_dir):
                 self.logger.debug('creating folder for generated notebook.')
                 os.mkdir(generate_notebook_dir)
-
+            '''
             if os.path.exists(db_file_path):
                 self.logger.debug('Trying to remove existing db file.')
                 os.remove(db_file_path)
@@ -215,16 +216,7 @@ class SchemaIndexApp:
         return db
 
 
-    '''
-        def get_data_source_name_list(self):
-    
-            rs = self.db_session.query(MDatasource) #.filter_by(name='ed')
-    
-            ds_list = []
-            for row in rs:
-                ds_list.append({'name': row.ds_name , 'ds_type': row.ds_type } )
-            return  ds_list
-    '''
+
     def global_whoosh_search(self, q = ''):
 
         ix = index.open_dir(self.indexdir)
@@ -272,6 +264,25 @@ class SchemaIndexApp:
                             })
         return res
 
+    def global_whoosh_search_by_ds(self, ds_name = ''):
+        ix = index.open_dir(self.indexdir)
+        res = {}
+        with ix.searcher() as searcher:
+            query = QueryParser("ds_name", ix.schema).parse(ds_name)
+            results = searcher.search(query)
+
+            for rrr in results:
+                ds_dict = si_app.get_data_source_dict(ds_name=rrr['ds_name'])
+                if ds_dict['metadata_type'] not in res.keys():
+                    res[ds_dict['metadata_type']] = [] # 'table' or 'file'
+                res[ds_dict['metadata_type']].append({'ds_name': rrr['ds_name'],
+                            'docnum': rrr.docnum,
+                            'table_id':rrr['table_id'],
+                            'table_info': rrr['table_info'],
+                            })
+        return res
+
+
     def global_whoosh_search_by_id(self, q_id = ''):
 
         ix = index.open_dir(self.indexdir)
@@ -286,6 +297,8 @@ class SchemaIndexApp:
                             })
 
         return res
+
+
 
     def delete_doc_from_index_by_docnum(self, p_docnum = None):
 
@@ -322,6 +335,7 @@ class SchemaIndexApp:
         with ix.reader() as r:
             for aterm in r.most_frequent_terms("table_content_index", number=5, prefix=q):
                 one_result = aterm[1].decode('utf-8')
+                print(one_result)
                 result.append(one_result) # The result was like (1.0, 'dept_manager'), but here i need only a keyword
                 #print(aterm)
 

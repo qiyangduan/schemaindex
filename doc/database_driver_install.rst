@@ -35,6 +35,30 @@ Refer To: http://docs.sqlalchemy.org/en/latest/dialects/mysql.html
 
 Microsoft SQL Server
 ============
+To enable schemaindex to work against MS SQLServer, you need to install additional library: pymssql.
+
+.. code-block:: bash
+
+    $ pip install pymssql
+    $ conda install pymssql
+
+In my test, pip failed and conda succedded. You can use either one.
+
+According to this page, you can start a testing ms sql server:
+https://hub.docker.com/r/microsoft/mssql-server-linux/
+
+.. code-block:: bash
+
+    # docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -p 1433:1433 -d microsoft/mssql-server-linux:2017-CU3
+
+I loaded this dataset into my testing db:
+http://www.dofactory.com/sql/sample-database
+
+.. code-block:: bash
+
+    (In container)# /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'yourStrong(!)Password' -i /tmp/cc.sql
+
+
 
 
 

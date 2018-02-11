@@ -1,32 +1,31 @@
 {% extends "base.html" %}
 
-{%import json %}
 {% block main_body_right %}
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Source Information
+        Data Source Details
       </h1>
     </section>
 
     <!-- Main content -->
     <section class="content">
 
-      <div class="box box-default">
+      <div class="box box-default"  collapsed-box>
           {% if 'error' in base_navigation_dict.keys()%}
               <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h4><i class="icon fa fa-ban"></i> Error!</h4>
                 {{base_navigation_dict['error']}}
               </div>
-          {%end%}
+          {%endif%}
 
             <!-- general form elements disabled -->
-          <form action="{{ request.path }}" method="post"  role="form">
+          <form action="{{ base_navigation_dict['self.request.path'] }}" method="post"  role="form">
                   <!-- text input -->
-
+            {{ xsrf_form_html() | safe }}
           <div class="box-header with-border">
-          <h3 class="box-title">Data Source Information</h3>
+          <h3 class="box-title">Data Source Configuration</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -41,27 +40,25 @@
                   <!-- select -->
 
                     {% if base_navigation_dict['selected_add_data_source'] == False  %}
-                      <input type="hidden" name="ds_type" value="{{base_navigation_dict['db'].ds_type}}" />
-                    {% end %}
+                      <input type="hidden" name="ds_type" value="{{base_navigation_dict['db']['ds_type']}}" />
+                    {% endif %}
                   <div class="form-group">
                     <label>Choose The Data Source Type (Required): </label>
                     <select id = "ds_type"  name = "ds_type" class="form-control"
                             {{'disabled=true' if base_navigation_dict['selected_add_data_source'] == False  else ''  }}
                     >
                       {% for p in base_navigation_dict['plugin_name_list']   %}
-                            <option {{'selected' if ('input_db_type' in base_navigation_dict.keys() and base_navigation_dict['input_db_type'] == p) or \
-                                                    ('db' in base_navigation_dict.keys() and base_navigation_dict['db'].ds_type == p) \
-                                                  else '' }} >
+                            <option {{'selected' if ('input_db_type' in base_navigation_dict.keys() and base_navigation_dict['input_db_type'] == p) or  ('db' in base_navigation_dict.keys() and base_navigation_dict['db']['ds_type'] == p)                                                   else '' }} >
                              {{p}}</option>
-                      {% end %}
+                      {% endfor %}
                     </select>
                   </div>
 
                   <div class="form-group required ">
                     <label>Data Source Name (Required): </label>
                     <input name="ds_name" type="text" class="form-control" placeholder="Enter Data Source Name..."
-                            {{readonly="readonly" if   base_navigation_dict['selected_add_data_source'] == False else ''  }}
-                           value="{{ base_navigation_dict['db'].ds_name if 'db' in base_navigation_dict.keys()   else '' }}">
+                            {{'readonly="readonly"' if   base_navigation_dict['selected_add_data_source'] == False else ''  }}
+                           value="{{ base_navigation_dict['db']['ds_name'] if 'db' in base_navigation_dict.keys()   else '' }}">
                   </div>
 
                   <!-- checkbox -->
@@ -78,7 +75,7 @@
                   <div class="form-group">
                     <label>Description: </label>
                     <textarea  name="ds_desc" class="form-control" rows="3" placeholder="Enter ...">
-                      {{ base_navigation_dict['db'].ds_desc if 'db' in base_navigation_dict.keys() else "" }}
+                      {{ base_navigation_dict['db']['ds_desc'] if 'db' in base_navigation_dict.keys() else "" }}
                     </textarea>
                   </div>
 
@@ -89,7 +86,7 @@
 
 
               {#  to show existing datasource and to show new data source should be same now! #}
-                  {# if base_navigation_dict['selected_add_data_source'] == False     This is to use plugin parameter to create a new DS#}
+                  {# ------------------ if base_navigation_dict['selected_add_data_source'] == False     This is to use plugin parameter to create a new DS#}
 
                     {% for param_id in base_navigation_dict['input_ds_param'].keys() %}
 
@@ -98,7 +95,7 @@
                     <div class="checkbox">
                       <label>
                         <input name="ds_param.{{param_id}}" type="checkbox"
-                               {{'checked="checked"'  if 'db' in base_navigation_dict.keys() and  base_navigation_dict['db'].to_dict()['ds_param'][param_id]  == 'on' else '' }}
+                               {{'checked="checked"'  if 'db' in base_navigation_dict.keys() and  base_navigation_dict['db']['ds_param'][param_id]  == 'on' else '' }}
                         　　　　data-toggle="tooltip" title="{{ base_navigation_dict['input_ds_param'][param_id]['desc']}}">
                         {{ base_navigation_dict['input_ds_param'][param_id]['full_name']}}
                       </label>
@@ -110,16 +107,15 @@
                     <label>{{ base_navigation_dict['input_ds_param'][param_id]['full_name']}}</label>
                     <input name="ds_param.{{param_id}}" type="text" class="form-control"
                            placeholder="{{ base_navigation_dict['input_ds_param'][param_id]['desc']}}"
-                           value="{{ base_navigation_dict['input_ds_param'][param_id]['default_value']}}"
+                           value="{{  base_navigation_dict['db']['ds_param'][param_id]   if base_navigation_dict['selected_add_data_source'] == False
+                                 else base_navigation_dict['input_ds_param'][param_id]['default_value']
+                           }}"
                            data-toggle="tooltip" title="{{ base_navigation_dict['input_ds_param'][param_id]['desc']}}"
-                           value="{{ base_navigation_dict['db'].to_dict()['ds_param'][param_id]  if 'db' in base_navigation_dict.keys() else ''}}">
+                           value="{{ base_navigation_dict['db']['ds_param'][param_id]  if 'db' in base_navigation_dict.keys() else ''}}">
                   </div>
 
-                        {% end %}
-
-
-
-                    {% end %}
+                        {% endif %}
+                    {% endfor %}
 
 
                   <div class="form-group">
@@ -135,21 +131,54 @@
 
               <a href="javascript:history.back()" id="cancel" name="cancel" class="btn btn-default">Cancel</a>
 
-              <input type="submit" value="{{ _("Save Changes") if base_navigation_dict['selected_add_data_source'] == False else _("Create Data Source") }}"
+              <input type="submit" value="{{ "Save Changes"  if base_navigation_dict['selected_add_data_source'] == False else  "Create Data Source"  }}"
                      class="btn btn-info pull-right"/>
 
        　　</div>
-                </form>
+          </form>
               <!-- /.box-body -->
+           {% if 'db' in base_navigation_dict.keys() %}
+
+              <div class="box-footer">
+
+                <form action="./relfect_data_source" method="post"  role="form">
+                    <!--a href="javascript:void(0)" class="uppercase">View All Tables</a-->
+                    {{ xsrf_form_html() | safe }}
+                {% if base_navigation_dict['selected_add_data_source'] == False   %}
+                    <input type="hidden" name="ds_name" value="{{base_navigation_dict['db']['ds_name']}}">
+                    <input type="submit" value="{{ "Reflect Now!"  }}" class="btn btn-info pull-left"/>
+                {% endif %}
+                </form>
+
+
+          <form action="./delete_data_source" method="post"  role="form">
+               <!-- checkbox -->
+                {{ xsrf_form_html() | safe }}
+
+                  <!-- checkbox -->
+
+                      <label class="pull-right">
+                        <input name="delete_reflected_database_automatic" type="checkbox">
+                        Delete Contents
+                      </label>
+
+                  <input name="ds_name" type="hidden" value="{{ base_navigation_dict['db']['ds_name']}}">
+                  <input type="submit" value="Delete Data Source" class="btn btn-danger pull-right"/>
+
+
+            </form>
+       　　</div>
+               {% endif %}
           <!-- /.box -->
       </div>
 
 
 
-                 {% if 'db' in base_navigation_dict.keys() %}
+             {% if False %}
       <div class="box box-default">
-          <form action="/delete_data_source" method="post"  role="form">
+          <form action="./delete_data_source" method="post"  role="form">
                <!-- checkbox -->
+                {{ xsrf_form_html() | safe }}
 
               <div class="box-footer">
 
@@ -163,17 +192,18 @@
                         Delete Contents in Data Source
                       </label>
 
-                  <input name="ds_name" type="hidden" value="{{ base_navigation_dict['db'].ds_name}}">
+                  <input name="ds_name" type="hidden" value="{{ base_navigation_dict['db']['ds_name']}}">
                   <input type="submit" value="Delete Data Source" class="btn btn-danger pull-right"/>
 
                     </div>
               </div>
             </form>
     　　</div>
-     {% end %}
+     {% endif %}
 
     </section>
     <!-- /.content -->
+
 
 
     <!-- Main content -->
@@ -184,12 +214,10 @@
       <div class="row">
         <!-- Left col -->
         <div class="col-md-12">
-          <!-- MAP & BOX PANE -->
-
           <!-- TABLE: LATEST ORDERS -->
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">List of Tables (only for relational DBs)</h3>
+              <h3 class="box-title">Reflected Metadata </h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -198,51 +226,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
-                  <tr>
-                    <th>Database Name</th>
-                    <th>Table Name</th>
-                    <th>Table Comments</th>
-                    <th>Column Names</th>
-                    <th>Operations</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-  {% if 'tabrs' in base_navigation_dict.keys()     %}
+              <div class="table-responsive" id="schemaindex_search_result_tbody">
 
-  {% for tab in base_navigation_dict['tabrs']   %}
-                  <tr>
-                    <td>{{ '.'.join([tab.ds_name])  }} </td>
-                    <td>{{ tab.table_name }}</td>
-                    <td>{{ tab.table_comment }}</td>
-                    <td>{{ tab.column_names }}</td>
-                    <td><a href="/view_table_in_notebook?table_name={{ tab.table_name }}&ds_name={{ tab.ds_name }}">Create Notebook</a>
-
-
-                    </td>
-                  </tr>
-  {% end %}
-  {% end %}
-
-
-                  </tbody>
-                </table>
               </div>
               <!-- /.table-responsive -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer text-center">
-                <form action="/relfect_data_source" method="post"  role="form">
-                    <!--a href="javascript:void(0)" class="uppercase">View All Tables</a-->
-                {% if base_navigation_dict['selected_add_data_source'] == False   %}
-                    <input type="hidden" name="ds_name" value="{{base_navigation_dict['db'].ds_name}}">
-                    <input type="submit" value="{{ _("Reflect Now!") }}" class="btn btn-info pull-right"/>
-                {% end %}
-                </form>
-
-
             </div>
             <!-- /.box-footer -->
           </div>
@@ -256,18 +243,101 @@
     </section>
     <!-- /.content -->
 
-<script> {#https://stackoverflow.com/questions/5150363/onchange-open-url-via-select-jquery#}
+<script>
+    {#https://stackoverflow.com/questions/5150363/onchange-open-url-via-select-jquery#}
     $(function(){
       // bind change event to select
       $('#ds_type').on('change', function () {
           var ds_typ = $(this).val(); // get selected value
           if (ds_typ) { // require a URL
-              window.location = '/add_data_source?ds_type=' + ds_typ; // redirect
+              window.location = './add_data_source?ds_type=' + ds_typ; // redirect
           }
           return false;
       });
     });
+
+{%if 'db' in base_navigation_dict.keys() %}
+    $(document).ready( function() {
+        console.log('ready');
+    });
+                // get the search result
+                $.ajax({
+                    url: '/schemaindex/global_search_formatted',  
+                    type: 'GET',
+                    data: { q: '*' , ds_name: '{{ base_navigation_dict['db']['ds_name']}}' },
+                    success: function (response, textStatus, jqXHR) {
+                        //console.log('success, duanqiyang',response);
+                        var resDict = JSON.parse(String(response));
+                        $('#schemaindex_search_result_tbody').html('');
+
+                        if (resDict.hasOwnProperty('table')) {
+                            var varList = resDict['table'];
+
+                            var search_result_table_html = '<br> <div ><table class=\"table table-bordered table-hover\"> \
+                                            <thead><tr><th>Table Name</th> <th>Data Source</th> <th>Column List</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="schemaindex_search_result_table_to_append_table"></tbody></table></div>';
+
+                            $('#schemaindex_search_result_tbody').append(search_result_table_html);
+
+                            var the_search_result_tbody = $('#schemaindex_search_result_table_to_append_table');
+
+                            for (var i = 0; i < varList.length; i++) {
+                                    var columnInfoJSON = JSON.parse(varList[i].table_info)['column_info'];
+                                    var columnString = '';
+                                    for ( var ij = 0; ij< columnInfoJSON.length; ij++){
+                                        columnString = columnString + columnInfoJSON[ij][0] + ', '
+                                    }
+
+                                    var tr = '<tr>';
+                                    tr += '<td>' + varList[i].table_id + '</td>';
+                                    tr += '<td>' + varList[i].ds_name + '</td>';
+                                    tr += '<td>' + columnString + '</td>';
+                                    tr += '<td  class="col-*-1"><a href="./generate_notebook?table_id=' + varList[i].table_id + '&ds_name=' + varList[i].ds_name + '"  target="_blank">Create Notebook</a></td>';
+                                    tr += '</tr>';
+                                    the_search_result_tbody.append(tr);
+                            }
+                        }
+
+                        if (resDict.hasOwnProperty('file')) {
+                            var varList = resDict['file'];
+
+                            var search_result_table_html = '<div ><table class=\"table table-bordered table-hover\"> \
+                                            <thead><tr><th>File Path</th> <th>Data Source</th> <th>Changed At</th> <th>Snippets</th></tr></thead> \
+                                            <tbody  id="schemaindex_search_result_table_to_append_file"></tbody></table></div>';
+
+                            $('#schemaindex_search_result_tbody').append(search_result_table_html);
+
+                            var the_search_result_tbody = $('#schemaindex_search_result_table_to_append_file');
+
+                            for (var i = 0; i < varList.length; i++) {
+                                    var modificationTime = JSON.parse(varList[i].table_info)['modificationTime'];
+
+
+                                    var tr = '<tr>';
+                                    tr += '<td  class="col-*-6" style="word-wrap: break-word;min-width: 100px;max-width: 240px;">' + varList[i].table_id + '</td>';
+                                    tr += '<td  class="col-*-1">' + varList[i].ds_name + '</td>';
+                                    tr += '<td  class="col-*-2">' + modificationTime + '</td>';
+                                    tr += '<td  class="col-*-1"><a href="./generate_notebook?table_id=' + varList[i].table_id + '&ds_name=' + varList[i].ds_name + '"  target="_blank">Create Notebook</a></td>';
+                                    tr += '</tr>';
+                                    the_search_result_tbody.append(tr);
+                            }
+                        }
+                    },
+
+                    error: function (jqXHR, textStatus, errorThrown) {console.log('eerrrrrr, duanqiyang', errorThrown)},
+                    complete: function (jqXHR, textStatus) {
+                        //console.log('completeee ajax: ', textStatus)
+                        $('button.addsnippets').unbind().bind('click', function() {
+                            var ds_name =  $('td:nth-child(2)', $(this).parents('tr')).text();
+                            // console.log('adding snippet ajax: ', $(this).data('key'),     ds_name);
+                            insert_snippets_func($(this).data('key'),   ds_name  );
+                          });
+
+
+                    }
+                });
+{% endif%}
 </script>
 
 
-{% end %}
+{% endblock %}

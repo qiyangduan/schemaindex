@@ -17,6 +17,7 @@ schemaindex/app/handler.py
 schemaindex/app/pluginmanager.py
 schemaindex/app/schemaindexapp.py
 schemaindex/app/webserver.py
+schemaindex/app/static/hello.html
 schemaindex/app/static/adminlte/css/AdminLTE.css
 schemaindex/app/static/adminlte/css/AdminLTE.min.css
 schemaindex/app/static/adminlte/css/alt/AdminLTE-bootstrap-social.css
@@ -124,12 +125,11 @@ schemaindex/app/static/res/font-awesome-4.7.0/scss/_variables.scss
 schemaindex/app/static/res/font-awesome-4.7.0/scss/font-awesome.scss
 schemaindex/app/templates/base.html
 schemaindex/app/templates/database_summary.html
+schemaindex/app/templates/duan.html
 schemaindex/app/templates/global_search_result.html
-schemaindex/app/templates/login.html
 schemaindex/app/templates/overview.html
-schemaindex/app/templates/adminlte/LICENSE
-schemaindex/app/templates/adminlte/index2.html
 schemaindex/jupyterext/__init__.py
+schemaindex/jupyterext/schemaindex_notebook_template.ipynb
 schemaindex/jupyterext/nbext/schemaindex_nbext/README.md
 schemaindex/jupyterext/nbext/schemaindex_nbext/main.js
 schemaindex/jupyterext/nbext/schemaindex_nbext/schemaindex_nbext.yaml

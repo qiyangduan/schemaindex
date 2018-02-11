@@ -27,7 +27,6 @@ class MApplication(tornado.web.Application):
             (r"/relfect_data_source", handler.ReflectDataSourceHandler),
             (r"/view_table_in_notebook", handler.ViewTableInNotebookHandler),
             #
-
             (r"/reload_plugins", handler.ReloadPluginHandler),
             (r"/global_search", handler.GlobalSearchHandler),
             (r"/search_suggestion_json", handler.SearchSuggestionJSONHandler),
@@ -43,7 +42,7 @@ class MApplication(tornado.web.Application):
             static_path=os.path.join(os.path.dirname(__file__), "static"),
             # ui_modules={"Entry": EntryModule},
             xsrf_cookies=False,
-            cookie_secret="databasemodels:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
+            cookie_secret="databasemodels:_GENERATVALUE_HERE__",
             login_url="/auth/login",
             debug=True,
         )

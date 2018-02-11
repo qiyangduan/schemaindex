@@ -1,1 +1,9 @@
-git push https://github.com/qiyangduan/schemaindex.git
+# Originally it was on github
+# git push https://github.com/qiyangduan/schemaindex.git
+
+# git remote add origin https://qiyangduan2@bitbucket.org/qiyangduan2/schemaindex.git
+# https://stackoverflow.com/questions/10904339/github-fatal-remote-origin-already-exists
+# git remote set-url origin https://qiyangduan2@bitbucket.org/qiyangduan2/schemaindex.git
+git push -u origin master
+
+

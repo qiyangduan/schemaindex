@@ -5,7 +5,7 @@
     
     Usage:
         schemaindex -h
-        schemaindex runserver [--port=<port> ] [--ip=<ip> ] [--browser]
+        schemaindex runserver [--port=<port> ] [--ip=<ip> ] [--browser] [--no-browser]  [--port=<port>]
         schemaindex list ( data_source | plugin )
         schemaindex add <data_source_name> --plugin=<spec_name> --ds_param=<ds_param_string>
         schemaindex init
@@ -32,6 +32,7 @@
 # following: https://github.com/docopt/docopt
 
 import os
+import sys
 from docopt import docopt
 from schemaindex.app.schemaindexapp import si_app #
 from schemaindex.app.webserver import run_webserver
@@ -151,13 +152,23 @@ def main():
 
         print("\n\rServer started, please visit : " + url)
 
+        from notebook import notebookapp
+        NotebookApp = notebookapp.NotebookApp
+
+        sys.argv.remove('runserver')
+        app = NotebookApp()
+        app.initialize()
+        app.default_url = '/schemaindex/overview'
+        app.start()
+
+        '''
         if docopt_args["--browser"] == True:
             import webbrowser
             # Open URL in new window, raising the window if possible.
             webbrowser.open_new(url)
 
         run_webserver(addr=addr_ip, port = port)
-
+        '''
     elif docopt_args["reload"]:
         # to reload from plugin folder
         if docopt_args["plugin"] == True:

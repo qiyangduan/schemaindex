@@ -37,7 +37,8 @@ define([
                             class : 'btn-primary',
                             click: function(event) {
                                 event.preventDefault();
-                                window.open(window.location.protocol+ '//' + window.location.hostname + ':8088/overview');
+                                //window.open(window.location.protocol+ '//' + window.location.hostname + ':8088/overview');
+                                window.open('../schemaindex/overview');
                                 }
                         },
                         Cancel: {class : 'btn-primary'},
@@ -291,10 +292,10 @@ define([
 
 
                                     var tr = '<tr>';
-                                    tr += '<td>' + varList[i].table_id + '</td>';
-                                    tr += '<td>' + varList[i].ds_name + '</td>';
-                                    tr += '<td>' + modificationTime + '</td>';
-                                    tr += '<td><button class="addsnippets" data-key="'+ varList[i].table_id +'"><i class="fa fa-file-code-o">Insert</i></button></td>';
+                                    tr += '<td  class="col-*-6" style="word-wrap: break-word;min-width: 100px;max-width: 240px;">' + varList[i].table_id + '</td>';
+                                    tr += '<td  class="col-*-1">' + varList[i].ds_name + '</td>';
+                                    tr += '<td  class="col-*-2">' + modificationTime + '</td>';
+                                    tr += '<td  class="col-*-1"><button class="addsnippets" data-key="'+ varList[i].table_id +'"><i class="fa fa-file-code-o">Insert</i></button></td>';
                                     tr += '</tr>';
                                     the_search_result_tbody.append(tr);
                             }

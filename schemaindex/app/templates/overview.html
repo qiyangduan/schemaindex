@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-
-{% block main_body_right %}
-    <!-- Content Header (Page header) -->
+{% block main_search%}
+   <!-- Content Header (Page header) -->
     <section class="content-header">
 
 
 <div class="row search">
   <div class="col-sm-12 col-sm-offset-0">
-    <form action="/global_search" role="form" method="post" >
+    <form action="./global_search" role="form" method="post" >
+        {{ xsrf_form_html() | safe }}
             <div class="input-group">
               <input id="q_search"  type="text" name="q" class="form-control" placeholder="Search Entities, Files and Attributes..." value="">
               <span class="input-group-btn">
@@ -37,6 +37,10 @@
 </script>
     </section>
 
+{%endblock%}
+
+{% block main_body_right %}
+
     <!-- Main content -->
     <section class="content">
 
@@ -62,7 +66,7 @@
               <center></center><h3 class="box-title">List of Data Source Plugins</h3> </center>
               <div class="box-tools pull-right">
 
-    <form action="/reload_plugins" role="form" method="get" >
+    <form action="./reload_plugins" role="form" method="get" >
                 <button type="submit" class="btn  btn-danger"  data-toggle="tooltip" title="Reload Plugins from disk!" >Re-Scan Plugins </button>
     </form>
 
@@ -89,9 +93,9 @@
                     <td>{{p.plugin_name}} </td>
                     <td    data-toggle="tooltip" title="{{p.plugin_spec_path}}">{{p.module_name}} </td>
                     <td>{{p.plugin_desc}}</td>
-                    <td><a href="/add_data_source?ds_type={{p.plugin_name}}" class="btn btn-info  btn-sm" role="button">Create Data Source</a></td>
+                    <td><a href="./add_data_source?ds_type={{p.plugin_name}}" class="btn btn-info  btn-sm" role="button">Create Data Source</a></td>
                   </tr>
-              {% end %}
+              {% endfor %}
 
 
                   </tbody>
@@ -136,13 +140,13 @@
 
               {% for ds in base_navigation_dict['dbrs']   %}
                   <tr>
-                    <td><a  href="/database_summary?ds_name={{ '.'.join([row.ds_name])  }}">
+                    <td><a  href="./database_summary?ds_name={{ ds.ds_name  }}">
                       　　{{ds.ds_name}}</a></td>
                     <td>{{ds.ds_param}}</td>
                     <td>{{ds.created_date.strftime("%Y-%m-%d %H:%M:%S")}}</td>
-                    <td>{{ds.last_reflect_date.strftime("%Y-%m-%d %H:%M:%S") if ds.last_reflect_date is not None else '' }}</td>
+                    <td>{{ds.last_reflect_date.strftime("%Y-%m-%d %H:%M:%S") if ds.last_reflect_date != None else '' }}</td>
                   </tr>
-              {% end %}
+              {% endfor %}
 
 　                  </tbody>
                 </table>
@@ -165,7 +169,7 @@
     </section>
     <!-- /.content -->
 
-{% end %}
+{% endblock %}
 
 {% block main_body_right_nouse %}
 
@@ -185,7 +189,7 @@
               <ul class="products-list product-list-in-box">
                 <li class="item">
                   <div class="product-img">
-                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                    <img src="{{ static_url("schemaindex_static/adminlte/img/default-50x50.gif") }}" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">Samsung TV
@@ -198,7 +202,7 @@
                 <!-- /.item -->
                 <li class="item">
                   <div class="product-img">
-                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                    <img src="{{ static_url("schemaindex_static/adminlte/img/default-50x50.gif") }}" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">Bicycle
@@ -211,7 +215,7 @@
                 <!-- /.item -->
                 <li class="item">
                   <div class="product-img">
-                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                    <img src="{{ static_url("schemaindex_static/adminlte/img/default-50x50.gif") }}" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
@@ -223,7 +227,7 @@
                 <!-- /.item -->
                 <li class="item">
                   <div class="product-img">
-                    <img src="{{ static_url("adminlte/img/default-50x50.gif") }}" alt="Product Image">
+                    <img src="{{ static_url("schemaindex_static/adminlte/img/default-50x50.gif") }}" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title">PlayStation 4
@@ -244,4 +248,4 @@
           </div>
           <!-- /.box -->
 
-{% end %}
+{% endblock %}
