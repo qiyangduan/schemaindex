@@ -83,6 +83,8 @@ hdfs_ds_dict = {
 
 
 def test_plugin_hdfs_add():
+    si_app.delete_data_soruce(hdfs_ds_dict)
+    si_app.data_source_dict.clear()
     dict1 = si_app.get_data_source_dict(ds_name=hdfs_ds_dict['ds_name'])
     assert dict1 is None
 
