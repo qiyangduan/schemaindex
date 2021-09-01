@@ -10,7 +10,7 @@ from schemaindex.app.schemaindexapp import si_app
 from schemaindex.app.pluginmanager import si_pm
 import os
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope='function')
 def resource_a_setup(request):
     print('\nDoing setup by putting init file')
     db_file_path = cfg['database']['sqlite_file']
